@@ -1,0 +1,6 @@
+/* Este sitio fue creado con Foundation. Diseño creado por Fernando Poli. Programación creada por Facundo Scoccia y Mario Bedin */
+/* humanstxt.org */
+
+/* SITE */
+  Standards: HTML5, CSS3
+  Components: jQuery, Media Queries, Prettyphoto
