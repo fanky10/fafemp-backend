@@ -4,7 +4,7 @@ include_once 'init.php';
 include_once ROOT_DIR .'/servicios/manejador_servicios.php';
 include_once ROOT_DIR .'/entidades/noticia.php';
 $manejador = new ManejadorServicios();
-$noticias = $manejador->getNoticias();
+$noticias = $manejador->getNoticias($GLOBAL_SETTINGS['slider.size']);
 ?>
     <!-- fanky-vardump
     <?php

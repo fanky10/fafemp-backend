@@ -10,7 +10,7 @@ define('USER_LOGIN', ROOT_URL . "/admin/user_login.php");
 
 
 $GLOBAL_SETTINGS = parse_ini_file("settings.ini");
-ini_set('display_errors', 1);
+ini_set('display_errors', $GLOBAL_SETTINGS['errors.display']);
 
 /**
  * algunas configuraciones globales tambien :P

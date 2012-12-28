@@ -18,8 +18,8 @@ class DataNoticias extends Data implements NoticiasRepository {
         parent::__construct();
     }
 
-    public function getNoticias() {
-        $query = "select * from noticias";
+    public function getNoticias($limit) {
+        $query = "select * from noticias ORDER BY noticia_fec_hora desc ".($limit>0?" limit ".$limit:"");
         $result = mysql_query($query)
                 or die("Query Failed " . mysql_error());
         $noticia_idx = 0;

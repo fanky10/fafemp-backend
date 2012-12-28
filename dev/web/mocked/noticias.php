@@ -11,7 +11,7 @@ include_once ROOT_DIR . '/entidades/noticia.php';
  */
 class MockedNoticias implements NoticiasRepository {
 
-    public function getNoticias(){
+    public function getNoticias($limit){
         $noticia_idx = 0;
         $vNews;
         $oNoticia = new Noticia();
