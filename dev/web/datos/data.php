@@ -63,7 +63,16 @@ class Data {
     public function closeDB() {
         mysql_close($this->connection);
     }
-
+    public function getUltimoID($tabla,$column){
+        $query = "select max($column) as ultimo_id from $tabla";
+        $result = mysql_query($query)
+            or die ("Query Failed ".mysql_error());
+        $id = -1;
+        while($row = mysql_fetch_array($result,MYSQL_ASSOC)){
+            $id = $row['ultimo_id'];
+        }
+        return $id;
+    }
 }
 
 ?>

@@ -40,7 +40,8 @@ class MockedNoticias implements NoticiasRepository {
         return null;
         
     }
-    public function addNoticia($noticia){
+    public function addNoticia(Noticia $noticia){
+        // do nothing
         
     }
 }

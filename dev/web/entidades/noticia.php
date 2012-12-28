@@ -1,7 +1,12 @@
 <?php
 
-class Noticia {
+include_once '../init.php';
+include_once ROOT_DIR .'/util/utilidades.php';
 
+class Noticia {
+    public static $TABLE = "noticias";
+    
+    public static $COLUMN_ID = "noticia_id";
     private $id;
     private $fechaHora;
     private $titulo;
@@ -54,7 +59,7 @@ class Noticia {
     }
 
     public function getUrl() {
-        return $this->url;
+        return Utilidades::safeText($this->titulo);
     }
 
 }
