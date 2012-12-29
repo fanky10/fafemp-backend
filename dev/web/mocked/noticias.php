@@ -37,12 +37,13 @@ class MockedNoticias implements NoticiasRepository {
         
     }
     public function getNoticia($titulo){
-        return null;
-        
+        // do nothing
     }
     public function addNoticia(Noticia $noticia){
         // do nothing
-        
+    }
+    public function getNoticiaById($id){
+        // do nothing
     }
 }
 ?>

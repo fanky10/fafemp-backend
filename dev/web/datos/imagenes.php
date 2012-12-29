@@ -21,15 +21,21 @@ class DataImagenes extends Data implements ImagenesRepository {
     }
 
     public function addImagen(Imagen $imagen) {
-        $non_query = "insert into ".Imagen::$TABLE." (imagen_path,imagen_nombre) values(" .
-                Utilidades::db_adapta_string($imagen->getPath()) . "," .
-                Utilidades::db_adapta_string($imagen->getNombre()) .
-                ")";
-        //lo insertamos
-        $results = mysql_query($non_query)
-                or die("Query Failed " . mysql_error());
-        $id = -1;
-        $id = $this->getUltimoID(Imagen::$TABLE,Imagen::$COLUMN_ID);
+        $non_query = "insert into " . Imagen::$TABLE . " (imagen_path,imagen_nombre) 
+            values(?,?)";
+        $stmt = $this->prepareStmt($non_query);
+        $stmt->bind_param('ss', $path, $name);
+
+        $name = $imagen->getNombre();
+        $path = $imagen->getPath();
+
+        if (!$stmt->execute()) {
+            echo "addImagen - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+            return -1;
+        }
+        $stmt->close();
+        $id = $this->getUltimoID(Imagen::$TABLE, Imagen::$COLUMN_ID);
+        
         return $id; //returns generated id
     }
 

@@ -28,7 +28,7 @@ class Utilidades {
 //  check if under 5MB,
 //  check file extension for legal file types
     public static function safeText($text){
-        preg_replace(
+        return preg_replace(
             array("/\s+/", "/[^-\.\w]+/"), array("_", ""), trim($text));
     }
     #Example: source from: http://snipplr.com/view/3644/

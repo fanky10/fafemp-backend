@@ -24,6 +24,7 @@ if ($_FILES["file"]["error"] > 0) {
     $safe_filename = Utilidades::safeText($_FILES['file']['name']);
     if ($_FILES['file']['size'] <= $MAXIMUM_FILESIZE &&
             preg_match($rEFileTypes, strrchr($safe_filename, '.'))) {
+        
         $isMove = move_uploaded_file(
                 $_FILES['file']['tmp_name'], $dirBase . $safe_filename);
         //  TODO: redirect header

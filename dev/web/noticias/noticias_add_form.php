@@ -1,7 +1,7 @@
 <html>
     <body>
 
-        <form action="noticias_controller.php" method="POST"
+        <form action="noticias_add.php" method="POST"
               enctype="multipart/form-data">
             <label for="titulo">Titulo Noticia</label>
             <input id="titulo" type="text" name="titulo"/>

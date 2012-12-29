@@ -14,19 +14,14 @@
 
 class Data {
 
-    protected $connection;
+    protected $mysqli;
 
     public function __construct() {
         //para que este dentro del standar :)
-        $this->connection = $this->initDB();
+        $this->mysqli = $this->initMysqlDB();
     }
 
-    /*
-     * DB Initialization method.
-     * Returns the connection variable.
-     * ver de hacerla singleton o algo asi para no consumir tantos recursos y evitar uso indebido
-     */
-    protected function initDB() {
+    protected function initMysqlDB() {
         //setea en la session la database
         if (!isset($_SESSION['databaseURL'])) {
             $dbConf = new Configuracion();
@@ -45,13 +40,11 @@ class Data {
         $databaseUName = $_SESSION['databaseUName'];
         $databasePWord = $_SESSION['databasePWord'];
         $databaseName = $_SESSION['databaseName'];
-
-        $connection = mysql_connect($databaseURL, $databaseUName, $databasePWord)
-                or die("Error while connecting to host <br/> error: " . mysql_error());
-        mysql_query('SET NAMES utf8');
-        $db = mysql_select_db($databaseName, $connection)
-                or die("Error while connecting to database <br/> error: " . mysql_error());
-        return $connection;
+        $mysqli = new mysqli($databaseURL, $databaseUName, $databasePWord, $databaseName);
+        if ($mysqli->connect_errno) {
+            echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+        return $mysqli;
     }
 
     /*
@@ -61,18 +54,24 @@ class Data {
      */
 
     public function closeDB() {
-        mysql_close($this->connection);
+        mysqli_close($this->mysqli);
     }
-    public function getUltimoID($tabla,$column){
+
+    protected function prepareStmt($query) {
+        return $this->mysqli->prepare($query);
+    }
+
+    public function getUltimoID($tabla, $column) {
         $query = "select max($column) as ultimo_id from $tabla";
-        $result = mysql_query($query)
-            or die ("Query Failed ".mysql_error());
-        $id = -1;
-        while($row = mysql_fetch_array($result,MYSQL_ASSOC)){
-            $id = $row['ultimo_id'];
+        $result = $this->mysqli->query($query);
+        if (!$result) {
+            throw new Exception("Database Error [{$this->mysqli->errno}] {$this->mysqli->error}");
         }
+        $row = $result->fetch_assoc();
+        $id = $row['ultimo_id'];
         return $id;
     }
+
 }
 
 ?>

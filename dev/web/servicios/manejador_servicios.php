@@ -29,6 +29,11 @@ class ManejadorServicios {
         return $this->noticiasRepository->addNoticia($noticia);
     }
 
+    public function getNoticiaById($id) {
+        $this->noticiasRepository = new DataNoticias();
+        return $this->noticiasRepository->getNoticiaById($id);
+    }
+
 }
 
 ?>
