@@ -19,13 +19,22 @@ class DataNoticias extends Data implements NoticiasRepository {
     }
 
     public function getNoticias($limit) {
-        $query = "select * from noticias ORDER BY noticia_fec_hora desc ".($limit>0?" limit ".$limit:"");
+        $query = "select n.noticia_id,n.noticia_fec_hora,n.noticia_titulo,n.noticia_cuerpo,i.imagen_id,i.imagen_path,i.imagen_nombre  
+            from noticias n 
+            LEFT JOIN imagenes i on i.imagen_id = n.noticia_imagen_id 
+            ORDER BY noticia_fec_hora desc ".($limit>0?" limit ".$limit:"");
         $result = mysql_query($query)
                 or die("Query Failed " . mysql_error());
         $noticia_idx = 0;
-        $vNews;
+        $vNews = array();
         while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-
+            
+            $oImagen = new Imagen();
+            $oImagen->setId($row['imagen_id']);
+            $oImagen->setNombre($row['imagen_nombre']);
+            $oImagen->setPath($row['imagen_path']);
+            
+            
             $id = $row['noticia_id'];
             $fechaHora = $row['noticia_fec_hora'];
             $titulo = $row['noticia_titulo'];
@@ -34,6 +43,7 @@ class DataNoticias extends Data implements NoticiasRepository {
             $oNoticia->setCuerpo($cuerpo);
             $oNoticia->setFechaHora($fechaHora);
             $oNoticia->setId($id);
+            $oNoticia->setImagen($oImagen);
             //TODO: imagen / url
             $oNoticia->setTitulo($titulo);
 
