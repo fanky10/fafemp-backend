@@ -61,6 +61,8 @@ if (!isset($vNoticias) || empty($vNoticias)) {
         //TODO: check max char count and cut it
         echo $oNoticia->getCuerpo();
         echo '</p>';
+        $link = ROOT_URL ."/noticia.php?id=".$oNoticia->getId();
+        echo '<a class="button radius" title="Ver más" href="'.$link.'">Más detalles</a>';
         //TODO: ver mas? --> link a la noticia
         echo '</div>';
         echo '</div>';
