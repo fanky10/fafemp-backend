@@ -14,6 +14,8 @@ $paginacionLimit = $GLOBAL_SETTINGS['news.page.limit'];
 $manejador = new ManejadorServicios();
 $vNoticias = $manejador->getNoticiasPaginadas($offset, $limit);
 $totalNoticias = $manejador->getCantidadNoticias();
+$imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
+$imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
 if (!isset($vNoticias) || empty($vNoticias)) {
     ?>
     <div class="twelve columns"><h3>Próximamente Noticias</h3></div> 
@@ -37,8 +39,7 @@ if (!isset($vNoticias) || empty($vNoticias)) {
 
     <?php
 } else {
-    ?>
-    <?php
+    
     $oNoticia = new Noticia();
     $oImagen = new Imagen();
 
@@ -50,18 +51,20 @@ if (!isset($vNoticias) || empty($vNoticias)) {
     $itemCount = 0;
     $rowCount = 0;
     foreach ($vNoticias as $oNoticia) {
+        $oImagen = $oNoticia->getImagen();
+        $link = ROOT_URL ."/noticia.php?id=".$oNoticia->getId();
+        $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
         echo '<div class="row">';
         echo '<div class="twelve columns"><h3>' . $oNoticia->getTitulo() . '</div>';
         echo '<div class="four columns">';
         //TODO: check img size (:
-        echo '<img src="http://placehold.it/400x300&amp;text=[img]">';
+        echo '<a href="'.$link.'"><img src="'.$imgSrc.'" witdh="'.$imgWidth.'" height="'.$imgHeight.'"></a>';
         echo '</div>';
         echo '<div class="eight columns">';
         echo '<p>';
         //TODO: check max char count and cut it
         echo $oNoticia->getCuerpo();
         echo '</p>';
-        $link = ROOT_URL ."/noticia.php?id=".$oNoticia->getId();
         echo '<a class="button radius" title="Ver más" href="'.$link.'">Más detalles</a>';
         //TODO: ver mas? --> link a la noticia
         echo '</div>';

@@ -18,7 +18,6 @@ if (isset($idNoticia)) {
         echo '<img src="' . $img . '" /><span class="slider-caption">' . $title . '</span>';
     }
 } else {
-    
     header( 'Location: '.$redirect);
 }
 ?>
