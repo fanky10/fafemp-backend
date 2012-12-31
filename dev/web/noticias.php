@@ -88,9 +88,9 @@
         </div>
         <!-- Three-up Content Blocks -->
         <div class="content">
-            <div class="row">
-                <?php include_once 'noticias_list.php'; ?>
-            </div>
+
+            <?php include_once 'noticias_list.php'; ?>
+
         </div>
 
         <!-- Footer -->
