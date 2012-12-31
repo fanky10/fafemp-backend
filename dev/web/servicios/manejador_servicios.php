@@ -38,6 +38,11 @@ class ManejadorServicios {
         $this->noticiasRepository = new DataNoticias();
         return $this->noticiasRepository->getNoticiasPaginadas($offset, $limit);
     }
+    
+    public function getCantidadNoticias(){
+        $this->noticiasRepository = new DataNoticias();
+        return $this->noticiasRepository->getCantidadNoticias();
+    }
 
 }
 

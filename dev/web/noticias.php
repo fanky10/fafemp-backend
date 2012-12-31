@@ -81,7 +81,7 @@
                     <ul class="inline-list">
                         <li><a href="index.html">Home</a></li>
                         <li>></li>
-                        <li>Contacto</li>
+                        <li>Noticias</li>
                     </ul>        
                 </div>
             </div>

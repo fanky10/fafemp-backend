@@ -168,6 +168,15 @@ class DataNoticias extends Data implements NoticiasRepository {
         $this->closeDB();
         return $vNews;
     }
+    public function getCantidadNoticias(){
+        $query = "select count(*) as cantidad from ".Noticia::$TABLE;
+        $result = $this->mysqli->query($query);
+        if (!$result) {
+            throw new Exception("Database Error [{$this->mysqli->errno}] {$this->mysqli->error}");
+        }
+        $row = $result->fetch_assoc();
+        return $row['cantidad'];
+    }
 
 }
 
