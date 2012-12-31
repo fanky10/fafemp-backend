@@ -16,6 +16,7 @@ $vNoticias = $manejador->getNoticiasPaginadas($offset, $limit);
 $totalNoticias = $manejador->getCantidadNoticias();
 $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
 $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
+$limiteCuerpo = $GLOBAL_SETTINGS['news.body.limit'];
 if (!isset($vNoticias) || empty($vNoticias)) {
     ?>
     <div class="twelve columns"><h3>Próximamente Noticias</h3></div> 
@@ -54,19 +55,18 @@ if (!isset($vNoticias) || empty($vNoticias)) {
         $oImagen = $oNoticia->getImagen();
         $link = ROOT_URL ."/noticia.php?id=".$oNoticia->getId();
         $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
+        $shortenText = Utilidades::acortaTexto($oNoticia->getCuerpo(), $limiteCuerpo, ".");
+            
         echo '<div class="row">';
         echo '<div class="twelve columns"><h3>' . $oNoticia->getTitulo() . '</div>';
         echo '<div class="four columns">';
-        //TODO: check img size (:
         echo '<a href="'.$link.'"><img src="'.$imgSrc.'" witdh="'.$imgWidth.'" height="'.$imgHeight.'"></a>';
         echo '</div>';
         echo '<div class="eight columns">';
         echo '<p>';
-        //TODO: check max char count and cut it
-        echo $oNoticia->getCuerpo();
+        echo $shortenText;
         echo '</p>';
         echo '<a class="button radius" title="Ver más" href="'.$link.'">Más detalles</a>';
-        //TODO: ver mas? --> link a la noticia
         echo '</div>';
         echo '</div>';
     }
