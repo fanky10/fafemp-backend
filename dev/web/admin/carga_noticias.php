@@ -39,7 +39,7 @@
 			<div class="one columns isotipo">
 				<a href="index.html"
 					title="Foro Argentino de Facultades y Escuelas de Medicina Públicas"><img
-					src="images/logo-foro-argentino-de-facultades-y-escuelas-de-medicina-publicas.png" /></a>
+					src="../images/logo-foro-argentino-de-facultades-y-escuelas-de-medicina-publicas.png" /></a>
 			</div>
 			<div class="eight columns">
 				<h2 class="slogan">Sitio Administracion - carga de noticias</h2>
@@ -61,36 +61,34 @@
 		<div class="row" style="height: 460px">
 			<div class="four columns"></div>
 			<div class="four columns" style="margin-top: 20px;">
-				<ul class="nav link-list" align="center">
-					<li class="titulo" align="center">
-						<label for="titulo">Ingrese titulo de la noticia</label> 
-						<input id="titulo" class="twelve required" type="text" name="noticia">
-					</li>
-				</ul>
-				<ul class="nav link-list" align="center">
-					<li class="desc_noticia">
-						<label for="descripcion">Titulo de la noticia</label> 
-						<input id="descripcion" class="twelve required" type="password" name="password">
-					</li>
-				</ul>
-				<ul class="nav link-list" align="center">
-					<li class="desc_noticia">
-						<label for="descripcion">Titulo de la noticia</label> 
-						<input id="descripcion" class="twelve required" type="password" name="password">
-					</li>
-				</ul>
-				<ul class="nav link-list" align="center">
-					<li class="desc_noticia">
-						<label for="descripcion">Titulo de la noticia</label> 
-						<input id="descripcion" class="twelve required" type="password" name="password">
-					</li>
-				</ul>
-				<ul class="nav link-list" align="center">
-					<li class="login" align="center">
-						<button type="submit" class="radius button">login</button> <input
-						id="submitted" type="hidden" value="true" name="submitted">
-					</li>
-				</ul>
+				
+				<form action="noticias_add.php" method="POST" enctype="multipart/form-data">
+              		<ul class="nav link-list" align="center">
+						<li class="titulo" align="center">
+							<label for="titulo">Ingrese titulo de la noticia</label> 
+							<input id="titulo" class="twelve required" type="text" name="noticia">
+						</li>
+					</ul>
+					<ul class="nav link-list" align="center">
+						<li class="desc_noticia">
+							<label for="descripcion">Ingrese descripcion de la noticia</label> 
+							<textarea class="twelve required" id="cuerpo" name="cuerpo" rows="4" cols="50">
+							</textarea>
+						</li>
+					</ul>
+					<ul class="nav link-list" align="center">
+						<li class="img_noticia">
+							<label for="imagen">Seleccione imagen de la noticia</label> 
+							<input type="file" name="file" id="file"/><br>
+						</li>
+					</ul>
+					<ul class="nav link-list" align="center">
+						<li class="submit" align="center">
+							<input type="submit" name="submit" value="Submit"/>
+						</li>
+					</ul>
+              	</form>
+			
 			</div>
 			<div class="four columns"></div>
 		</div>

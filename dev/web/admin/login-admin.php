@@ -34,7 +34,7 @@
   <div class="logo">
     <div class="row">
       <div class="one columns isotipo">
-        <a href="index.html" title="Foro Argentino de Facultades y Escuelas de Medicina Públicas"><img src="images/logo-foro-argentino-de-facultades-y-escuelas-de-medicina-publicas.png" /></a></div>
+        <a href="index.html" title="Foro Argentino de Facultades y Escuelas de Medicina Públicas"><img src="../images/logo-foro-argentino-de-facultades-y-escuelas-de-medicina-publicas.png" /></a></div>
         <div class="eight columns">
           <h2 class="slogan">Sitio Administracion</h2>
           <h1 class="logotipo">Foro Argentino de Facultades y Escuelas de Medicina Públicas</h1>
