@@ -54,4 +54,3 @@ class MockedNoticias implements NoticiasRepository {
     }
 }
 ?>
-
