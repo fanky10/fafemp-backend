@@ -4,11 +4,15 @@
 @include_once ROOT_DIR . '/mocked/noticias.php';
 @include_once ROOT_DIR . '/datos/imagenes.php';
 @include_once ROOT_DIR . '/datos/noticias.php';
+@include_once ROOT_DIR . '/mocked/UserServiceMocked.php';
+@include_once ROOT_DIR . '/datos/usuarios.php';
+
 
 class ManejadorServicios {
 
     private $noticiasRepository;
     private $imagenesRepository;
+    private $usuariosRepository;
 
     public function __construct() {
         
@@ -33,7 +37,26 @@ class ManejadorServicios {
         $this->noticiasRepository = new DataNoticias();
         return $this->noticiasRepository->getNoticiaById($id);
     }
-
+    
+    public function getNoticiasPaginadas($offset,$limit) {
+        $this->noticiasRepository = new DataNoticias();
+        return $this->noticiasRepository->getNoticiasPaginadas($offset, $limit);
+    }
+    
+    public function getCantidadNoticias(){
+        $this->noticiasRepository = new DataNoticias();
+        return $this->noticiasRepository->getCantidadNoticias();
+    }
+    
+    public function getUsuarios($user){
+        $this->usuariosRepository = new DataUsuarios();
+        return $this->usuariosRepository->getUsuario($user);
+    }
+    
+    public function cambioPassword($user,$newPassword){
+        $this->usuariosRepository = new DataUsuarios();
+        return $this->usuariosRepository->cambioPassword($user,$newPassword);
+    }
 }
 
 ?>

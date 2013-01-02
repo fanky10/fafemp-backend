@@ -45,6 +45,12 @@ class MockedNoticias implements NoticiasRepository {
     public function getNoticiaById($id){
         // do nothing
     }
+    
+    public function getNoticiasPaginadas($offset,$limit){
+        // do nothing
+    }
+    public function getCantidadNoticias(){
+        // do nothing (x
+    }
 }
 ?>
-
