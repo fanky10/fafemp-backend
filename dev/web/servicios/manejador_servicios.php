@@ -43,6 +43,11 @@ class ManejadorServicios {
         $this->usuariosRepository = new DataUsuarios();
         return $this->usuariosRepository->getUsuario($user);
     }
+    
+    public function cambioPassword($user,$newPassword){
+        $this->usuariosRepository = new DataUsuarios();
+        return $this->usuariosRepository->cambioPassword($user,$newPassword);
+    }
 }
 
 ?>

@@ -36,6 +36,16 @@ class DataUsuarios extends Data implements UsuariosRepository {
         $stmt->close();
         return $usuario;
     }
+    
+    public function cambioPassword($user,$newPassword){
+        $query="update usuarios set usuario_pass= ? where usuario_user = ?";    
+        
+        $stmt = $this->prepareStmt($query);
+
+        $stmt->bind_param('ss', $newPassword,$user);
+
+        $stmt->execute();
+    }
 
 }
 
