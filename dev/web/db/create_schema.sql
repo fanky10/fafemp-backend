@@ -31,3 +31,16 @@ CREATE TABLE imagenes (
 */
 
 ALTER TABLE noticias ADD CONSTRAINT `FK_imagen_id_1` FOREIGN KEY (`noticia_imagen_id`) REFERENCES `imagenes` (`imagen_id`);
+
+
+CREATE TABLE usuarios(
+    usuario_user varchar(20) not null primary key,
+    usuario_pass varchar(32) not null
+);
+
+
+/*
+insert into usuarios 
+values ("admin",md5("pass_admin"));
+*/
+
