@@ -1,4 +1,5 @@
 <?php
+echo "hola!";
 include_once '../init.php';
 include_once ROOT_DIR .'/entidades/noticia.php';
 include_once ROOT_DIR .'/entidades/imagen.php';
