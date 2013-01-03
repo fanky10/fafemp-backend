@@ -30,8 +30,8 @@
     </head>
     <body>
 
-        <?php 
-            include_once 'admin_header.php';
+        <?php
+        include_once 'admin_header.php';
         ?>
         <div align="center" class="menu">
             <div class="row" style="height:460px" >
@@ -58,12 +58,13 @@
                         </ul>
                     </form>
                     <p style="text-align:left">
-                        <?php 
-                        if(isset($_GET['msg']) && $_GET['msg']=="error"){
-                            echo "Usuario o contraseña incorrectos";
-                        }
-                        
-                        ?>
+                        <label class="error" for="email" generated="true">
+                            <?php
+                            if (isset($_GET['msg']) && $_GET['msg'] == "error") {
+                                echo "Usuario o contraseña incorrectos";
+                            }
+                            ?>
+                        </label>
                     </p>
                 </div>
                 <div class="four columns"></div>
@@ -73,16 +74,16 @@
         <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
 
 
-        <?php include_once 'admin_footer.php';?>
+        <?php include_once 'admin_footer.php'; ?>
 
-            <!-- Included JS Files (Compressed) -->
-            <script src="javascripts/jquery.js"></script>
-            <script src="javascripts/foundation.min.js"></script>
+        <!-- Included JS Files (Compressed) -->
+        <script src="javascripts/jquery.js"></script>
+        <script src="javascripts/foundation.min.js"></script>
 
-            <!-- Initialize JS Plugins -->
-            <script src="javascripts/jquery.prettyPhoto.js"></script>
-            <script src="javascripts/app.js"></script>
-            <script src="javascripts/init.js"></script>
+        <!-- Initialize JS Plugins -->
+        <script src="javascripts/jquery.prettyPhoto.js"></script>
+        <script src="javascripts/app.js"></script>
+        <script src="javascripts/init.js"></script>
 
     </body>
 </html>
