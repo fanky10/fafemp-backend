@@ -49,8 +49,6 @@ if ($_FILES["file"]["error"] > 0) {
     echo "Posible ataque del archivo subido: ";
     echo "nombre del archivo '" . $_FILES["file"]["tmp_name"] . "'.";
 }
-?> 
-<?php
 echo "Preview!";
 echo "<br/>";
 /* 
