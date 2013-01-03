@@ -1,4 +1,4 @@
-<?php include 'admin_check.php'?>
+<?php include 'admin_check.php' ?>
 <!DOCTYPE html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -33,12 +33,12 @@
     </head>
     <body>
 
-        <?php 
-            $aditionalTitle = "- Carga noticias";
-            include_once 'admin_header.php';
+        <?php
+        $aditionalTitle = "- Carga noticias";
+        include_once 'admin_header.php';
         ?>
         <div class="menu">
-            
+
             <div class="row">
                 <!-- Contact Details -->
                 <div class="nine columns">
@@ -72,41 +72,15 @@
         <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
 
 
-        <!-- Three-up Content Blocks -->
-        <div class="content">
+        <?php include_once 'admin_footer.php'; ?>
+        <!-- Included JS Files (Compressed) -->
+        <script src="javascripts/jquery.js"></script>
+        <script src="javascripts/foundation.min.js"></script>
 
+        <!-- Initialize JS Plugins -->
+        <script src="javascripts/jquery.prettyPhoto.js"></script>
+        <script src="javascripts/app.js"></script>
+        <script src="javascripts/init.js"></script>
 
-            <!-- Footer -->
-            <div class="sponsor"></div>
-
-            <!-- Footer -->
-            <div class="footer footer-line-white">
-                <footer class="row">
-                    <div class="twelve columns">
-                        <div class="row">
-                            <div class="four columns"></div>
-                            <div class="four columns"></div>
-                            <div class="four columns"></div>
-                        </div>
-                        <div class="row copyright">
-                            <div class="twelve columns">
-                                <hr class="footer-line" />
-                                <p class="last">FAFEMP © 2013 - Foro Argentino de Facultades
-                                    y Escuelas de Medicina Públicas.</p>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-
-            <!-- Included JS Files (Compressed) -->
-            <script src="javascripts/jquery.js"></script>
-            <script src="javascripts/foundation.min.js"></script>
-
-            <!-- Initialize JS Plugins -->
-            <script src="javascripts/jquery.prettyPhoto.js"></script>
-            <script src="javascripts/app.js"></script>
-            <script src="javascripts/init.js"></script>
-            
     </body>
 </html>
