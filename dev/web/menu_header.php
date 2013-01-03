@@ -2,7 +2,7 @@
     <div class="row">
         <div class="twelve columns menu-wrapper">
             <ul class="nav link-list">
-                <li class="active"><a href="index.html" title="Home">Home</a></li>
+                <li class="active"><a href="index.php" title="Home">Home</a></li>
                 <li>|</li>
                 <li><a href="nosotros.html" title="Nosotros">Nosotros</a></li>
                 <li>|</li>
