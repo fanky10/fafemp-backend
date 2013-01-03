@@ -8,6 +8,10 @@ include_once ROOT_DIR . '/repositorios/usuarios_repository.php';
 include_once ROOT_DIR . '/mocked/UserServiceMocked.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 
+$redirect = "admin_panel.php";
+if(isset($_GET['redirect'])){
+    $redirect = $_GET['redirect'];
+}
 $estadoLogin = $_SESSION['estado'];
 if(isset($estadoLogin) && $estadoLogin){
     header("Location: admin_panel.php");
@@ -24,7 +28,7 @@ $administrador = $manejador->getUsuarios($user);
 if (isset($administrador) && $user == $administrador->getUser() && $pass == $administrador->getPass()) {
     $_SESSION['estado'] = true;
     $_SESSION['user'] = $administrador->getUser();
-    header("Location: admin_panel.php");
+    header("Location: ".$redirect);
 } else {
     header("Location: admin_login.php?msg=error");
 }
