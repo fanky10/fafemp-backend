@@ -56,33 +56,7 @@
     <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
 
 
-
-    <!-- Footer -->
-    <div class="sponsor">
-
-    </div>
-
-    <!-- Footer -->
-    <div class="footer footer-line-white">
-        <footer class="row">
-            <div class="twelve columns">
-                <div class="row">
-                    <div class="four columns">
-                    </div>  
-                    <div class="four columns">
-                    </div>
-                    <div class="four columns">
-                    </div>
-                </div>
-                <div class="row copyright">
-                    <div class="twelve columns">
-                        <hr class="footer-line" />
-                        <p class="last">FAFEMP © 2013 - Foro Argentino de Facultades y Escuelas de Medicina Públicas.</p>
-                    </div>
-                </div>
-            </div> 
-        </footer>
-    </div>
+    <?php include_once 'admin_footer.php'; ?>
     <!-- Included JS Files (Compressed) -->
     <script src="javascripts/jquery.js"></script>
     <script src="javascripts/foundation.min.js"></script>
@@ -106,7 +80,7 @@ $msg = "Bienvenido " . $_SESSION['user'];
     <title>User Panel</title>
 </head>
 <body>
-<p> <?php // echo $msg;    ?> </p>
+<p> <?php // echo $msg;     ?> </p>
 
 <form id="form2" name="form2" method="post" action="cambio_pass_form.php">
   <input type="submit" name="cambio_pass" id="logout" value="Cambiar contraseña" />
