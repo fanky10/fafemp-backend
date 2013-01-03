@@ -10,7 +10,7 @@ include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 
 $estadoLogin = $_SESSION['estado'];
 if(isset($estadoLogin) && $estadoLogin){
-    header("Location: user_panel.php");
+    header("Location: admin_panel.php");
     return ; //everything is just fine! ^^
 }
 
@@ -24,8 +24,8 @@ $administrador = $manejador->getUsuarios($user);
 if (isset($administrador) && $user == $administrador->getUser() && $pass == $administrador->getPass()) {
     $_SESSION['estado'] = true;
     $_SESSION['user'] = $administrador->getUser();
-    header("Location: user_panel.php");
+    header("Location: admin_panel.php");
 } else {
-    header("Location: login_admin.php?msg=error");
+    header("Location: admin_login.php?msg=error");
 }
 ?>
