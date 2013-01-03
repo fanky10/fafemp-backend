@@ -6,18 +6,18 @@ session_start();
 <html>
 <head><title>User Panel</title></head>
 <body>
-<p> <?= $msg ?> </p>
-<form id="form1" name="form1" method="post" action="estado.php">
-  <input type="submit" name="session_status" id="session_status" value="Ver estado de sesion" />
-</form>
+<p> <?php echo $msg; ?> </p>
 
-<form id="form2" name="form2" method="post" action="cambio_pass_form.html">
+<form id="form2" name="form2" method="post" action="cambio_pass_form.php">
   <input type="submit" name="cambio_pass" id="logout" value="Cambiar contraseña" />
 </form>
 
 <form id="form2" name="form3" method="post" action="logout.php">
   <input type="submit" name="logout" id="logout" value="Desconectarme" />
 </form>
+
+<a href="noticias_add_form.php">Cargar nueva noticia!</a>
+
 
 </body>
 </html>

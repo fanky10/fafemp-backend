@@ -1,4 +1,5 @@
 <?php
+echo "hola!";
 include_once '../init.php';
 include_once ROOT_DIR .'/entidades/noticia.php';
 include_once ROOT_DIR .'/entidades/imagen.php';
@@ -49,8 +50,6 @@ if ($_FILES["file"]["error"] > 0) {
     echo "Posible ataque del archivo subido: ";
     echo "nombre del archivo '" . $_FILES["file"]["tmp_name"] . "'.";
 }
-?> 
-<?php
 echo "Preview!";
 echo "<br/>";
 /* 
