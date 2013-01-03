@@ -18,7 +18,7 @@
 
         $title = $oNoticia->getTitulo();
         $oImagen = $oNoticia->getImagen();
-        $link = ROOT_URL ."/noticias/noticias_list.php?id=".$oNoticia->getId();
+        $link = ROOT_URL ."/noticia.php?id=".$oNoticia->getId();
         $img = "http://placehold.it/970x290/E9E9E9&text=".$title;
         //$img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
         echo '<a href="' . $link . '"><img src="' . $img . '" /><span class="slider-caption">Ver más</span></a>';
