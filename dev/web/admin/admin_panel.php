@@ -29,31 +29,53 @@
     include_once 'admin_header.php';
     ?>
 
-    <div class="menu">
-
-        <div class="row">
-            <!-- Contact Details -->
-            <div class="nine columns">
-                <div class="row">
-                    <div class="twelve columns">
-                        <form id="form2" name="form2" method="post" action="cambio_pass_form.php">
-                            <input type="submit" name="cambio_pass" id="logout" value="Cambiar contraseña" />
-                        </form>
-                    </div>
-                    <div class="twelve columns">
-                        <form id="form2" name="form3" method="post" action="logout.php">
-                            <input type="submit" name="logout" id="logout" value="Desconectarme" />
-                        </form>
-                    </div>
-                    <div class="twelve columns">
-                        <a href="noticias_carga.php">Cargar nueva noticia!</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- First Band (Slider) -->
     <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
+		<div class="breadcrums">
+			<div class="row">
+				<div class="twelve columns">
+					<ul class="inline-list">
+						<li><a href="index.html">Admin Panel</a></li>
+						<li>></li>
+						<li>Menu Administrador</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	
+		<!-- Three-up Content Blocks -->
+	
+		<div class="content">
+			<div class="row">
+				<div class="nine columns">
+					<h3>Menu</h3>
+					<div class="twelve columns">
+						<br/>
+					</div>
+					<div class="row" align="center">
+						<div class="twelve columns">
+							<form id="form2" name="form2" method="post" action="cambio_pass_form.php">
+								<input type="submit" name="cambio_pass" id="logout" value="Cambiar contraseña" />
+							</form>
+						</div>
+						<div class="twelve columns">
+							<br/>
+						</div>
+						<div class="twelve columns">
+							<form id="form2" name="form3" method="post" action="logout.php">
+								<input type="submit" name="logout" id="logout" value="Desconectarme" />
+							</form>
+						</div>
+						<div class="twelve columns">
+							<br/>
+						</div>
+						<div class="twelve columns">
+							<a href="noticias_carga.php">Cargar nueva noticia!</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    
 
 
     <?php include_once 'admin_footer.php'; ?>
