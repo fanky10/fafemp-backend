@@ -9,9 +9,9 @@ include_once ROOT_DIR . '/mocked/UserServiceMocked.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 
 $estadoLogin = $_SESSION['estado'];
-if(isset($estadoLogin) && $estadoLogin){
+if (isset($estadoLogin) && $estadoLogin) {
     header("Location: admin_panel.php");
-    return ; //everything is just fine! ^^
+    return; //everything is just fine! ^^
 }
 
 $user = $_POST['user'];
@@ -25,7 +25,9 @@ if (isset($administrador) && $user == $administrador->getUser() && $pass == $adm
     $_SESSION['estado'] = true;
     $_SESSION['user'] = $administrador->getUser();
     header("Location: admin_panel.php");
-} else {
+} else if ($user != null && $pass != null) {
     header("Location: admin_login.php?msg=error");
+} else if ($user == null || $pass == null) {
+    header("Location: admin_login.php");
 }
 ?>
