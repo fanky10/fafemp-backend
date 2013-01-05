@@ -4,7 +4,7 @@
             <ul class="nav link-list">
                 <li class="active"><a href="index.php" title="Home">Home</a></li>
                 <li>|</li>
-                <li><a href="nosotros.html" title="Nosotros">Nosotros</a></li>
+                <li><a href="nosotros.php" title="Nosotros">Nosotros</a></li>
                 <li>|</li>
                 <li><a href="campus-virtual.html" title="Campus Virtual">Campus Virtual</a></li>
                 <li>|</li>
@@ -16,9 +16,9 @@
                 <li>|</li>
                 <li><a href="autoridades.html" title="Autoridades">Autoridades</a></li>
                 <li>|</li>
-                <li><a href="contacto.html" title="Contacto">Contacto</a></li>
+                <li><a href="contacto.php" title="Contacto">Contacto</a></li>
                 <li>|</li>
-                <li><a href="noticias.php" title="Contacto">Noticias</a></li>
+                <li><a href="noticias.php" title="Noticias">Noticias</a></li>
             </ul>
         </div>
     </div>
