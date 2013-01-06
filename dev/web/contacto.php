@@ -53,14 +53,15 @@
         <?php include_once 'menu_header.php' ?>
         <!-- First Band (Slider) -->
         <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
-        <?php $navigateTitle = "Contacto";
+        <?php
+        $navigateTitle = "Contacto";
         include_once 'navigate.php'
         ?>
         <!-- Three-up Content Blocks -->
         <div class="content">
             <div class="row">
                 <!-- Contact Details -->
-                <div class="nine columns">
+                <div class="eight columns">
                     <h3>Contacto</h3>
                     <p>Por favor pongase en contacto con nosotros por cualquier duda o comentario a través de nuestro formulario de Contacto.<br>A la brevedad nos estaremos comunicando con usted. Muchas gracias!.</p>
                     <form id="formInscripcion" class="validateform" method="post" action="send-mail.php">
@@ -94,19 +95,20 @@
                     </form>
                 </div>
                 <!-- Sidebar -->
-                <div class="three columns">
+                <div class="four columns">
                     <h3>Google Maps</h3>    
                     <!-- Clicking this placeholder fires the mapModal Reveal modal -->
-                    <p> <a class="th" href="https://maps.google.com.ar/maps?q=Santa+Fe+3100,+Rosario,+Argentina&hl=en&ll=-32.938062,-60.665216&spn=0.009581,0.021007&sll=-38.341656,-63.28125&sspn=34.259869,86.044922&oq=Santa+Fe+3100,+Rosario+-+Argentina&hnear=Santa+Fe+3100,+Alberto+Olmedo,+Rosario,+Santa+Fe&t=m&z=16&iwloc=lyrftr:m,1173664463940107749,-32.940043,-60.665302&output=embed?iframe=true&width=100%&height=100%" rel="prettyPhoto[iframes]"><img src="images/google-maps-rosario-argentina.jpg" /></a><br />
-                        <a href="https://maps.google.com.ar/maps?q=Santa+Fe+3100,+Rosario,+Argentina&hl=en&ll=-32.938062,-60.665216&spn=0.009581,0.021007&sll=-38.341656,-63.28125&sspn=34.259869,86.044922&oq=Santa+Fe+3100,+Rosario+-+Argentina&hnear=Santa+Fe+3100,+Alberto+Olmedo,+Rosario,+Santa+Fe&t=m&z=16&iwloc=lyrftr:m,1173664463940107749,-32.940043,-60.665302&output=embed?iframe=true&width=100%&height=100%" rel="prettyPhoto[iframes]">Ver Mapa</a> </p>
-                    <p><img src="images/ico-home-black.png" alt="Dirección" /> Santa Fe 3100, Rosario - Argentina</p>
+                    <p> <a href="https://maps.google.com.ar/maps/ms?msid=206810590642046489742.0004d26020155865bcfe4&msa=0&ll=-33.998027,-61.21582&spn=10.121215,20.214844&t=m&output=embed?iframe=true&width=100%&height=100%" rel="prettyPhoto[iframes]">
+                            <img src="images/mapa-argentina-fafemp.png" alt="Google Maps - Argentina" /> 
+                        </a>
+                    </p>
                 </div>  
                 <!-- End Sidebar -->
             </div>
         </div>
 
         <!-- Footer -->
-<?php include_once 'footer.php'; ?>
+        <?php include_once 'footer.php'; ?>
         <!-- Included JS Files (Uncompressed) -->
         <!--
         
