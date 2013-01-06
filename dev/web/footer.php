@@ -3,20 +3,6 @@
 
 	<!-- Footer -->
 
-    <div class="sponsor">
-
-		<div class="row">
-			<div class="twelve columns sponsor-wrapper">
-				<a href="#"><img src="images/pan-american-health-organization.jpg">
-				</a> <a href="#"><img
-					src="images/organizacion-de-los-estados-americanos.jpg"> </a> <a
-					href="#"><img src="images/presidencia-de-la-nacion.jpg"> </a> <a
-					href="#" class="last"><img
-					src="images/red-de-telesalud-de-las-americas.jpg"> </a>
-			</div>
-		</div>
-	</div>
-
 	<div class="footer footer-line-white">
 		<footer class="row">
 			<div class="twelve columns">
