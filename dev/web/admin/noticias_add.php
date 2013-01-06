@@ -1,4 +1,5 @@
 <?php
+include 'admin_check.php';
 include_once '../init.php';
 include_once ROOT_DIR .'/entidades/noticia.php';
 include_once ROOT_DIR .'/entidades/imagen.php';
@@ -17,6 +18,7 @@ $rEFileTypes =
 $dirBase = ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/";
 
 $isFile = is_uploaded_file($_FILES["file"]["tmp_name"]);
+$everythingFine = false;
 if ($_FILES["file"]["error"] > 0) {
     echo "Error: " . $_FILES["file"]["error"] . "<br>";
 } else if ($isFile) {    //  do we have a file?
@@ -41,23 +43,102 @@ if ($_FILES["file"]["error"] > 0) {
             
             $manejador->addNoticia($oNoticia);
             //TODO: redirect noticias. o algo asi un mensaje ALGO jeje
+            $everythingFine=true;
         }else{
             echo "Posible problemas de permisos: ";
+            
         }
     }
 } else {
     echo "Posible ataque del archivo subido: ";
     echo "nombre del archivo '" . $_FILES["file"]["tmp_name"] . "'.";
 }
-echo "Preview!";
-echo "<br/>";
-/* 
- * forma de mostrarla (un poco de css aqui please!)
- * 
- */
-echo "<img src=\"" . ROOT_URL. "/".$GLOBAL_SETTINGS["news.img.path"] . "/" . $safe_filename . "\" >";
+
+if($everythingFine){
 ?>
-<br/>
-<a href="upload_form.php">volver</a>
-<?php //TODO ir a noticia!! con la url "generada" ?>
-<a href="#">ir a noticia</a>
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8" />
+
+        <!-- Set the viewport width to device width for mobile -->
+        <meta name="viewport" content="width=device-width" />
+
+        <title>Foro Argentino de Facultades y Escuelas de Medicina
+            Públicas | ADMIN SITE</title>
+
+        <!-- Included CSS Files (Uncompressed) -->
+        <!--
+          <link rel="stylesheet" href="stylesheets/foundation.css">
+        -->
+
+        <!-- Included CSS Files (Compressed) -->
+        <link rel="stylesheet" href="../stylesheets/foundation.css">
+        <link rel="stylesheet" href="../stylesheets/app.css">
+        <link rel="stylesheet" href="../stylesheets/prettyPhoto.css">
+
+        <!-- Author -->
+        <link type="text/plain" rel="author" href="humans.txt" />
+
+        <script src="javascripts/modernizr.foundation.js"></script>
+    </head>
+    <body>
+
+        <?php
+        $aditionalTitle = "- Preview Noticia";
+        include_once 'admin_header.php';
+        ?>
+    
+    
+		<!-- First Band (Slider) -->
+		<!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
+		<div class="breadcrums">
+			<div class="row">
+				<div class="twelve columns">
+					<ul class="inline-list">
+						<li><a href="index.html">Home</a></li>
+						<li>></li>
+						<li>Noticia Preview</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	
+		<!-- Three-up Content Blocks -->
+                <div class="content">
+                        <div class="row">
+                            <div class="twelve columns">
+                                <hr class="sin-margin-top" />
+                            </div>
+                            <div class="six columns">
+                                <h4 class="destacado"><?php echo $oNoticia->getTitulo(); ?></h4>
+                                <?php echo "<img src=\"".ROOT_URL."/".$GLOBAL_SETTINGS['news.img.path']."/".$safe_filename."\">";?>
+                            </div>
+                            <div class="six columns">
+                                <h4 class="destacado"></h4>
+                                <p class="text-justify"><?php echo $oNoticia->getCuerpo(); ?></p>
+                            </div>
+                        </div>
+                    </div>
+        
+
+
+        <?php include_once 'admin_footer.php'; ?>
+        <!-- Included JS Files (Compressed) -->
+        <script src="javascripts/jquery.js"></script>
+        <script src="javascripts/foundation.min.js"></script>
+
+        <!-- Initialize JS Plugins -->
+        <script src="javascripts/jquery.prettyPhoto.js"></script>
+        <script src="javascripts/app.js"></script>
+        <script src="javascripts/init.js"></script>
+
+    </body>
+</html>
+<?php } ?>

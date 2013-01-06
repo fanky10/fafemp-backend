@@ -146,39 +146,7 @@
         </div>
 
         <!-- Footer -->
-        <div class="footer footer-line-gray">
-            <footer class="row">
-                <div class="twelve columns">
-                    <div class="row">
-                        <div class="four columns">
-                            <h4>Contacto</h4>
-                            <p class="last"><img src="images/ico-phone.png" alt="Teléfono" /> Tel: (0341) - 555555</p>
-                            <p class="last"><img src="images/ico-phone.png" alt="Teléfono" /> Fax: (0341) - 555555</p>
-                            <p><img src="images/ico-mail.png" alt="Mail" /> E-mail: <a href="mailto:info@fafemp.org">info@fafemp.org</a></p>
-                            <p class="last"><img src="images/ico-home.png" alt="Dirección" /> <a href="https://maps.google.com.ar/maps?q=Santa+Fe+3100,+Rosario,+Argentina&hl=en&ll=-32.938062,-60.665216&spn=0.009581,0.021007&sll=-38.341656,-63.28125&sspn=34.259869,86.044922&oq=Santa+Fe+3100,+Rosario+-+Argentina&hnear=Santa+Fe+3100,+Alberto+Olmedo,+Rosario,+Santa+Fe&t=m&z=16&iwloc=lyrftr:m,1173664463940107749,-32.940043,-60.665302&output=embed?iframe=true&width=100%&height=100%" rel="prettyPhoto[iframes]">Santa Fe 3100, Rosario - Argentina</a></p>
-                        </div>
-                        <div class="four columns">
-                            <h4>Google Maps</h4>
-                            <a href="https://maps.google.com.ar/maps?q=Santa+Fe+3100,+Rosario,+Argentina&hl=en&ll=-32.938062,-60.665216&spn=0.009581,0.021007&sll=-38.341656,-63.28125&sspn=34.259869,86.044922&oq=Santa+Fe+3100,+Rosario+-+Argentina&hnear=Santa+Fe+3100,+Alberto+Olmedo,+Rosario,+Santa+Fe&t=m&z=16&iwloc=lyrftr:m,1173664463940107749,-32.940043,-60.665302&output=embed?iframe=true&width=100%&height=100%" rel="prettyPhoto[iframes]"><img src="images/google-maps-rosario-argentina.png" alt="Google Maps - Rosario - Argentina" /></a>
-                        </div>
-                        <div class="four columns">
-                            <h4>Contacto Social</h4>
-                            <ul class="social-box link-list">
-                                <li><a href="#" class="facebook">Facebook</a></li>
-                                <li><a href="#" class="twitter">Twitter</a></li>
-                                <li><a href="#" class="linkedin">LinkedIn</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row copyright">
-                        <div class="twelve columns">
-                            <hr class="footer-line" />
-                            <p class="last">FAFEMP © 2013 - Foro Argentino de Facultades y Escuelas de Medicina Públicas.</p>
-                        </div>
-                    </div>
-                </div> 
-            </footer>
-        </div>
+        <?php include_once 'footer.php'; ?>
         <!-- Included JS Files (Uncompressed) -->
         <!--
         
