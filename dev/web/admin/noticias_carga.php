@@ -34,58 +34,46 @@
     <body>
 
         <?php
-        $aditionalTitle = "- Carga noticias";
         include_once 'admin_header.php';
-        ?>
-    
-    
-		<!-- First Band (Slider) -->
-		<!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
-		<div class="breadcrums">
-			<div class="row">
-				<div class="twelve columns">
-					<ul class="inline-list">
-						<li><a href="index.html">Home</a></li>
-						<li>></li>
-						<li>Carga Noticia</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	
-		<!-- Three-up Content Blocks -->
-		<div class="content">
-			<div class="row">
-				<!-- Contact Details -->
-				<div class="nine columns">
-					<h3>Carga Noticias</h3>
-					<p>Desde el siguiente formulario usted prodra ingresar nuevas
-						noticias, que quedaras visibles desde el sitio publico!.</p>
-					<form action="noticias_add.php" method="POST"
-						enctype="multipart/form-data">
-						<h5>Formulario de Noticia</h5>
-						<label for="nombre">Titulo</label> 
-						<input type="text" class="twelve required" name="titulo" id="titulo" />
-						<div class="row">
-							<div class="twelve columns">
-								<label for="descripcion">Cuerpo Noticia</label>
-								<textarea rows="4" id="descripcion" class="required" name="cuerpo"></textarea>
-							</div>
-							<div class="twelve columns">
-								<label for="imagen">Selecciona Imagen</label> <input type="file" class="twelve required" name="file" id="file" />
-							</div>
-							<div class="twelve columns">
-								<br/>
-							</div>
-							<div class="twelve columns">
-								<button type="submit" name="submit" class="radius button">Guardar</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+        include_once 'admin_menu.php';
+        $navigateTitle = "Carga noticias";
+        include_once 'admin_navigate.php';
         
+        ?>
+
+        <!-- Three-up Content Blocks -->
+        <div class="content">
+            <div class="row">
+                <!-- Contact Details -->
+                <div class="nine columns">
+                    <h3>Carga Noticias</h3>
+                    <p>Desde el siguiente formulario usted prodra ingresar nuevas
+                        noticias, que quedaras visibles desde el sitio publico!.</p>
+                    <form action="noticias_add.php" method="POST"
+                          enctype="multipart/form-data">
+                        <h5>Formulario de Noticia</h5>
+                        <label for="nombre">Titulo</label> 
+                        <input type="text" class="twelve required" name="titulo" id="titulo" />
+                        <div class="row">
+                            <div class="twelve columns">
+                                <label for="descripcion">Cuerpo Noticia</label>
+                                <textarea rows="4" id="descripcion" class="required" name="cuerpo"></textarea>
+                            </div>
+                            <div class="twelve columns">
+                                <label for="imagen">Selecciona Imagen</label> <input type="file" class="twelve required" name="file" id="file" />
+                            </div>
+                            <div class="twelve columns">
+                                <br/>
+                            </div>
+                            <div class="twelve columns">
+                                <button type="submit" name="submit" class="radius button">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 
 
         <?php include_once 'admin_footer.php'; ?>

@@ -91,24 +91,12 @@ if($everythingFine){
     <body>
 
         <?php
-        $aditionalTitle = "- Preview Noticia";
         include_once 'admin_header.php';
+        include_once 'admin_menu.php';
+        $navigateTitle = "Noticia - Previsualización";
+        include_once 'admin_navigate.php';
+        
         ?>
-    
-    
-		<!-- First Band (Slider) -->
-		<!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
-		<div class="breadcrums">
-			<div class="row">
-				<div class="twelve columns">
-					<ul class="inline-list">
-						<li><a href="index.html">Home</a></li>
-						<li>></li>
-						<li>Noticia Preview</li>
-					</ul>
-				</div>
-			</div>
-		</div>
 	
 		<!-- Three-up Content Blocks -->
                 <div class="content">

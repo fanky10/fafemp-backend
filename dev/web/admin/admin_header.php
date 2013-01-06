@@ -7,7 +7,7 @@
                     src="../images/logo-foro-argentino-de-facultades-y-escuelas-de-medicina-publicas.png" /></a>
         </div>
         <div class="eight columns">
-            <h2 class="slogan">Sitio Administración <?php echo $aditionalTitle; ?></h2>
+            <h2 class="slogan">Sitio Administración</h2>
             <h1 class="logotipo">Foro Argentino de Facultades y Escuelas de
                 Medicina Públicas</h1>
         </div>
