@@ -91,29 +91,37 @@
       <div class="row">
         
 	        <div class="nine columns">
-	          <h3>Menu</h3>
-	          	<div class="twelve columns">
-	              	<br/>
-	            </div>
-	            <div class="row" align="center">
-	              <div class="twelve columns">
-	                <button type="submit" name="noticias" class="radius button">Noticias</button>
-	              </div>
-	              <div class="twelve columns">
-	              	<br/>
-	              </div>
-	              <div class="twelve columns">
-	                <button type="submit" name="noticias" class="radius button">Noticias</button>
-	              </div>
-	              <div class="twelve columns">
-	              	<br/>
-	              </div>
-	              <div class="twelve columns">
-	                <button type="submit" name="noticias" class="radius button">Noticias</button>
-	              </div>
-	            </div>
-	          
-	        </div>
+				
+				<div class="row" align="center">
+					
+					<div class="twelve columns">
+						<br/><br/>
+					</div>
+					
+					<div class="twelve columns">
+						<form id="form1" name="form1" method="post" action="cambio_pass_form.php">
+							<button type="submit" name="cambio_pass" id="logout" class="radius button">Cambiar contraseña</button>
+						</form>
+					</div>
+					<div class="twelve columns">
+						<br/>
+					</div>
+					<div class="twelve columns">
+						<form id="form2" name="form2" method="post" action="logout.php">
+							<button type="submit" name="noticias" id="noticias" class="radius button">Desconectarse</button>
+						</form>
+					</div>
+					<div class="twelve columns">
+						<br/>
+					</div>
+					<div class="twelve columns">
+						<form id="form2" name="form2" method="post" action="noticias_carga.php">
+							<button type="submit" name="noticias" class="radius button" >Carga noticia</button>
+						</form>
+					</div>
+				</div>
+
+			</div>
        	</div>
       </div>
 

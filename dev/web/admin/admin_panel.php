@@ -47,13 +47,15 @@
 		<div class="content">
 			<div class="row">
 				<div class="nine columns">
-					<h3>Menu</h3>
-					<div class="twelve columns">
-						<br/>
-					</div>
+					
 					<div class="row" align="center">
+					
 						<div class="twelve columns">
-							<form id="form2" name="form2" method="post" action="cambio_pass_form.php">
+							<br/><br/>
+						</div>
+					
+						<div class="twelve columns">
+							<form id="form1" name="form1" method="post" action="cambio_pass_form.php">
 								<input type="submit" name="cambio_pass" id="logout" value="Cambiar contraseña" />
 							</form>
 						</div>
@@ -61,7 +63,7 @@
 							<br/>
 						</div>
 						<div class="twelve columns">
-							<form id="form2" name="form3" method="post" action="logout.php">
+							<form id="form2" name="form2" method="post" action="logout.php">
 								<input type="submit" name="logout" id="logout" value="Desconectarme" />
 							</form>
 						</div>
@@ -69,7 +71,9 @@
 							<br/>
 						</div>
 						<div class="twelve columns">
-							<a href="noticias_carga.php">Cargar nueva noticia!</a>
+							<form id="form2" name="form2" method="post" action="noticias_carga.php">
+								<input type="submit" name="add_noticia" id="add_noticia" value="Cargar noticia" />
+							</form>
 						</div>
 					</div>
 				</div>
