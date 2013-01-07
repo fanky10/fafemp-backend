@@ -8,7 +8,7 @@ $redirect = ROOT_URL . '/noticias.php';
 $idNoticia = $_GET['id'];
 $isRedirect = true;
 $oNoticia = new Noticia();
-$oImagen = new Imagen();
+//$oImagen = new Imagen();
 if (isset($idNoticia)) {
     $manejador = new ManejadorServicios();
     $oNoticia = $manejador->getNoticiaById($idNoticia);
@@ -100,8 +100,15 @@ if ($isRedirect) {
                     <div class="six columns">
                         <h4 class="destacado"><?php echo $oNoticia->getTitulo(); ?></h4>
                         <?php
-                        $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
-                        echo '<img src="' . $img . '" /><span class="slider-caption">' . $oNoticia->getTitulo() . '</span>';
+                        $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
+                        $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
+                        if (isset($oImagen)) {
+                            $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
+                        } else {
+
+                            $img = "http://placehold.it/".$imgWidth."x".$imgHeight."/E9E9E9&text=Sin imagen";
+                        }
+                        echo '<img src="' . $img . '" />';
                         ?>
                     </div>
                     <div class="six columns">
@@ -112,7 +119,7 @@ if ($isRedirect) {
             </div>
 
             <!-- Footer -->
-            <?php include_once 'footer.php'; ?> 
+    <?php include_once 'footer.php'; ?> 
 
             <!-- Included JS Files (Compressed) -->
             <script src="javascripts/jquery.js"></script>

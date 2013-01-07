@@ -40,7 +40,7 @@ if (!isset($vNoticias) || empty($vNoticias)) {
 
     <?php
 } else {
-    
+
     $oNoticia = new Noticia();
     $oImagen = new Imagen();
 
@@ -53,20 +53,26 @@ if (!isset($vNoticias) || empty($vNoticias)) {
     $rowCount = 0;
     foreach ($vNoticias as $oNoticia) {
         $oImagen = $oNoticia->getImagen();
-        $link = ROOT_URL ."/noticia.php?id=".$oNoticia->getId();
-        $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
-        $shortenText = Utilidades::acortaTexto($oNoticia->getCuerpo(), $limiteCuerpo, ".");
+        $link = ROOT_URL . "/noticia.php?id=" . $oNoticia->getId();
+        $idImg = $oImagen->getId();
+        if (!isset($oImagen) || !isset($idImg)) {
+            $imgSrc = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
+        } else {
+            $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
             
+        }
+        $shortenText = Utilidades::acortaTexto($oNoticia->getCuerpo(), $limiteCuerpo, ".");
+
         echo '<div class="row">';
         echo '<div class="twelve columns"><h3>' . $oNoticia->getTitulo() . '</div>';
         echo '<div class="four columns">';
-        echo '<a href="'.$link.'"><img src="'.$imgSrc.'" witdh="'.$imgWidth.'" height="'.$imgHeight.'"></a>';
+        echo '<a href="' . $link . '"><img src="' . $imgSrc . '" witdh="' . $imgWidth . '" height="' . $imgHeight . '"></a>';
         echo '</div>';
         echo '<div class="eight columns">';
         echo '<p>';
         echo $shortenText;
         echo '</p>';
-        echo '<a class="button radius" title="Ver más" href="'.$link.'">Más detalles</a>';
+        echo '<a class="button radius" title="Ver más" href="' . $link . '">Más detalles</a>';
         echo '</div>';
         echo '</div>';
     }
@@ -114,9 +120,9 @@ if (!isset($vNoticias) || empty($vNoticias)) {
         //es necesario poner el .. [ultima pagina]?
         //TODO: check si es necesario
         //si estamos por debajo de 2 paginas de la de fin then show
-        if ($totalPag < $pagFin ) {
+        if ($totalPag < $pagFin) {
             echo '<li class="unavailable">…</li>';
-            echo '<li><a href="">'.$pagFin.'</a></li>';
+            echo '<li><a href="">' . $pagFin . '</a></li>';
         }
         //arrow siguiente
         $hrefPosterior = "?pag=" . ($pag + 1);

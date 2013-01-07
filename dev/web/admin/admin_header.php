@@ -2,7 +2,7 @@
 <div class="logo">
     <div class="row">
         <div class="one columns isotipo">
-            <a href="index.html"
+            <a href="../index.php"
                title="Foro Argentino de Facultades y Escuelas de Medicina Públicas"><img
                     src="../images/logo-foro-argentino-de-facultades-y-escuelas-de-medicina-publicas.png" /></a>
         </div>
