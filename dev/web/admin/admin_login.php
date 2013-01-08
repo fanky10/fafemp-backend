@@ -43,7 +43,7 @@
             <div class="row">
                 <div class="twelve columns">
                     <ul class="inline-list">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="../">Home</a></li>
                         <li>></li>
                         <li>Login Admin</li>
                     </ul>
