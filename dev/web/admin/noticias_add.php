@@ -35,13 +35,14 @@ $oNoticia = new Noticia();
 if ($_FILES["file"]["error"] > 0 && $_FILES["file"]["error"] != 4) {//subio algo o no jeje
     $msgError = $error_types[$_FILES['userfile']['error']];
 } else if ($isFile) {    //  do we have a file?
-    $safe_filename = Utilidades::safeText($_FILES['file']['name']);
+    //add the ctstamp
+    $formattedDate = strftime('%d%m%Y');//Dia-Mes-Anio todo en nros.
+    $safe_filename = Utilidades::safeText($formattedDate.'-'.baseName($_FILES['file']['name']));
     if ($_FILES['file']['size'] <= $MAXIMUM_FILESIZE &&
             preg_match($rEFileTypes, strrchr($safe_filename, '.'))) {
 
         $isMove = move_uploaded_file(
                 $_FILES['file']['tmp_name'], $dirBase . $safe_filename);
-        //  TODO: redirect header
         if ($isMove) {
             //save image url, object etc.
             $oImagen = new Imagen();
