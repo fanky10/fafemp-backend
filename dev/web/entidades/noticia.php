@@ -12,8 +12,7 @@ class Noticia {
     private $titulo;
     private $cuerpo;
     private $imagen;
-    private $url;
-
+    
     public function setId($id) {
         $this->id = $id;
     }
@@ -34,10 +33,6 @@ class Noticia {
         $this->imagen = $imagen;
     }
 
-    public function setUrl($url) {
-        $this->url = $url;
-    }
-    
     public function getId() {
         return $this->id;
     }
@@ -56,10 +51,6 @@ class Noticia {
 
     public function getImagen() {
         return $this->imagen;
-    }
-
-    public function getUrl() {
-        return Utilidades::safeText($this->titulo);
     }
 
 }

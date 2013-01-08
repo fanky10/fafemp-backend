@@ -61,7 +61,7 @@ class Utilidades {
     }
     //for text with 
     public static function breakeLines( $text){
-        return str_replace("\r\n", "<br />", $text);
+        return preg_replace('#(\\\r|\\\n)#', '<br/>',preg_replace('#(\\\r\\\n)#', '<br/>',$text));
     }
 
     #Example: source from: http://snipplr.com/view/3644/
