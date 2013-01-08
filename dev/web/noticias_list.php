@@ -62,7 +62,7 @@ if (!isset($vNoticias) || empty($vNoticias)) {
             
         }
         $shortenText = Utilidades::acortaTexto($oNoticia->getCuerpo(), $limiteCuerpo, ".");
-
+        $shortenText = Utilidades::breakeLines($shortenText);
         echo '<div class="row">';
         echo '<div class="twelve columns"><h3>' . $oNoticia->getTitulo() . '</div>';
         echo '<div class="four columns">';
