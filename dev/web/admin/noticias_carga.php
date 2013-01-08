@@ -29,7 +29,7 @@
         <!-- Author -->
         <link type="text/plain" rel="author" href="humans.txt" />
 
-        <script src="javascripts/modernizr.foundation.js"></script>
+        <script src="../javascripts/modernizr.foundation.js"></script>
     </head>
     <body>
 
@@ -38,7 +38,6 @@
         include_once 'admin_menu.php';
         $navigateTitle = "Carga noticias";
         include_once 'admin_navigate.php';
-        
         ?>
 
         <!-- Three-up Content Blocks -->
@@ -49,7 +48,7 @@
                     <h3>Carga Noticias</h3>
                     <p>Desde el siguiente formulario usted prodra ingresar nuevas
                         noticias, que quedaras visibles desde el sitio publico!.</p>
-                    <form action="noticias_add.php" method="POST"
+                    <form id="formNoticia"action="noticias_add.php" method="POST"
                           enctype="multipart/form-data">
                         <h5>Formulario de Noticia</h5>
                         <label for="nombre">Titulo</label> 
@@ -57,10 +56,11 @@
                         <div class="row">
                             <div class="twelve columns">
                                 <label for="descripcion">Cuerpo Noticia</label>
-                                <textarea rows="4" id="descripcion" class="required" name="cuerpo"></textarea>
+                                <textarea rows="4" id="cuerpo" class="required" name="cuerpo"></textarea>
                             </div>
                             <div class="twelve columns">
-                                <label for="imagen">Selecciona Imagen</label> <input type="file" class="twelve required" name="file" id="file" />
+                                <label for="imagen">Selecciona Imagen</label> 
+                                <input type="file" class="twelve" name="file" id="file" />
                             </div>
                             <div class="twelve columns">
                                 <br/>
@@ -78,13 +78,37 @@
 
         <?php include_once 'admin_footer.php'; ?>
         <!-- Included JS Files (Compressed) -->
-        <script src="javascripts/jquery.js"></script>
-        <script src="javascripts/foundation.min.js"></script>
+        <script src="../javascripts/jquery.js"></script>
+        <script src="../javascripts/foundation.min.js"></script>
 
         <!-- Initialize JS Plugins -->
-        <script src="javascripts/jquery.prettyPhoto.js"></script>
-        <script src="javascripts/app.js"></script>
-        <script src="javascripts/init.js"></script>
+        <script src="../javascripts/jquery.prettyPhoto.js"></script>
+        <script src="../javascripts/jquery_validate.js"></script>
+        <script src="../javascripts/app.js"></script>
+        <script src="../javascripts/init.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $('#formNoticia').validate({
+                    rules: {
+                        'titulo': 'required',
+                        'cuerpo': 'required'
+                    },
+                    messages: {
+                        'titulo': 'Debe ingresar un titulo de noticia.',
+                        'cuerpo': 'Debe ingresar un cuerpo a la noticia.'
+                    },
+                    submitHandler: function(form) {
+                        form.submit();
+                    }
+                });
+            });
+            $(document).ready(function(){
+                $("a[rel^='prettyPhoto']").prettyPhoto({
+                    theme: 'facebook',
+                    social_tools: false
+                });
+            });
+        </script>
 
     </body>
 </html>

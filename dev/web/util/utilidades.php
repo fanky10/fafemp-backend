@@ -59,6 +59,10 @@ class Utilidades {
         return preg_replace(
                         array("/\s+/", "/[^-\.\w]+/"), array("_", ""), trim($text));
     }
+    //for text with 
+    public static function breakeLines( $text){
+        return preg_replace('#(\\\r|\\\n)#', '<br/>',preg_replace('#(\\\r\\\n)#', '<br/>',$text));
+    }
 
     #Example: source from: http://snipplr.com/view/3644/
 //    get_date_spanish(time(), true, 'month'); # return Enero
@@ -66,7 +70,6 @@ class Utilidades {
 //    get_date_spanish(time(), true, 'Y'); # return 2011
 //    get_date_spanish(time());#return 06 de septiempre de 2011
     #Modified by Fanky10
-
     public static function get_date_spanish($time, $part = false, $formatDate = '') {
         #Declare n compatible arrays
         $month = array("", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiempre", "diciembre"); #n
