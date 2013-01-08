@@ -1,0 +1,2 @@
+#development 
+ErrorDocument 404  /fafemp-backend/dev/web/error404.php
