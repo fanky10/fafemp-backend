@@ -7,7 +7,6 @@
 @include_once ROOT_DIR . '/mocked/UserServiceMocked.php';
 @include_once ROOT_DIR . '/datos/usuarios.php';
 
-
 class ManejadorServicios {
 
     private $noticiasRepository;
@@ -24,11 +23,12 @@ class ManejadorServicios {
     }
 
     public function addNoticia(Noticia $noticia) {
-        $imagen = new Imagen();
         $imagen = $noticia->getImagen();
-        $this->imagenesRepository = new DataImagenes();
-        $idImagen = $this->imagenesRepository->addImagen($imagen);
-        $imagen->setId($idImagen);
+        if (isset($imagen)) {
+            $this->imagenesRepository = new DataImagenes();
+            $idImagen = $this->imagenesRepository->addImagen($imagen);
+            $imagen->setId($idImagen);
+        }
         $this->noticiasRepository = new DataNoticias();
         return $this->noticiasRepository->addNoticia($noticia);
     }
@@ -37,26 +37,27 @@ class ManejadorServicios {
         $this->noticiasRepository = new DataNoticias();
         return $this->noticiasRepository->getNoticiaById($id);
     }
-    
-    public function getNoticiasPaginadas($offset,$limit) {
+
+    public function getNoticiasPaginadas($offset, $limit) {
         $this->noticiasRepository = new DataNoticias();
         return $this->noticiasRepository->getNoticiasPaginadas($offset, $limit);
     }
-    
-    public function getCantidadNoticias(){
+
+    public function getCantidadNoticias() {
         $this->noticiasRepository = new DataNoticias();
         return $this->noticiasRepository->getCantidadNoticias();
     }
-    
-    public function getUsuarios($user){
+
+    public function getUsuarios($user) {
         $this->usuariosRepository = new DataUsuarios();
         return $this->usuariosRepository->getUsuario($user);
     }
-    
-    public function cambioPassword($user,$newPassword){
+
+    public function cambioPassword($user, $newPassword) {
         $this->usuariosRepository = new DataUsuarios();
-        return $this->usuariosRepository->cambioPassword($user,$newPassword);
+        return $this->usuariosRepository->cambioPassword($user, $newPassword);
     }
+
 }
 
 ?>

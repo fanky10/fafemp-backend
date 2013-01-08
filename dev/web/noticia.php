@@ -1,5 +1,6 @@
 <?php
 include_once 'init.php';
+include_once ROOT_DIR. '/util/utilidades.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/entidades/noticia.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
@@ -8,7 +9,7 @@ $redirect = ROOT_URL . '/noticias.php';
 $idNoticia = $_GET['id'];
 $isRedirect = true;
 $oNoticia = new Noticia();
-$oImagen = new Imagen();
+//$oImagen = new Imagen();
 if (isset($idNoticia)) {
     $manejador = new ManejadorServicios();
     $oNoticia = $manejador->getNoticiaById($idNoticia);
@@ -91,25 +92,7 @@ if ($isRedirect) {
                     </div>
                 </div>
             </div>
-            <!-- Three-up Content Blocks -->
-            <div class="content">
-                <div class="row">
-                    <div class="twelve columns">
-                        <hr class="sin-margin-top" />
-                    </div>
-                    <div class="six columns">
-                        <h4 class="destacado"><?php echo $oNoticia->getTitulo(); ?></h4>
-                        <?php
-                        $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
-                        echo '<img src="' . $img . '" /><span class="slider-caption">' . $oNoticia->getTitulo() . '</span>';
-                        ?>
-                    </div>
-                    <div class="six columns">
-                        <h4 class="destacado"></h4>
-                        <p class="text-justify"><?php echo $oNoticia->getCuerpo(); ?></p>
-                    </div>
-                </div>
-            </div>
+            <?php include_once 'common/noticia_content.php';?>
 
             <!-- Footer -->
             <?php include_once 'footer.php'; ?> 

@@ -14,8 +14,7 @@ CREATE TABLE noticias(
     noticia_fec_hora timestamp not null,
     noticia_titulo varchar(100) not null,
     noticia_cuerpo text not null,
-    noticia_imagen_id integer null, #puede ser que no tenga imagen.
-    noticia_url varchar(500) not null
+    noticia_imagen_id integer null #puede ser que no tenga imagen.
 );
 
 DROP TABLE IF EXISTS imagenes;
