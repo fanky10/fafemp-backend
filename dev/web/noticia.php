@@ -97,8 +97,22 @@ if ($isRedirect) {
                     <div class="twelve columns">
                         <hr class="sin-margin-top" />
                     </div>
+                    <div class="twelve columns">
+                        <p class="destacado" style="text-transform: uppercase;">
+                            <?php
+                            $timestamp = strtotime($oNoticia->getFechaHora());
+                            $formattedDate = strftime($GLOBAL_SETTINGS['news.date.formatter'],$timestamp);
+                            echo $formattedDate;
+                            ?>
+                        </p>
+                        <h3 class="destacado" style="text-transform: capitalize;">
+                            <?php
+                            echo $oNoticia->getTitulo();
+                            ?>
+                        </h3>
+
+                    </div>
                     <div class="six columns">
-                        <h4 class="destacado"><?php echo $oNoticia->getTitulo(); ?></h4>
                         <?php
                         $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
                         $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
@@ -106,20 +120,19 @@ if ($isRedirect) {
                             $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
                         } else {
 
-                            $img = "http://placehold.it/".$imgWidth."x".$imgHeight."/E9E9E9&text=Sin imagen";
+                            $img = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
                         }
                         echo '<img src="' . $img . '" />';
                         ?>
                     </div>
                     <div class="six columns">
-                        <h4 class="destacado"></h4>
                         <p class="text-justify"><?php echo $oNoticia->getCuerpo(); ?></p>
                     </div>
                 </div>
             </div>
 
             <!-- Footer -->
-    <?php include_once 'footer.php'; ?> 
+            <?php include_once 'footer.php'; ?> 
 
             <!-- Included JS Files (Compressed) -->
             <script src="javascripts/jquery.js"></script>
