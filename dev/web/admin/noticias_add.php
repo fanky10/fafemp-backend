@@ -89,9 +89,9 @@ $manejador->addNoticia($oNoticia);
         <link rel="stylesheet" href="../stylesheets/prettyPhoto.css">
 
         <!-- Author -->
-        <link type="text/plain" rel="author" href="humans.txt" />
+        <link type="text/plain" rel="author" href="../humans.txt" />
 
-        <script src="javascripts/modernizr.foundation.js"></script>
+        <script src="../javascripts/modernizr.foundation.js"></script>
     </head>
     <body>
 
@@ -144,14 +144,6 @@ $manejador->addNoticia($oNoticia);
 
 
         <?php include_once 'admin_footer.php'; ?>
-        <!-- Included JS Files (Compressed) -->
-        <script src="javascripts/jquery.js"></script>
-        <script src="javascripts/foundation.min.js"></script>
-
-        <!-- Initialize JS Plugins -->
-        <script src="javascripts/jquery.prettyPhoto.js"></script>
-        <script src="javascripts/app.js"></script>
-        <script src="javascripts/init.js"></script>
 
     </body>
 </html>
