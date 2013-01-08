@@ -65,11 +65,11 @@
                         <div class="row">
                             <div class="four columns">
                                 <label for="usuario">Ingrese Usuario</label> 
-                                <input id="usuario" class="twelve required" type="text" name="user">
+                                <input id="user" class="required user" type="text" name="user">
                             </div>
                             <div class="four columns">
                                 <label for="password">Ingrese Pasword</label> 
-                                <input id="password" class="twelve required" type="password" name="pass">
+                                <input id="pass" class="required pass" type="password" name="pass">
                             </div>
                             <div class="four columns">
                                 <br/>
@@ -100,13 +100,38 @@
         <?php include_once 'admin_footer.php'; ?>
 
         <!-- Included JS Files (Compressed) -->
-        <script src="javascripts/jquery.js"></script>
-        <script src="javascripts/foundation.min.js"></script>
+        <script src="../javascripts/jquery.js"></script>
+        <script src="../javascripts/foundation.min.js"></script>
 
         <!-- Initialize JS Plugins -->
-        <script src="javascripts/jquery.prettyPhoto.js"></script>
-        <script src="javascripts/app.js"></script>
-        <script src="javascripts/init.js"></script>
+        <script src="../javascripts/jquery.prettyPhoto.js"></script>
+        <script src="../javascripts/jquery_validate.js"></script>
+        <script src="../javascripts/app.js"></script>
+        <script src="../javascripts/init.js"></script>
+
+        <script type="text/javascript">
+            $(function(){
+                $('#login').validate({
+                    rules: {
+                        'user': 'required',
+                        'pass': 'required'
+                    },
+                    messages: {
+                        'user': 'Debe ingresar usuario.',
+                        'pass': 'Debe ingresar contraseña.'
+                    },
+                    submitHandler: function(form) {
+                        form.submit();
+                    }
+                });
+            });
+            $(document).ready(function(){
+                $("a[rel^='prettyPhoto']").prettyPhoto({
+                    theme: 'facebook',
+                    social_tools: false
+                });
+            });
+        </script>
 
     </body>
 </html>
