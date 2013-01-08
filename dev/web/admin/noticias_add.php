@@ -35,13 +35,14 @@ $oNoticia = new Noticia();
 if ($_FILES["file"]["error"] > 0 && $_FILES["file"]["error"] != 4) {//subio algo o no jeje
     $msgError = $error_types[$_FILES['userfile']['error']];
 } else if ($isFile) {    //  do we have a file?
-    $safe_filename = Utilidades::safeText($_FILES['file']['name']);
+    //add the ctstamp
+    $formattedDate = strftime('%d%m%Y');//Dia-Mes-Anio todo en nros.
+    $safe_filename = Utilidades::safeText($formattedDate.'-'.baseName($_FILES['file']['name']));
     if ($_FILES['file']['size'] <= $MAXIMUM_FILESIZE &&
             preg_match($rEFileTypes, strrchr($safe_filename, '.'))) {
 
         $isMove = move_uploaded_file(
                 $_FILES['file']['tmp_name'], $dirBase . $safe_filename);
-        //  TODO: redirect header
         if ($isMove) {
             //save image url, object etc.
             $oImagen = new Imagen();
@@ -88,9 +89,9 @@ $manejador->addNoticia($oNoticia);
         <link rel="stylesheet" href="../stylesheets/prettyPhoto.css">
 
         <!-- Author -->
-        <link type="text/plain" rel="author" href="humans.txt" />
+        <link type="text/plain" rel="author" href="../humans.txt" />
 
-        <script src="javascripts/modernizr.foundation.js"></script>
+        <script src="../javascripts/modernizr.foundation.js"></script>
     </head>
     <body>
 
@@ -101,14 +102,27 @@ $manejador->addNoticia($oNoticia);
         include_once 'admin_navigate.php';
         ?>
 
-        <!-- Three-up Content Blocks -->
         <div class="content">
             <div class="row">
                 <div class="twelve columns">
                     <hr class="sin-margin-top" />
                 </div>
+                <div class="twelve columns">
+                    <p class="destacado" style="text-transform: uppercase;">
+                        <?php
+                        $timestamp = strtotime($oNoticia->getFechaHora());
+                        $formattedDate = strftime($GLOBAL_SETTINGS['news.date.formatter'], $timestamp);
+                        echo $formattedDate;
+                        ?>
+                    </p>
+                    <h3 class="destacado" style="text-transform: capitalize;">
+                        <?php
+                        echo $oNoticia->getTitulo();
+                        ?>
+                    </h3>
+
+                </div>
                 <div class="six columns">
-                    <h4 class="destacado"><?php echo $oNoticia->getTitulo(); ?></h4>
                     <?php
                     $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
                     $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
@@ -122,7 +136,6 @@ $manejador->addNoticia($oNoticia);
                     ?>
                 </div>
                 <div class="six columns">
-                    <h4 class="destacado"></h4>
                     <p class="text-justify"><?php echo $oNoticia->getCuerpo(); ?></p>
                 </div>
             </div>
@@ -131,14 +144,6 @@ $manejador->addNoticia($oNoticia);
 
 
         <?php include_once 'admin_footer.php'; ?>
-        <!-- Included JS Files (Compressed) -->
-        <script src="javascripts/jquery.js"></script>
-        <script src="javascripts/foundation.min.js"></script>
-
-        <!-- Initialize JS Plugins -->
-        <script src="javascripts/jquery.prettyPhoto.js"></script>
-        <script src="javascripts/app.js"></script>
-        <script src="javascripts/init.js"></script>
 
     </body>
 </html>
