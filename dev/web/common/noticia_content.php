@@ -11,13 +11,13 @@ include_once ROOT_DIR . '/util/utilidades.php';
         <div class="twelve columns">
             <p class="destacado" style="text-transform: uppercase;">
                 <?php
-                $formattedDate = strftime($GLOBAL_SETTINGS['news.date.formatter'],time());
+                $timestamp = time();
                 $noticiaFecHr = $oNoticia->getFechaHora();
                 if (isset($noticiaFecHr)) {
                     $timestamp = strtotime($oNoticia->getFechaHora());
-                    $formattedDate = strftime($GLOBAL_SETTINGS['news.date.formatter'], $timestamp);
                 }
-
+                //handle strftime
+                $formattedDate = iconv('ISO-8859-1', 'UTF-8', strftime($GLOBAL_SETTINGS['news.date.formatter'], $timestamp));
                 echo $formattedDate;
                 ?>
             </p>
