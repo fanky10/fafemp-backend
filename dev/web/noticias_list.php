@@ -19,23 +19,17 @@ $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
 $limiteCuerpo = $GLOBAL_SETTINGS['news.body.limit'];
 if (!isset($vNoticias) || empty($vNoticias)) {
     ?>
-    <div class="twelve columns"><h3>Próximamente Noticias</h3></div> 
-    <div class="twelve columns">
+    <div class="content">
         <div class="row">
-            <div class="six columns">
-                <h4>Noticia número 1</h4>
-                <img src="http://placehold.it/451x150&amp;text=[img]">
-                <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
-                <a href="#" class="button radius" title="Ver más">Más detalles</a>
+            <div class="twelve columns">
+                <hr class="sin-margin-top" />
+
             </div>
-            <div class="six columns">
-                <h4>Noticia número 2</h4>
-                <img src="http://placehold.it/451x150&amp;text=[img]">
-                <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
-                <a href="#" class="button radius" title="Ver más">Más detalles</a>
+            <div class="twelve columns">
+                <h3>Proximamente noticias...</h3>
             </div>
+
         </div>
-        <hr />
     </div>
 
     <?php
@@ -59,7 +53,6 @@ if (!isset($vNoticias) || empty($vNoticias)) {
             $imgSrc = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
         } else {
             $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
-            
         }
         $shortenText = Utilidades::acortaTexto($oNoticia->getCuerpo(), $limiteCuerpo, ".");
         $shortenText = Utilidades::breakeLines($shortenText);
