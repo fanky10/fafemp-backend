@@ -1,6 +1,6 @@
 <?php
 //include_once '../init.php';
-include_once ROOT_DIR. '/util/utilidades.php';
+include_once ROOT_DIR . '/util/utilidades.php';
 ?>
 <!-- Three-up Content Blocks -->
 <div class="content">
@@ -11,8 +11,13 @@ include_once ROOT_DIR. '/util/utilidades.php';
         <div class="twelve columns">
             <p class="destacado" style="text-transform: uppercase;">
                 <?php
-                $timestamp = strtotime($oNoticia->getFechaHora());
-                $formattedDate = strftime($GLOBAL_SETTINGS['news.date.formatter'], $timestamp);
+                $formattedDate = strftime($GLOBAL_SETTINGS['news.date.formatter'],time());
+                $noticiaFecHr = $oNoticia->getFechaHora();
+                if (isset($noticiaFecHr)) {
+                    $timestamp = strtotime($oNoticia->getFechaHora());
+                    $formattedDate = strftime($GLOBAL_SETTINGS['news.date.formatter'], $timestamp);
+                }
+
                 echo $formattedDate;
                 ?>
             </p>
