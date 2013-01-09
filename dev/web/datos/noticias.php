@@ -72,7 +72,7 @@ class DataNoticias extends Data implements NoticiasRepository {
         $stmt->bind_param('ssi', $title, $body, $imgId);
         $title = $noticia->getTitulo();
         $cuerpo = $noticia->getCuerpo();
-        $body = mysql_real_escape_string($cuerpo);
+        $body = $this->realEscapeString($cuerpo);
         if (isset($imagen)) {
             $imgId = $imagen->getId();
         }

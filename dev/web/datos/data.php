@@ -19,6 +19,9 @@ class Data {
     public function __construct() {
         //para que este dentro del standar :)
         $this->mysqli = $this->initMysqlDB();
+        if (!$this->mysqli->set_charset("utf8")) {
+            echo "error loading charset UTF-8 " . $this->mysqli->error;
+        }
     }
 
     protected function initMysqlDB() {
@@ -70,6 +73,10 @@ class Data {
         $row = $result->fetch_assoc();
         $id = $row['ultimo_id'];
         return $id;
+    }
+    
+    public function realEscapeString($string){
+        return $this->mysqli->real_escape_string($string);
     }
 
 }
