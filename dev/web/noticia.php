@@ -63,7 +63,8 @@ if ($isRedirect) {
             <?php include_once 'header.php'; ?>
 
             <!-- End Header and Nav -->
-            <?php $seccion = "noticias";
+            <?php
+            $seccion = "noticias";
             include_once 'menu_header.php';
             ?>
             <!-- First Band (Slider) -->
@@ -96,6 +97,32 @@ if ($isRedirect) {
             <script src="javascripts/init.js"></script>
 
         </body>
+        <!-- Included JS Files (Compressed) -->
+        <script src="javascripts/jquery.js"></script>
+        <script src="javascripts/foundation.min.js"></script>
+
+        <!-- Initialize JS Plugins -->
+        <script src="javascripts/jquery.prettyPhoto.js"></script>
+        <script src="javascripts/app.js"></script>
+        <script src="javascripts/init.js"></script>
+
+        <script type="text/javascript">
+            $(window).load(function() {
+                $('#slider').orbit({
+                    animation: 'fade',      
+                    pauseOnHover: true,
+                    startClockOnMouseOut: true, 
+                    bullets: true, // true or false to activate the bullet navigation
+                    bulletThumbs: true
+                });
+            });
+            $(document).ready(function(){
+                $("a[rel^='prettyPhoto']").prettyPhoto({
+                    theme: 'facebook',
+                    social_tools: false
+                });
+            });
+        </script>
     </html>
 
 <?php } ?>
