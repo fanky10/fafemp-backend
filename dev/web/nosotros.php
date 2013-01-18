@@ -34,7 +34,10 @@
         <?php include_once 'header.php'; ?>
 
         <!-- End Header and Nav -->
-        <?php include_once 'menu_header.php' ?>
+        <?php
+        $seccion = "nosotros";
+        include_once 'menu_header.php';
+        ?>
         <!-- First Band (Slider) -->
         <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
         <?php

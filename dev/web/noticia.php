@@ -1,7 +1,7 @@
 
 <?php
 include_once 'init.php';
-include_once ROOT_DIR. '/util/utilidades.php';
+include_once ROOT_DIR . '/util/utilidades.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/entidades/noticia.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
@@ -63,7 +63,10 @@ if ($isRedirect) {
             <?php include_once 'header.php'; ?>
 
             <!-- End Header and Nav -->
-            <?php include_once 'menu_header.php'; ?>
+            <?php
+            $seccion = "noticias";
+            include_once 'menu_header.php';
+            ?>
             <!-- First Band (Slider) -->
             <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
             <div class="breadcrums">
@@ -77,11 +80,11 @@ if ($isRedirect) {
                     </div>
                 </div>
             </div>
-            
-            <?php include_once 'common/noticia_content.php';?>
+
+    <?php include_once 'common/noticia_content.php'; ?>
 
             <!-- Footer -->
-            <?php include_once 'footer.php'; ?> 
+    <?php include_once 'footer.php'; ?> 
 
             <!-- Included JS Files (Compressed) -->
             <script src="javascripts/jquery.js"></script>
@@ -94,6 +97,32 @@ if ($isRedirect) {
             <script src="javascripts/init.js"></script>
 
         </body>
+        <!-- Included JS Files (Compressed) -->
+        <script src="javascripts/jquery.js"></script>
+        <script src="javascripts/foundation.min.js"></script>
+
+        <!-- Initialize JS Plugins -->
+        <script src="javascripts/jquery.prettyPhoto.js"></script>
+        <script src="javascripts/app.js"></script>
+        <script src="javascripts/init.js"></script>
+
+        <script type="text/javascript">
+            $(window).load(function() {
+                $('#slider').orbit({
+                    animation: 'fade',      
+                    pauseOnHover: true,
+                    startClockOnMouseOut: true, 
+                    bullets: true, // true or false to activate the bullet navigation
+                    bulletThumbs: true
+                });
+            });
+            $(document).ready(function(){
+                $("a[rel^='prettyPhoto']").prettyPhoto({
+                    theme: 'facebook',
+                    social_tools: false
+                });
+            });
+        </script>
     </html>
 
 <?php } ?>

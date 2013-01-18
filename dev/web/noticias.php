@@ -34,7 +34,8 @@
         <?php include_once 'header.php'; ?>
 
         <!-- End Header and Nav -->
-        <?php include_once 'menu_header.php'; ?>
+        <?php $seccion = "noticias";
+        include_once 'menu_header.php'; ?>
         <!-- First Band (Slider) -->
         <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
         <?php
@@ -44,12 +45,12 @@
         <!-- Three-up Content Blocks -->
         <div class="content">
 
-<?php include_once 'noticias_list.php'; ?>
+            <?php include_once 'noticias_list.php'; ?>
 
         </div>
 
         <!-- Footer -->
-<?php include_once 'footer.php'; ?> 
+        <?php include_once 'footer.php'; ?> 
 
         <!-- Included JS Files (Compressed) -->
         <script src="javascripts/jquery.js"></script>

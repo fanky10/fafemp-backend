@@ -21,7 +21,7 @@ include_once ROOT_DIR . '/util/utilidades.php';
                 echo $formattedDate;
                 ?>
             </p>
-            <h3 class="destacado" style="text-transform: capitalize;">
+            <h3 class="destacado">
                 <?php
                 echo $oNoticia->getTitulo();
                 ?>
@@ -38,7 +38,8 @@ include_once ROOT_DIR . '/util/utilidades.php';
 
                 $img = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
             }
-            echo '<img src="' . $img . '" />';
+            //echo '<img src="' . $img . '" />';
+            echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
             ?>
         </div>
         <div class="six columns">
