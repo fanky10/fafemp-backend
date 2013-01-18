@@ -37,6 +37,8 @@ class ControladorNoticias {
         $oNoticia->setTitulo($_POST['titulo']);
         $oNoticia->setId(1);
         //TODO: agregar la noticia -> setID
+        $nuevoId = $this->manejador->addNoticia($oNoticia);
+        $oNoticia->setId($nuevoId);
         return $oNoticia;
     }
 

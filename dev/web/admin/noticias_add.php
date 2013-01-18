@@ -9,6 +9,7 @@ include_once ROOT_DIR . '/controladores/controlador_noticias.php';
 
 $manejadorNoticias = new ControladorNoticias(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
 $oNoticia = $manejadorNoticias->subirNoticia();
+//TODO: mostrar el set de imagenes (Ni se como... por ahora solo muestro la primera.)
 $oImagenes = $oNoticia->getImagenes();
 $oImagen = $oImagenes[0];
 echo"<!-- ";

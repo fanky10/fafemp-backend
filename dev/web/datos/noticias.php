@@ -65,17 +65,14 @@ class DataNoticias extends Data implements NoticiasRepository {
     }
 
     public function addNoticia(Noticia $noticia) {
-        $imagen = $noticia->getImagen();
-        $non_query = "insert into " . Noticia::$TABLE . " (noticia_titulo,noticia_cuerpo,noticia_imagen_id) 
-            values(?,?,?)";
+        $non_query = "insert into " . Noticia::$TABLE . " (noticia_titulo,noticia_cuerpo) 
+            values(?,?)";
         $stmt = $this->prepareStmt($non_query);
-        $stmt->bind_param('ssi', $title, $body, $imgId);
+        $stmt->bind_param('ss', $title, $body);
         $title = $noticia->getTitulo();
         $cuerpo = $noticia->getCuerpo();
         $body = $this->realEscapeString($cuerpo);
-        if (isset($imagen)) {
-            $imgId = $imagen->getId();
-        }
+        
         
         if (!$stmt->execute()) {
             echo "addNoticia - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
@@ -84,6 +81,9 @@ class DataNoticias extends Data implements NoticiasRepository {
 
         /* close statement and connection */
         $stmt->close();
+        
+        $id = $this->getUltimoID(Noticia::$TABLE, Noticia::$COLUMN_ID);
+        return $id;//generated id
     }
 
     public function getNoticiaById($id) {
