@@ -12,7 +12,7 @@ $oNoticia = $manejadorNoticias->subirNoticia();
 //TODO: mostrar el set de imagenes (Ni se como... por ahora solo muestro la primera.)
 $oImagenes = $oNoticia->getImagenes();
 $oImagen = $oImagenes[0];
-echo"<!-- ";
+echo"<!-- DEBUG --";
 var_dump($oNoticia);
 echo"--> ";
 ?>

@@ -15,15 +15,14 @@ class ControladorNoticias {
     protected $imgPath;
 
     public function __construct($dirBase, $imgPath) {
-        $this->dirBase = $dirBase; //ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/";
+        $this->dirBase = $dirBase; 
         $this->fileTypes = "/^\.(jpg|jpeg|gif|png){1}$/i";
         $this->manejador = new ManejadorServicios();
         $this->maxFileSize = 5 * 1024 * 1024; //take it from config
-        $this->imgPath = $imgPath; //$GLOBAL_SETTINGS["news.img.path"]
+        $this->imgPath = $imgPath; 
     }
 
     public function subirNoticia() {
-        echo "debug loco!";
         $oNoticia = new Noticia();
         $oNoticia = $this->agregaNoticia();
         $oImagenes = $this->subeMultiplesImagenes($oNoticia->getId());
@@ -106,9 +105,10 @@ class ControladorNoticias {
                 }
             }
         }
-        
+
         return null;
     }
 
 }
+
 ?>

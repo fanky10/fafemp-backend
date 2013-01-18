@@ -14,7 +14,10 @@ $oNoticia = new Noticia();
 if (isset($idNoticia)) {
     $manejador = new ManejadorServicios();
     $oNoticia = $manejador->getNoticiaById($idNoticia);
-    $oImagen = $oNoticia->getImagen();
+    $vImagenes = $oNoticia->getImagenes();
+    if (isset($vImagenes) || !empty($vImagenes)) {
+        $oImagen = $vImagenes[0];
+    }
     if (!isset($oNoticia) || empty($oNoticia)) {
         $isRedirect = true;
     } else {
@@ -81,10 +84,10 @@ if ($isRedirect) {
                 </div>
             </div>
 
-    <?php include_once 'common/noticia_content.php'; ?>
+            <?php include_once 'common/noticia_content.php'; ?>
 
             <!-- Footer -->
-    <?php include_once 'footer.php'; ?> 
+            <?php include_once 'footer.php'; ?> 
 
             <!-- Included JS Files (Compressed) -->
             <script src="javascripts/jquery.js"></script>

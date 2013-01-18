@@ -17,14 +17,9 @@ class ManejadorServicios {
         
     }
 
-    public function getNoticias($limit) {
-        $this->noticiasRepository = new DataNoticias();
-        return $this->noticiasRepository->getNoticias($limit);
-    }
-
     public function addImagenNoticia(Imagen $imagen, $noticiaId) {
         $this->imagenesRepository = new DataImagenes();
-        $idImagen = $this->imagenesRepository->addImagenNoticia($imagen,$noticiaId);
+        $idImagen = $this->imagenesRepository->addImagenNoticia($imagen, $noticiaId);
         $imagen->setId($idImagen);
     }
 
@@ -35,12 +30,23 @@ class ManejadorServicios {
 
     public function getNoticiaById($id) {
         $this->noticiasRepository = new DataNoticias();
-        return $this->noticiasRepository->getNoticiaById($id);
+        $oNoticia = $this->noticiasRepository->getNoticiaById($id);
+        $this->asignaImagenesNoticia($oNoticia);
+        return $oNoticia;
     }
 
     public function getNoticiasPaginadas($offset, $limit) {
         $this->noticiasRepository = new DataNoticias();
-        return $this->noticiasRepository->getNoticiasPaginadas($offset, $limit);
+        $vNoticias = $this->noticiasRepository->getNoticiasPaginadas($offset, $limit);
+        $this->asignaImagenesNoticias($vNoticias);
+        return $vNoticias;
+    }
+
+    public function getNoticias($limit) {
+        $this->noticiasRepository = new DataNoticias();
+        $vNoticias = $this->noticiasRepository->getNoticias($limit);
+        $this->asignaImagenesNoticias($vNoticias);
+        return $vNoticias;
     }
 
     public function getCantidadNoticias() {
@@ -56,6 +62,21 @@ class ManejadorServicios {
     public function cambioPassword($user, $newPassword) {
         $this->usuariosRepository = new DataUsuarios();
         return $this->usuariosRepository->cambioPassword($user, $newPassword);
+    }
+
+    private function asignaImagenesNoticia(Noticia $oNoticia) {
+        $this->imagenesRepository = new DataImagenes();
+        $vImagenes = $this->imagenesRepository->getImagenesNoticia($oNoticia->getId());
+        $oNoticia->setImagenes($vImagenes);
+    }
+
+    private function asignaImagenesNoticias($vNoticias) {
+        $this->imagenesRepository = new DataImagenes();
+        $oNoticia = new Noticia();
+        foreach ($vNoticias as $oNoticia) {
+            $vImagenes = $this->imagenesRepository->getImagenesNoticia($oNoticia->getId());
+            $oNoticia->setImagenes($vImagenes);
+        }
     }
 
 }
