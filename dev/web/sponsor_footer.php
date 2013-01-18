@@ -1,6 +1,6 @@
 <div class="sponsor">
     <div class="row">
-            <div class="twelve columns sponsor-wrapper">
+        <div class="twelve columns sponsor-wrapper">
             <center>
                 <a href="http://www.mincyt.gov.ar/"><img src="images/presidencia-de-la-nacion.jpg"></a>
                 <a href="http://portales.educacion.gov.ar/spu/"><img src="images/ministerio-educacion.jpg"></a>
