@@ -24,11 +24,7 @@
                 
                 <li><a href="campus-virtual.html" title="Campus Virtual">Campus Virtual</a></li>
                 <li>|</li>
-                <li><a href="foro.html" title="Foro">Foro</a></li>
-                <li>|</li>
-                <li><a href="comisiones-de-trabajo.html" title="Comisiones de Trabajo">Comisiones de Trabajo</a></li>
-                <li>|</li>
-                <li><a href="congreso-de-decanos.html" title="Congreso de Decanos">Congreso de Decanos</a></li>
+                <li><a href="foro.html" title="Foros">Foro</a></li>
                 <li>|</li>
                 <li><a href="autoridades.html" title="Autoridades">Autoridades</a></li>
                 <li>|</li>
