@@ -1,7 +1,7 @@
 <?php
 
 class Imagen {
-    public static $TABLE = "imagenes";
+    public static $TABLE = "imagenes_noticia";
     
     public static $COLUMN_ID = "imagen_id";
     private $id;

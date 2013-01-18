@@ -35,7 +35,30 @@ class DataImagenes extends Data implements ImagenesRepository {
         }
         $stmt->close();
         $id = $this->getUltimoID(Imagen::$TABLE, Imagen::$COLUMN_ID);
-        
+
+        return $id; //returns generated id
+    }
+
+    public function addImagenNoticia(Imagen $imagen, $noticiaId) {
+        $non_query = "insert into " . Imagen::$TABLE . " (imagen_path,imagen_nombre,imagen_noticia_id) 
+            values(?,?,?)";
+        $stmt = $this->prepareStmt($non_query);
+        if (!$stmt->bind_param('ssi', $path, $name, $noticiaId)) {
+            echo "addImagen - Bind Param failed: (" . $stmt->errno . ") " . $stmt->error;
+            return -1;
+        }
+
+
+        $name = $imagen->getNombre();
+        $path = $imagen->getPath();
+
+        if (!$stmt->execute()) {
+            echo "addImagen - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+            return -1;
+        }
+        $stmt->close();
+        $id = $this->getUltimoID(Imagen::$TABLE, Imagen::$COLUMN_ID);
+
         return $id; //returns generated id
     }
 

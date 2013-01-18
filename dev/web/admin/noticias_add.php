@@ -5,61 +5,15 @@ include_once ROOT_DIR . '/entidades/noticia.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/util/utilidades.php';
+include_once ROOT_DIR . '/controladores/controlador_noticias.php';
 
-$manejador = new ManejadorServicios();
-// validation
-//  5MB maximum file size
-// TODO: settings max file
-$MAXIMUM_FILESIZE = 5 * 1024 * 1024;
-//  Valid file extensions (images, word, excel, powerpoint)
-$rEFileTypes =
-        "/^\.(jpg|jpeg|gif|png|doc|docx|txt|rtf|pdf|xls|xlsx|
-        ppt|pptx){1}$/i";
-$dirBase = ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/";
-
-$isFile = is_uploaded_file($_FILES["file"]["tmp_name"]);
-$everythingFine = false;
-$msgError = "";
-//TODO: change this to a saved config file (:
-$error_types = array(
-    1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
-    'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.',
-    'The uploaded file was only partially uploaded.',
-    'No file was uploaded.',
-    6 => 'Missing a temporary folder.',
-    'Failed to write file to disk.',
-    'A PHP extension stopped the file upload.'
-);
-$oImagen = null;
-$oNoticia = new Noticia();
-if ($_FILES["file"]["error"] > 0 && $_FILES["file"]["error"] != 4) {//subio algo o no jeje
-    $msgError = $error_types[$_FILES['userfile']['error']];
-} else if ($isFile) {    //  do we have a file?
-    //add the ctstamp
-    $formattedDate = strftime('%d%m%Y'); //Dia-Mes-Anio todo en nros.
-    $safe_filename = Utilidades::safeText($formattedDate . '-' . baseName($_FILES['file']['name']));
-    if ($_FILES['file']['size'] <= $MAXIMUM_FILESIZE &&
-            preg_match($rEFileTypes, strrchr($safe_filename, '.'))) {
-
-        $isMove = move_uploaded_file(
-                $_FILES['file']['tmp_name'], $dirBase . $safe_filename);
-        if ($isMove) {
-            //save image url, object etc.
-            $oImagen = new Imagen();
-            $oImagen->setNombre($safe_filename);
-            $oImagen->setPath($GLOBAL_SETTINGS["news.img.path"]);
-        } else {
-            //echo "Posible problemas de permisos: ";
-            // no me importa, la subo sin imagen jeje
-        }
-    }
-}
-
-$oNoticia->setCuerpo($_POST['cuerpo']);
-$oNoticia->setTitulo($_POST['titulo']);
-$oNoticia->setImagen($oImagen);
-
-$manejador->addNoticia($oNoticia);
+$manejadorNoticias = new ControladorNoticias(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
+$oNoticia = $manejadorNoticias->subirNoticia();
+$oImagenes = $oNoticia->getImagenes();
+$oImagen = $oImagenes[0];
+echo"<!-- ";
+var_dump($oNoticia);
+echo"--> ";
 ?>
 <!DOCTYPE html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->

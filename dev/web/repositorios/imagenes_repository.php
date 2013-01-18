@@ -7,5 +7,6 @@ interface ImagenesRepository{
     public function getImagenes();
     public function getImagen($id);
     public function addImagen(Imagen $imagen);
+    public function addImagenNoticia(Imagen $imagen,$noticiaId);
 }
 ?>

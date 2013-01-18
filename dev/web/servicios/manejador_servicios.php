@@ -22,6 +22,12 @@ class ManejadorServicios {
         return $this->noticiasRepository->getNoticias($limit);
     }
 
+    public function addImagenNoticia(Imagen $imagen, $noticiaId) {
+        $this->imagenesRepository = new DataImagenes();
+        $idImagen = $this->imagenesRepository->addImagenNoticia($imagen,$noticiaId);
+        $imagen->setId($idImagen);
+    }
+
     public function addNoticia(Noticia $noticia) {
         $imagen = $noticia->getImagen();
         if (isset($imagen)) {
