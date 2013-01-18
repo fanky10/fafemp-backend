@@ -51,7 +51,7 @@
                     <hr class="sin-margin-top" />
                 </div>
                 <div class="eight columns">
-                    <h3>Propósitos del Foro</h3>
+                    <h3>Principios del Foro</h3>
                     <p class="text-justify"><b>1° Propósito de bien común;</b> rechazando el mercantilismo que incide en
                         la educación superior y en la salud de los argentinos; priorizando lo social a lo individual;
                         anteponiendo a todo, la relevancia y pertinencia de la misión, funciones y actividades de una
