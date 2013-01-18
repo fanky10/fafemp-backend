@@ -3,7 +3,10 @@
 * create database fafemp_web;
 * grant all privileges on fafemp_web.* to fafemp_root@'localhost' identified by 'root';
 */
-
+drop database if exists fafemp_web;
+create database fafemp_web;
+grant all privileges on fafemp_web.* to fafemp_root@'localhost' identified by 'root';
+connect fafemp_web;
 /**
 * reglas de negocio a aplicar en las noticias, la noticia tiene un titulo, una fecha-hora, un cuerpo y (al menos por ahora) una sola imagen.
 */
@@ -13,23 +16,27 @@ CREATE TABLE noticias(
     noticia_id integer not null primary key AUTO_INCREMENT,
     noticia_fec_hora timestamp not null,
     noticia_titulo varchar(100) not null,
-    noticia_cuerpo text not null,
-    noticia_imagen_id integer null #puede ser que no tenga imagen.
+    noticia_cuerpo text not null
 );
 
-DROP TABLE IF EXISTS imagenes;
+DROP TABLE IF EXISTS imagenes_noticia;
 
-CREATE TABLE imagenes (
+/**
+* una noticia, puede tener muchas imagenes, una imagen pertenece a una noticia.
+*/
+
+CREATE TABLE imagenes_noticia (
     imagen_id integer not null primary key AUTO_INCREMENT,
     imagen_path varchar(200) not null,
-    imagen_nombre varchar(200) not null
+    imagen_nombre varchar(200) not null,
+    imagen_noticia_id integer not null #una imagen no puede no saber de que noticia es
 );
 
 /**
 * foreign keys
 */
 
-ALTER TABLE noticias ADD CONSTRAINT `FK_imagen_id_1` FOREIGN KEY (`noticia_imagen_id`) REFERENCES `imagenes` (`imagen_id`);
+ALTER TABLE imagenes_noticia ADD CONSTRAINT `FK_imagenes_noticia_id_1` FOREIGN KEY (`imagen_noticia_id`) REFERENCES `noticias` (`noticia_id`);
 
 
 CREATE TABLE usuarios(

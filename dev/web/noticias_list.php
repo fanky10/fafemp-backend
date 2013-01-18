@@ -46,13 +46,15 @@ if (!isset($vNoticias) || empty($vNoticias)) {
     $itemCount = 0;
     $rowCount = 0;
     foreach ($vNoticias as $oNoticia) {
-        $oImagen = $oNoticia->getImagen();
-        $link = ROOT_URL . "/noticia.php?id=" . $oNoticia->getId();
-        $idImg = $oImagen->getId();
-        if (!isset($oImagen) || !isset($idImg)) {
-            $imgSrc = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
-        } else {
-            $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
+        $vImagenes = $oNoticia->getImagenes();
+        $imgSrc = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
+        if (isset($vImagenes) && !empty($vImagenes)) {
+            $oImagen = $vImagenes[0];
+            $link = ROOT_URL . "/noticia.php?id=" . $oNoticia->getId();
+            $idImg = $oImagen->getId();
+            if (isset($oImagen) && isset($idImg)) {
+                $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
+            }
         }
         $shortenText = Utilidades::acortaTexto($oNoticia->getCuerpo(), $limiteCuerpo, ".");
         $shortenText = Utilidades::breakeLines($shortenText);

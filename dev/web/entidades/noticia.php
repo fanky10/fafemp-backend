@@ -11,7 +11,7 @@ class Noticia {
     private $fechaHora;
     private $titulo;
     private $cuerpo;
-    private $imagen;
+    private $imagenes;
     
     public function setId($id) {
         $this->id = $id;
@@ -29,8 +29,8 @@ class Noticia {
         $this->cuerpo = $cuerpo;
     }
 
-    public function setImagen($imagen) {
-        $this->imagen = $imagen;
+    public function setImagenes($imagenes) {
+        $this->imagenes = $imagenes;
     }
 
     public function getId() {
@@ -49,8 +49,8 @@ class Noticia {
         return $this->cuerpo;
     }
 
-    public function getImagen() {
-        return $this->imagen;
+    public function getImagenes() {
+        return $this->imagenes;
     }
 
 }
