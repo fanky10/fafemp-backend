@@ -1,18 +1,22 @@
 <div class="sponsor">
     <div class="row">
         <div class="twelve columns sponsor-wrapper">
-            <center>
-                <a href="http://www.mincyt.gov.ar/"><img src="images/presidencia-de-la-nacion.jpg"></a>
-                <a href="http://portales.educacion.gov.ar/spu/"><img src="images/ministerio-educacion.jpg"></a>
-                <a href="http://www.msal.gov.ar/" class="last"><img src="images/ministerio-salud.jpg"></a>
-            </center>
+            <div class="table">
+                <ul id="sponsors"> 
+                    <li><a class="ministerioEducacion" href="http://www.fafemp.org/images/ministerio-educacion.jpg"></a></li> 
+                    <li><a class="ministerioSalud" href="http://www.fafemp.org/images/ministerio-salud.jpg"></a></li> 
+                    <li><a class="ministerioCiencia" href="http://www.fafemp.org/images/presidencia-de-la-nacion.jpg"></a></li> 
+                </ul>
+            </div>
         </div>
         <div class="twelve columns sponsor-wrapper">
-            <center>
-                <a href="http://www.paho.org/"><img src="images/pan-american-health-organization.jpg"></a>
-                <a href="http://www.oas.org/es/"><img src="images/organizacion-de-los-estados-americanos.jpg"></a>
-                <a href="#"><img src="images/red-de-telesalud-de-las-americas.jpg"></a>
-            </center>
+            <div class="table">
+                <ul id="sponsors"> 
+                    <li><a class="panAmerican" href="http://www.fafemp.org/images/pan-american-health-organization.jpg"></a></li> 
+                    <li><a class="oea" href="http://www.fafemp.org/images/organizacion-de-los-estados-americanos.jpg"></a></li> 
+                    <li><a class="redTelesalud" href="#"></a></li> 
+                </ul>
+            </div>
         </div>
     </div>
 </div>
