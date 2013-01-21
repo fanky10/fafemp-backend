@@ -21,13 +21,27 @@ class ImagenesTest extends DatabaseIsolatedTestCase {
 
     function testAddImage() {
         $idNoticia = $this->agregaNoticia();
+        $idImagen = $this->agregaImagen($idNoticia);
+        $this->assertTrue(isset($idImagen));
+    }
 
+    function testGetImagenesNoticia() {
+        $idNoticia = $this->agregaNoticia();
+        $i = 0;
+        while ($i < 4) {
+            $this->agregaImagen($idNoticia);
+            $i++;
+        }
+        $imagenes = $this->imagenesRepository->getImagenesNoticia($idNoticia);
+        $this->assertTrue(isset($imagenes) && count($imagenes) == 4);
+    }
+
+    private function agregaImagen($idNoticia) {
         $imagen = new Imagen();
         $imagen->setNombre("pepe.png");
         $imagen->setPath("/pepe/");
 
-        $idImagen = $this->imagenesRepository->addImagenNoticia($imagen, $idNoticia);
-        $this->assertTrue(isset($idImagen));
+        return $this->imagenesRepository->addImagenNoticia($imagen, $idNoticia);
     }
 
     private function agregaNoticia() {
