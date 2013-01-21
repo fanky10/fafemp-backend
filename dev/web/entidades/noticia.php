@@ -1,18 +1,18 @@
 <?php
 
 include_once '../init.php';
-include_once ROOT_DIR .'/util/utilidades.php';
+include_once ROOT_DIR . '/util/utilidades.php';
 
 class Noticia {
+
     public static $TABLE = "noticias";
-    
     public static $COLUMN_ID = "noticia_id";
     private $id;
     private $fechaHora;
     private $titulo;
     private $cuerpo;
     private $imagenes;
-    
+
     public function setId($id) {
         $this->id = $id;
     }
@@ -51,6 +51,13 @@ class Noticia {
 
     public function getImagenes() {
         return $this->imagenes;
+    }
+
+    public function getImagen() {
+        if (isset($this->imagenes)) {
+            return $this->imagenes[0];
+        }
+        return null;
     }
 
 }
