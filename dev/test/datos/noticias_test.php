@@ -32,6 +32,49 @@ class NoticiasTest extends DatabaseIsolatedTestCase {
         $this->assertTrue(isset($vNoticias) && count($vNoticias)==$limit);
     }
     
+    function testGetNoticiaByID(){
+        $idNoticia = $this->agregaNoticia();
+        $oNoticia = $this->noticiasRepository->getNoticiaById($idNoticia);
+        $this->assertTrue(isset($oNoticia));
+    }
+    
+    function testGetNoticiasPaginadas(){
+        $i=0;
+        while($i<10){//agrego 10 noticias
+            $this->agregaNoticia();
+            $i++;
+        }
+        $limit = 3;//news per page
+        
+        $pag = 1;
+        $offset = ($pag - 1) * $limit; //donde empieza a mostrar
+        $vNoticias = $this->noticiasRepository->getNoticiasPaginadas($offset, $limit);
+        $this->assertTrue(isset($vNoticias) && count($vNoticias)==$limit);
+        
+        //pagina 2
+        $pag = 2;
+        $offset = ($pag - 1) * $limit; //donde empieza a mostrar
+        $vNoticias = $this->noticiasRepository->getNoticiasPaginadas($offset, $limit);
+        $this->assertTrue(isset($vNoticias) && count($vNoticias)==$limit);
+        
+        //pagina 5
+        $pag = 5;
+        $offset = ($pag - 1) * $limit; //donde empieza a mostrar
+        $vNoticias = $this->noticiasRepository->getNoticiasPaginadas($offset, $limit);
+        $this->assertTrue(empty($vNoticias));
+    }
+    
+    function testGetCantidadNoticias(){
+        $i=0;
+        $cant = 10;
+        while($i<$cant){//agrego 10 noticias
+            $this->agregaNoticia();
+            $i++;
+        }
+        $count = $this->noticiasRepository->getCantidadNoticias();
+        $this->assertTrue($count==$cant);
+    }
+    
     private function agregaNoticia(){
         $noticia = new Noticia();
         $noticia->setCuerpo("Esto es un cuerpo");
