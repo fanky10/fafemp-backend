@@ -11,53 +11,26 @@
  */
 @include_once '../init.php';
 @include_once ROOT_DIR . '/conf/conf.php';
-
+@include_once 'mysql_datasource.php';
 class Data {
 
     protected $mysqli;
 
     public function __construct() {
         //para que este dentro del standar :)
-        $this->mysqli = $this->initMysqlDB();
+        //obtiene solo una connection
+        $mysqlDataSource =  MysqlDataSource::getInstance();
+        $this->mysqli = $mysqlDataSource->getMySQLi();
         if (!$this->mysqli->set_charset("utf8")) {
             echo "error loading charset UTF-8 " . $this->mysqli->error;
         }
     }
-
-    protected function initMysqlDB() {
-        //setea en la session la database
-        if (!isset($_SESSION['databaseURL'])) {
-            $dbConf = new Configuracion();
-            $databaseURL = $dbConf->get_databaseURL();
-            $databaseUName = $dbConf->get_databaseUName();
-            $databasePWord = $dbConf->get_databasePWord();
-            $databaseName = $dbConf->get_databaseName();
-
-            //Set DB Info. in-session
-            $_SESSION['databaseURL'] = $databaseURL;
-            $_SESSION['databaseUName'] = $databaseUName;
-            $_SESSION['databasePWord'] = $databasePWord;
-            $_SESSION['databaseName'] = $databaseName;
-        }
-        $databaseURL = $_SESSION['databaseURL'];
-        $databaseUName = $_SESSION['databaseUName'];
-        $databasePWord = $_SESSION['databasePWord'];
-        $databaseName = $_SESSION['databaseName'];
-        $mysqli = new mysqli($databaseURL, $databaseUName, $databasePWord, $databaseName);
-        if ($mysqli->connect_errno) {
-            echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-        }
-        return $mysqli;
-    }
-
-    /*
-      DB Closing method.
-      Pass the connection variable
-      obtained through initDB().
+    /**
+     * to avoid any method not found thing I'll keep it here.
      */
-
     public function closeDB() {
-        mysqli_close($this->mysqli);
+        $mysqlDataSource =  MysqlDataSource::getInstance();
+        $mysqlDataSource->closeConnection();
     }
 
     protected function prepareStmt($query) {
@@ -74,8 +47,8 @@ class Data {
         $id = $row['ultimo_id'];
         return $id;
     }
-    
-    public function realEscapeString($string){
+
+    public function realEscapeString($string) {
         return $this->mysqli->real_escape_string($string);
     }
 

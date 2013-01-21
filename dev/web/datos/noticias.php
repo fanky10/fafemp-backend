@@ -47,7 +47,7 @@ class DataNoticias extends Data implements NoticiasRepository {
             $vNews[$noticia_idx] = $oNoticia;
             $noticia_idx = $noticia_idx + 1;
         }
-        $this->closeDB();
+        $stmt->close();
         return $vNews;
     }
 
@@ -141,7 +141,7 @@ class DataNoticias extends Data implements NoticiasRepository {
             $vNews[$noticia_idx] = $oNoticia;
             $noticia_idx = $noticia_idx + 1;
         }
-        $this->closeDB();
+        $stmt->close();
         return $vNews;
     }
 
