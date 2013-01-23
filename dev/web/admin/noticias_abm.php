@@ -8,23 +8,31 @@ include_once ROOT_DIR . '/util/utilidades.php';
 include_once ROOT_DIR . '/controladores/controlador_noticias.php';
 
 $action = $_GET['action'];
+$redirectLocation = 'Location: noticias.php';
 // the action is not valid
 if (!isset($action) || empty($action)) {
     //I dont know what to do!
-    header('Location: admin/noticias.php');
+    header($redirectLocation);
     return;
 }
 //TODO: action="delete, add, edit"
-$manejadorNoticias = new ControladorNoticias(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
+$controladorNoticias = new ControladorNoticias(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
 if ($action == "add") {
-    $oNoticia = $manejadorNoticias->subirNoticia();
-    //TODO: mostrar el set de imagenes (Ni se como... por ahora solo muestro la primera.)
-    $vImagenes = $oNoticia->getImagenes();
-    if (isset($vImagenes) && !empty($vImagenes)) {
-        $oImagen = $vImagenes[0];
+    $oNoticia = $controladorNoticias->subirNoticia();
+} else if ($action == "edit") {
+    $noticiaId = $_GET['id'];
+    if (isset($noticiaId) && !empty($noticiaId)) {
+        $oNoticia = $controladorNoticias->editarNoticia($noticiaId);
+    }
+} else if ($action == "del") {
+    $noticiaId = $_GET['id'];
+    if (isset($noticiaId) && !empty($noticiaId)) {
+        $controladorNoticias->eliminarNoticia($noticiaId);
+        header($redirectLocation);
+        return;
     }
 } else {
-    header('Location: admin/noticias.php');
+    header($redirectLocation);
     return;
 }
 ?>

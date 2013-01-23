@@ -1,4 +1,16 @@
-<?php include 'admin_check.php' ?>
+<?php
+include 'admin_check.php';
+include_once '../init.php';
+include_once ROOT_DIR . '/servicios/manejador_servicios.php';
+include_once ROOT_DIR . '/entidades/noticia.php';
+include_once ROOT_DIR . '/entidades/imagen.php';
+include_once ROOT_DIR . '/util/utilidades.php';
+$manejador = new ManejadorServicios();
+$noticias = $manejador->getNoticias($GLOBAL_SETTINGS['news.abm.limit']);
+$oNoticia = new Noticia();
+$oImagen = new Imagen();
+?>
+
 <!DOCTYPE html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -32,7 +44,6 @@
         <script src="../javascripts/modernizr.foundation.js"></script>
     </head>
     <body>
-
         <?php
         include_once 'admin_header.php';
         include_once 'admin_menu.php';
@@ -40,135 +51,78 @@
         include_once 'admin_navigate.php';
         ?>
 
-        <!-- Three-up Content Blocks -->
         <div class="content">
             <div class="row">
-                <!-- Contact Details -->
                 <div class="twelve columns">
-                    <h3>Listado de Noticias</h3>
-                    <p>Desde la siguiente lista de noticias podras editar y eliminar noticias ya cargadas.</p>
-                    
-                    <div class="row">
-                        <div class="two columns">
-                            <h5>Titulo</h5>
-                        </div>
-                        <div class="four columns">
-                            <h5>Descripcion</h5>
-                        </div>
-                        <div class="two columns">
-                            <h5>Fecha</h5>
-                        </div>
-                        <div class="two columns">
-                        </div>
-                        <div class="two columns">
-                        </div>
-
-                    </div>
-
                     <?php
-                    $i = 0;
-                    while ($i < 5) {
-                        $i++;
+                    if (isset($noticias) && !empty($noticias)) {//hay noticias    
                         ?>
+                        <h3>Listado de Noticias</h3>
+                        <p>Desde la siguiente lista de noticias podras editar y eliminar noticias ya cargadas.</p>
+
                         <div class="row">
                             <div class="two columns">
-                                Reunion de medicos de Rosario
+                                <h5>Titulo</h5>
                             </div>
                             <div class="four columns">
-                                Se reunieron un monton de medicos para decidir el futuro de la facultad de medicina.
+                                <h5>Descripcion</h5>
                             </div>
                             <div class="two columns">
-                                21/12/2012
+                                <h5>Fecha</h5>
                             </div>
-                            <div class="two columns" align="center">
-                                <?php
-                                    $linkEdicion = "noticias_edicion.php?id=".$i;
-                                    echo '<a href="'.$linkEdicion.'"><img src="../images/edit-32.png" alt="Editar" /></a>';
-                                ?>
-                                
+                            <div class="two columns">
                             </div>
-                            <div class="two columns" align="center">
-                                <?php
-                                    $linkEliminar = "noticias_eliminar.php?id=".$i;
-                                    echo '<a href="'.$linkEliminar.'"><img src="../images/delete-32.png" alt="Eliminar" /></a>';
-                                ?>
-                                
+                            <div class="two columns">
                             </div>
-                            <div class="twelve columns footer-line"></div>
                         </div>
-                        
                         <?php
-                        
+                        foreach ($noticias as $oNoticia) {
+                            echo '<div class="row">';
+                            echo '<div class="two columns">';
+                            $timestamp = time();
+                            $noticiaFecHr = $oNoticia->getFechaHora();
+                            if (isset($noticiaFecHr)) {
+                                $timestamp = strtotime($oNoticia->getFechaHora());
+                            }
+                            //handle strftime
+                            $formattedDate = iconv('ISO-8859-1', 'UTF-8', strftime($GLOBAL_SETTINGS['news.date.formatter'], $timestamp));
+                            echo $formattedDate;
+                            echo '</div>';
+
+
+                            echo '<div class="two columns">';
+                            echo $oNoticia->getTitulo();
+
+                            echo '</div>';
+                            echo '<div class="four columns">';
+                            echo $oNoticia->getCuerpo();
+
+                            echo '</div>';
+
+                            echo '<div class = "two columns" align = "center">';
+                            $linkEdicion = "noticias_edicion.php?id=" . $oNoticia->getId();
+                            echo '<a href="' . $linkEdicion . '"><img src="../images/edit-32.png" alt="Editar" /></a>';
+                            echo '</div>';
+                            
+                            echo '<div class="two columns" align="center">';
+                            $linkEliminar = "noticias_abm.php?action=del&id=" . $oNoticia->getId();
+                            echo '<a href="' . $linkEliminar . '"><img src="../images/delete-32.png" alt="Eliminar" /></a>';
+                            echo '</div>';
+                            
+                            echo '<div class="twelve columns footer-line"></div>';
+
+                            echo '</div>';
+                        }
+                    } else {//no hay noticias
+                        echo "<h3>No se han encontrado noticias</h3>";
+                        echo '<a class="button radius" title="Ver más" href="noticias_carga.php">Agregar Noticia</a>';
                     }
                     ?>
-                    <a href="noticias_carga.php"><button type="submit" name="submit" class="radius button">Agregar Noticia</button></a>
-                    <!-- 
-                  <div class="row">
-                    <div class="two columns">
-                      Reunion de medicos de Rosario
-                    </div>
-                    <div class="four columns">
-                      Se reunieron un monton de medicos para decidir el futuro de la facultad de medicina.
-                    </div>
-                    <div class="two columns">
-                      21/12/2012
-                    </div>
-                    <div class="two columns" align="center">
-                      <a href="edit.html"><img src="../images/edit-32.png" alt="Editar" /></a>
-                    </div>
-                    <div class="two columns" align="center">
-                      <a href="delete.html"><img src="../images/delete-32.png" alt="Eliminar" /></a>
-                    </div>
-                    <div class="twelve columns footer-line"></div>
-                  </div>
-                  
-                  
-                  <div class="row">
-                    <div class="two columns">
-                      Reunion de medicos de Rosario
-                    </div>
-                    <div class="four columns">
-                      Se reunieron un monton de medicos para decidir el futuro de la facultad de medicina.
-                    </div>
-                    <div class="two columns">
-                      21/12/2012
-                    </div>
-                    <div class="two columns" align="center">
-                      <a href="edit.html"><img src="../images/edit-32.png" alt="Editar" /></a>
-                    </div>
-                    <div class="two columns" align="center">
-                      <a href="delete.html"><img src="../images/delete-32.png" alt="Eliminar" /></a>
-                    </div>
-                    <div class="twelve columns footer-line"></div>
-                  </div>
-                  
-                  
-                  <div class="row">
-                    <div class="two columns">
-                      Reunion de medicos de Rosario
-                    </div>
-                    <div class="four columns">
-                      Se reunieron un monton de medicos para decidir el futuro de la facultad de medicina.
-                    </div>
-                    <div class="two columns">
-                      21/12/2012
-                    </div>
-                    <div class="two columns" align="center">
-                      <a href="edit.html"><img src="../images/edit-32.png" alt="Editar" /></a>
-                    </div>
-                    <div class="two columns" align="center">
-                      <a href="delete.html"><img src="../images/delete-32.png" alt="Eliminar" /></a>
-                    </div>
-                  </div>
-                    -->
-
-
                 </div>
             </div>
         </div>
 
         <?php include_once 'admin_footer.php'; ?>
-
 
     </body>
 </html>
