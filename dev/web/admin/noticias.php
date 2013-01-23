@@ -62,13 +62,13 @@ $oImagen = new Imagen();
 
                         <div class="row">
                             <div class="two columns">
+                                <h5>Fecha</h5>
+                            </div>
+                            <div class="two columns">
                                 <h5>Titulo</h5>
                             </div>
                             <div class="four columns">
                                 <h5>Descripcion</h5>
-                            </div>
-                            <div class="two columns">
-                                <h5>Fecha</h5>
                             </div>
                             <div class="two columns">
                             </div>
