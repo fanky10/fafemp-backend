@@ -1,5 +1,5 @@
-<?php include 'admin_check.php' ?>
-<?php
+<?php 
+include 'admin_check.php';
 include_once '../init.php';
 include_once ROOT_DIR . '/util/utilidades.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
@@ -18,7 +18,7 @@ if (isset($idNoticia) && !empty($idNoticia)) {
     //id returns valid noticia object
     if (isset($oNoticia) && !empty($oNoticia)) {
         $vImagenes = $oNoticia->getImagenes();
-        if (isset($vImagenes) || !empty($vImagenes)) {
+        if (isset($vImagenes) && !empty($vImagenes)) {
             $oImagen = $vImagenes[0];
         }
         $isRedirect = false;// I wont redirect unless noticia is a valid one
@@ -77,8 +77,8 @@ if ($isRedirect) {
                         <h3>Carga Noticias</h3>
                         <p>Desde el siguiente formulario usted prodra editar la noticia seleccionada!.</p>
                         <?php
-                        $formAction = "noticias_add.php?action=edit&id=" . $oNoticia->getId();
-                        echo '<form id="formNoticia"action=' . $formAction . '" method="POST"
+                        $formAction = "noticias_abm.php?action=edit&id=" . $oNoticia->getId();
+                        echo '<form id="formNoticia"action="' . $formAction . '" method="POST"
                               enctype="multipart/form-data">';
                         ?>
 
