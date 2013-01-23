@@ -96,10 +96,12 @@ if ($isRedirect) {
                                 ?>
 
                             </div>
+                            <!-- por ahora no asigna nuevas imagenes
                             <div class="twelve columns">
                                 <label for="imagen">Selecciona Imagen</label> 
                                 <input type="file" class="twelve" name="fileImage[]" id="file" multiple="true"/>
                             </div>
+                            -->
                             <div class="twelve columns">
                                 <br/>
                                 <h4>Aqui carousel de imagenes!</h4>
