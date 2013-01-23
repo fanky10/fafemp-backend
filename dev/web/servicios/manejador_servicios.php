@@ -22,6 +22,11 @@ class ManejadorServicios {
         $idImagen = $this->imagenesRepository->addImagenNoticia($imagen, $noticiaId);
         $imagen->setId($idImagen);
     }
+    
+    public function editarNoticia(Noticia $oNoticia){
+        $this->noticiasRepository = new DataNoticias();
+        $this->noticiasRepository->editarNoticia($oNoticia);
+    }
 
     public function addNoticia(Noticia $noticia) {
         $this->noticiasRepository = new DataNoticias();
@@ -64,7 +69,7 @@ class ManejadorServicios {
         return $this->usuariosRepository->cambioPassword($user, $newPassword);
     }
 
-    private function asignaImagenesNoticia(Noticia $oNoticia) {
+    private function asignaImagenesNoticia($oNoticia) {
         if (!isset($oNoticia)) {
             return;
         }
