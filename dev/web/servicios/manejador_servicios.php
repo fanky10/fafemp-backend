@@ -65,12 +65,18 @@ class ManejadorServicios {
     }
 
     private function asignaImagenesNoticia(Noticia $oNoticia) {
+        if (!isset($oNoticia)) {
+            return;
+        }
         $this->imagenesRepository = new DataImagenes();
         $vImagenes = $this->imagenesRepository->getImagenesNoticia($oNoticia->getId());
         $oNoticia->setImagenes($vImagenes);
     }
 
     private function asignaImagenesNoticias($vNoticias) {
+        if (!isset($vNoticias) || empty($vNoticias)) {
+            return;
+        }
         $this->imagenesRepository = new DataImagenes();
         $oNoticia = new Noticia();
         foreach ($vNoticias as $oNoticia) {
