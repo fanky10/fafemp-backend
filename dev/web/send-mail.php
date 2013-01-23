@@ -53,7 +53,7 @@
 		// error
 		if ( isset( $error ) )
 		{
-			header("Location: contacto-no-enviado.html");
+			header("Location: contacto-no-enviado.php");
 		}
 		// end error
 		
@@ -69,7 +69,7 @@
 			mail( $email_to, $subject, $body, $headers );
 			
 			//echo '<div class="alert alert-success contact-alert"><strong>ENVIADO! </strong>' . $success_message . '</div>';
-			header("Location: contacto-enviado.html");
+			header("Location: contacto-enviado.php");
 		}
 		// end no error send mail
 		
