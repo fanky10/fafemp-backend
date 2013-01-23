@@ -11,6 +11,7 @@ class Noticia {
     private $fechaHora;
     private $titulo;
     private $cuerpo;
+    private $eliminada;
     private $imagenes;
 
     public function setId($id) {
@@ -27,6 +28,10 @@ class Noticia {
 
     public function setCuerpo($cuerpo) {
         $this->cuerpo = $cuerpo;
+    }
+    
+    public function setEliminada($eliminada){
+        $this->eliminada=$eliminada;
     }
 
     public function setImagenes($imagenes) {
@@ -59,7 +64,9 @@ class Noticia {
         }
         return null;
     }
-
+    public function getEliminada(){
+        return $this->eliminada;
+    }
 }
 
 ?>
