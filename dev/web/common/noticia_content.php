@@ -36,7 +36,7 @@ include_once ROOT_DIR . '/util/utilidades.php';
                         $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
                         $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
                         $vImagenes = $oNoticia->getImagenes();
-                        if (isset($vImagenes) || !empty($vImagenes)) {
+                        if (isset($vImagenes) && !empty($vImagenes)) {
                             foreach ($vImagenes as $oImagen) {
                                 if (isset($oImagen)) {
                                     $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();

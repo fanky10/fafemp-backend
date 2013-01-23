@@ -64,15 +64,32 @@ class NoticiasTest extends DatabaseIsolatedTestCase {
         $this->assertTrue(empty($vNoticias));
     }
     
-    function testGetCantidadNoticias(){
-        $i=0;
-        $cant = 10;
-        while($i<$cant){//agrego 10 noticias
-            $this->agregaNoticia();
-            $i++;
-        }
-        $count = $this->noticiasRepository->getCantidadNoticias();
-        $this->assertTrue($count==$cant);
+    function testDeleteNoticia(){
+        $idNoticia = $this->agregaNoticia();
+        
+        $oNoticia = $this->noticiasRepository->getNoticiaById($idNoticia);
+        $oNoticia->setEliminada(1);
+        $this->noticiasRepository->editarNoticia($oNoticia);
+        
+        $oNoticia = $this->noticiasRepository->getNoticiaById($idNoticia);
+        
+        $this->assertTrue($oNoticia->getEliminada()==1);
+    }
+    function testEditarNoticia(){
+        $nuevoTitulo="hola";
+        $nuevoCuerpo="chau";
+        
+        $idNoticia = $this->agregaNoticia();
+        
+        $oNoticia = $this->noticiasRepository->getNoticiaById($idNoticia);
+        $oNoticia->setTitulo($nuevoTitulo);
+        $oNoticia->setCuerpo($nuevoCuerpo);
+        
+        $this->noticiasRepository->editarNoticia($oNoticia);
+        
+        $oNoticia = $this->noticiasRepository->getNoticiaById($idNoticia);
+        
+        $this->assertTrue($oNoticia->getTitulo()==$nuevoTitulo && $oNoticia->getCuerpo()==$nuevoCuerpo);
     }
     
     private function agregaNoticia(){

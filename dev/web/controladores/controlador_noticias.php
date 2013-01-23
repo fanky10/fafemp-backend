@@ -15,11 +15,33 @@ class ControladorNoticias {
     protected $imgPath;
 
     public function __construct($dirBase, $imgPath) {
-        $this->dirBase = $dirBase; 
+        $this->dirBase = $dirBase;
         $this->fileTypes = "/^\.(jpg|jpeg|gif|png){1}$/i";
         $this->manejador = new ManejadorServicios();
         $this->maxFileSize = 5 * 1024 * 1024; //take it from config
-        $this->imgPath = $imgPath; 
+        $this->imgPath = $imgPath;
+    }
+
+    public function editarNoticia($noticiaId) {
+        $oNoticia = new Noticia();
+        $oNoticia = $this->manejador->getNoticiaById($noticiaId);
+        //primero chequeo que quiero editar la noticia correcta
+        if (isset($oNoticia) && !empty($oNoticia)) {
+            $oNoticia->setCuerpo($_POST['cuerpo']);
+            $oNoticia->setTitulo($_POST['titulo']);
+            $this->manejador->editarNoticia($oNoticia);
+        }
+        return $oNoticia;
+    }
+
+    public function eliminarNoticia($noticiaId) {
+        $oNoticia = new Noticia();
+        $oNoticia = $this->manejador->getNoticiaById($noticiaId);
+        //primero chequeo que quiero editar la noticia correcta
+        if (isset($oNoticia) && !empty($oNoticia)) {
+            $oNoticia->setEliminada(1);
+            $this->manejador->editarNoticia($oNoticia);
+        }
     }
 
     public function subirNoticia() {

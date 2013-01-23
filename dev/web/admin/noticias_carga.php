@@ -48,7 +48,7 @@
                     <h3>Carga Noticias</h3>
                     <p>Desde el siguiente formulario usted prodra ingresar nuevas
                         noticias, que quedaras visibles desde el sitio publico!.</p>
-                    <form id="formNoticia"action="noticias_add.php" method="POST"
+                    <form id="formNoticia"action="noticias_abm.php?action=add" method="POST"
                           enctype="multipart/form-data">
                         <h5>Formulario de Noticia</h5>
                         <label for="nombre">Titulo</label> 

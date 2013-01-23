@@ -11,7 +11,7 @@ include_once ROOT_DIR . '/entidades/noticia.php';
  */
 class MockedNoticias implements NoticiasRepository {
 
-    public function getNoticias($limit){
+    public function getNoticias($limit) {
         $noticia_idx = 0;
         $vNews;
         $oNoticia = new Noticia();
@@ -23,7 +23,7 @@ class MockedNoticias implements NoticiasRepository {
 
         $vNews[$noticia_idx] = $oNoticia;
         $noticia_idx = $noticia_idx + 1;
-        
+
         $oNoticia = new Noticia();
         $oNoticia->setCuerpo("un cuerpo re loco 2");
         $oNoticia->setFechaHora("2012-12-12");
@@ -34,23 +34,32 @@ class MockedNoticias implements NoticiasRepository {
         $vNews[$noticia_idx] = $oNoticia;
         $noticia_idx = $noticia_idx + 1;
         return $vNews;
-        
     }
-    public function getNoticia($titulo){
+
+    public function getNoticia($titulo) {
         // do nothing
     }
-    public function addNoticia(Noticia $noticia){
+
+    public function addNoticia(Noticia $noticia) {
         // do nothing
     }
-    public function getNoticiaById($id){
+
+    public function getNoticiaById($id) {
         // do nothing
     }
-    
-    public function getNoticiasPaginadas($offset,$limit){
+
+    public function getNoticiasPaginadas($offset, $limit) {
         // do nothing
     }
-    public function getCantidadNoticias(){
+
+    public function getCantidadNoticias() {
         // do nothing (x
     }
+
+    public function editarNoticia(Noticia $noticia) {
+        
+    }
+
 }
+
 ?>

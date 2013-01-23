@@ -15,7 +15,7 @@ if (isset($idNoticia)) {
     $manejador = new ManejadorServicios();
     $oNoticia = $manejador->getNoticiaById($idNoticia);
     $vImagenes = $oNoticia->getImagenes();
-    if (isset($vImagenes) || !empty($vImagenes)) {
+    if (isset($vImagenes) && !empty($vImagenes)) {
         $oImagen = $vImagenes[0];
     }
     if (!isset($oNoticia) || empty($oNoticia)) {

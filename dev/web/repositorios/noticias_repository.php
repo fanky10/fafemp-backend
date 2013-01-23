@@ -10,5 +10,6 @@ interface NoticiasRepository{
     public function addNoticia(Noticia $noticia);
     public function getNoticiasPaginadas($offset,$limit);
     public function getCantidadNoticias();
+    public function editarNoticia(Noticia $noticia);
 }
 ?>
