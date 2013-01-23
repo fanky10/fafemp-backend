@@ -54,11 +54,45 @@ if ($isRedirect) {
             <link rel="stylesheet" href="stylesheets/foundation.css">
             <link rel="stylesheet" href="stylesheets/app.css">
             <link rel="stylesheet" href="stylesheets/prettyPhoto.css">
+            <link rel="stylesheet" href="stylesheets/flexslider.css">
 
             <!-- Author -->
             <link type="text/plain" rel="author" href="humans.txt" />
 
             <script src="javascripts/modernizr.foundation.js"></script>
+
+            <!-- Syntax Highlighter -->
+            <script src="javascripts/modernizr.js"></script>
+            <!-- Included JS Files (Compressed) -->
+            <script src="javascripts/jquery.js"></script>
+            <script src="javascripts/foundation.min.js"></script>
+
+            <!-- Initialize JS Plugins -->
+            <script src="javascripts/jquery.prettyPhoto.js"></script>
+            <script src="javascripts/jquery_validate.js"></script>
+            <script src="javascripts/app.js"></script>
+            <script src="javascripts/init.js"></script>
+
+            <!-- jQuery -->
+
+            <!-- FlexSlider -->
+            <script defer src="javascripts/jquery.flexslider.js"></script>
+            <script defer src="javascripts/jquery.flexslider-min.js"></script>
+
+            <script type="text/javascript">
+                $(function(){
+                    SyntaxHighlighter.all();
+                });
+                $(window).load(function(){
+                    $('.flexslider').flexslider({
+                        animation: "slide",
+                        start: function(slider){
+                            $('body').removeClass('loading');
+                        }
+                    });
+                });
+            </script>
+
         </head>
         <body>
 
@@ -88,44 +122,7 @@ if ($isRedirect) {
 
             <!-- Footer -->
             <?php include_once 'footer.php'; ?> 
-
-            <!-- Included JS Files (Compressed) -->
-            <script src="javascripts/jquery.js"></script>
-            <script src="javascripts/foundation.min.js"></script>
-
-            <!-- Initialize JS Plugins -->
-            <script src="javascripts/jquery.prettyPhoto.js"></script>
-            <script src="javascripts/jquery_validate.js"></script>
-            <script src="javascripts/app.js"></script>
-            <script src="javascripts/init.js"></script>
-
         </body>
-        <!-- Included JS Files (Compressed) -->
-        <script src="javascripts/jquery.js"></script>
-        <script src="javascripts/foundation.min.js"></script>
-
-        <!-- Initialize JS Plugins -->
-        <script src="javascripts/jquery.prettyPhoto.js"></script>
-        <script src="javascripts/app.js"></script>
-        <script src="javascripts/init.js"></script>
-
-        <script type="text/javascript">
-            $(window).load(function() {
-                $('#slider').orbit({
-                    animation: 'fade',      
-                    pauseOnHover: true,
-                    startClockOnMouseOut: true, 
-                    bullets: true, // true or false to activate the bullet navigation
-                    bulletThumbs: true
-                });
-            });
-            $(document).ready(function(){
-                $("a[rel^='prettyPhoto']").prettyPhoto({
-                    theme: 'facebook',
-                    social_tools: false
-                });
-            });
-        </script>
     </html>
 
 <?php } ?>

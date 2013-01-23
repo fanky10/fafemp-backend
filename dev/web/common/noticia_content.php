@@ -28,19 +28,35 @@ include_once ROOT_DIR . '/util/utilidades.php';
             </h3>
 
         </div>
-        <div class="six columns">
-            <?php
-            $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
-            $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
-            if (isset($oImagen)) {
-                $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
-            } else {
-
-                $img = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
-            }
-            //echo '<img src="' . $img . '" />';
-            echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
-            ?>
+        <div id="imgContent" class="six columns">
+            <section class="slider">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <?php
+                        $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
+                        $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
+                        $vImagenes = $oNoticia->getImagenes();
+                        if (isset($vImagenes) || !empty($vImagenes)) {
+                            foreach ($vImagenes as $oImagen) {
+                                if (isset($oImagen)) {
+                                    $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
+                                    echo "<li>";
+                                    echo '<img src="' . $img . '" />';
+                                    //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
+                                    echo "</li>";
+                                }
+                            }
+                        } else {//no images
+                            $img = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
+                            echo "<li>";
+                            echo '<img src="' . $img . '" />';
+                            //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
+                            echo "</li>";
+                        }
+                        ?>
+                    </ul>
+                </div>
+            </section>
         </div>
         <div class="six columns">
             <p class="text-justify"><?php echo Utilidades::breakeLines($oNoticia->getCuerpo()); ?></p>
