@@ -34,13 +34,15 @@
         <?php include_once 'header.php'; ?>
 
         <!-- End Header and Nav -->
-        <?php $seccion = "contacto";
-        include_once 'menu_header.php' ?>
+        <?php
+        $seccion = "contacto";
+        include_once 'menu_header.php';
+        ?>
         <!-- First Band (Slider) -->
         <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
         <?php
         $navigateTitle = "Contacto";
-        include_once 'navigate.php'
+        include_once 'navigate.php';
         ?>
         <!-- Three-up Content Blocks -->
         <div class="content">
@@ -48,7 +50,24 @@
                 <!-- Contact Details -->
                 <div class="eight columns">
                     <h3>Contacto</h3>
-                    <p>Por favor pongase en contacto con nosotros por cualquier duda o comentario a través de nuestro formulario de Contacto.<br>A la brevedad nos estaremos comunicando con usted. Muchas gracias!.</p>
+
+                    <?php
+                        if(!isset($emailStatus)){
+                            echo '<p>Por favor pongase en contacto con nosotros por cualquier duda o comentario a través de nuestro formulario de Contacto.<br>A la brevedad nos estaremos comunicando con usted. Muchas gracias!.</p>';
+                        }else if($emailStatus=="success"){
+                            echo '
+                                <div class="alert-box success">
+                                    Su mensaje fue enviado Correctamente!. A la brevedad nos estaremos comunicando con usted!.
+                                    <p class="last">Muchas gracias!</p>
+                                    <a href="" class="close">&times;</a>
+                                </div>';
+                        }else if($emailStatus=="error"){
+                            echo '<div class="alert-box alert">
+                                    Su mensaje no fue enviado. Por favor vuelva a intentarlo.
+                                    <a href="" class="close">&times;</a>
+                                </div>';
+                        }
+                    ?>
                     <form id="formInscripcion" class="validateform" method="post" action="send-mail.php">
                         <h5>Formulario de Contacto</h5>
                         <label for="nombre">Nombre y Apellido</label>
