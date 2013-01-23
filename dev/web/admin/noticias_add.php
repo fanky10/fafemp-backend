@@ -6,7 +6,7 @@ include_once ROOT_DIR . '/entidades/imagen.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/util/utilidades.php';
 include_once ROOT_DIR . '/controladores/controlador_noticias.php';
-
+//TODO: action="delete, add, edit"
 $manejadorNoticias = new ControladorNoticias(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
 $oNoticia = $manejadorNoticias->subirNoticia();
 //TODO: mostrar el set de imagenes (Ni se como... por ahora solo muestro la primera.)
