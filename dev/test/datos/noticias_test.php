@@ -65,14 +65,31 @@ class NoticiasTest extends DatabaseIsolatedTestCase {
     }
     
     function testDeleteNoticia(){
-        $nuevoTitulo="hola";
         $idNoticia = $this->agregaNoticia();
+        
         $oNoticia = $this->noticiasRepository->getNoticiaById($idNoticia);
-        $oNoticia->setTitulo($nuevoTitulo);
+        $oNoticia->setEliminada(1);
         $this->noticiasRepository->editarNoticia($oNoticia);
+        
         $oNoticia = $this->noticiasRepository->getNoticiaById($idNoticia);
         
-        $this->assertTrue($oNoticia->getTitulo()==$nuevoTitulo);
+        $this->assertTrue($oNoticia->getEliminada()==1);
+    }
+    function testEditarNoticia(){
+        $nuevoTitulo="hola";
+        $nuevoCuerpo="chau";
+        
+        $idNoticia = $this->agregaNoticia();
+        
+        $oNoticia = $this->noticiasRepository->getNoticiaById($idNoticia);
+        $oNoticia->setTitulo($nuevoTitulo);
+        $oNoticia->setCuerpo($nuevoCuerpo);
+        
+        $this->noticiasRepository->editarNoticia($oNoticia);
+        
+        $oNoticia = $this->noticiasRepository->getNoticiaById($idNoticia);
+        
+        $this->assertTrue($oNoticia->getTitulo()==$nuevoTitulo && $oNoticia->getCuerpo()==$nuevoCuerpo);
     }
     
     private function agregaNoticia(){
