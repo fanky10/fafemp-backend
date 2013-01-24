@@ -16,7 +16,21 @@ class DataImagenes extends Data implements ImagenesRepository {
         return array();
     }
 
-    public function getImagen($id) {
+    public function getImagen($idImagen) {
+        $query = "select imagen_id,imagen_path,imagen_nombre,imagen_fec_hora,imagen_eliminada,imagen_nombre_archivo,imagen_orden FROM " . Imagen::$TABLE . 
+                " WHERE imagen_id= ? ".
+                " ORDER BY imagen_orden";
+        $stmt = $this->prepareStmt($query);
+
+        $stmt->bind_param('i', $idImagen);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        
+        while ($row = $result->fetch_assoc()) {
+            return $this->createImageObject($row);
+        }
         return null;
     }
 
@@ -85,6 +99,25 @@ class DataImagenes extends Data implements ImagenesRepository {
         $oImagen->setFechaHora($imgFecHora);
         $oImagen->setOrden($imgOrden);
         return $oImagen;
+    }
+
+    public function editarImagen(Imagen $imagen) {
+        $non_query = "update " . Imagen::$TABLE . " set imagen_path=?, imagen_nombre=?,imagen_eliminada=?, imagen_nombre_archivo=?,imagen_orden=? where imagen_id=?";
+        $stmt = $this->prepareStmt($non_query);
+        $stmt->bind_param('ssisii', $path, $nombre,$eliminada,$nombreArchivo,$orden,$imagenId);
+
+        $eliminada = $imagen->getEliminada();
+        $imagenId = $imagen->getId();
+        $nombre = $imagen->getNombre();
+        $nombreArchivo = $imagen->getNombreArchivo();
+        $orden = $imagen->getOrden();
+        $path = $imagen->getPath();
+        
+        if (!$stmt->execute()) {
+            echo "addNoticia - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        /* close statement and connection */
+        $stmt->close();
     }
 
 }
