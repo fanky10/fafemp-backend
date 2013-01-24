@@ -21,10 +21,10 @@ class DataImagenes extends Data implements ImagenesRepository {
     }
 
     public function addImagenNoticia(Imagen $imagen, $noticiaId) {
-        $non_query = "insert into " . Imagen::$TABLE . " (imagen_path,imagen_nombre,imagen_nombre_archivo,imagen_noticia_id) 
-            values(?,?,?,?)";
+        $non_query = "insert into " . Imagen::$TABLE . " (imagen_path,imagen_nombre,imagen_nombre_archivo,imagen_orden,imagen_noticia_id) 
+            values(?,?,?,?,?)";
         $stmt = $this->prepareStmt($non_query);
-        if (!$stmt->bind_param('sssi', $path, $name,$nombreArchivo, $noticiaId)) {
+        if (!$stmt->bind_param('sssii', $path, $name,$nombreArchivo, $orden,$noticiaId)) {
             echo "addImagen - Bind Param failed: (" . $stmt->errno . ") " . $stmt->error;
             return -1;
         }
@@ -33,6 +33,7 @@ class DataImagenes extends Data implements ImagenesRepository {
         $name = $imagen->getNombre();
         $nombreArchivo = $imagen->getNombreArchivo();
         $path = $imagen->getPath();
+        $orden = $imagen->getOrden();
 
         if (!$stmt->execute()) {
             echo "addImagen - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
@@ -45,7 +46,7 @@ class DataImagenes extends Data implements ImagenesRepository {
     }
 
     public function getImagenesNoticia($noticiaId) {
-        $query = "select imagen_id,imagen_path,imagen_nombre,imagen_fec_hora,imagen_eliminada,imagen_nombre_archivo FROM " . Imagen::$TABLE . " WHERE imagen_noticia_id= ? and imagen_eliminada=0";
+        $query = "select imagen_id,imagen_path,imagen_nombre,imagen_fec_hora,imagen_eliminada,imagen_nombre_archivo,imagen_orden FROM " . Imagen::$TABLE . " WHERE imagen_noticia_id= ? and imagen_eliminada=0 ORDER BY imagen_orden DESC";
         $stmt = $this->prepareStmt($query);
 
         $stmt->bind_param('i', $noticiaId);
@@ -73,11 +74,14 @@ class DataImagenes extends Data implements ImagenesRepository {
         $imgNombreArchivo = $row['imagen_nombre_archivo'];
         $imgFecHora = $row['imagen_fec_hora'];
         $imgEliminada = $row['imagen_eliminada'];
+        $imgOrden = $row['imagen_orden'];
         $oImagen->setId($id);
         $oImagen->setNombre($imgNombre);
         $oImagen->setPath($imgPath);
+        $oImagen->setNombreArchivo($imgNombreArchivo);
         $oImagen->setEliminada($imgEliminada);
         $oImagen->setFechaHora($imgFecHora);
+        $oImagen->setOrden($imgOrden);
         return $oImagen;
     }
 

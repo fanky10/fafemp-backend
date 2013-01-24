@@ -28,10 +28,11 @@ CREATE TABLE imagenes_noticia (
     imagen_id integer unsigned not null primary key AUTO_INCREMENT,
     imagen_path varchar(200) not null,
     imagen_nombre varchar(200) not null,
-    imagen_noticia_id integer unsigned not null, #una imagen no puede no saber de que noticia es
+    imagen_noticia_id integer unsigned not null, #una imagen no puede no saber a que noticia pertenece
     imagen_eliminada TINYINT(1) default 0,
     imagen_fec_hora timestamp not null default current_timestamp,
-    imagen_nombre_archivo varchar(200) not null
+    imagen_nombre_archivo varchar(200) not null,
+    imagen_orden integer unsigned not null
 )ENGINE=InnoDB;
 
 /**

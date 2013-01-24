@@ -10,6 +10,7 @@ class Imagen {
     private $path;
     private $fechaHora;
     private $eliminada;
+    private $orden;
 
     public function setId($id) {
         $this->id = $id;
@@ -33,6 +34,10 @@ class Imagen {
 
     public function setNombreArchivo($nombreArchivo) {
         $this->nombreArchivo = $nombreArchivo;
+    }
+    
+    public function setOrden($orden) {
+        $this->orden = $orden;
     }
 
     public function getId() {
@@ -58,7 +63,9 @@ class Imagen {
     public function getNombreArchivo() {
         return $this->nombreArchivo;
     }
-
+    public function getOrden() {
+        return $this->orden;
+    }
 }
 
 ?>
