@@ -21,7 +21,7 @@ class ControladorImagenes {
         $this->maxFileSize = 5 * 1024 * 1024; //take it from config
         $this->imgPath = $imgPath;
     }
-    
+
     public function subeMultiplesImagenes($noticiaId) {
         $arrItems = Array();
         $index = 0;
@@ -37,16 +37,16 @@ class ControladorImagenes {
                 $file['tmp_name'] = $_FILES['fileImage']['tmp_name'][$index];
                 $file['error'] = $_FILES['fileImage']['error'][$index];
                 $file['size'] = $_FILES['fileImage']['size'][$index];
-                $oImagen = $this->subeImagen($file, $noticiaId,$index);
+                $oImagen = $this->subeImagen($file, $noticiaId, $index);
                 $arrItems[$index] = $oImagen;
                 $index++;
             }
         }
-        
+
         return $arrItems;
     }
 
-    private function subeImagen($file, $noticiaId,$orden) {
+    private function subeImagen($file, $noticiaId, $orden) {
 
         $msgError = "";
         $error_types = array(
@@ -90,6 +90,35 @@ class ControladorImagenes {
         }
 
         return null;
+    }
+
+    public function reorderImagenes() {
+        $jsonReceived = $_POST['imgJSON'];
+        $items = json_decode($jsonReceived);
+        foreach ($items as $item) {//call updateImg
+            $imageId = null;
+            $imageOrder = null;
+            foreach ($item as $property => $value) {
+                if ($property == "imagen.id") {
+                    $imageId = $value;
+                }
+                if ($property == "imagen.orden") {
+                    $imageOrder = $value;
+                }
+            }
+            if (isset($imageId) && isset($imageOrder)) {
+                //get original img object to see if the id is cool
+                $oImage = $this->manejador->getImagen($imageId);
+                $oImage->setOrden($imageOrder);
+                $this->manejador->editarImagen($oImage);
+            }
+        }
+        return "Se han realizado los cambios";
+    }
+
+    public function getUpdatedImages($idNoticia) {
+        $oNoticia = $this->manejador->getNoticiaById($idNoticia);
+        return $oNoticia->getImagenes();
     }
 
 }

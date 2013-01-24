@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'admin_check.php';
 include_once '../init.php';
 include_once ROOT_DIR . '/util/utilidades.php';
@@ -21,7 +21,7 @@ if (isset($idNoticia) && !empty($idNoticia)) {
         if (isset($vImagenes) && !empty($vImagenes)) {
             $oImagen = $vImagenes[0];
         }
-        $isRedirect = false;// I wont redirect unless noticia is a valid one
+        $isRedirect = false; // I wont redirect unless noticia is a valid one
     }
 }
 if ($isRedirect) {
@@ -54,14 +54,89 @@ if ($isRedirect) {
             <link rel="stylesheet" href="../stylesheets/foundation.css">
             <link rel="stylesheet" href="../stylesheets/app.css">
             <link rel="stylesheet" href="../stylesheets/prettyPhoto.css">
+            
+            
+            <!-- Included JS Files (Compressed) -->
+            <script src="../javascripts/jquery.js"></script>
+            <script src="../javascripts/foundation.min.js"></script>
+
+            <!-- Initialize JS Plugins -->
+            <script src="../javascripts/jquery.prettyPhoto.js"></script>
+            <script src="../javascripts/jquery_validate.js"></script>
+            <script src="../javascripts/app.js"></script>
+            <script src="../javascripts/init.js"></script>
+            <script type="text/javascript">
+                $(function(){
+                    $('#formNoticia').validate({
+                        rules: {
+                            'titulo': 'required',
+                            'cuerpo': 'required'
+                        },
+                        messages: {
+                            'titulo': 'Debe ingresar un titulo de noticia.',
+                            'cuerpo': 'Debe ingresar un cuerpo a la noticia.'
+                        },
+                        submitHandler: function(form) {
+                            form.submit();
+                        }
+                    });
+                });
+                $(document).ready(function(){
+                    $("a[rel^='prettyPhoto']").prettyPhoto({
+                        theme: 'facebook',
+                        social_tools: false
+                    });
+                });
+            </script>
+            
             <!-- Todo lo referido al draggin de imagenes -->
             <!-- Para el style de el div de imagenes -->
+            <!-- y scripts necesarios para manejarlo -->
             <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-            <!-- jquery-ui para mover las imagenes -->
-            <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+            <script src="../javascripts/jquery-ui-1.9.2.custom.min.js"></script>
             <!-- script para enviar un json del orden de las imagenes -->
+            <script type="text/javascript">
+                    $(document).ready(function() {
+                        
+                        function createObject(id, position) {
+                            
+                            return {
+                                "imagen.id": id,
+                                "imagen.orden": position
+                            }
+                            
+                        }
+                        function recreateList(data){
+                            $("#imgResponse").html(data);
+                        }
+                        
+                        $( "#imgSortable" ).sortable({
+                            update: function(event, ui) {
+                                var result = [];//new Array();
+                                $("#imgSortable li").each(function(idx, item){
+                                    var id = $(item).attr('id');
+                                    var oRow = createObject(id,idx);
+                                    result.push(oRow);
+                                    
+                                });
+                                //once we have the result let's show it!!
+                                var jsonResult = JSON.stringify(result);
+                                //once we know it works let's send it!!
+                                $.post(
+                                "imagenes_noticia_abm.php?action=updateOrder&idNoticia=<?php echo $oNoticia->getId();?>",
+                                {imgJSON: jsonResult},
+                                function(data){
+                                    recreateList(data);
+                                });
+                                
+                            }
+                        });
+                        $( "#imgSortable" ).disableSelection();
+                    });
+                </script>
+            <!-- script para delete+updatear el set de las imagenes -->
             <script>
-            
+                            
             </script>
             <!-- Author -->
             <link type="text/plain" rel="author" href="humans.txt" />
@@ -111,11 +186,37 @@ if ($isRedirect) {
                             </div>
                             -->
                             <div class="twelve columns">
-                                <br/>
-                                <h4>Aqui carousel de imagenes!</h4>
+                                <ul id="imgSortable">
+                                    <?php
+                                    $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
+                                    $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
+                                    $vImagenes = $oNoticia->getImagenes();
+                                    if (isset($vImagenes) && !empty($vImagenes)) {
+                                        foreach ($vImagenes as $oImagen) {
+                                            if (isset($oImagen)) {
+                                                $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
+                                                echo '<li id="' . $oImagen->getId() . '" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item ' . $oImagen->getNombre() . '</li>';
+//                                                echo "<li>";
+//                                                echo '<img src="' . $img . '" />';
+//                                                //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
+//                                                echo "</li>";
+                                            }
+                                        }
+                                    } else {//no images
+                                        $img = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
+                                        echo "<li>";
+                                        echo '<img src="' . $img . '" />';
+                                        //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
+                                        echo "</li>";
+                                    }
+                                    ?>
+                                </ul>
                             </div>
                             <div class="twelve columns">
                                 <button type="submit" name="submit" class="radius button">Guardar</button>
+                            </div>
+                            <div id="imgResponse" class="twelve columns">
+                                <h2>img response</h2>
                             </div>
                         </div>
                         <?php
@@ -129,38 +230,7 @@ if ($isRedirect) {
 
 
             <?php include_once 'admin_footer.php'; ?>
-            <!-- Included JS Files (Compressed) -->
-            <script src="../javascripts/jquery.js"></script>
-            <script src="../javascripts/foundation.min.js"></script>
-
-            <!-- Initialize JS Plugins -->
-            <script src="../javascripts/jquery.prettyPhoto.js"></script>
-            <script src="../javascripts/jquery_validate.js"></script>
-            <script src="../javascripts/app.js"></script>
-            <script src="../javascripts/init.js"></script>
-            <script type="text/javascript">
-                $(function(){
-                    $('#formNoticia').validate({
-                        rules: {
-                            'titulo': 'required',
-                            'cuerpo': 'required'
-                        },
-                        messages: {
-                            'titulo': 'Debe ingresar un titulo de noticia.',
-                            'cuerpo': 'Debe ingresar un cuerpo a la noticia.'
-                        },
-                        submitHandler: function(form) {
-                            form.submit();
-                        }
-                    });
-                });
-                $(document).ready(function(){
-                    $("a[rel^='prettyPhoto']").prettyPhoto({
-                        theme: 'facebook',
-                        social_tools: false
-                    });
-                });
-            </script>
+            
 
         </body>
     </html>
