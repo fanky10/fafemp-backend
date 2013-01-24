@@ -46,8 +46,8 @@
                 <!-- Contact Details -->
                 <div class="nine columns">
                     <h3>Carga Noticias</h3>
-                    <p>Desde el siguiente formulario usted prodra ingresar nuevas
-                        noticias, que quedaras visibles desde el sitio publico!.</p>
+                    <p>Desde el siguiente formulario usted prodrá ingresar nuevas
+                        noticias, que quedarán visibles desde el sitio público!.</p>
                     <form id="formNoticia"action="noticias_abm.php?action=add" method="POST"
                           enctype="multipart/form-data">
                         <h5>Formulario de Noticia</h5>
