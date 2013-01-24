@@ -16,22 +16,38 @@ class DataImagenes extends Data implements ImagenesRepository {
         return array();
     }
 
-    public function getImagen($id) {
+    public function getImagen($idImagen) {
+        $query = "select imagen_id,imagen_path,imagen_nombre,imagen_fec_hora,imagen_eliminada,imagen_nombre_archivo,imagen_orden FROM " . Imagen::$TABLE . 
+                " WHERE imagen_id= ? ".
+                " ORDER BY imagen_orden";
+        $stmt = $this->prepareStmt($query);
+
+        $stmt->bind_param('i', $idImagen);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        
+        while ($row = $result->fetch_assoc()) {
+            return $this->createImageObject($row);
+        }
         return null;
     }
 
     public function addImagenNoticia(Imagen $imagen, $noticiaId) {
-        $non_query = "insert into " . Imagen::$TABLE . " (imagen_path,imagen_nombre,imagen_noticia_id) 
-            values(?,?,?)";
+        $non_query = "insert into " . Imagen::$TABLE . " (imagen_path,imagen_nombre,imagen_nombre_archivo,imagen_orden,imagen_noticia_id) 
+            values(?,?,?,?,?)";
         $stmt = $this->prepareStmt($non_query);
-        if (!$stmt->bind_param('ssi', $path, $name, $noticiaId)) {
+        if (!$stmt->bind_param('sssii', $path, $name,$nombreArchivo, $orden,$noticiaId)) {
             echo "addImagen - Bind Param failed: (" . $stmt->errno . ") " . $stmt->error;
             return -1;
         }
 
 
         $name = $imagen->getNombre();
+        $nombreArchivo = $imagen->getNombreArchivo();
         $path = $imagen->getPath();
+        $orden = $imagen->getOrden();
 
         if (!$stmt->execute()) {
             echo "addImagen - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
@@ -44,7 +60,9 @@ class DataImagenes extends Data implements ImagenesRepository {
     }
 
     public function getImagenesNoticia($noticiaId) {
-        $query = "select imagen_id,imagen_path,imagen_nombre FROM " . Imagen::$TABLE . " WHERE imagen_noticia_id= ?";
+        $query = "select imagen_id,imagen_path,imagen_nombre,imagen_fec_hora,imagen_eliminada,imagen_nombre_archivo,imagen_orden FROM " . Imagen::$TABLE . 
+                " WHERE imagen_noticia_id= ? and imagen_eliminada=0".
+                " ORDER BY imagen_orden";
         $stmt = $this->prepareStmt($query);
 
         $stmt->bind_param('i', $noticiaId);
@@ -57,17 +75,49 @@ class DataImagenes extends Data implements ImagenesRepository {
         $img_idx = 0;
         $vImagenes = array();
         while ($row = $result->fetch_assoc()) {
-            $oImagen = new Imagen();
-            $id = $row['imagen_id'];
-            $imgPath = $row['imagen_path'];
-            $imgNombre = $row['imagen_nombre'];
-            $oImagen->setId($id);
-            $oImagen->setNombre($imgNombre);
-            $oImagen->setPath($imgPath);
+            $oImagen = $this->createImageObject($row);
             $vImagenes[$img_idx] = $oImagen;
             $img_idx++;
         }
         return $vImagenes;
+    }
+
+    private function createImageObject($row) {
+        $oImagen = new Imagen();
+        $id = $row['imagen_id'];
+        $imgPath = $row['imagen_path'];
+        $imgNombre = $row['imagen_nombre'];
+        $imgNombreArchivo = $row['imagen_nombre_archivo'];
+        $imgFecHora = $row['imagen_fec_hora'];
+        $imgEliminada = $row['imagen_eliminada'];
+        $imgOrden = $row['imagen_orden'];
+        $oImagen->setId($id);
+        $oImagen->setNombre($imgNombre);
+        $oImagen->setPath($imgPath);
+        $oImagen->setNombreArchivo($imgNombreArchivo);
+        $oImagen->setEliminada($imgEliminada);
+        $oImagen->setFechaHora($imgFecHora);
+        $oImagen->setOrden($imgOrden);
+        return $oImagen;
+    }
+
+    public function editarImagen(Imagen $imagen) {
+        $non_query = "update " . Imagen::$TABLE . " set imagen_path=?, imagen_nombre=?,imagen_eliminada=?, imagen_nombre_archivo=?,imagen_orden=? where imagen_id=?";
+        $stmt = $this->prepareStmt($non_query);
+        $stmt->bind_param('ssisii', $path, $nombre,$eliminada,$nombreArchivo,$orden,$imagenId);
+
+        $eliminada = $imagen->getEliminada();
+        $imagenId = $imagen->getId();
+        $nombre = $imagen->getNombre();
+        $nombreArchivo = $imagen->getNombreArchivo();
+        $orden = $imagen->getOrden();
+        $path = $imagen->getPath();
+        
+        if (!$stmt->execute()) {
+            echo "addNoticia - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        /* close statement and connection */
+        $stmt->close();
     }
 
 }

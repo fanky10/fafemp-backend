@@ -53,7 +53,7 @@ if (!isset($vNoticias) || empty($vNoticias)) {
             $oImagen = $vImagenes[0];
             $idImg = $oImagen->getId();
             if (isset($oImagen) && isset($idImg)) {
-                $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
+                $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
             }
         }
         $shortenText = Utilidades::acortaTexto($oNoticia->getCuerpo(), $limiteCuerpo, ".");
