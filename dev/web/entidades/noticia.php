@@ -59,7 +59,7 @@ class Noticia {
     }
 
     public function getImagen() {
-        if (isset($this->imagenes)) {
+        if (isset($this->imagenes) && !empty($this->imagenes)) {
             return $this->imagenes[0];
         }
         return null;
