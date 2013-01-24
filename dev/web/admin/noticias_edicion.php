@@ -54,7 +54,15 @@ if ($isRedirect) {
             <link rel="stylesheet" href="../stylesheets/foundation.css">
             <link rel="stylesheet" href="../stylesheets/app.css">
             <link rel="stylesheet" href="../stylesheets/prettyPhoto.css">
-
+            <!-- Todo lo referido al draggin de imagenes -->
+            <!-- Para el style de el div de imagenes -->
+            <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+            <!-- jquery-ui para mover las imagenes -->
+            <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+            <!-- script para enviar un json del orden de las imagenes -->
+            <script>
+            
+            </script>
             <!-- Author -->
             <link type="text/plain" rel="author" href="humans.txt" />
 

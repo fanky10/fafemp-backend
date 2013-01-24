@@ -39,6 +39,7 @@ class ImagenesTest extends DatabaseIsolatedTestCase {
     private function agregaImagen($idNoticia) {
         $imagen = new Imagen();
         $imagen->setNombre("pepe.png");
+        $imagen->setNombreArchivo("pepe.png");
         $imagen->setPath("/pepe/");
 
         return $this->imagenesRepository->addImagenNoticia($imagen, $idNoticia);

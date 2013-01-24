@@ -47,6 +47,7 @@ class ControladorNoticias {
     public function subirNoticia() {
         $oNoticia = new Noticia();
         $oNoticia = $this->agregaNoticia();
+        //TODO: encapsular esto en otro controller.
         $oImagenes = $this->subeMultiplesImagenes($oNoticia->getId());
         $oNoticia->setImagenes($oImagenes);
         return $oNoticia;
@@ -109,6 +110,7 @@ class ControladorNoticias {
             //add the ctstamp
             $formattedDate = strftime('%d%m%Y'); //Dia-Mes-Anio todo en nros.
             $safe_filename = Utilidades::safeText($formattedDate . '-' . baseName($file['name']));
+            $safe_name = Utilidades::safeText(baseName($file['name']));
             if ($file['size'] <= $this->maxFileSize &&
                     preg_match($this->fileTypes, strrchr($safe_filename, '.'))) {
 
@@ -117,7 +119,8 @@ class ControladorNoticias {
                 if ($isMove) {
                     //save image url, object etc.
                     $oImagen = new Imagen();
-                    $oImagen->setNombre($safe_filename);
+                    $oImagen->setNombre($safe_name);
+                    $oImagen->setNombreArchivo($safe_filename);
                     $oImagen->setPath($this->imgPath);
                     $this->manejador->addImagenNoticia($oImagen, $noticiaId);
                     return $oImagen;

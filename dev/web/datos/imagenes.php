@@ -21,16 +21,17 @@ class DataImagenes extends Data implements ImagenesRepository {
     }
 
     public function addImagenNoticia(Imagen $imagen, $noticiaId) {
-        $non_query = "insert into " . Imagen::$TABLE . " (imagen_path,imagen_nombre,imagen_noticia_id) 
-            values(?,?,?)";
+        $non_query = "insert into " . Imagen::$TABLE . " (imagen_path,imagen_nombre,imagen_nombre_archivo,imagen_noticia_id) 
+            values(?,?,?,?)";
         $stmt = $this->prepareStmt($non_query);
-        if (!$stmt->bind_param('ssi', $path, $name, $noticiaId)) {
+        if (!$stmt->bind_param('sssi', $path, $name,$nombreArchivo, $noticiaId)) {
             echo "addImagen - Bind Param failed: (" . $stmt->errno . ") " . $stmt->error;
             return -1;
         }
 
 
         $name = $imagen->getNombre();
+        $nombreArchivo = $imagen->getNombreArchivo();
         $path = $imagen->getPath();
 
         if (!$stmt->execute()) {
@@ -44,7 +45,7 @@ class DataImagenes extends Data implements ImagenesRepository {
     }
 
     public function getImagenesNoticia($noticiaId) {
-        $query = "select imagen_id,imagen_path,imagen_nombre FROM " . Imagen::$TABLE . " WHERE imagen_noticia_id= ?";
+        $query = "select imagen_id,imagen_path,imagen_nombre,imagen_fec_hora,imagen_eliminada,imagen_nombre_archivo FROM " . Imagen::$TABLE . " WHERE imagen_noticia_id= ? and imagen_eliminada=0";
         $stmt = $this->prepareStmt($query);
 
         $stmt->bind_param('i', $noticiaId);
@@ -57,17 +58,27 @@ class DataImagenes extends Data implements ImagenesRepository {
         $img_idx = 0;
         $vImagenes = array();
         while ($row = $result->fetch_assoc()) {
-            $oImagen = new Imagen();
-            $id = $row['imagen_id'];
-            $imgPath = $row['imagen_path'];
-            $imgNombre = $row['imagen_nombre'];
-            $oImagen->setId($id);
-            $oImagen->setNombre($imgNombre);
-            $oImagen->setPath($imgPath);
+            $oImagen = $this->createImageObject($row);
             $vImagenes[$img_idx] = $oImagen;
             $img_idx++;
         }
         return $vImagenes;
+    }
+
+    private function createImageObject($row) {
+        $oImagen = new Imagen();
+        $id = $row['imagen_id'];
+        $imgPath = $row['imagen_path'];
+        $imgNombre = $row['imagen_nombre'];
+        $imgNombreArchivo = $row['imagen_nombre_archivo'];
+        $imgFecHora = $row['imagen_fec_hora'];
+        $imgEliminada = $row['imagen_eliminada'];
+        $oImagen->setId($id);
+        $oImagen->setNombre($imgNombre);
+        $oImagen->setPath($imgPath);
+        $oImagen->setEliminada($imgEliminada);
+        $oImagen->setFechaHora($imgFecHora);
+        return $oImagen;
     }
 
 }
