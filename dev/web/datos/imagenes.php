@@ -46,7 +46,9 @@ class DataImagenes extends Data implements ImagenesRepository {
     }
 
     public function getImagenesNoticia($noticiaId) {
-        $query = "select imagen_id,imagen_path,imagen_nombre,imagen_fec_hora,imagen_eliminada,imagen_nombre_archivo,imagen_orden FROM " . Imagen::$TABLE . " WHERE imagen_noticia_id= ? and imagen_eliminada=0 ORDER BY imagen_orden DESC";
+        $query = "select imagen_id,imagen_path,imagen_nombre,imagen_fec_hora,imagen_eliminada,imagen_nombre_archivo,imagen_orden FROM " . Imagen::$TABLE . 
+                " WHERE imagen_noticia_id= ? and imagen_eliminada=0".
+                " ORDER BY imagen_orden";
         $stmt = $this->prepareStmt($query);
 
         $stmt->bind_param('i', $noticiaId);

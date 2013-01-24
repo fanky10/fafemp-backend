@@ -39,7 +39,7 @@ include_once ROOT_DIR . '/util/utilidades.php';
                         if (isset($vImagenes) && !empty($vImagenes)) {
                             foreach ($vImagenes as $oImagen) {
                                 if (isset($oImagen)) {
-                                    $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
+                                    $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
                                     echo "<li>";
                                     echo '<img src="' . $img . '" />';
                                     //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';

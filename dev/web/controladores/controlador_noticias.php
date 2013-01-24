@@ -67,7 +67,6 @@ class ControladorNoticias {
     private function subeMultiplesImagenes($noticiaId) {
         $arrItems = Array();
         $index = 0;
-        echo "<!--";
         foreach ($_FILES['fileImage']['name'] as $index => $name) {
 
             if ($_FILES['fileImage']['error'][$index] == 4) {
@@ -80,16 +79,16 @@ class ControladorNoticias {
                 $file['tmp_name'] = $_FILES['fileImage']['tmp_name'][$index];
                 $file['error'] = $_FILES['fileImage']['error'][$index];
                 $file['size'] = $_FILES['fileImage']['size'][$index];
-                $oImagen = $this->subeImagen($file, $noticiaId);
+                $oImagen = $this->subeImagen($file, $noticiaId,$index);
                 $arrItems[$index] = $oImagen;
                 $index++;
             }
         }
-        echo "-->";
+        
         return $arrItems;
     }
 
-    private function subeImagen($file, $noticiaId) {
+    private function subeImagen($file, $noticiaId,$orden) {
 
         $msgError = "";
         $error_types = array(
@@ -122,6 +121,7 @@ class ControladorNoticias {
                     $oImagen->setNombre($safe_name);
                     $oImagen->setNombreArchivo($safe_filename);
                     $oImagen->setPath($this->imgPath);
+                    $oImagen->setOrden($orden);
                     $this->manejador->addImagenNoticia($oImagen, $noticiaId);
                     return $oImagen;
                 } else {
