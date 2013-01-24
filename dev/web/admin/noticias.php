@@ -103,13 +103,15 @@ $oImagen = new Imagen();
                             $linkEdicion = "noticias_edicion.php?id=" . $oNoticia->getId();
                             echo '<a href="' . $linkEdicion . '"><img src="../images/edit-32.png" alt="Editar" /></a>';
                             echo '</div>';
-                            
+
                             echo '<div class="two columns" align="center">';
                             $linkEliminar = "noticias_abm.php?action=del&id=" . $oNoticia->getId();
                             echo '<a href="' . $linkEliminar . '"><img src="../images/delete-32.png" alt="Eliminar" /></a>';
                             echo '</div>';
+
+                            echo '<div class="twelve columns"> <br/> </div>';
+                            echo '<a class="button radius" title="Ver más" href="noticias_carga.php">Agregar Noticia</a>';
                             
-                            echo '<div class="twelve columns footer-line"></div>';
 
                             echo '</div>';
                         }
