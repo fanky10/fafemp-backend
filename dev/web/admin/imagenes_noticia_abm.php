@@ -1,4 +1,5 @@
 <?php
+
 include 'admin_check.php';
 include_once '../init.php';
 include_once ROOT_DIR . '/entidades/noticia.php';
@@ -24,17 +25,18 @@ if ($action == "add") {// by multipart post.
         //otherwise we go and insert some data!!
         $controladorImagenes->subeMultiplesImagenes($noticiaId);
     }
-    
 } else if ($action == "del") {
     $idImagen = $_GET['id_imagen'];
     if (isset($idImagen) && !empty($idImagen)) {
-        
+        $controladorImagenes->deleteImage($idImagen);
     }
-}else if ($action == "updateOrder") {
-    echo $controladorImagenes->reorderImagenes();
-}else{
+} else if ($action == "updateOrder") {
+    $controladorImagenes->reorderImagenes();
+} else {
     //something is really wrong
     header($redirectLocation);
 }
-    
+
+
+
 ?>

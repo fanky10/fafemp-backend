@@ -109,16 +109,48 @@ class ControladorImagenes {
             if (isset($imageId) && isset($imageOrder)) {
                 //get original img object to see if the id is cool
                 $oImage = $this->manejador->getImagen($imageId);
-                $oImage->setOrden($imageOrder);
-                $this->manejador->editarImagen($oImage);
+                if (isset($oImage) && !empty($oImage)) {
+                    $oImage->setOrden($imageOrder);
+                    $this->manejador->editarImagen($oImage);
+                } else {
+                    $this->sendJSONResponseMessage("ERROR", "No se pudieron guardar los cambios, avise al administrador o intente nuevamente mas tarde");
+                }
             }
         }
-        return "Se han realizado los cambios";
+        $this->sendJSONResponseMessage("OK", "");
     }
 
-    public function getUpdatedImages($idNoticia) {
+    public function deleteImage($imageId) {
+        $oImage = $this->manejador->getImagen($imageId);
+        $oImage->setEliminada(1);
+        $this->manejador->editarImagen($oImage);
+        $this->sendJSONResponseMessage("OK", "");
+    }
+
+    public function getImagesJSON($idNoticia) {
         $oNoticia = $this->manejador->getNoticiaById($idNoticia);
-        return $oNoticia->getImagenes();
+        $vImagenes = $oNoticia->getImagenes();
+
+        $vResponse = array();
+        $idx = 0;
+        foreach ($vImagenes as $imagen) {
+            $object = new StdClass;
+            $object->id = $imagen->getId();
+            $object->nombre = $imagen->getNombre();
+
+            $vResponse[$idx] = json_encode($object);
+            $idx++;
+        }
+        header("Content-type: application/json");
+        echo json_encode($vResponse);
+    }
+
+    function sendJSONResponseMessage($status, $mensaje) {
+        header("Content-type: application/json");
+        $responseMsg = new StdClass;
+        $responseMsg->status = $status;
+        $responseMsg->mensaje = $mensaje;
+        echo json_encode($responseMsg);
     }
 
 }

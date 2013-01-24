@@ -54,8 +54,8 @@ if ($isRedirect) {
             <link rel="stylesheet" href="../stylesheets/foundation.css">
             <link rel="stylesheet" href="../stylesheets/app.css">
             <link rel="stylesheet" href="../stylesheets/prettyPhoto.css">
-            
-            
+
+
             <!-- Included JS Files (Compressed) -->
             <script src="../javascripts/jquery.js"></script>
             <script src="../javascripts/foundation.min.js"></script>
@@ -88,7 +88,7 @@ if ($isRedirect) {
                     });
                 });
             </script>
-            
+
             <!-- Todo lo referido al draggin de imagenes -->
             <!-- Para el style de el div de imagenes -->
             <!-- y scripts necesarios para manejarlo -->
@@ -96,47 +96,64 @@ if ($isRedirect) {
             <script src="../javascripts/jquery-ui-1.9.2.custom.min.js"></script>
             <!-- script para enviar un json del orden de las imagenes -->
             <script type="text/javascript">
-                    $(document).ready(function() {
-                        
-                        function createObject(id, position) {
-                            
-                            return {
-                                "imagen.id": id,
-                                "imagen.orden": position
-                            }
-                            
+                $(document).ready(function() {
+                                                    
+                    function createObject(id, position) {
+                                                        
+                        return {
+                            "imagen.id": id,
+                            "imagen.orden": position
                         }
-                        function recreateList(data){
-                            $("#imgResponse").html(data);
+                                                        
+                    }
+                                                    
+                    $( "#imgSortable" ).sortable({
+                        update: function(event, ui) {
+                            var result = [];//new Array();
+                            $("#imgSortable li").each(function(idx, item){
+                                var id = $(item).attr('imageId');
+                                var oRow = createObject(id,idx);
+                                result.push(oRow);
+                                                                
+                            });
+                            //once we have the result let's show it!!
+                            var jsonResult = JSON.stringify(result);
+                            //once we know it works let's send it!!
+                            $.post(
+                            "imagenes_noticia_abm.php?action=updateOrder&idNoticia=<?php echo $oNoticia->getId(); ?>",
+                            {imgJSON: jsonResult},
+                            function(response){
+                                            
+                                if(response.status=='ERROR'){
+                                    $("#imgResponse").html('<div class="alert-box alert">'+response.mensaje+'.<a href="" class="close">&times;</a></div>');
+                                }
+                            });
+                                                            
                         }
-                        
-                        $( "#imgSortable" ).sortable({
-                            update: function(event, ui) {
-                                var result = [];//new Array();
-                                $("#imgSortable li").each(function(idx, item){
-                                    var id = $(item).attr('id');
-                                    var oRow = createObject(id,idx);
-                                    result.push(oRow);
-                                    
-                                });
-                                //once we have the result let's show it!!
-                                var jsonResult = JSON.stringify(result);
-                                //once we know it works let's send it!!
-                                $.post(
-                                "imagenes_noticia_abm.php?action=updateOrder&idNoticia=<?php echo $oNoticia->getId();?>",
-                                {imgJSON: jsonResult},
-                                function(data){
-                                    recreateList(data);
-                                });
-                                
-                            }
-                        });
-                        $( "#imgSortable" ).disableSelection();
                     });
-                </script>
+                    $( "#imgSortable" ).disableSelection();
+                });
+            </script>
             <!-- script para delete+updatear el set de las imagenes -->
             <script>
-                            
+                
+                function deleteImage(imageId,noticiaId) {
+                                                
+                    $.getJSON('imagenes_noticia_abm.php',
+                    {
+                        action:"del",
+                        id_noticia:noticiaId,
+                        id_imagen:imageId
+                    }, function(response){
+                        if(response.status=='OK'){
+                            //IF ok then 
+                            $("#liImg"+imageId).fadeOut("slow", function() { 
+                                $(this).remove(); 
+                            });
+                        }
+                    });
+                                                
+                }            
             </script>
             <!-- Author -->
             <link type="text/plain" rel="author" href="humans.txt" />
@@ -186,43 +203,36 @@ if ($isRedirect) {
                             </div>
                             -->
                             <div class="twelve columns">
-                                <ul id="imgSortable">
-                                    <?php
-                                    $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
-                                    $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
-                                    $vImagenes = $oNoticia->getImagenes();
-                                    if (isset($vImagenes) && !empty($vImagenes)) {
-                                        foreach ($vImagenes as $oImagen) {
-                                            if (isset($oImagen)) {
-                                                $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
-                                                echo '<li id="' . $oImagen->getId() . '" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item ' . $oImagen->getNombre() . '</li>';
-//                                                echo "<li>";
-//                                                echo '<img src="' . $img . '" />';
-//                                                //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
-//                                                echo "</li>";
-                                            }
+                                <?php
+                                $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
+                                $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
+                                $vImagenes = $oNoticia->getImagenes();
+                                if (isset($vImagenes) && !empty($vImagenes)) {
+                                    echo '<ul id="imgSortable">';
+                                    foreach ($vImagenes as $oImagen) {
+                                        if (isset($oImagen)) {
+                                            $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
+                                            echo '<li id="liImg' . $oImagen->getId() . '" imageId="' . $oImagen->getId() . '" class="ui-state-default">
+                                            <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item ' . $oImagen->getNombre() .
+                                            '<button onclick="deleteImage(' . $oImagen->getId() . ',' . $oNoticia->getId() . '); return false;">Eliminar</button>' .
+                                            '</li>';
                                         }
-                                    } else {//no images
-                                        $img = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
-                                        echo "<li>";
-                                        echo '<img src="' . $img . '" />';
-                                        //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
-                                        echo "</li>";
                                     }
-                                    ?>
-                                </ul>
+                                    echo '</ul>';
+                                } else {//no images
+                                }
+                                ?>
                             </div>
                             <div class="twelve columns">
                                 <button type="submit" name="submit" class="radius button">Guardar</button>
                             </div>
-                            <div id="imgResponse" class="twelve columns">
-                                <h2>img response</h2>
+                            <div id="imgResponse" class="twelve columns" >
                             </div>
                         </div>
                         <?php
                         echo '</form>';
                         ?>
-
+                        
                     </div>
                 </div>
             </div>
@@ -230,7 +240,7 @@ if ($isRedirect) {
 
 
             <?php include_once 'admin_footer.php'; ?>
-            
+
 
         </body>
     </html>
