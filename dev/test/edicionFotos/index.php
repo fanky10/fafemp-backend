@@ -14,7 +14,8 @@
                     bgColor:     'black',
                     bgOpacity:   .4,
                     setSelect:   [ 100, 100, 920, 290 ],
-                    aspectRatio: 92/29
+                    aspectRatio: 92/29,
+                    boxWidth: 900
                 });
             });
             function showCoords(c)
