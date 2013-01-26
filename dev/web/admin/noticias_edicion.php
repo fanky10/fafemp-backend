@@ -202,19 +202,19 @@ if ($isRedirect) {
                                 <input type="file" class="twelve" name="fileImage[]" id="file" multiple="true"/>
                             </div>
                             -->
-                            <div class="twelve columns">
+                            <div class="six columns">
                                 <?php
                                 $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
                                 $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
                                 $vImagenes = $oNoticia->getImagenes();
                                 if (isset($vImagenes) && !empty($vImagenes)) {
-                                    echo '<ul id="imgSortable">';
+                                    echo '<ul id="imgSortable" style="list-style-type:none;" >';
                                     foreach ($vImagenes as $oImagen) {
                                         if (isset($oImagen)) {
                                             $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
                                             echo '<li id="liImg' . $oImagen->getId() . '" imageId="' . $oImagen->getId() . '" class="ui-state-default">
-                                            <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item ' . $oImagen->getNombre() .
-                                            '<button onclick="deleteImage(' . $oImagen->getId() . ',' . $oNoticia->getId() . '); return false;">Eliminar</button>' .
+                                            <img src="'.$img .'" ' . '" width=25%" '.
+                                            '</img><button onclick="deleteImage(' . $oImagen->getId() . ',' . $oNoticia->getId() . '); return false;" style="Position:Absolute;  left:50%;" class="secondary button" >Eliminar</button>' .
                                             '</li>';
                                         }
                                     }
@@ -223,6 +223,7 @@ if ($isRedirect) {
                                 }
                                 ?>
                             </div>
+                            <div class="six columns"></div>
                             <div class="twelve columns">
                                 <button type="submit" name="submit" class="radius button">Guardar</button>
                             </div>
