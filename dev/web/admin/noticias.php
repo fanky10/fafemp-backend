@@ -42,6 +42,7 @@ $oImagen = new Imagen();
         <link type="text/plain" rel="author" href="humans.txt" />
 
         <script src="../javascripts/modernizr.foundation.js"></script>
+        <script src="../javascripts/popUpConfirm.js"></script>
     </head>
     <body>
         <?php
@@ -108,7 +109,7 @@ $oImagen = new Imagen();
 
                             echo '<div class="two columns" align="center">';
                             $linkEliminar = "noticias_abm.php?action=del&id=" . $oNoticia->getId();
-                            echo '<a href="' . $linkEliminar . '"><img src="../images/soft-scraps-delete-icon.png" alt="Eliminar" /></a>';
+                            echo '<a href="#" onclick="popUpConfirm(\'' . $linkEliminar . '\')"><img src="../images/soft-scraps-delete-icon.png" alt="Eliminar" /></a>';
                             echo '</div>';
 
                             echo '<div class="twelve columns"> <br/> </div>';
