@@ -103,20 +103,9 @@ if ($isRedirect) {
             <?php
             $seccion = "noticias";
             include_once 'menu_header.php';
+            $navigateTitle = "Noticia";
+            include_once 'navigate.php'
             ?>
-            <!-- First Band (Slider) -->
-            <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
-            <div class="breadcrums">
-                <div class="row">
-                    <div class="twelve columns">
-                        <ul class="inline-list">
-                            <li><a href="index.html">Home</a></li>
-                            <li>></li>
-                            <li>Noticias</li>
-                        </ul>        
-                    </div>
-                </div>
-            </div>
 
             <?php include_once 'common/noticia_content.php'; ?>
 
