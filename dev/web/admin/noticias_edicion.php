@@ -196,12 +196,13 @@ if ($isRedirect) {
                                 ?>
 
                             </div>
-                            <!-- por ahora no asigna nuevas imagenes
+                            
                             <div class="twelve columns">
                                 <label for="imagen">Selecciona Imagen</label> 
                                 <input type="file" class="twelve" name="fileImage[]" id="file" multiple="true"/>
                             </div>
-                            -->
+                            <br/>
+                            <br/>
                             <div class="six columns">
                                 <?php
                                 $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];

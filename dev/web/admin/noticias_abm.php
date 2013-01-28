@@ -27,6 +27,8 @@ if ($action == "add") {
     $noticiaId = $_GET['id'];
     if (isset($noticiaId) && !empty($noticiaId)) {
         $oNoticia = $controladorNoticias->editarNoticia($noticiaId);
+        $oImagenes = $controladorImagenes->subeMultiplesImagenes($oNoticia->getId());
+        $oNoticia->setImagenes($oImagenes);
     }
 } else if ($action == "del") {
     $noticiaId = $_GET['id'];
