@@ -99,6 +99,12 @@ class ManejadorServicios {
             $oNoticia->setImagenes($vImagenes);
         }
     }
+    
+    public function getImagenesNoticia($noticiaId){
+        $this->imagenesRepository = new DataImagenes();
+        $vImagenes = $this->imagenesRepository->getImagenesNoticia($noticiaId);
+        return $vImagenes;
+    }
 
 }
 

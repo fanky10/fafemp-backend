@@ -23,8 +23,6 @@ class ControladorImagenes {
     }
 
     public function subeMultiplesImagenes($noticiaId) {
-        $arrItems = Array();
-        $index = 0;
         foreach ($_FILES['fileImage']['name'] as $index => $name) {
 
             if ($_FILES['fileImage']['error'][$index] == 4) {
@@ -37,13 +35,11 @@ class ControladorImagenes {
                 $file['tmp_name'] = $_FILES['fileImage']['tmp_name'][$index];
                 $file['error'] = $_FILES['fileImage']['error'][$index];
                 $file['size'] = $_FILES['fileImage']['size'][$index];
-                $oImagen = $this->subeImagen($file, $noticiaId, $index);
-                $arrItems[$index] = $oImagen;
-                $index++;
+                $this->subeImagen($file, $noticiaId, $index);
             }
         }
-
-        return $arrItems;
+        //devuelvo todas las que encuentro en la db (:
+        return $this->manejador->getImagenesNoticia($noticiaId);
     }
 
     private function subeImagen($file, $noticiaId, $orden) {
