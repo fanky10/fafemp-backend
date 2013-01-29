@@ -65,6 +65,7 @@ if ($isRedirect) {
             <script src="../javascripts/jquery_validate.js"></script>
             <script src="../javascripts/app.js"></script>
             <script src="../javascripts/init.js"></script>
+            <script src="../javascripts/filterdiv.js"></script>
             <script type="text/javascript">
                 $(function(){
                     $('#formNoticia').validate({
@@ -97,16 +98,16 @@ if ($isRedirect) {
             <!-- script para enviar un json del orden de las imagenes -->
             <script type="text/javascript">
                 $(document).ready(function() {
-                                                        
+                                                                                        
                     function createObject(id, position) {
-                                                            
+                                                                                            
                         return {
                             "imagen.id": id,
                             "imagen.orden": position
                         }
-                                                            
+                                                                                            
                     }
-                                                        
+                                                                                        
                     $( "#imgSortable" ).sortable({
                         update: function(event, ui) {
                             var result = [];//new Array();
@@ -114,7 +115,7 @@ if ($isRedirect) {
                                 var id = $(item).attr('imageId');
                                 var oRow = createObject(id,idx);
                                 result.push(oRow);
-                                                                    
+                                                                                                    
                             });
                             //once we have the result let's show it!!
                             var jsonResult = JSON.stringify(result);
@@ -123,12 +124,12 @@ if ($isRedirect) {
                             "imagenes_noticia_abm.php?action=updateOrder&idNoticia=<?php echo $oNoticia->getId(); ?>",
                             {imgJSON: jsonResult},
                             function(response){
-                                                
+                                                                                
                                 if(response.status=='ERROR'){
                                     $("#imgResponse").html('<div class="alert-box alert">'+response.mensaje+'.<a href="" class="close">&times;</a></div>');
                                 }
                             });
-                                                                
+                                                                                                
                         }
                     });
                     $( "#imgSortable" ).disableSelection();
@@ -136,9 +137,9 @@ if ($isRedirect) {
             </script>
             <!-- script para delete+updatear el set de las imagenes -->
             <script>
-                    
-                function deleteImage(imageId,noticiaId) {
                                                     
+                function deleteImage(imageId,noticiaId) {
+                                                                                    
                     $.getJSON('imagenes_noticia_abm.php',
                     {
                         action:"del",
@@ -152,7 +153,7 @@ if ($isRedirect) {
                             });
                         }
                     });
-                                                    
+                                                                                    
                 }            
             </script>
             <!-- Author -->
@@ -196,34 +197,14 @@ if ($isRedirect) {
                                 ?>
 
                             </div>
-                            
+
                             <div class="twelve columns">
-                                <label for="imagen">Selecciona Imagen</label> 
+                                <label for="imagen">Agregar Imagenes</label> 
                                 <input type="file" class="twelve" name="fileImage[]" id="file" multiple="true"/>
                             </div>
                             <br/>
                             <br/>
-                            <div class="six columns">
-                                <?php
-                                $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
-                                $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
-                                $vImagenes = $oNoticia->getImagenes();
-                                if (isset($vImagenes) && !empty($vImagenes)) {
-                                    echo '<ul id="imgSortable" style="list-style-type:none;" >';
-                                    foreach ($vImagenes as $oImagen) {
-                                        if (isset($oImagen)) {
-                                            $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
-                                            echo '<li id="liImg' . $oImagen->getId() . '" imageId="' . $oImagen->getId() . '" class="ui-state-default">
-                                            <img src="' . $img . '" ' . '" width=25%" ' .
-                                            '</img><button onclick="deleteImage(' . $oImagen->getId() . ',' . $oNoticia->getId() . '); return false;" style="Position:Absolute;  left:50%;" class="secondary button" >Eliminar</button>' .
-                                            '</li>';
-                                        }
-                                    }
-                                    echo '</ul>';
-                                } else {//no images
-                                }
-                                ?>
-                            </div>
+
                             <div class="twelve columns">
                                 <br/>
                             </div>
@@ -236,7 +217,51 @@ if ($isRedirect) {
                                     </div>
                                 </div>
                             </div>
-                            <div id="imgResponse" class="twelve columns" >
+                            <div class="twelve columns">
+                                <br>
+                                <br>
+                            </div>
+                            <div class="twelve columns">
+                                <div class="six columns">
+                                <div class="six columns">
+                                    <a class="button radius" onclick="muestra_oculta('images')" title="editarImagenes" href="#">Mover ó eliminar imagenes</a>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="twelve columns">
+                                <br>
+                            </div>
+                            <div class="twelve columns">
+                                <div id="images">
+                                    <div class="six columns">
+                                        <label class="error" >
+                                        <p>Importante: Una vez eliminadas las imagenes no se podran deshacer los cambios.</p>
+                                        </label>
+                                        <?php
+                                        $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
+                                        $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
+                                        $vImagenes = $oNoticia->getImagenes();
+                                        if (isset($vImagenes) && !empty($vImagenes)) {
+                                            echo '<ul id="imgSortable" style="list-style-type:none;" >';
+                                            foreach ($vImagenes as $oImagen) {
+                                                if (isset($oImagen)) {
+                                                    $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
+                                                    echo '<li id="liImg' . $oImagen->getId() . '" imageId="' . $oImagen->getId() . '" class="ui-state-default">
+                                            <img src="' . $img . '" ' . '" width=25%" ' .
+                                                    '</img><button onclick="deleteImage(' . $oImagen->getId() . ',' . $oNoticia->getId() . '); return false;" style="Position:Absolute;  left:50%;" class="secondary button" >Eliminar</button>' .
+                                                    '</li>';
+                                                }
+                                            }
+                                            echo '</ul>';
+                                        } else {//no images
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="six columns">
+                                <div id="imgResponse" class="twelve columns" >
+                                </div>
                             </div>
                         </div>
                         <?php
