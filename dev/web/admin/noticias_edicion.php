@@ -45,22 +45,19 @@ if ($isRedirect) {
             <title>Foro Argentino de Facultades y Escuelas de Medicina
                 Públicas | ADMIN SITE</title>
 
-            <!-- Included CSS Files (Uncompressed) -->
-            <!--
-              <link rel="stylesheet" href="stylesheets/foundation.css">
-            -->
 
             <!-- Included CSS Files (Compressed) -->
-            <link rel="stylesheet" href="../stylesheets/foundation.css">
             <link rel="stylesheet" href="../stylesheets/app.css">
             <link rel="stylesheet" href="../stylesheets/prettyPhoto.css">
+            <link rel="stylesheet" href="../stylesheets/foundation.css">
 
-            <!-- Attach the Reveal CSS -->
-            <link rel="stylesheet" href="../stylesheets/reveal.css">
+            <!-- Attach the Reveal includes-->
+			<script src="../javascripts/jquery.foundation.reveal.js"></script>
+			<link rel="stylesheet" href="../stylesheets/reveal.css">
 			
-
             <!-- Included JS Files (Compressed) -->
             <script src="../javascripts/jquery.js"></script>
+            <script src="../javascripts/foundation.js"></script>
             <script src="../javascripts/foundation.min.js"></script>
 
             <!-- Initialize JS Plugins -->
@@ -69,11 +66,12 @@ if ($isRedirect) {
             <script src="../javascripts/app.js"></script>
             <script src="../javascripts/init.js"></script>
             <script src="../javascripts/filterdiv.js"></script>
-            
-			<!-- jQuery needs to be attached  -->
-			<script src="../javascripts/jquery-1.4.4.min.js" type="text/javascript"></script>
-			<!-- Then just attach the Reveal plugin -->
-			<script src="../javascripts/jquery.reveal.js" type="text/javascript"></script>
+
+			
+			 <!-- Todo lo referido al draggin de imagenes -->
+            <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+            <script src="../javascripts/jquery-ui-1.9.2.custom.min.js"></script>
+			
             
             <script type="text/javascript">
                 $(function(){
@@ -97,7 +95,7 @@ if ($isRedirect) {
                         social_tools: false
                     });
                 });
-            </script>
+            </script> 
             
             <script type="text/javascript">
 			     $(document).ready(function() {
@@ -107,11 +105,6 @@ if ($isRedirect) {
 			});
 			</script>
 
-            <!-- Todo lo referido al draggin de imagenes -->
-            <!-- Para el style de el div de imagenes -->
-            <!-- y scripts necesarios para manejarlo -->
-            <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-            <script src="../javascripts/jquery-ui-1.9.2.custom.min.js"></script>
             <!-- script para enviar un json del orden de las imagenes -->
             <script type="text/javascript">
                 $(document).ready(function() {
@@ -219,11 +212,14 @@ if ($isRedirect) {
                                 <label for="imagen">Agregar Imagenes</label> 
                                 <input type="file" class="twelve" name="fileImage[]" id="file" multiple="true"/>
                             </div>
-                            <br/>
-                            <br/>
-
                             <div class="twelve columns">
-                                <br/>
+                                <br><br>
+                            </div>
+                            <div class="twelve columns">
+                                <a class="secondary button" data-reveal-id="confirmImageChanges" title="editarImagenes" href="#">Mover ó eliminar imagenes</a>
+                            </div>
+							<div class="twelve columns">
+                                <br><br>
                             </div>
                             <div class="twelve columns">
                                 <div class="six columns">
@@ -237,24 +233,13 @@ if ($isRedirect) {
                                 </div>
                             </div>
                             <div class="twelve columns">
-                                <br><br>
-                            </div>
-                            <div class="twelve columns">
-                                <div class="six columns">
-                                <div class="six columns">
-                                    <a class="button radius" onclick="muestra_oculta('images')" title="editarImagenes" href="#">Mover ó eliminar imagenes</a>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="twelve columns">
                                 <br>
                             </div>
-                            <div class="twelve columns">
-                                <div id="images">
-                                    <div class="six columns">
-                                        <label class="error" >
-                                        <p>Importante: Una vez eliminadas las imagenes no se podran deshacer los cambios.</p>
-                                        </label>
+                            <div id="confirmImageChanges" class="reveal-modal">
+								<h3>Elimina o cambia el orden de las imagenes</h3>
+                                <label class="error" >
+                                	<p>Importante: Una vez eliminadas las imagenes no se podran deshacer los cambios.</p>
+                                </label>
                                         <?php
                                         $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
                                         $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
@@ -265,7 +250,7 @@ if ($isRedirect) {
                                                 if (isset($oImagen)) {
                                                     $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
                                                     echo '<li id="liImg' . $oImagen->getId() . '" imageId="' . $oImagen->getId() . '" class="ui-state-default">
-                                            <img src="' . $img . '" ' . '" width=25%" ' .
+                                            <img src="' . $img . '" ' . '" width=15%" ' .
                                                     '</img><button onclick="deleteImage(' . $oImagen->getId() . ',' . $oNoticia->getId() . '); return false;" style="Position:Absolute;  left:50%;" class="secondary button" >Eliminar</button>' .
                                                     '</li>';
                                                 }
@@ -274,8 +259,9 @@ if ($isRedirect) {
                                         } else {//no images
                                         }
                                         ?>
-                                    </div>
-                                </div>
+                            	<p class="lead">Si estas seguro de los cambios realizados presiona aceptar.</p>
+								<a class="close-reveal-modal">&#215;</a>
+								<a class="button radius" title="aceptar" href="">Aceptar</a>
                             </div>
                             <div class="six columns">
                                 <div id="imgResponse" class="twelve columns" >
@@ -289,7 +275,7 @@ if ($isRedirect) {
 								<button type="submit" name="submit" class="radius button">Aceptar</button>
 								<a class="button radius" title="cancelar" href="">Cancelar</a>
 							</div>
-                            
+							
                         </div>
                         <?php
                         echo '</form>';
