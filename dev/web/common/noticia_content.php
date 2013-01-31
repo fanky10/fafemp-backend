@@ -61,5 +61,11 @@ include_once ROOT_DIR . '/util/utilidades.php';
         <div class="six columns">
             <p class="text-justify"><?php echo Utilidades::breakeLines($oNoticia->getCuerpo()); ?></p>
         </div>
+        <div class="six columns">
+        	<?php $linkEdicion = "noticias_edicion.php?id=" . $oNoticia->getId();
+               echo '<a href="' . $linkEdicion . '"> <button class="secondary button">Editar</button> </a>';
+               echo '</div>';
+            ?>
+        <div class="six columns"></div>
     </div>
 </div>
