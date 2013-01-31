@@ -52,9 +52,9 @@ if ($isRedirect) {
             <link rel="stylesheet" href="../stylesheets/foundation.css">
 
             <!-- Attach the Reveal includes-->
-			<script src="../javascripts/jquery.foundation.reveal.js"></script>
-			<link rel="stylesheet" href="../stylesheets/reveal.css">
-			
+            <script src="../javascripts/jquery.foundation.reveal.js"></script>
+            <link rel="stylesheet" href="../stylesheets/reveal.css">
+
             <!-- Included JS Files (Compressed) -->
             <script src="../javascripts/jquery.js"></script>
             <script src="../javascripts/foundation.js"></script>
@@ -67,12 +67,12 @@ if ($isRedirect) {
             <script src="../javascripts/init.js"></script>
             <script src="../javascripts/filterdiv.js"></script>
 
-			
-			 <!-- Todo lo referido al draggin de imagenes -->
+
+            <!-- Todo lo referido al draggin de imagenes -->
             <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
             <script src="../javascripts/jquery-ui-1.9.2.custom.min.js"></script>
-			
-            
+
+
             <script type="text/javascript">
                 $(function(){
                     $('#formNoticia').validate({
@@ -96,28 +96,28 @@ if ($isRedirect) {
                     });
                 });
             </script> 
-            
+
             <script type="text/javascript">
-			     $(document).ready(function() {
-			          $('#confirmModal').click(function() {
-			               $('#confirmModal').reveal();
-			     });
-			});
-			</script>
+                $(document).ready(function() {
+                    $('#confirmModal').click(function() {
+                        $('#confirmModal').reveal();
+                    });
+                });
+            </script>
 
             <!-- script para enviar un json del orden de las imagenes -->
             <script type="text/javascript">
                 $(document).ready(function() {
-                                                                                        
-                    function createObject(id, position) {
                                                                                             
+                    function createObject(id, position) {
+                                                                                                
                         return {
                             "imagen.id": id,
                             "imagen.orden": position
                         }
-                                                                                            
+                                                                                                
                     }
-                                                                                        
+                                                                                            
                     $( "#imgSortable" ).sortable({
                         update: function(event, ui) {
                             var result = [];//new Array();
@@ -125,7 +125,7 @@ if ($isRedirect) {
                                 var id = $(item).attr('imageId');
                                 var oRow = createObject(id,idx);
                                 result.push(oRow);
-                                                                                                    
+                                                                                                        
                             });
                             //once we have the result let's show it!!
                             var jsonResult = JSON.stringify(result);
@@ -134,12 +134,12 @@ if ($isRedirect) {
                             "imagenes_noticia_abm.php?action=updateOrder&idNoticia=<?php echo $oNoticia->getId(); ?>",
                             {imgJSON: jsonResult},
                             function(response){
-                                                                                
+                                                                                    
                                 if(response.status=='ERROR'){
                                     $("#imgResponse").html('<div class="alert-box alert">'+response.mensaje+'.<a href="" class="close">&times;</a></div>');
                                 }
                             });
-                                                                                                
+                                                                                                    
                         }
                     });
                     $( "#imgSortable" ).disableSelection();
@@ -147,9 +147,9 @@ if ($isRedirect) {
             </script>
             <!-- script para delete+updatear el set de las imagenes -->
             <script>
-                                                    
+                                                        
                 function deleteImage(imageId,noticiaId) {
-                                                                                    
+                                                                                        
                     $.getJSON('imagenes_noticia_abm.php',
                     {
                         action:"del",
@@ -163,7 +163,7 @@ if ($isRedirect) {
                             });
                         }
                     });
-                                                                                    
+                                                                                        
                 }            
             </script>
             <!-- Author -->
@@ -218,15 +218,15 @@ if ($isRedirect) {
                             <div class="twelve columns">
                                 <a class="secondary button" data-reveal-id="confirmImageChanges" title="editarImagenes" href="#">Mover ó eliminar imagenes</a>
                             </div>
-							<div class="twelve columns">
+                            <div class="twelve columns">
                                 <br><br>
                             </div>
                             <div class="twelve columns">
                                 <div class="six columns">
                                     <div class="six columns">
-										<!--<button type="submit" name="submit" class="radius button">Guardar</button> </div> -->
-                                     	<a href="#" data-reveal-id="myModal"><button class="radius button">Guardar</button></a> 
-                                     </div>
+                                        <!--<button type="submit" name="submit" class="radius button">Guardar</button> </div> -->
+                                        <a href="#" data-reveal-id="myModal"><button class="radius button">Guardar</button></a> 
+                                    </div>
                                     <div class="six columns">
                                         <a class="button radius" title="cancelar" href="noticias.php">Cancelar</a>
                                     </div>
@@ -236,46 +236,45 @@ if ($isRedirect) {
                                 <br>
                             </div>
                             <div id="confirmImageChanges" class="reveal-modal">
-								<h3>Elimina o cambia el orden de las imagenes</h3>
+                                <h3>Elimina o cambia el orden de las imagenes</h3>
                                 <label class="error" >
-                                	<p>Importante: Una vez eliminadas las imagenes no se podran deshacer los cambios.</p>
+                                    <p>Importante: Una vez eliminadas las imagenes no se podran deshacer los cambios.</p>
                                 </label>
-                                        <?php
-                                        $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
-                                        $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
-                                        $vImagenes = $oNoticia->getImagenes();
-                                        if (isset($vImagenes) && !empty($vImagenes)) {
-                                            echo '<ul id="imgSortable" style="list-style-type:none;" >';
-                                            foreach ($vImagenes as $oImagen) {
-                                                if (isset($oImagen)) {
-                                                    $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
-                                                    echo '<li id="liImg' . $oImagen->getId() . '" imageId="' . $oImagen->getId() . '" class="ui-state-default">
+                                <?php
+                                $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
+                                $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
+                                $vImagenes = $oNoticia->getImagenes();
+                                if (isset($vImagenes) && !empty($vImagenes)) {
+                                    echo '<ul id="imgSortable" style="list-style-type:none;" >';
+                                    foreach ($vImagenes as $oImagen) {
+                                        if (isset($oImagen)) {
+                                            $img = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
+                                            echo '<li id="liImg' . $oImagen->getId() . '" imageId="' . $oImagen->getId() . '" class="ui-state-default">
                                             <img src="' . $img . '" ' . '" width=15%" ' .
-                                                    '</img><button onclick="deleteImage(' . $oImagen->getId() . ',' . $oNoticia->getId() . '); return false;" style="Position:Absolute;  left:50%;" class="secondary button" >Eliminar</button>' .
-                                                    '</li>';
-                                                }
-                                            }
-                                            echo '</ul>';
-                                        } else {//no images
+                                            '</img><button onclick="deleteImage(' . $oImagen->getId() . ',' . $oNoticia->getId() . '); return false;" style="Position:Absolute;  left:50%;" class="secondary button" >Eliminar</button>' .
+                                            '</li>';
                                         }
-                                        ?>
-                            	<p class="lead">Si estas seguro de los cambios realizados presiona aceptar.</p>
-								<a class="close-reveal-modal">&#215;</a>
-								<a class="button radius" title="aceptar" href="">Aceptar</a>
+                                    }
+                                    echo '</ul>';
+                                } else {//no images
+                                }
+                                ?>
+                                <a class="close-reveal-modal">&#215;</a>
+                                <a class="button radius" title="aceptar" href="">Aceptar</a>
                             </div>
                             <div class="six columns">
                                 <div id="imgResponse" class="twelve columns" >
                                 </div>
                             </div>
-              				
-              				<div id="myModal" class="reveal-modal">
-								<h2>Confirmacion</h2>
-								<p class="lead">Si estas seguro de los cambios realizados presiona aceptar.</p>
-								<a class="close-reveal-modal">&#215;</a>
-								<button type="submit" name="submit" class="radius button">Aceptar</button>
-								<a class="button radius" title="cancelar" href="">Cancelar</a>
-							</div>
-							
+
+                            <div id="myModal" class="reveal-modal">
+                                <h2>Confirmacion</h2>
+                                <p class="lead">Si estas seguro de los cambios realizados presiona aceptar.</p>
+                                <a class="close-reveal-modal">&#215;</a>
+                                <button type="submit" name="submit" class="radius button">Aceptar</button>
+                                <a class="button radius" title="cancelar" href="">Cancelar</a>
+                            </div>
+
                         </div>
                         <?php
                         echo '</form>';
