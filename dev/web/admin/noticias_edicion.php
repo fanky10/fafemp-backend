@@ -55,6 +55,9 @@ if ($isRedirect) {
             <link rel="stylesheet" href="../stylesheets/app.css">
             <link rel="stylesheet" href="../stylesheets/prettyPhoto.css">
 
+            <!-- Attach the Reveal CSS -->
+            <link rel="stylesheet" href="../stylesheets/reveal.css">
+			
 
             <!-- Included JS Files (Compressed) -->
             <script src="../javascripts/jquery.js"></script>
@@ -66,6 +69,12 @@ if ($isRedirect) {
             <script src="../javascripts/app.js"></script>
             <script src="../javascripts/init.js"></script>
             <script src="../javascripts/filterdiv.js"></script>
+            
+			<!-- jQuery needs to be attached  -->
+			<script src="../javascripts/jquery-1.4.4.min.js" type="text/javascript"></script>
+			<!-- Then just attach the Reveal plugin -->
+			<script src="../javascripts/jquery.reveal.js" type="text/javascript"></script>
+            
             <script type="text/javascript">
                 $(function(){
                     $('#formNoticia').validate({
@@ -89,6 +98,14 @@ if ($isRedirect) {
                     });
                 });
             </script>
+            
+            <script type="text/javascript">
+			     $(document).ready(function() {
+			          $('#confirmModal').click(function() {
+			               $('#confirmModal').reveal();
+			     });
+			});
+			</script>
 
             <!-- Todo lo referido al draggin de imagenes -->
             <!-- Para el style de el div de imagenes -->
@@ -211,15 +228,16 @@ if ($isRedirect) {
                             <div class="twelve columns">
                                 <div class="six columns">
                                     <div class="six columns">
-                                        <button type="submit" name="submit" class="radius button">Guardar</button> </div>
+										<!--<button type="submit" name="submit" class="radius button">Guardar</button> </div> -->
+                                     	<a href="#" data-reveal-id="myModal"><button class="radius button">Guardar</button></a> 
+                                     </div>
                                     <div class="six columns">
                                         <a class="button radius" title="cancelar" href="noticias.php">Cancelar</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="twelve columns">
-                                <br>
-                                <br>
+                                <br><br>
                             </div>
                             <div class="twelve columns">
                                 <div class="six columns">
@@ -263,6 +281,15 @@ if ($isRedirect) {
                                 <div id="imgResponse" class="twelve columns" >
                                 </div>
                             </div>
+              				
+              				<div id="myModal" class="reveal-modal">
+								<h2>Confirmacion</h2>
+								<p class="lead">Si estas seguro de los cambios realizados presiona aceptar.</p>
+								<a class="close-reveal-modal">&#215;</a>
+								<button type="submit" name="submit" class="radius button">Aceptar</button>
+								<a class="button radius" title="cancelar" href="">Cancelar</a>
+							</div>
+                            
                         </div>
                         <?php
                         echo '</form>';
