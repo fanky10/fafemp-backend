@@ -113,6 +113,22 @@ if ($action == "add") {
         include_once 'admin_menu.php';
         $navigateTitle = "Noticia - Previsualización";
         include_once 'admin_navigate.php';
+        ?>
+        <div class="row">
+            <div class="three columns" >
+                <?php
+                $linkEdicion = "noticias_edicion.php?id=" . $oNoticia->getId();
+                echo '<a href="' . $linkEdicion . '"> <button class="radius button">Volver a editar</button> </a>';
+                echo '</div>';
+                ?>
+                <div class="three columns">
+                    <a class="radius button" href="index.php">Volver a Noticias</a>
+                </div>
+                <div class="three columns" ></div>
+
+            </div>
+        </div>
+        <?php
         include_once '../common/noticia_content.php';
         include_once 'admin_footer.php';
         ?>
