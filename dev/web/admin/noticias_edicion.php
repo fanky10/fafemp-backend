@@ -108,16 +108,16 @@ if ($isRedirect) {
             <!-- script para enviar un json del orden de las imagenes -->
             <script type="text/javascript">
                 $(document).ready(function() {
-                                                                                                
-                    function createObject(id, position) {
                                                                                                     
+                    function createObject(id, position) {
+                                                                                                        
                         return {
                             "imagen.id": id,
                             "imagen.orden": position
                         }
-                                                                                                    
+                                                                                                        
                     }
-                                                                                                
+                                                                                                    
                     $( "#imgSortable" ).sortable({
                         update: function(event, ui) {
                             var result = [];//new Array();
@@ -125,7 +125,7 @@ if ($isRedirect) {
                                 var id = $(item).attr('imageId');
                                 var oRow = createObject(id,idx);
                                 result.push(oRow);
-                                                                                                            
+                                                                                                                
                             });
                             //once we have the result let's show it!!
                             var jsonResult = JSON.stringify(result);
@@ -134,12 +134,12 @@ if ($isRedirect) {
                             "imagenes_noticia_abm.php?action=updateOrder&idNoticia=<?php echo $oNoticia->getId(); ?>",
                             {imgJSON: jsonResult},
                             function(response){
-                                                                                        
+                                                                                            
                                 if(response.status=='ERROR'){
                                     $("#imgResponse").html('<div class="alert-box alert">'+response.mensaje+'.<a href="" class="close">&times;</a></div>');
                                 }
                             });
-                                                                                                        
+                                                                                                            
                         }
                     });
                     $( "#imgSortable" ).disableSelection();
@@ -147,9 +147,9 @@ if ($isRedirect) {
             </script>
             <!-- script para delete+updatear el set de las imagenes -->
             <script>
-                                                            
+                                                                
                 function deleteImage(imageId,noticiaId) {
-                                                                                            
+                                                                                                
                     $.getJSON('imagenes_noticia_abm.php',
                     {
                         action:"del",
@@ -163,7 +163,15 @@ if ($isRedirect) {
                             });
                         }
                     });
-                                                                                            
+                                                                                                
+                }            
+            </script>
+            <script>
+                                                                
+                function submitForm() {
+                                                                                                
+                    $("#formNoticia").submit();
+                                                                                                
                 }            
             </script>
             <!-- Author -->
@@ -239,15 +247,6 @@ if ($isRedirect) {
                                 <div id="imgResponse" class="twelve columns" >
                                 </div>
                             </div>
-
-                            <div id="myModal" class="reveal-modal">
-                                <h2>Confirmacion</h2>
-                                <p class="lead">Si estas seguro de los cambios realizados presiona aceptar.</p>
-                                <a class="close-reveal-modal">&#215;</a>
-                                <button type="submit" name="submit" class="radius button">Aceptar</button>
-                                <a class="button radius" title="cancelar" href="">Cancelar</a>
-                            </div>
-
                         </div>
                         <?php
                         echo '</form>';
@@ -258,7 +257,7 @@ if ($isRedirect) {
             </div>
 
             <?php include_once 'admin_footer.php'; ?>
-            
+
             <!-- modals! -->
             <div id="confirmImageChanges" class="reveal-modal">
                 <h3>Elimina o cambia el orden de las imagenes</h3>
@@ -286,6 +285,14 @@ if ($isRedirect) {
                 ?>
                 <a class="close-reveal-modal">&#215;</a>
                 <a class="button radius" title="aceptar" href="">Cerrar</a>
+            </div>
+
+            <div id="myModal" class="reveal-modal">
+                <h2>Confirmacion</h2>
+                <p class="lead">Si estas seguro de los cambios realizados presiona aceptar.</p>
+                <a class="close-reveal-modal">&#215;</a>
+                <button type="submit" name="submit" onclick="submitForm();" class="radius button">Aceptar</button>
+                <a class="button radius" title="cancelar" href="">Cancelar</a>
             </div>
 
 
