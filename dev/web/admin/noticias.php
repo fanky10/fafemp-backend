@@ -86,7 +86,7 @@ $oImagen = new Imagen();
                                 $timestamp = strtotime($oNoticia->getFechaHora());
                             }
                             //handle strftime
-                            $formattedDate = iconv('ISO-8859-1', 'UTF-8', strftime($GLOBAL_SETTINGS['news.date.formatter'], $timestamp));
+                            $formattedDate = strftime($GLOBAL_SETTINGS['news.date.formatter'], $timestamp);
                             echo $formattedDate;
                             echo '</div>';
 
