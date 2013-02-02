@@ -108,16 +108,16 @@ if ($isRedirect) {
             <!-- script para enviar un json del orden de las imagenes -->
             <script type="text/javascript">
                 $(document).ready(function() {
-                                                                                                    
+                                                                                                            
                     function createObject(id, position) {
-                                                                                                        
+                                                                                                                
                         return {
                             "imagen.id": id,
                             "imagen.orden": position
                         }
-                                                                                                        
+                                                                                                                
                     }
-                                                                                                    
+                                                                                                            
                     $( "#imgSortable" ).sortable({
                         update: function(event, ui) {
                             var result = [];//new Array();
@@ -125,7 +125,7 @@ if ($isRedirect) {
                                 var id = $(item).attr('imageId');
                                 var oRow = createObject(id,idx);
                                 result.push(oRow);
-                                                                                                                
+                                                                                                                        
                             });
                             //once we have the result let's show it!!
                             var jsonResult = JSON.stringify(result);
@@ -134,12 +134,12 @@ if ($isRedirect) {
                             "imagenes_noticia_abm.php?action=updateOrder&idNoticia=<?php echo $oNoticia->getId(); ?>",
                             {imgJSON: jsonResult},
                             function(response){
-                                                                                            
+                                                                                                    
                                 if(response.status=='ERROR'){
                                     $("#imgResponse").html('<div class="alert-box alert">'+response.mensaje+'.<a href="" class="close">&times;</a></div>');
                                 }
                             });
-                                                                                                            
+                                                                                                                    
                         }
                     });
                     $( "#imgSortable" ).disableSelection();
@@ -147,9 +147,9 @@ if ($isRedirect) {
             </script>
             <!-- script para delete+updatear el set de las imagenes -->
             <script>
-                                                                
+                                                                        
                 function deleteImage(imageId,noticiaId) {
-                                                                                                
+                                                                                                        
                     $.getJSON('imagenes_noticia_abm.php',
                     {
                         action:"del",
@@ -163,15 +163,15 @@ if ($isRedirect) {
                             });
                         }
                     });
-                                                                                                
+                                                                                                        
                 }            
             </script>
             <script>
-                                                                
+                                                                        
                 function submitForm() {
-                                                                                                
+                                                                                                        
                     $("#formNoticia").submit();
-                                                                                                
+                                                                                                        
                 }            
             </script>
             <!-- Author -->
@@ -224,7 +224,15 @@ if ($isRedirect) {
                                 <br><br>
                             </div>
                             <div class="twelve columns">
-                                <a class="secondary button" data-reveal-id="confirmImageChanges" title="editarImagenes" href="#">Mover ó eliminar imagenes</a>
+                                <?php
+                                $vImagenes = $oNoticia->getImagenes();
+                                if (isset($vImagenes) && !empty($vImagenes)) {
+                                    echo '<a class="secondary button" data-reveal-id="confirmImageChanges" title="editarImagenes" href="#">Mover ó eliminar imagenes</a>';
+                                } else {
+                                    echo '<a class="secondary button disabled" title="editarImagenes" href="#">Mover ó eliminar imagenes</a>';
+                                }
+                                ?>
+
                             </div>
                             <div class="twelve columns">
                                 <br><br>
@@ -256,7 +264,7 @@ if ($isRedirect) {
                 </div>
             </div>
 
-            <?php include_once 'admin_footer.php'; ?>
+    <?php include_once 'admin_footer.php'; ?>
 
             <!-- modals! -->
             <div id="confirmImageChanges" class="reveal-modal">
