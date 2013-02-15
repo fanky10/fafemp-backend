@@ -36,10 +36,39 @@ class ImagenesTest extends DatabaseIsolatedTestCase {
         $this->assertTrue(isset($imagenes) && count($imagenes) == 4);
     }
 
+    function testGetImagenByID() {
+        $idNoticia = $this->agregaNoticia();
+        $idImagen = $this->agregaImagen($idNoticia);
+        
+        $oImagen = $this->imagenesRepository->getImagen($idImagen);
+        $this->assertTrue(isset($oImagen));
+    }
+
+    function testEditImagen() {
+        $idNoticia = $this->agregaNoticia();
+        $idImagen = $this->agregaImagen($idNoticia);
+
+        $imagen = new Imagen();
+        $editedImagen = new Imagen();
+
+        $imagen->setNombre("pepe2.png");
+        $imagen->setNombreArchivo("pepe2.png");
+        $imagen->setPath("/pepe/2");
+        $imagen->setOrden(5);
+        $imagen->setId($idImagen);
+
+        $this->imagenesRepository->editarImagen($imagen);
+
+        $editedImagen = $this->imagenesRepository->getImagen($idImagen);
+        $this->assertTrue(isset($editedImagen) && $this->isEquals($imagen, $editedImagen));
+    }
+
     private function agregaImagen($idNoticia) {
         $imagen = new Imagen();
         $imagen->setNombre("pepe.png");
+        $imagen->setNombreArchivo("pepe.png");
         $imagen->setPath("/pepe/");
+        $imagen->setOrden(1);
 
         return $this->imagenesRepository->addImagenNoticia($imagen, $idNoticia);
     }
@@ -50,6 +79,13 @@ class ImagenesTest extends DatabaseIsolatedTestCase {
         $noticia->setTitulo("una noticia con imagen");
 
         return $this->noticiasRepository->addNoticia($noticia);
+    }
+
+    private function isEquals(Imagen $imagen, Imagen $otherImagen) {
+        return ($imagen->getNombre() == $otherImagen->getNombre() &&
+                $imagen->getNombreArchivo() == $otherImagen->getNombreArchivo() &&
+                $imagen->getPath() == $otherImagen->getPath() &&
+                $imagen->getOrden() == $otherImagen->getOrden() );
     }
 
 }

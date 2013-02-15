@@ -46,9 +46,9 @@
                 <!-- Contact Details -->
                 <div class="nine columns">
                     <h3>Carga Noticias</h3>
-                    <p>Desde el siguiente formulario usted prodra ingresar nuevas
-                        noticias, que quedaras visibles desde el sitio publico!.</p>
-                    <form id="formNoticia"action="noticias_add.php" method="POST"
+                    <p>Desde el siguiente formulario usted prodrá ingresar nuevas
+                        noticias, que quedarán visibles desde el sitio público!.</p>
+                    <form id="formNoticia"action="noticias_abm.php?action=add" method="POST"
                           enctype="multipart/form-data">
                         <h5>Formulario de Noticia</h5>
                         <label for="nombre">Titulo</label> 
@@ -66,9 +66,14 @@
                                 <br/>
                             </div>
                             <div class="twelve columns">
-                                <button type="submit" name="submit" class="radius button">Guardar</button>
+                                <div class="six columns">
+                                    <div class="six columns">
+                                        <button type="submit" name="submit" class="radius button">Guardar</button> </div>
+                                    <div class="six columns">
+                                        <a class="button radius" title="cancelar" href="noticias.php">Cancelar</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                     </form>
                 </div>
             </div>

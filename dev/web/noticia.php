@@ -15,7 +15,7 @@ if (isset($idNoticia)) {
     $manejador = new ManejadorServicios();
     $oNoticia = $manejador->getNoticiaById($idNoticia);
     $vImagenes = $oNoticia->getImagenes();
-    if (isset($vImagenes) || !empty($vImagenes)) {
+    if (isset($vImagenes) && !empty($vImagenes)) {
         $oImagen = $vImagenes[0];
     }
     if (!isset($oNoticia) || empty($oNoticia)) {
@@ -54,41 +54,15 @@ if ($isRedirect) {
             <link rel="stylesheet" href="stylesheets/foundation.css">
             <link rel="stylesheet" href="stylesheets/app.css">
             <link rel="stylesheet" href="stylesheets/prettyPhoto.css">
+            <link rel="stylesheet" href="stylesheets/flexslider.css">
 
             <!-- Author -->
             <link type="text/plain" rel="author" href="humans.txt" />
 
             <script src="javascripts/modernizr.foundation.js"></script>
-        </head>
-        <body>
 
-            <!-- Header and Nav -->
-            <?php include_once 'header.php'; ?>
-
-            <!-- End Header and Nav -->
-            <?php
-            $seccion = "noticias";
-            include_once 'menu_header.php';
-            ?>
-            <!-- First Band (Slider) -->
-            <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
-            <div class="breadcrums">
-                <div class="row">
-                    <div class="twelve columns">
-                        <ul class="inline-list">
-                            <li><a href="index.html">Home</a></li>
-                            <li>></li>
-                            <li>Noticias</li>
-                        </ul>        
-                    </div>
-                </div>
-            </div>
-
-            <?php include_once 'common/noticia_content.php'; ?>
-
-            <!-- Footer -->
-            <?php include_once 'footer.php'; ?> 
-
+            <!-- Syntax Highlighter -->
+            <script src="javascripts/modernizr.js"></script>
             <!-- Included JS Files (Compressed) -->
             <script src="javascripts/jquery.js"></script>
             <script src="javascripts/foundation.min.js"></script>
@@ -99,33 +73,45 @@ if ($isRedirect) {
             <script src="javascripts/app.js"></script>
             <script src="javascripts/init.js"></script>
 
+            <!-- jQuery -->
+
+            <!-- FlexSlider -->
+            <script defer src="javascripts/jquery.flexslider.js"></script>
+            <script defer src="javascripts/jquery.flexslider-min.js"></script>
+
+            <script type="text/javascript">
+                $(function(){
+                    SyntaxHighlighter.all();
+                });
+                $(window).load(function(){
+                    $('.flexslider').flexslider({
+                        animation: "slide",
+                        start: function(slider){
+                            $('body').removeClass('loading');
+                        }
+                    });
+                });
+            </script>
+
+        </head>
+        <body>
+
+            <!-- Header and Nav -->
+            <?php include_once 'header.php'; ?>
+
+            <!-- End Header and Nav -->
+            <?php
+            $seccion = "noticias";
+            include_once 'menu_header.php';
+            $navigateTitle = "Noticia";
+            include_once 'navigate.php'
+            ?>
+
+            <?php include_once 'common/noticia_content.php'; ?>
+
+            <!-- Footer -->
+            <?php include_once 'footer.php'; ?> 
         </body>
-        <!-- Included JS Files (Compressed) -->
-        <script src="javascripts/jquery.js"></script>
-        <script src="javascripts/foundation.min.js"></script>
-
-        <!-- Initialize JS Plugins -->
-        <script src="javascripts/jquery.prettyPhoto.js"></script>
-        <script src="javascripts/app.js"></script>
-        <script src="javascripts/init.js"></script>
-
-        <script type="text/javascript">
-            $(window).load(function() {
-                $('#slider').orbit({
-                    animation: 'fade',      
-                    pauseOnHover: true,
-                    startClockOnMouseOut: true, 
-                    bullets: true, // true or false to activate the bullet navigation
-                    bulletThumbs: true
-                });
-            });
-            $(document).ready(function(){
-                $("a[rel^='prettyPhoto']").prettyPhoto({
-                    theme: 'facebook',
-                    social_tools: false
-                });
-            });
-        </script>
     </html>
 
 <?php } ?>

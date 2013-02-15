@@ -48,12 +48,12 @@ if (!isset($vNoticias) || empty($vNoticias)) {
     foreach ($vNoticias as $oNoticia) {
         $vImagenes = $oNoticia->getImagenes();
         $imgSrc = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
+        $link = ROOT_URL . "/noticia.php?id=" . $oNoticia->getId();
         if (isset($vImagenes) && !empty($vImagenes)) {
             $oImagen = $vImagenes[0];
-            $link = ROOT_URL . "/noticia.php?id=" . $oNoticia->getId();
             $idImg = $oImagen->getId();
             if (isset($oImagen) && isset($idImg)) {
-                $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombre();
+                $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
             }
         }
         $shortenText = Utilidades::acortaTexto($oNoticia->getCuerpo(), $limiteCuerpo, ".");
@@ -82,6 +82,9 @@ if (!isset($vNoticias) || empty($vNoticias)) {
     <hr/>
     <div class="twelve columns">
         <?php
+        if($totalNoticias==0){
+            return ;
+        }
         //cual es la pagina de inicio, si estamos mas alla del limite, mostrar la anterior
         $paginaInicio = ($pag > $paginacionLimit ? $pag - 1 : 1); //
         $pagFin = ceil($totalNoticias / $limit); //saco el total de las paginas
