@@ -109,7 +109,7 @@ $oImagen = new Imagen();
 
                             echo '<div class="two columns" align="center">';
                             $linkEliminar = "noticias_abm.php?action=del&id=" . $oNoticia->getId();
-                            echo '<a href="#" onclick="popUpConfirm(\'' . $linkEliminar . '\')"><img src="../images/soft-scraps-delete-icon.png" alt="Eliminar" /></a>';
+                            echo '<a href="#" onclick="popUpConfirm(\'' . $linkEliminar . '\',\'Seguro desea eliminar la noticia?\')"><img src="../images/soft-scraps-delete-icon.png" alt="Eliminar" /></a>';
                             echo '</div>';
 
                             echo '<div class="twelve columns"> <br/> </div>';

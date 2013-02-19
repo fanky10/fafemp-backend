@@ -59,7 +59,7 @@
         </script>
         <script type="text/javascript">
             $(function(){
-                $('#formNoticia').validate({
+                $('#formReunion').validate({
                     rules: {
                         'titulo': 'required',
                         'cuerpo': 'required',
@@ -100,7 +100,7 @@
                     <h3>Carga Noticias</h3>
                     <p>Desde el siguiente formulario usted prodrá ingresar nuevas
                         reuniones, que quedarán visibles desde el sitio público!.</p>
-                    <form id="formNoticia"action="reuniones_abm.php?action=add" method="POST"
+                    <form id="formReunion" action="reuniones_abm.php?action=add" method="POST"
                           enctype="multipart/form-data">
                         <h5>Formulario de Reunion</h5>
                         <label for="nombre">Titulo</label> 
@@ -130,18 +130,19 @@
                                     <div class="six columns">
                                         <button type="submit" name="submit" class="radius button">Guardar</button> </div>
                                     <div class="six columns">
-                                        <a class="button radius" title="cancelar" href="noticias.php">Cancelar</a>
+                                        <a class="button radius" title="cancelar" href="reuniones.php">Cancelar</a>
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
                     </form>
                 </div>
             </div>
-        </div>
 
 
 
-        <?php include_once 'admin_footer.php'; ?>
+            <?php include_once 'admin_footer.php'; ?>
 
 
     </body>

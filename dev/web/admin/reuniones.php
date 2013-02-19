@@ -48,7 +48,7 @@ $oImagen = new Imagen();
         <?php
         include_once 'admin_header.php';
         include_once 'admin_menu.php';
-        $navigateTitle = "Noticias";
+        $navigateTitle = "Reuniones";
         include_once 'admin_navigate.php';
         ?>
 
@@ -109,7 +109,7 @@ $oImagen = new Imagen();
 
                             echo '<div class="two columns" align="center">';
                             $linkEliminar = "reuniones_abm.php?action=del&id=" . $oReunion->getId();
-                            echo '<a href="#" onclick="popUpConfirm(\'' . $linkEliminar . '\')"><img src="../images/soft-scraps-delete-icon.png" alt="Eliminar" /></a>';
+                            echo '<a href="#" onclick="popUpConfirm(\'' . $linkEliminar . '\',\'Seguro desea eliminar la reunion?\')"><img src="../images/soft-scraps-delete-icon.png" alt="Eliminar" /></a>';
                             echo '</div>';
 
                             echo '<div class="twelve columns"> <br/> </div>';

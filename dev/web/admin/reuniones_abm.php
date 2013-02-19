@@ -31,8 +31,8 @@ if ($action == "add") {
 //        $oNoticia->setImagenes($oImagenes);
     }
 } else if ($action == "del") {
-    $noticiaId = $_GET['id'];
-    if (isset($noticiaId) && !empty($noticiaId)) {
+    $reunionId = $_GET['id'];
+    if (isset($reunionId) && !empty($reunionId)) {
         $controladorReuniones->eliminarReunion($reunionId);
         header($redirectLocation);
         return;
