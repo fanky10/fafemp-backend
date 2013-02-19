@@ -32,10 +32,6 @@ class DataReuniones extends Data implements ReunionesRepository {
         return $id; //generated id
     }
 
-    public function getCantidadReuniones() {
-        
-    }
-
     public function getReunionById($id) {
         $query = "select r.reunion_id,r.reunion_titulo,r.reunion_cuerpo,r.reunion_fec_ini,r.reunion_fec_fin,r.reunion_eliminada
             from reuniones r 
@@ -56,11 +52,26 @@ class DataReuniones extends Data implements ReunionesRepository {
     }
 
     public function getReuniones($limit) {
+        $query = "select r.reunion_id,r.reunion_titulo,r.reunion_cuerpo,r.reunion_fec_ini,r.reunion_fec_fin,r.reunion_eliminada
+            FROM reuniones r 
+            WHERE r.reunion_eliminada=0
+            ORDER BY r.reunion_fec_ini LIMIT ?";
         
-    }
-
-    public function getReunionesPaginadas($offset, $limit) {
+        $stmt = $this->prepareStmt($query);
+        $stmt->bind_param('i', $limit);
+        $stmt->execute();
+        $result = $stmt->get_result();
         
+        $reunion_idx = 0;
+        $vReuniones = array();
+        while ($row = $result->fetch_assoc()) {
+            $oReunion = $this->generaReunion($row);
+            $vReuniones[$reunion_idx] = $oReunion;
+            $reunion_idx = $reunion_idx + 1;
+        }
+        $stmt->close();
+        
+        return $vReuniones;
     }
     
     private function generaReunion($row){

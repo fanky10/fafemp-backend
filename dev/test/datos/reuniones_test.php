@@ -27,6 +27,19 @@ class ReunionesTest extends DatabaseIsolatedTestCase {
         $this->assertTrue(isset($oReunion));
     }
     
+    
+    
+    function testGetReunionesLimited(){
+        $i=0;
+        while($i<5){
+            $this->agregaReunion();
+            $i++;
+        }
+        $limit = 2;
+        $vReuniones = $this->reunionesRepository->getReuniones($limit);
+        $this->assertTrue(isset($vReuniones) && count($vReuniones)==$limit);
+    }
+    
     private function agregaReunion(){
         $reunion = new Reunion();
         

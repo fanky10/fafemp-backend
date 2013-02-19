@@ -7,7 +7,5 @@ interface ReunionesRepository{
     public function getReuniones($limit);
     public function getReunionById($id);
     public function addReunion(Reunion $reunion);
-    public function getReunionesPaginadas($offset,$limit);
-    public function getCantidadReuniones();
 }
 ?>
