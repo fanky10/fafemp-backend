@@ -50,8 +50,8 @@ CREATE TABLE reuniones(
     reunion_fec_ini date not null,
     reunion_fec_fin date not null,
     reunion_titulo varchar(100) not null,
-	reunion_cuerpo text not null,
-	noticia_eliminada TINYINT(1) default 0
+    reunion_cuerpo text not null,
+    reunion_eliminada TINYINT(1) default 0
 );
 
 DROP TABLE IF EXISTS imagenes_reunion;
@@ -65,7 +65,7 @@ CREATE TABLE imagenes_reunion (
     imagen_path varchar(200) not null,
     imagen_nombre varchar(200) not null,
     imagen_reunion_id integer not null,
-	imagen_eliminada TINYINT(1) default 0,
+    imagen_eliminada TINYINT(1) default 0,
     imagen_fec_hora timestamp not null default current_timestamp,
     imagen_nombre_archivo varchar(200) not null,
     imagen_orden integer unsigned not null
