@@ -1,6 +1,6 @@
-function popUpConfirm(url)   
+function popUpConfirm(url, mensaje)   
 {
-var r=confirm("Seguro desea eliminar la noticia?");
+var r=confirm(mensaje);
 if (r==true)
   {
   location.href=url

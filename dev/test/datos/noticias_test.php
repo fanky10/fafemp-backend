@@ -11,7 +11,7 @@ class NoticiasTest extends DatabaseIsolatedTestCase {
     private $noticiasRepository;
     
     public function __construct() {
-        parent::__construct("Imagenes Test");
+        parent::__construct("Noticias Test");
         $this->noticiasRepository = new DataNoticias();
     }
     
