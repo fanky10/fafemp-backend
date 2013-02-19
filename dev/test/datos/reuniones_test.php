@@ -20,6 +20,12 @@ class ReunionesTest extends DatabaseIsolatedTestCase {
         $this->assertTrue(isset($idReunion));
     }
     
+    function testGetReunionByID(){
+        $idReunion = $this->agregaReunion();
+        $oReunion = $this->reunionesRepository->getReunionById($idReunion);
+        
+        $this->assertTrue(isset($oReunion));
+    }
     
     private function agregaReunion(){
         $reunion = new Reunion();
