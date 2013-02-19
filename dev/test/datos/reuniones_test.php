@@ -11,7 +11,7 @@ class ReunionesTest extends DatabaseIsolatedTestCase {
     private $reunionesRepository;
     
     public function __construct() {
-        parent::__construct("Imagenes Test");
+        parent::__construct("Reuniones Test");
         $this->reunionesRepository = new DataReuniones();
     }
     
