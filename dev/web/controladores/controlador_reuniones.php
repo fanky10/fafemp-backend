@@ -40,8 +40,6 @@ class ControladorReuniones {
             $oReunion->setCuerpo($_POST['cuerpo']);
             $oReunion->setFechaFin($fechaFin);
             $oReunion->setFechaInicio($fechaInicio);
-            // TODO: handle imagenes
-            //$oReunion->setImagenes($imagenes)
             $oReunion->setTitulo($_POST['titulo']);
             $this->manejador->editarReunion($oReunion);
         }

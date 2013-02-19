@@ -133,7 +133,20 @@ class ManejadorServicios {
         $this->imagenesRepository = new DataImagenes();
         $this->imagenesRepository->editarImagen($imagen);
     }
-
+    
+    public function getImagenesReunion($reunionId){
+        $this->imagenesRepository = new DataImagenes();
+        return $this->imagenesRepository->getImagenesReunion($reunionId);
+    }
+    public function addImagenReunion(Imagen $imagen,$reunionId){
+        $this->imagenesRepository = new DataImagenes();
+        return $this->imagenesRepository->addImagenReunion($imagen, $reunionId);
+    }
+    public function editarImagenReunion(Imagen $imagen){
+        $this->imagenesRepository = new DataImagenes();
+        return $this->imagenesRepository->editarImagenReunion($imagen);
+    }
+    
 }
 
 ?>

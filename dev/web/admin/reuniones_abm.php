@@ -7,6 +7,7 @@ include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/util/utilidades.php';
 include_once ROOT_DIR . '/controladores/controlador_reuniones.php';
 include_once ROOT_DIR . '/controladores/controlador_imagenes.php';
+include_once ROOT_DIR . '/controladores/controlador_imagenes_reunion.php';
 
 $action = $_GET['action'];
 $redirectLocation = 'Location: reuniones.php';
@@ -16,13 +17,14 @@ if (!isset($action) || empty($action)) {
     header($redirectLocation);
     return;
 }
-
+$controladorImagenes = new ControladorImagenesReunion(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
 $controladorReuniones = new ControladorReuniones($GLOBAL_SETTINGS["reuniones.datepicker.formatter"]);
 
 if ($action == "add") {
     $oReunion = $controladorReuniones->agregarReunion();
-//    $oImagenes = $controladorImagenes->subeMultiplesImagenes($oNoticia->getId());
-//    $oNoticia->setImagenes($oImagenes);
+    
+    $oImagenes = $controladorImagenes->subeMultiplesImagenes();
+    $oNoticia->setImagenes($oImagenes);
 } else if ($action == "edit") {
     $reunionId = $_GET['id'];
     if (isset($reunionId) && !empty($reunionId)) {

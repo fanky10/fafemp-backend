@@ -17,7 +17,6 @@ if (!isset($action) || empty($action)) {
     return;
 }
 $controladorImagenes = new ControladorImagenesNoticia(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
-
 $controladorNoticias = new ControladorNoticias();
 if ($action == "add") {
     $oNoticia = $controladorNoticias->subirNoticia();
