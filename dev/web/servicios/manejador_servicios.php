@@ -22,6 +22,11 @@ class ManejadorServicios {
         $idImagen = $this->imagenesRepository->addImagenNoticia($imagen, $noticiaId);
         $imagen->setId($idImagen);
     }
+    
+    public function editarNoticia(Noticia $oNoticia){
+        $this->noticiasRepository = new DataNoticias();
+        $this->noticiasRepository->editarNoticia($oNoticia);
+    }
 
     public function addNoticia(Noticia $noticia) {
         $this->noticiasRepository = new DataNoticias();
@@ -63,20 +68,42 @@ class ManejadorServicios {
         $this->usuariosRepository = new DataUsuarios();
         return $this->usuariosRepository->cambioPassword($user, $newPassword);
     }
+    
+    public function editarImagen(Imagen $oImagen){
+        $this->imagenesRepository = new DataImagenes();
+        $this->imagenesRepository->editarImagen($oImagen);
+    }
+    
+    public function getImagen($idImagen){
+        $this->imagenesRepository = new DataImagenes();
+        return $this->imagenesRepository->getImagen($idImagen);
+    }
 
-    private function asignaImagenesNoticia(Noticia $oNoticia) {
+    private function asignaImagenesNoticia($oNoticia) {
+        if (!isset($oNoticia)) {
+            return;
+        }
         $this->imagenesRepository = new DataImagenes();
         $vImagenes = $this->imagenesRepository->getImagenesNoticia($oNoticia->getId());
         $oNoticia->setImagenes($vImagenes);
     }
 
     private function asignaImagenesNoticias($vNoticias) {
+        if (!isset($vNoticias) || empty($vNoticias)) {
+            return;
+        }
         $this->imagenesRepository = new DataImagenes();
         $oNoticia = new Noticia();
         foreach ($vNoticias as $oNoticia) {
             $vImagenes = $this->imagenesRepository->getImagenesNoticia($oNoticia->getId());
             $oNoticia->setImagenes($vImagenes);
         }
+    }
+    
+    public function getImagenesNoticia($noticiaId){
+        $this->imagenesRepository = new DataImagenes();
+        $vImagenes = $this->imagenesRepository->getImagenesNoticia($noticiaId);
+        return $vImagenes;
     }
 
 }

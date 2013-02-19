@@ -5,9 +5,9 @@ drop database if exists fafemp_web;
 create database fafemp_web;
 grant all privileges on fafemp_web.* to fafemp_root@'localhost' identified by 'root';
 connect fafemp_web;
-
-
-/* NOTICIAS */
+/**
+* reglas de negocio a aplicar en las noticias, la noticia tiene un titulo, una fecha-hora, un cuerpo y (al menos por ahora) una sola imagen.
+*/
 DROP TABLE IF EXISTS noticias;
 
 CREATE TABLE noticias(
@@ -40,7 +40,13 @@ CREATE TABLE imagenes_noticia (
 */
 
 ALTER TABLE imagenes_noticia ADD CONSTRAINT `FK_imagenes_noticia_id_1` FOREIGN KEY (`imagen_noticia_id`) REFERENCES `noticias` (`noticia_id`);
-/* FIN NOTICIAS */
+
+DROP TABLE IF EXISTS usuarios;
+
+CREATE TABLE usuarios(
+    usuario_user varchar(20) not null primary key,
+    usuario_pass varchar(32) not null
+)ENGINE=InnoDB;
 
 /* REUNIONES */
 DROP TABLE IF EXISTS reuniones;
@@ -78,12 +84,3 @@ CREATE TABLE imagenes_reunion (
 ALTER TABLE imagenes_reunion ADD CONSTRAINT `FK_imagenes_reunion_id_1` FOREIGN KEY (`imagen_reunion_id`) REFERENCES `reuniones` (`reunion_id`);
 
 /* FIN REUNIONES*/
-
-/* USUARIOS */
-DROP TABLE IF EXISTS usuarios;
-
-CREATE TABLE usuarios(
-    usuario_user varchar(20) not null primary key,
-    usuario_pass varchar(32) not null
-)ENGINE=InnoDB;
-/* FIN USUARIOS */

@@ -53,13 +53,8 @@
 		// error
 		if ( isset( $error ) )
 		{
-			header("Location: contacto-no-enviado.html");
-		}
-		// end error
-		
-		// no error send mail
-		if ( ! isset($error) )
-		{
+                        $emailStatus = "error";
+		}else{
 			$subject = 'Mensaje desde el Sitio ' . $site_name . ' Online';
 			
 			$body = "Nombre: $nombre \n\nTelefono: $telefono \n\nCiudad: $ciudad \n\nZip: $zip \n\nEmail: $email \n\nMensaje: $mensaje";
@@ -67,13 +62,15 @@
 			$headers = 'From: ' . $nombre . ' <' . $email . '> ' . "\r\n" . 'Reply-To: ' . $email;
 			
 			mail( $email_to, $subject, $body, $headers );
-			
-			//echo '<div class="alert alert-success contact-alert"><strong>ENVIADO! </strong>' . $success_message . '</div>';
-			header("Location: contacto-enviado.html");
+                        
+                        $emailStatus = "success";
+                        
 		}
 		// end no error send mail
+                
 		
 	}
 	// end contact form submitted
+        include 'contacto.php';
 	
 ?>
