@@ -18,7 +18,7 @@ if (!isset($action) || empty($action)) {
 }
 
 $controladorReuniones = new ControladorReuniones($GLOBAL_SETTINGS["reuniones.datepicker.formatter"]);
-$controladorImagenes = new ControladorImagenes(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
+
 if ($action == "add") {
     $oReunion = $controladorReuniones->agregarReunion();
 //    $oImagenes = $controladorImagenes->subeMultiplesImagenes($oNoticia->getId());
@@ -26,6 +26,7 @@ if ($action == "add") {
 } else if ($action == "edit") {
     $reunionId = $_GET['id'];
     if (isset($reunionId) && !empty($reunionId)) {
+        $controladorImagenes = new ControladorImagenesReunion(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"],$reunionId);
         $oReunion = $controladorReuniones->editarReunion($reunionId);
 //        $oImagenes = $controladorImagenes->subeMultiplesImagenes($oNoticia->getId());
 //        $oNoticia->setImagenes($oImagenes);

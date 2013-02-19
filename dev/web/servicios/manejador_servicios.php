@@ -127,6 +127,12 @@ class ManejadorServicios {
         $this->reunionesRepository = new DataReuniones();
         return $this->reunionesRepository->editarReunion($reunion);
     }
+    
+    public function eliminarImagen(Imagen $imagen){
+        $imagen->setEliminada(1);
+        $this->imagenesRepository = new DataImagenes();
+        $this->imagenesRepository->editarImagen($imagen);
+    }
 
 }
 

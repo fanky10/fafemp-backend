@@ -116,6 +116,26 @@ class DataImagenes extends Data implements ImagenesRepository {
     }
 
     public function editarImagenNoticia(Imagen $imagen) {//TODO: rename to editarImagenNoticia --> orden!
+        
+        $this->editarImagen($imagen);
+        
+        $non_query = "update " . ImagenNoticia::$TABLE . " set imagen_orden=? where imagen_id=?";
+        $stmt = $this->prepareStmt($non_query);
+        $stmt->bind_param('ii', $orden, $imagenId);
+
+        $imagenId = $imagen->getId();
+        $orden = $imagen->getOrden();
+
+        if (!$stmt->execute()) {
+            echo "editarImagenNoticia - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        /* close statement and connection */
+        $stmt->close();
+    }
+    
+    
+    
+    public function editarImagen(Imagen $imagen){
         $non_query = "update " . Imagen::$TABLE . " set imagen_path=?, imagen_nombre=?,imagen_eliminada=?, imagen_nombre_archivo=? where imagen_id=?";
         $stmt = $this->prepareStmt($non_query);
         $stmt->bind_param('ssisi', $path, $nombre, $eliminada, $nombreArchivo, $imagenId);
@@ -130,18 +150,6 @@ class DataImagenes extends Data implements ImagenesRepository {
             echo "editarImagen - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
         }
 
-        $non_query = "update " . ImagenNoticia::$TABLE . " set imagen_orden=? where imagen_id=?";
-        $stmt = $this->prepareStmt($non_query);
-        $stmt->bind_param('ii', $orden, $imagenId);
-
-        $imagenId = $imagen->getId();
-        $orden = $imagen->getOrden();
-
-        if (!$stmt->execute()) {
-            echo "editarImagenNoticia - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
-        }
-        /* close statement and connection */
-        $stmt->close();
     }
 
     public function addImagenReunion(Imagen $imagen, $reunionId) {

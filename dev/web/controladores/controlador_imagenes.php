@@ -1,13 +1,12 @@
 <?php
 
 include_once '../init.php';
-include_once ROOT_DIR . '/entidades/noticia.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/util/utilidades.php';
 
-class ControladorImagenes {
-
+abstract class ControladorImagenes {
+    
     protected $maxFileSize;
     protected $fileTypes;
     protected $dirBase;
@@ -21,10 +20,16 @@ class ControladorImagenes {
         $this->maxFileSize = 5 * 1024 * 1024; //take it from config
         $this->imgPath = $imgPath;
     }
+    
+    /**
+     * esto debe ser implementado segun convenga
+     */
+    protected abstract function getImagenesGuardadas();
+    protected abstract function saveImage($safe_name,$safe_filename,$orden);
 
-    public function subeMultiplesImagenes($noticiaId) {
-        $imagenes = $this->manejador->getImagenesNoticia($noticiaId);
-        $orden = count($imagenes);//ultimo lugar
+    public function subeMultiplesImagenes() {
+        $imagenes = $this->getImagenesGuardadas();
+        $orden = count($imagenes);//ultimo lugar -- incluso si no hay ninguna.
         foreach ($_FILES['fileImage']['name'] as $index => $name) {
 
             if ($_FILES['fileImage']['error'][$index] == 4) {
@@ -37,19 +42,16 @@ class ControladorImagenes {
                 $file['tmp_name'] = $_FILES['fileImage']['tmp_name'][$index];
                 $file['error'] = $_FILES['fileImage']['error'][$index];
                 $file['size'] = $_FILES['fileImage']['size'][$index];
-                $nuevaImagen = $this->subeImagen($file, $noticiaId, $orden);
+                $nuevaImagen = $this->subeImagen($file, $orden);
                 if(isset($nuevaImagen)){
                     $imagenes[$orden]=$nuevaImagen;
                 }
             }
         }
-        //devuelvo todas las que encuentro en la db (:
-//        return $this->manejador->getImagenesNoticia($noticiaId);
         return $imagenes;
     }
 
-    private function subeImagen($file, $noticiaId, $orden) {
-
+    protected function subeImagen($file, $orden) {
         $msgError = "";
         $error_types = array(
             1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
@@ -77,13 +79,7 @@ class ControladorImagenes {
                         $file['tmp_name'], $this->dirBase . $safe_filename);
                 if ($isMove) {
                     //save image url, object etc.
-                    $oImagen = new Imagen();
-                    $oImagen->setNombre($safe_name);
-                    $oImagen->setNombreArchivo($safe_filename);
-                    $oImagen->setPath($this->imgPath);
-                    $oImagen->setOrden($orden);
-                    $this->manejador->addImagenNoticia($oImagen, $noticiaId);
-                    return $oImagen;
+                    return $this->saveImage($safe_name, $safe_filename, $orden);
                 } else {
                     //echo "Posible problemas de permisos: ";
                     // no me importa, la subo sin imagen jeje
@@ -109,14 +105,7 @@ class ControladorImagenes {
                 }
             }
             if (isset($imageId) && isset($imageOrder)) {
-                //get original img object to see if the id is cool
-                $oImage = $this->manejador->getImagen($imageId);
-                if (isset($oImage) && !empty($oImage)) {
-                    $oImage->setOrden($imageOrder);
-                    $this->manejador->editarImagenNoticia($oImage);
-                } else {
-                    $this->sendJSONResponseMessage("ERROR", "No se pudieron guardar los cambios, avise al administrador o intente nuevamente mas tarde");
-                }
+                $this->editarOrden($imageId,$imageOrder);
             }
         }
         $this->sendJSONResponseMessage("OK", "");
@@ -124,14 +113,12 @@ class ControladorImagenes {
 
     public function deleteImage($imageId) {
         $oImage = $this->manejador->getImagen($imageId);
-        $oImage->setEliminada(1);
-        $this->manejador->editarImagenNoticia($oImage);
+        $this->manejador->eliminarImagen($oImage);
         $this->sendJSONResponseMessage("OK", "");
     }
 
-    public function getImagesJSON($idNoticia) {
-        $oNoticia = $this->manejador->getNoticiaById($idNoticia);
-        $vImagenes = $oNoticia->getImagenes();
+    public function getImagesJSON() {
+        $vImagenes = $this->getImagenesGuardadas();
 
         $vResponse = array();
         $idx = 0;

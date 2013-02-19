@@ -6,6 +6,7 @@ include_once ROOT_DIR . '/entidades/imagen.php';
 interface ImagenesRepository{
     public function getImagen($id);
     public function getImagenes();
+    public function editarImagen(Imagen $imagen);
     
     public function editarImagenNoticia(Imagen $imagen);
     public function getImagenesNoticia($noticiaId);
