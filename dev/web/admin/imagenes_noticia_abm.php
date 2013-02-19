@@ -17,10 +17,12 @@ if (!isset($action) || empty($action)) {
     header($redirectLocation);
     return;
 }
-$noticiaId = $_GET['id_noticia'];
-$controladorImagenes = new ControladorImagenesNoticia(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"],$noticiaId);
+
+$controladorImagenes = new ControladorImagenesNoticia(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
 if ($action == "add") {// by multipart post.
+    $noticiaId = $_GET['id_noticia'];
     if (isset($noticiaId) && !empty($noticiaId)) {
+        $controladorImagenes->setNoticiaId($noticiaId);
         $controladorImagenes->subeMultiplesImagenes();
     }
 } else if ($action == "del") {

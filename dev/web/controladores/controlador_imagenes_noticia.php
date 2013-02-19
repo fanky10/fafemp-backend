@@ -11,9 +11,8 @@ class ControladorImagenesNoticia extends ControladorImagenes {
 
     private $noticiaId;
 
-    public function __construct($dirBase, $imgPath, $noticiaId) {
+    public function __construct($dirBase, $imgPath) {
         parent::__construct($dirBase, $imgPath);
-        $this->noticiaId = $noticiaId;
     }
 
     protected function getImagenesGuardadas() {
@@ -30,7 +29,7 @@ class ControladorImagenesNoticia extends ControladorImagenes {
         return $oImagen;
     }
 
-    protected function editOrden($imageId,$imageOrder) {
+    protected function editOrden($imageId, $imageOrder) {
         //get original img object to see if the id is cool
         $oImage = $this->manejador->getImagen($imageId);
         if (isset($oImage) && !empty($oImage)) {
@@ -39,6 +38,10 @@ class ControladorImagenesNoticia extends ControladorImagenes {
         } else {
             $this->sendJSONResponseMessage("ERROR", "No se pudieron guardar los cambios, avise al administrador o intente nuevamente mas tarde");
         }
+    }
+
+    public function setNoticiaId($noticiaId) {
+        $this->noticiaId = $noticiaId;
     }
 
 }

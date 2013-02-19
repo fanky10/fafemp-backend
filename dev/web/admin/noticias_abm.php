@@ -16,18 +16,20 @@ if (!isset($action) || empty($action)) {
     header($redirectLocation);
     return;
 }
-//TODO: action="delete, add, edit"
+$controladorImagenes = new ControladorImagenesNoticia(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
+
 $controladorNoticias = new ControladorNoticias();
 if ($action == "add") {
     $oNoticia = $controladorNoticias->subirNoticia();
-    $controladorImagenes = new ControladorImagenesNoticia(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"],$oNoticia->getId());
+    $controladorImagenes->setNoticiaId($oNoticia->getId());
     $oImagenes = $controladorImagenes->subeMultiplesImagenes();
     $oNoticia->setImagenes($oImagenes);
 } else if ($action == "edit") {
     $noticiaId = $_GET['id'];
     if (isset($noticiaId) && !empty($noticiaId)) {
-        $controladorImagenes = new ControladorImagenesNoticia(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"],$noticiaId);
         $oNoticia = $controladorNoticias->editarNoticia($noticiaId);
+        
+        $controladorImagenes->setNoticiaId($noticiaId);
         $oImagenes = $controladorImagenes->subeMultiplesImagenes();
         $oNoticia->setImagenes($oImagenes);
     }
