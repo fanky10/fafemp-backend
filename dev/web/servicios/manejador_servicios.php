@@ -71,9 +71,9 @@ class ManejadorServicios {
         return $this->usuariosRepository->cambioPassword($user, $newPassword);
     }
 
-    public function editarImagen(Imagen $oImagen) {
+    public function editarImagenNoticia(Imagen $oImagen) {
         $this->imagenesRepository = new DataImagenes();
-        $this->imagenesRepository->editarImagen($oImagen);
+        $this->imagenesRepository->editarImagenNoticia($oImagen);
     }
 
     public function getImagen($idImagen) {

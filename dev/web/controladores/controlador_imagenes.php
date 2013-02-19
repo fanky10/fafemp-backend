@@ -23,6 +23,8 @@ class ControladorImagenes {
     }
 
     public function subeMultiplesImagenes($noticiaId) {
+        $imagenes = $this->manejador->getImagenesNoticia($noticiaId);
+        $orden = count($imagenes);//ultimo lugar
         foreach ($_FILES['fileImage']['name'] as $index => $name) {
 
             if ($_FILES['fileImage']['error'][$index] == 4) {
@@ -35,11 +37,15 @@ class ControladorImagenes {
                 $file['tmp_name'] = $_FILES['fileImage']['tmp_name'][$index];
                 $file['error'] = $_FILES['fileImage']['error'][$index];
                 $file['size'] = $_FILES['fileImage']['size'][$index];
-                $this->subeImagen($file, $noticiaId, $index);
+                $nuevaImagen = $this->subeImagen($file, $noticiaId, $orden);
+                if(isset($nuevaImagen)){
+                    $imagenes[$orden]=$nuevaImagen;
+                }
             }
         }
         //devuelvo todas las que encuentro en la db (:
-        return $this->manejador->getImagenesNoticia($noticiaId);
+//        return $this->manejador->getImagenesNoticia($noticiaId);
+        return $imagenes;
     }
 
     private function subeImagen($file, $noticiaId, $orden) {
@@ -107,7 +113,7 @@ class ControladorImagenes {
                 $oImage = $this->manejador->getImagen($imageId);
                 if (isset($oImage) && !empty($oImage)) {
                     $oImage->setOrden($imageOrder);
-                    $this->manejador->editarImagen($oImage);
+                    $this->manejador->editarImagenNoticia($oImage);
                 } else {
                     $this->sendJSONResponseMessage("ERROR", "No se pudieron guardar los cambios, avise al administrador o intente nuevamente mas tarde");
                 }
@@ -119,7 +125,7 @@ class ControladorImagenes {
     public function deleteImage($imageId) {
         $oImage = $this->manejador->getImagen($imageId);
         $oImage->setEliminada(1);
-        $this->manejador->editarImagen($oImage);
+        $this->manejador->editarImagenNoticia($oImage);
         $this->sendJSONResponseMessage("OK", "");
     }
 
