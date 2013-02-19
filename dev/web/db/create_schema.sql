@@ -58,7 +58,7 @@ CREATE TABLE reuniones(
     reunion_titulo varchar(100) not null,
     reunion_cuerpo text not null,
     reunion_eliminada TINYINT(1) default 0
-);
+)ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS imagenes_reunion;
 
@@ -75,7 +75,7 @@ CREATE TABLE imagenes_reunion (
     imagen_fec_hora timestamp not null default current_timestamp,
     imagen_nombre_archivo varchar(200) not null,
     imagen_orden integer unsigned not null
-);
+)ENGINE=InnoDB;
 
 /**
 * foreign keys
