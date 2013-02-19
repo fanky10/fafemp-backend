@@ -110,12 +110,16 @@ class ManejadorServicios {
 
     public function getReunionById($reunionId) {
         $this->reunionesRepository = new DataReuniones();
-        return $this->reunionesRepository->getReunionById($reunionId);
+        $oReunion = $this->reunionesRepository->getReunionById($reunionId);
+        $this->asignaImagenesReunion($oReunion);
+        return $oReunion;
     }
 
     public function getReuniones($limit) {
         $this->reunionesRepository = new DataReuniones();
-        return $this->reunionesRepository->getReuniones($limit);
+        $vReuniones = $this->reunionesRepository->getReuniones($limit);
+        $this->asignaImagenesReuniones($vReuniones);
+        return $vReuniones;
     }
 
     public function addReunion(Reunion $reunion) {
@@ -145,6 +149,29 @@ class ManejadorServicios {
     public function editarImagenReunion(Imagen $imagen){
         $this->imagenesRepository = new DataImagenes();
         return $this->imagenesRepository->editarImagenReunion($imagen);
+    }
+    
+    
+
+    private function asignaImagenesReunion($oReunion) {
+        if (!isset($oReunion)) {
+            return;
+        }
+        $this->imagenesRepository = new DataImagenes();
+        $vImagenes = $this->imagenesRepository->getImagenesReunion($oReunion->getId());
+        $oReunion->setImagenes($vImagenes);
+    }
+
+    private function asignaImagenesReuniones($vReuniones) {
+        if (!isset($vReuniones) || empty($vReuniones)) {
+            return;
+        }
+        $this->imagenesRepository = new DataImagenes();
+        $oReunion = new Reunion();
+        foreach ($vReuniones as $oReunion) {
+            $vImagenes = $this->imagenesRepository->getImagenesReunion($oReunion->getId());
+            $oReunion->setImagenes($vImagenes);
+        }
     }
     
 }

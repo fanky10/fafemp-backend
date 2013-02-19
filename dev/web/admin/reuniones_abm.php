@@ -22,16 +22,16 @@ $controladorReuniones = new ControladorReuniones($GLOBAL_SETTINGS["reuniones.dat
 
 if ($action == "add") {
     $oReunion = $controladorReuniones->agregarReunion();
-    
+    $controladorImagenes->setReunionId($oReunion->getId());
     $oImagenes = $controladorImagenes->subeMultiplesImagenes();
-    $oNoticia->setImagenes($oImagenes);
+    $oReunion->setImagenes($oImagenes);
 } else if ($action == "edit") {
     $reunionId = $_GET['id'];
     if (isset($reunionId) && !empty($reunionId)) {
-        $controladorImagenes = new ControladorImagenesReunion(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"],$reunionId);
         $oReunion = $controladorReuniones->editarReunion($reunionId);
-//        $oImagenes = $controladorImagenes->subeMultiplesImagenes($oNoticia->getId());
-//        $oNoticia->setImagenes($oImagenes);
+        $controladorImagenes->setReunionId($reunionId);
+        $oImagenes = $controladorImagenes->subeMultiplesImagenes();
+        $oReunion->setImagenes($oImagenes);
     }
 } else if ($action == "del") {
     $reunionId = $_GET['id'];
