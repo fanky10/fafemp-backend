@@ -54,10 +54,9 @@ class ImagenesTest extends DatabaseIsolatedTestCase {
         $imagen->setNombre("pepe2.png");
         $imagen->setNombreArchivo("pepe2.png");
         $imagen->setPath("/pepe/2");
-        $imagen->setOrden(5);
         $imagen->setId($idImagen);
 
-        $this->imagenesRepository->editarImagen($imagen);
+        $this->imagenesRepository->editarImagenNoticia($imagen);
 
         $editedImagen = $this->imagenesRepository->getImagen($idImagen);
         $this->assertTrue(isset($editedImagen) && $this->isEquals($imagen, $editedImagen));
@@ -84,8 +83,7 @@ class ImagenesTest extends DatabaseIsolatedTestCase {
     private function isEquals(Imagen $imagen, Imagen $otherImagen) {
         return ($imagen->getNombre() == $otherImagen->getNombre() &&
                 $imagen->getNombreArchivo() == $otherImagen->getNombreArchivo() &&
-                $imagen->getPath() == $otherImagen->getPath() &&
-                $imagen->getOrden() == $otherImagen->getOrden() );
+                $imagen->getPath() == $otherImagen->getPath() );
     }
 
 }

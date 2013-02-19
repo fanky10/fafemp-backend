@@ -87,7 +87,7 @@ class ControladorImagenes {
 
         return null;
     }
-
+    //TODO: reorderImagenes-Noticia / Reunion.
     public function reorderImagenes() {
         $jsonReceived = $_POST['imgJSON'];
         $items = json_decode($jsonReceived);
