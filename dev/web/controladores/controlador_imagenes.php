@@ -46,6 +46,7 @@ abstract class ControladorImagenes {
                 if(isset($nuevaImagen)){
                     $imagenes[$orden]=$nuevaImagen;
                 }
+                $orden++;
             }
         }
         return $imagenes;
