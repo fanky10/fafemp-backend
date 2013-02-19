@@ -85,6 +85,27 @@ class DataReuniones extends Data implements ReunionesRepository {
         
         return $reunion;
     }
+
+    public function editarReunion(Reunion $reunion) {
+        $non_query = "update " . Reunion::$TABLE . " set reunion_titulo=?, reunion_cuerpo=?, reunion_eliminada=?,reunion_fec_ini=?,reunion_fec_fin=? where reunion_id=?";
+        $stmt = $this->prepareStmt($non_query);
+        $stmt->bind_param('ssissi', $title, $body, $eliminada,$fecIni,$fecFin, $id);
+        
+        $fecIni = $reunion->getFechaInicio();
+        $fecFin = $reunion->getFechaFin();
+        $title = $reunion->getTitulo();
+        $eliminada = $reunion->getEliminada();
+        $cuerpo = $reunion->getCuerpo();
+        $body = $this->realEscapeString($cuerpo);
+        
+        $id = $reunion->getId();
+
+        if (!$stmt->execute()) {
+            echo "addNoticia - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        /* close statement and connection */
+        $stmt->close();
+    }
             
 }
 ?>
