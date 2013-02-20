@@ -46,6 +46,8 @@
                 };
                 ?>
                 <a href="noticias.php" title="Noticias">Noticias</a></li>
+                <li>|</li>
+                <li><a href="reuniones.php" title="Reuniones">Reuniones</a></li>
             </ul>
         </div>
     </div>
