@@ -9,7 +9,7 @@ include_once ROOT_DIR . '/mocked/UserServiceMocked.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 
 $estadoLogin = $_SESSION['estado'];
-$redirectLogin = "noticias.php";// la pagina principal del login! :D
+$redirectLogin = "home.php";// la pagina principal del login! :D
 if (isset($estadoLogin) && $estadoLogin) {
     header("Location: ".$redirectLogin);
     return; //everything is just fine! ^^
