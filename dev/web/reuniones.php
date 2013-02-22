@@ -23,17 +23,25 @@
         <link rel="stylesheet" href="stylesheets/app.css">
         <link rel="stylesheet" href="stylesheets/prettyPhoto.css">
         
-		<link rel='stylesheet' type='text/css' href='fullcalendar/fullcalendar.css' />
-		<link rel='stylesheet' type='text/css' href='fullcalendar/fullcalendar.print.css' media='print' />
-		<script type='text/javascript' src='jquery/jquery-1.8.1.min.js'></script>
-		<script type='text/javascript' src='jquery/jquery-ui-1.8.23.custom.min.js'></script>
-		<script type='text/javascript' src='fullcalendar/fullcalendar.min.js'></script>
+		
+		<!-- Include CSS for JQuery Frontier Calendar plugin (Required for calendar plugin) -->
+		<link rel="stylesheet" type="text/css" href="stylesheets/frontierCalendar/jquery-frontier-cal-1.3.2.css" />
+		<link rel="stylesheet" type="text/css" href="stylesheets/colorpicker/colorpicker.css" />
+		<link rel="stylesheet" type="text/css" href="stylesheets/jquery-ui/smoothness/jquery-ui-1.8.1.custom.css" />
+		
+		<!--Include JQuery Core (Required for calendar plugin)-->
+		<script type="text/javascript" src="javascripts/jquery-core/jquery-1.4.2-ie-fix.min.js"></script>
+		<script type="text/javascript" src="javascripts/jquery-ui/smoothness/jquery-ui-1.8.1.custom.min.js"></script>
+		<script type="text/javascript" src="javascripts/colorpicker/colorpicker.js"></script>
+		<script type="text/javascript" src="javascripts/jquery-qtip-1.0.0-rc3140944/jquery.qtip-1.0.js"></script>
+		<script type="text/javascript" src="javascripts/lib/jshashtable-2.1.js"></script>
+		<script type="text/javascript" src="javascripts/frontierCalendar/jquery-frontier-cal-1.3.2.min.js"></script>
+        
+		
 
         <!-- Author -->
         <link type="text/plain" rel="author" href="humans.txt" />
 
-        <?php include_once 'reuniones_list.php'; ?>
-		
 		<style type='text/css'>
 		
 			body {
@@ -64,17 +72,16 @@
         $navigateTitle = "Reuniones";
         include_once 'navigate.php'
         ?>
+        
+        <?php include_once 'calendar_init.php'; ?>
 
         <!-- Three-up Content Blocks -->
         <div class="content">
         	<div class="row">
         		<div class="twelve columns">
-                    <hr class="sin-margin-top" />
+              		<?php include_once 'calendar.php'; ?>  
                 </div>
-        		<div class="twelve columns">	
-        			<div id='calendar'></div>
-				</div>
-			</div>
+        	</div>
 		</div>
 
         <!-- Footer -->
