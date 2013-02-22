@@ -245,49 +245,50 @@ ul#sponsors li {
     float: left;
 }
 #sponsors li a{
+    background: url(../images/sponsors.jpg) no-repeat 0 0; 
     margin-left: auto;
     margin-right: auto;
     padding: 0px;
     display: block;
-    width: 260px; /*El ancho del bloque con el icono*/
-    height: 90px; /*El alto del bloque con el icono*/
+    width: 261px; /*El ancho del bloque con el icono*/
+    height: 86px; /*El alto del bloque con el icono*/
 }
 #sponsors li a.ministerioEducacion{
-    background: url(../images/ministerio-educacion.jpg) no-repeat;
+    background-position: -522px 0;
 }
 #sponsors li a.ministerioCiencia{
-    background: url(../images/ministerio-ciencia.jpg) no-repeat;
+    background-position: -261px 0;
 }
 #sponsors li a.ministerioSalud{
-    background: url(../images/ministerio-salud-argentina.jpg) no-repeat;
+    background-position: 0px 0;
 }
 #sponsors li a.oea{
-    background: url(../images/oea.jpg) no-repeat;
+    background-position: -1044px 0;
 }
 #sponsors li a.panAmerican{
-    background: url(../images/pan-american.jpg) no-repeat;
+    background-position: -783px 0;
 }
 #sponsors li a.redTelesalud{
-    background: url(../images/red-telesalud.jpg) no-repeat;
+    background-position: -1305px 0;
 }
 
 #sponsors li a.ministerioEducacion:hover {
-    background: url(../images/ministerio-educacion-color.jpg) no-repeat;
+    background-position: -522px -86px;
 }
 #sponsors li a.ministerioCiencia:hover {
-    background: url(../images/ministerio-ciencia-color.jpg) no-repeat;
+    background-position: -261px -86px;
 }
 #sponsors li a.ministerioSalud:hover {
-    background: url(../images/ministerio-salud-color.jpg) no-repeat;
+    background-position: 0px -86px;
 } 
 #sponsors li a.oea:hover {
-    background: url(../images/oea-color.jpg) no-repeat;
+    background-position: -1044px -86px;
 }
 #sponsors li a.panAmerican:hover {
-    background: url(../images/pan-american-color.jpg) no-repeat;
+    background-position: -783px -86px;
 }
 #sponsors li a.redTelesalud:hover {
-    background: url(../images/red-telesalud-color.jpg) no-repeat;
+    background-position: -1305px -86px;
 }
 
 
