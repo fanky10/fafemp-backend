@@ -48,6 +48,7 @@
                         dragAndDropEnabled: false,
                         agendaClickCallback: myAgendaClickHandler
                     }).data("plugin");
+                    
                     try{
                         /**
                          * http://library.osu.edu/inc/frontierCalendar/calendar.html#AddAgendaItem
@@ -68,7 +69,7 @@
                             alert("Added not agenda",e.message);
                     } 
 
-                });
+                
                 function createCalendarData(){
                     var result = new Array();
                     var object = {
@@ -105,6 +106,42 @@
                        clickAgendaItem = agendaItem;
                        $("#display-event-form").dialog('open');
                };
+               
+               /**
+                * Initialize previous month button
+                */
+               $("#BtnPreviousMonth").button();
+               $("#BtnPreviousMonth").click(function() {
+                       jfcalplugin.showPreviousMonth("#"+calendarId);
+                       // update the jqeury datepicker value
+                       var calDate = jfcalplugin.getCurrentDate("#mycal"); // returns Date object
+                       var cyear = calDate.getFullYear();
+                       // Date month 0-based (0=January)
+                       var cmonth = calDate.getMonth();
+                       var cday = calDate.getDate();
+                       // jquery datepicker month starts at 1 (1=January) so we add 1
+                       $("#dateSelect").datepicker("setDate",cyear+"-"+(cmonth+1)+"-"+cday);
+                       return false;
+               });
+               
+               /**
+                * Initialize next month button
+                */
+               $("#BtnNextMonth").button();
+               $("#BtnNextMonth").click(function() {
+                       jfcalplugin.showNextMonth("#"+calendarId);
+                       // update the jqeury datepicker value
+                       var calDate = jfcalplugin.getCurrentDate("#mycal"); // returns Date object
+                       var cyear = calDate.getFullYear();
+                       // Date month 0-based (0=January)
+                       var cmonth = calDate.getMonth();
+                       var cday = calDate.getDate();
+                       // jquery datepicker month starts at 1 (1=January) so we add 1
+                       $("#dateSelect").datepicker("setDate",cyear+"-"+(cmonth+1)+"-"+cday);		
+                       return false;
+               });
+               });
+
         </script>
 		
 
