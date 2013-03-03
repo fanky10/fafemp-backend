@@ -63,12 +63,21 @@
                     rules: {
                         'titulo': 'required',
                         'cuerpo': 'required',
-                        'fecha_inicio':'required'
+                        'fecha_inicio':'required',
+                        'fecha_fin':{
+                            required: true
+                            //min: 'fecha_inicio'
+                            
+                        }
                     },
                     messages: {
                         'titulo': 'Debe ingresar un titulo de reunion.',
                         'cuerpo': 'Debe ingresar un cuerpo a la reunion.',
-                        'fecha_inicio': 'Debe ingresar una fecha de inicio'
+                        'fecha_inicio': 'Debe ingresar una fecha de inicio',
+                        'fecha_fin':{
+                            required: 'Debe ingresar una fecha de fin',
+                            //min: "La fecha de fin debe ser mayor a la fecha de inicio"
+                        } 
                     },
                     submitHandler: function(form) {
                         form.submit();
