@@ -53,46 +53,38 @@
                         /**
                          * http://library.osu.edu/inc/frontierCalendar/calendar.html#AddAgendaItem
                          */
-                        var dataList = createCalendarData();
-                        $.each(dataList,function(idx,item){
-                            jfcalplugin.addAgendaItem(
-                            "#"+calendarId,
-                            item.titulo,
-                            item.fechaInicio,
-                            item.fechaFin,
-                            item.allDay,
-                            item.data,
-                            item.displayProp
-                            );
+                        $.getJSON('reuniones_list.php',
+                        {
+                        }, function(response){
+                            if(response.status=='OK'){
+                                agregaEventos(response.content);
+                            }
                         });
+                        
                     } catch (e) {
                             alert("Added not agenda",e.message);
                     } 
-
-                
-                function createCalendarData(){
-                    var result = new Array();
-                    var object = {
-                        titulo:"Test Som sheeet jeje",
-                        fechaInicio:new Date(2013,02,05,0,0,0,0),
-                        fechaFin: new Date(2013,02,08,0,0,0,0),
-                        allDay:true,
-                        data:{url:"http://google.com"},
-                        displayProp:{backgroundColor:null,foregroundColor:null}
+                    
+                function agregaEventos(dataList){
+                    try{
+                    $.each(dataList,function(idx,item){
+                        var jsonItem = JSON.parse(item);
+                        var fInicio = new Date(jsonItem.fechaInicio*1000);
+                        var fFin = new Date(jsonItem.fechaFin*1000);
+                        jfcalplugin.addAgendaItem(
+                            "#"+calendarId,
+                            jsonItem.titulo,
+                            fInicio,
+                            fFin,
+                            true,
+                            null,
+                            null
+                        );
+                    });
                         
+                    }catch(e){
+                        console.log("no se pudo agregar a la agenda:"+e.message);
                     }
-                    result.push(object);
-                    object = {
-                        titulo:"Test 2",
-                        fechaInicio:new Date(2013,02,01,0,0,0,0),
-                        fechaFin: new Date(2013,02,03,0,0,0,0),
-                        allDay:true,
-                        data:{url:"http://google.com"},
-                        displayProp:{backgroundColor:null,foregroundColor:null}
-                        
-                    }
-                    result.push(object);
-                    return result;
                 }
                 /**
                  * Called when user clicks and agenda item
