@@ -75,7 +75,7 @@
                         'cuerpo': 'Debe ingresar un cuerpo a la reunion.',
                         'fecha_inicio': 'Debe ingresar una fecha de inicio',
                         'fecha_fin':{
-                            required: 'Debe ingresar una fecha de fin',
+                            required: 'Debe ingresar una fecha de fin'
                             //min: "La fecha de fin debe ser mayor a la fecha de inicio"
                         } 
                     },
