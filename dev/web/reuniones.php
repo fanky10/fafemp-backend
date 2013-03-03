@@ -114,7 +114,7 @@
                $("#BtnPreviousMonth").click(function() {
                        jfcalplugin.showPreviousMonth("#"+calendarId);
                        // update the jqeury datepicker value
-                       var calDate = jfcalplugin.getCurrentDate("#mycal"); // returns Date object
+                       var calDate = jfcalplugin.getCurrentDate("#"+calendarId);// returns Date object
                        var cyear = calDate.getFullYear();
                        // Date month 0-based (0=January)
                        var cmonth = calDate.getMonth();
@@ -131,7 +131,7 @@
                $("#BtnNextMonth").click(function() {
                        jfcalplugin.showNextMonth("#"+calendarId);
                        // update the jqeury datepicker value
-                       var calDate = jfcalplugin.getCurrentDate("#mycal"); // returns Date object
+                       var calDate = jfcalplugin.getCurrentDate("#"+calendarId);// returns Date object
                        var cyear = calDate.getFullYear();
                        // Date month 0-based (0=January)
                        var cmonth = calDate.getMonth();
