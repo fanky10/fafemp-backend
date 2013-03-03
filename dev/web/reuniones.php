@@ -42,9 +42,11 @@
                 */
                $(document).ready(
                 function() {
-                    var jfcalplugin = $("#reunionesCal").jFrontierCal({
+                    var calendarId = "reunionesCal";
+                    var jfcalplugin = $("#"+calendarId).jFrontierCal({
                         date: new Date(),
-                        dragAndDropEnabled: false
+                        dragAndDropEnabled: false,
+                        agendaClickCallback: myAgendaClickHandler
                     }).data("plugin");
                     try{
                         /**
@@ -53,7 +55,7 @@
                         var dataList = createCalendarData();
                         $.each(dataList,function(idx,item){
                             jfcalplugin.addAgendaItem(
-                            "#reunionesCal",
+                            "#"+calendarId,
                             item.titulo,
                             item.fechaInicio,
                             item.fechaFin,
@@ -79,8 +81,30 @@
                         
                     }
                     result.push(object);
+                    object = {
+                        titulo:"Test 2",
+                        fechaInicio:new Date(2013,02,01,0,0,0,0),
+                        fechaFin: new Date(2013,02,03,0,0,0,0),
+                        allDay:true,
+                        data:{url:"http://google.com"},
+                        displayProp:{backgroundColor:null,foregroundColor:null}
+                        
+                    }
+                    result.push(object);
                     return result;
                 }
+                /**
+                 * Called when user clicks and agenda item
+                 * use reference to plugin object to edit agenda item
+                 */
+               function myAgendaClickHandler(eventObj){
+                       // Get ID of the agenda item from the event object
+                       var agendaId = eventObj.data.agendaId;		
+                       // pull agenda item from calendar
+                       var agendaItem = jfcalplugin.getAgendaItemById("#"+calendarId,agendaId);
+                       clickAgendaItem = agendaItem;
+                       $("#display-event-form").dialog('open');
+               };
         </script>
 		
 
