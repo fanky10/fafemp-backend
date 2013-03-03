@@ -43,6 +43,11 @@ class JSONReunion{
         $reunionFecInicio = $reunion->getFechaInicio();
         if (isset($reunionFecInicio)) {
             $tstampInicio = strtotime($reunionFecInicio);
+            $tstampFin = $tstampFin;
+        }
+        $reunionFecFin = $reunion->getFechaFin();
+        if (isset($reunionFecFin)) {//si esta seteada la sobreescribimos (:
+            $tstampFin = strtotime($reunionFecFin);
         }
         $calendarItem->fechaInicio = $tstampInicio;
         $calendarItem->fechaFin = $tstampFin;
