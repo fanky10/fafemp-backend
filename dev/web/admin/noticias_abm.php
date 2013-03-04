@@ -131,7 +131,7 @@ if ($action == "add") {
 	                echo '</div>';
 	                ?>
 				<div class="three columns">
-	            	<a class="radius button" href="index.php">Volver a Noticias</a>
+	            	<a class="radius button" href="noticias.php">Volver a Noticias</a>
 				</div>
 	            <div class="three columns" ></div>
 	

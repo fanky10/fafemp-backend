@@ -133,7 +133,7 @@ if ($action == "add") {
 	                echo '</div>';
 	                ?>
 				<div class="three columns">
-	            	<a class="radius button" href="index.php">Volver a Reuniones</a>
+	            	<a class="radius button" href="reuniones.php">Volver a Reuniones</a>
 				</div>
 	            <div class="three columns" ></div>
 	
