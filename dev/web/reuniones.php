@@ -52,9 +52,7 @@
                     showDateMessage();
                     
                     try{
-                        /**
-                         * http://library.osu.edu/inc/frontierCalendar/calendar.html#AddAgendaItem
-                         */
+                        
                         $.getJSON('reuniones_list.php',
                         {
                         }, function(response){
@@ -69,6 +67,7 @@
                     
                 function agregaEventos(dataList){
                     try{
+                    //http://library.osu.edu/inc/frontierCalendar/calendar.html#AddAgendaItem
                     $.each(dataList,function(idx,item){
                         var jsonItem = JSON.parse(item);
                         var fInicio = new Date(jsonItem.fechaInicio*1000);
@@ -79,7 +78,7 @@
                             fInicio,
                             fFin,
                             true,
-                            null,
+                            {idReunion:jsonItem.idReunion},//data
                             null
                         );
                     });
@@ -97,8 +96,7 @@
                        var agendaId = eventObj.data.agendaId;		
                        // pull agenda item from calendar
                        var agendaItem = jfcalplugin.getAgendaItemById("#"+calendarId,agendaId);
-                       clickAgendaItem = agendaItem;
-                       $("#display-event-form").dialog('open');
+                       window.open('reunion.php?id='+agendaItem.data['idReunion'],'_self');
                };
                
                /**
