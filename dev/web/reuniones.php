@@ -140,21 +140,6 @@
         <!-- Author -->
         <link type="text/plain" rel="author" href="humans.txt" />
 
-        <style type='text/css'>
-
-                body {
-                        margin-top: 40px;
-                        text-align: center;
-                        font-size: 14px;
-                        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-                        }
-
-                #calendar {
-                        width: 750px;
-                        margin: 0 auto;
-                        }
-
-        </style>
         
     </head>
     <body>
@@ -177,12 +162,12 @@
             <div class="row">
                 <div class="twelve columns">
                     <br><br>
-                    <div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
+                    <div id="toolbar" align="center" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; horizontal-align:middle; white-space:nowrap; overflow: hidden;">
                         <!-- this looks awesome! -->
                         <button id="BtnPreviousMonth" class="radius button">Mes Anterior</button>
                         <button id="BtnNextMonth" class="radius button">Mes Siguiente</button>
                     </div>
-                    <div id="subToolBar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
+                    <div id="subToolBar" align="center" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
                         
                     </div>
         
