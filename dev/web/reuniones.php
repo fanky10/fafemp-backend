@@ -79,7 +79,7 @@
                             fFin,
                             true,
                             {idReunion:jsonItem.idReunion},//data
-                            {backgroundColor:"#003DF5",foregroundColor:null}//displayProp
+                            {backgroundColor:"#487386",foregroundColor:null}//displayProp
                         );
                     });
                         
