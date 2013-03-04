@@ -48,14 +48,40 @@
                 $( "#datepickerInicio" ).datepicker({
                     onSelect: function(textoFecha, objDatepicker){
                         $("#datepickerFin").val(textoFecha);
+                        
                     }
                 });
                 $( "#datepickerFin" ).datepicker({
                     onSelect: function(textoFecha, objDatepicker){
                         //TODO: check if fechaFin >= fechaInicio
+                        $("#formReunion").valid();
+                        
                     }
                 });
+                $.validator.addMethod(
+                    "validDateFormat",
+                    function(value, element) {
+                        return value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
+                    },
+                    "Por favor ingrese la fecha en formato dd/mm/yyyy."
+                );
+                $.validator.addMethod(
+                    "validMinDate",
+                    function(value, element) {
+                        var fechaInicio = parseDate($("#datepickerInicio").val());
+                        var fechaFin = parseDate(value);
+                        
+                        return fechaInicio<=fechaFin;
+                    },
+                    "Por favor ingrese una fecha de fin mayor a la de inicio."
+                );
             });
+            // parse a date in dd/mm/yyyy
+            function parseDate(input) {
+              var parts = input.match(/(\d+)/g);
+              // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+              return new Date(parts[2], parts[1]-1, parts[0]); // months are 0-based
+            }
         </script>
         <script type="text/javascript">
             $(function(){
@@ -63,20 +89,24 @@
                     rules: {
                         'titulo': 'required',
                         'cuerpo': 'required',
-                        'fecha_inicio':'required',
+                        'fecha_inicio':{required:true,validDateFormat: true},
                         'fecha_fin':{
-                            required: true
-                            //min: 'fecha_inicio'
-                            
+                            required: true,
+                            validDateFormat: true,
+                            validMinDate: true
                         }
                     },
                     messages: {
                         'titulo': 'Debe ingresar un titulo de reunion.',
                         'cuerpo': 'Debe ingresar un cuerpo a la reunion.',
-                        'fecha_inicio': 'Debe ingresar una fecha de inicio',
+                        'fecha_inicio': {
+                            required:'Debe ingresar una fecha de inicio',
+                            validDateFormat:'Debe ingresar una fecha con formato dd/mm/yyy'
+                        },
                         'fecha_fin':{
-                            required: 'Debe ingresar una fecha de fin'
-                            //min: "La fecha de fin debe ser mayor a la fecha de inicio"
+                            required: 'Debe ingresar una fecha de fin',
+                            validDateFormat:'Debe ingresar una fecha con formato dd/mm/yyy',
+                            validMinDate: 'Debe ingresar una fecha de fin posterior a la de inicio'
                         } 
                     },
                     submitHandler: function(form) {
