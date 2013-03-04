@@ -50,6 +50,7 @@
                 };
                 ?>
                 <a href="noticias.php" title="Noticias">Noticias</a></li>
+<<<<<<< HEAD
 
                 <li>|</li>
 
@@ -61,6 +62,10 @@
                 };
                 ?>
                 <a href="reuniones.php" title="Reuniones">Reuniones</a></li>
+=======
+                <li>|</li>
+                <li><a href="reuniones.php" title="Reuniones">Reuniones</a></li>
+>>>>>>> f7196f79ffb88541cd859df7b97717302a74feb5
             </ul>
         </div>
     </div>
