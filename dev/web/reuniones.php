@@ -49,6 +49,8 @@
                         agendaClickCallback: myAgendaClickHandler
                     }).data("plugin");
                     
+                    showDateMessage();
+                    
                     try{
                         /**
                          * http://library.osu.edu/inc/frontierCalendar/calendar.html#AddAgendaItem
@@ -102,36 +104,34 @@
                /**
                 * Initialize previous month button
                 */
-               $("#BtnPreviousMonth").button();
                $("#BtnPreviousMonth").click(function() {
                        jfcalplugin.showPreviousMonth("#"+calendarId);
-                       // update the jqeury datepicker value
-                       var calDate = jfcalplugin.getCurrentDate("#"+calendarId);// returns Date object
-                       var cyear = calDate.getFullYear();
-                       // Date month 0-based (0=January)
-                       var cmonth = calDate.getMonth();
-                       var cday = calDate.getDate();
-                       // jquery datepicker month starts at 1 (1=January) so we add 1
-                       $("#dateSelect").datepicker("setDate",cyear+"-"+(cmonth+1)+"-"+cday);
+                       showDateMessage();
                        return false;
                });
                
                /**
                 * Initialize next month button
                 */
-               $("#BtnNextMonth").button();
                $("#BtnNextMonth").click(function() {
                        jfcalplugin.showNextMonth("#"+calendarId);
-                       // update the jqeury datepicker value
-                       var calDate = jfcalplugin.getCurrentDate("#"+calendarId);// returns Date object
-                       var cyear = calDate.getFullYear();
-                       // Date month 0-based (0=January)
-                       var cmonth = calDate.getMonth();
-                       var cday = calDate.getDate();
-                       // jquery datepicker month starts at 1 (1=January) so we add 1
-                       $("#dateSelect").datepicker("setDate",cyear+"-"+(cmonth+1)+"-"+cday);		
+                       showDateMessage();
                        return false;
                });
+               function showDateMessage(){
+                   var calDate = jfcalplugin.getCurrentDate("#"+calendarId);// returns Date object
+                    var cyear = calDate.getFullYear();
+                    // Date month 0-based (0=January)
+                    var cmonth = calDate.getMonth();
+                    var config = {
+                        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                        monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+                        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                        dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb']
+                    };
+                    var message = config.monthNames[cmonth] + '-' + cyear; 
+                    $("#subToolBar").html(message);
+               }
                });
 
         </script>
@@ -178,8 +178,12 @@
                 <div class="twelve columns">
                     <br><br>
                     <div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
-                        <button id="BtnPreviousMonth">Mes Anterior</button>
-                        <button id="BtnNextMonth">Mes Siguiente</button>
+                        <!-- this looks awesome! -->
+                        <button id="BtnPreviousMonth" class="radius button">Mes Anterior</button>
+                        <button id="BtnNextMonth" class="radius button">Mes Siguiente</button>
+                    </div>
+                    <div id="subToolBar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
+                        
                     </div>
         
                     <br>
