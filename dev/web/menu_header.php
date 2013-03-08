@@ -23,22 +23,8 @@
                 <a href="nosotros.php" title="Nosotros">Nosotros</a></li>
 
                 <li>|</li>
-
-                <li><a href="campus-virtual.html" title="Campus Virtual">Campus Virtual</a></li>
-                <li>|</li>
-                <li><a href="foro.html" title="Foros">Foro</a></li>
-                <li>|</li>
+                
                 <li><a href="autoridades.html" title="Autoridades">Autoridades</a></li>
-                <li>|</li>
-
-                <?php
-                if ($seccion == "contacto") {
-                    echo '<li class="active">';
-                } else {
-                    echo "<li>";
-                };
-                ?>
-                <a href="contacto.php" title="Contacto">Contacto</a></li>
 
                 <li>|</li>
 
@@ -50,6 +36,7 @@
                 };
                 ?>
                 <a href="noticias.php" title="Noticias">Noticias</a></li>
+
                 <li>|</li>
 
                 <?php
@@ -60,7 +47,26 @@
                 };
                 ?>
                 <a href="reuniones.php" title="Reuniones">Reuniones</a></li>
-              
+
+
+                <li>|</li>
+
+                <li><a href="campus-virtual.html" title="Campus Virtual">Campus Virtual</a></li>
+                <li>|</li>
+                <li><a href="foro.html" title="Foros">Foro</a></li>
+
+                <li>|</li>
+
+                <?php
+                if ($seccion == "contacto") {
+                    echo '<li class="active">';
+                } else {
+                    echo "<li>";
+                };
+                ?>
+                <a href="contacto.php" title="Contacto">Contacto</a></li>
+
+
             </ul>
         </div>
     </div>
