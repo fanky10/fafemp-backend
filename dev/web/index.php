@@ -34,8 +34,10 @@
         <?php include_once 'header.php'; ?>
 
         <!-- End Header and Nav -->
-        <?php $seccion = "home";
-        include_once 'menu_header.php'; ?>
+        <?php
+        $seccion = "home";
+        include_once 'menu_header.php';
+        ?>
         <!-- First Band (Slider) -->
         <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
         <div class="multimedia">
@@ -82,6 +84,27 @@
                         subatendidas del país y el continente, generando guías académicas
                         de diagnóstico y tratamiento de enfermedades regionales
                         prevalentes y alternativas de segunda opinión médica a distancia.</p>
+
+                    <br>
+                    <br>
+                    <div class="eight columns">
+                        <div class="four columns sponsor-wrapper">
+                            <div class="table">
+                                <ul id="sponsors"> 
+                                    <li><a class="redTelesaludWhite" href="#"></a></li> 
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="four columns sponsor-wrapper">
+                            <div class="table">
+                                <ul id="sponsors"> 
+                                    <li><a class="bvs" href="#"></a></li> 
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="four columns">
