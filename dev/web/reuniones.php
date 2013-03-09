@@ -79,7 +79,7 @@
                             fFin,
                             true,
                             {idReunion:jsonItem.idReunion},//data
-                            {backgroundColor:"#487386",foregroundColor:null}//displayProp
+                            {backgroundColor:"#30a5b0",foregroundColor:null}//displayProp
                         );
                     });
                         
@@ -158,25 +158,24 @@
         <!-- Three-up Content Blocks -->
         <div class="content">
             <div class="row">
-                <div class="twelve columns">
-                    <br><br>
-                    <div id="toolbar" align="center" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; horizontal-align:middle; white-space:nowrap; overflow: hidden;">
-                        <!-- this looks awesome! -->
-                        <button id="BtnPreviousMonth" class="radius button">Mes Anterior</button>
-                        <button id="BtnNextMonth" class="radius button">Mes Siguiente</button>
+                <div class="twelve columns ui-widget">
+                    
+                    <div id="toolbar" align="center" style="padding:3px; vertical-align: middle; horizontal-align:middle; white-space:nowrap; overflow: hidden;">
+	                        <!-- this looks awesome! -->
+	                        <div id="subToolBar" align="center"  style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;"></div>
+	                        <br>
+	                        <button id="BtnPreviousMonth" class="small button">Mes Anterior</button>
+	                        <button id="BtnNextMonth" class="small button">Mes Siguiente</button>
+	                    	<br>
+	                    
+	                    <br>
+	                    <!--
+	                    You can use pixel widths or percentages. Calendar will auto resize all sub elements.
+	                    Height will be calculated by aspect ratio. Basically all day cells will be as tall
+	                    as they are wide.
+	                    -->
+	                    <div id="reunionesCal"></div>
                     </div>
-                    <div id="subToolBar" align="center" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; white-space:nowrap; overflow: hidden;">
-                        
-                    </div>
-        
-                    <br>
-        
-                    <!--
-                    You can use pixel widths or percentages. Calendar will auto resize all sub elements.
-                    Height will be calculated by aspect ratio. Basically all day cells will be as tall
-                    as they are wide.
-                    -->
-                    <div id="reunionesCal"></div>
                 </div>
             </div>
         </div>
