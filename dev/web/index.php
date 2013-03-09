@@ -93,7 +93,7 @@
 
                 <div class="four columns">
                     <h3>Unidades académicas participantes</h3>
-                    <a href="https://maps.google.com.ar/maps/ms?msid=206810590642046489742.0004d26020155865bcfe4&msa=0&ll=-33.998027,-61.21582&spn=10.121215,20.214844&t=m&output=embed?iframe=true&width=100%&height=100%" rel="prettyPhoto[iframes]">
+                    <a href="https://maps.google.co.in/maps/ms?msid=206810590642046489742.0004d771b22020fd69670&msa=0&ll=-31.615966,-66.181641&spn=20.291325,40.429688&t=m&output=embed?iframe=true&width=100%&height=100%" rel="prettyPhoto[iframes]">
                         <img src="images/mapa-argentina-fafemp.png" alt="Google Maps - Argentina" /> 
                     </a>
                 </div>
