@@ -4,6 +4,8 @@
 @include_once '../init.php';
 @include_once ROOT_DIR . '/repositorios/imagenes_repository.php';
 @include_once ROOT_DIR . '/entidades/imagen.php';
+@include_once ROOT_DIR . '/entidades/imagen_noticia.php';
+@include_once ROOT_DIR . '/entidades/imagen_reunion.php';
 @include_once ROOT_DIR . '/util/utilidades.php';
 
 class DataImagenes extends Data implements ImagenesRepository {
@@ -17,9 +19,8 @@ class DataImagenes extends Data implements ImagenesRepository {
     }
 
     public function getImagen($idImagen) {
-        $query = "select imagen_id,imagen_path,imagen_nombre,imagen_fec_hora,imagen_eliminada,imagen_nombre_archivo,imagen_orden FROM " . Imagen::$TABLE . 
-                " WHERE imagen_id= ? ".
-                " ORDER BY imagen_orden";
+        $query = "select imagen_id,imagen_path,imagen_nombre,imagen_fec_hora,imagen_eliminada,imagen_nombre_archivo, 1 as imagen_orden FROM " . Imagen::$TABLE .
+                " WHERE imagen_id= ? ";
         $stmt = $this->prepareStmt($query);
 
         $stmt->bind_param('i', $idImagen);
@@ -27,7 +28,7 @@ class DataImagenes extends Data implements ImagenesRepository {
         $stmt->execute();
 
         $result = $stmt->get_result();
-        
+
         while ($row = $result->fetch_assoc()) {
             return $this->createImageObject($row);
         }
@@ -35,33 +36,30 @@ class DataImagenes extends Data implements ImagenesRepository {
     }
 
     public function addImagenNoticia(Imagen $imagen, $noticiaId) {
-        $non_query = "insert into " . Imagen::$TABLE . " (imagen_path,imagen_nombre,imagen_nombre_archivo,imagen_orden,imagen_noticia_id) 
-            values(?,?,?,?,?)";
+        $this->addImagen($imagen);
+        //conseguimos el idImagen generado
+        $imagenId = $this->getUltimoID(Imagen::$TABLE, Imagen::$COLUMN_ID);
+
+        $non_query = "insert into " . ImagenNoticia::$TABLE . " (imagen_id,noticia_id,imagen_orden) 
+            values(?,?,?)";
         $stmt = $this->prepareStmt($non_query);
-        if (!$stmt->bind_param('sssii', $path, $name,$nombreArchivo, $orden,$noticiaId)) {
-            echo "addImagen - Bind Param failed: (" . $stmt->errno . ") " . $stmt->error;
+        if (!$stmt->bind_param('iii', $imagenId, $noticiaId, $orden)) {
+            echo "addImagenNoticia - Bind Param failed: (" . $stmt->errno . ") " . $stmt->error;
             return -1;
         }
-
-
-        $name = $imagen->getNombre();
-        $nombreArchivo = $imagen->getNombreArchivo();
-        $path = $imagen->getPath();
         $orden = $imagen->getOrden();
-
         if (!$stmt->execute()) {
             echo "addImagen - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
             return -1;
         }
-        $stmt->close();
-        $id = $this->getUltimoID(Imagen::$TABLE, Imagen::$COLUMN_ID);
 
-        return $id; //returns generated id
+        return $imagenId; //returns generated id
     }
 
     public function getImagenesNoticia($noticiaId) {
-        $query = "select imagen_id,imagen_path,imagen_nombre,imagen_fec_hora,imagen_eliminada,imagen_nombre_archivo,imagen_orden FROM " . Imagen::$TABLE . 
-                " WHERE imagen_noticia_id= ? and imagen_eliminada=0".
+        $query = "select i.imagen_id,i.imagen_path,i.imagen_nombre,i.imagen_fec_hora,i.imagen_eliminada,i.imagen_nombre_archivo,ii.imagen_orden FROM " . Imagen::$TABLE . " as i" .
+                " INNER JOIN " . ImagenNoticia::$TABLE . " as ii ON ii.imagen_id=i.imagen_id" .
+                " WHERE ii.noticia_id= ? and i.imagen_eliminada=0" .
                 " ORDER BY imagen_orden";
         $stmt = $this->prepareStmt($query);
 
@@ -101,22 +99,124 @@ class DataImagenes extends Data implements ImagenesRepository {
         return $oImagen;
     }
 
-    public function editarImagen(Imagen $imagen) {
-        $non_query = "update " . Imagen::$TABLE . " set imagen_path=?, imagen_nombre=?,imagen_eliminada=?, imagen_nombre_archivo=?,imagen_orden=? where imagen_id=?";
+    public function editarImagenNoticia(Imagen $imagen) {
+        
+        $this->editarImagen($imagen);
+        
+        $non_query = "update " . ImagenNoticia::$TABLE . " set imagen_orden=? where imagen_id=?";
         $stmt = $this->prepareStmt($non_query);
-        $stmt->bind_param('ssisii', $path, $nombre,$eliminada,$nombreArchivo,$orden,$imagenId);
+        $stmt->bind_param('ii', $orden, $imagenId);
+
+        $imagenId = $imagen->getId();
+        $orden = $imagen->getOrden();
+
+        if (!$stmt->execute()) {
+            echo "editarImagenNoticia - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        /* close statement and connection */
+        $stmt->close();
+    }
+    
+    
+    
+    public function editarImagen(Imagen $imagen){
+        $non_query = "update " . Imagen::$TABLE . " set imagen_path=?, imagen_nombre=?,imagen_eliminada=?, imagen_nombre_archivo=? where imagen_id=?";
+        $stmt = $this->prepareStmt($non_query);
+        $stmt->bind_param('ssisi', $path, $nombre, $eliminada, $nombreArchivo, $imagenId);
 
         $eliminada = $imagen->getEliminada();
         $imagenId = $imagen->getId();
         $nombre = $imagen->getNombre();
         $nombreArchivo = $imagen->getNombreArchivo();
-        $orden = $imagen->getOrden();
         $path = $imagen->getPath();
-        
+
         if (!$stmt->execute()) {
-            echo "addNoticia - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+            echo "editarImagen - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+
+    }
+
+    public function addImagenReunion(Imagen $imagen, $reunionId) {
+        $this->addImagen($imagen);
+        //conseguimos el idImagen generado
+        $imagenId = $this->getUltimoID(Imagen::$TABLE, Imagen::$COLUMN_ID);
+
+        $non_query = "insert into " . ImagenReunion::$TABLE . " (imagen_id,reunion_id,imagen_orden) 
+            values(?,?,?)";
+        $stmt = $this->prepareStmt($non_query);
+        if (!$stmt->bind_param('iii', $imagenId, $reunionId, $orden)) {
+            echo "addImagenReunion - Bind Param failed: (" . $stmt->errno . ") " . $stmt->error;
+            return -1;
+        }
+        $orden = $imagen->getOrden();
+        if (!$stmt->execute()) {
+            echo "addImagenReunion - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+            return -1;
+        }
+
+        return $imagenId; //returns generated id
+    }
+
+
+    public function getImagenesReunion($reunionId) {
+        $query = "select i.imagen_id,i.imagen_path,i.imagen_nombre,i.imagen_fec_hora,i.imagen_eliminada,i.imagen_nombre_archivo,ii.imagen_orden FROM " . Imagen::$TABLE . " as i" .
+                " INNER JOIN " . ImagenReunion::$TABLE . " as ii ON ii.imagen_id=i.imagen_id" .
+                " WHERE ii.reunion_id= ? and i.imagen_eliminada=0" .
+                " ORDER BY imagen_orden";
+        $stmt = $this->prepareStmt($query);
+
+        $stmt->bind_param('i', $reunionId);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+
+        $img_idx = 0;
+        $vImagenes = array();
+        while ($row = $result->fetch_assoc()) {
+            $oImagen = $this->createImageObject($row);
+            $vImagenes[$img_idx] = $oImagen;
+            $img_idx++;
+        }
+        return $vImagenes;
+    }
+
+    public function editarImagenReunion(Imagen $imagen) {
+        
+        $this->editarImagen($imagen);
+        
+        $non_query = "update " . ImagenReunion::$TABLE . " set imagen_orden=? where imagen_id=?";
+        $stmt = $this->prepareStmt($non_query);
+        $stmt->bind_param('ii', $orden, $imagenId);
+
+        $imagenId = $imagen->getId();
+        $orden = $imagen->getOrden();
+
+        if (!$stmt->execute()) {
+            echo "editarImagenNoticia - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
         }
         /* close statement and connection */
+        $stmt->close();
+    }
+    
+    private function addImagen(Imagen $imagen){
+        $non_query = "insert into " . Imagen::$TABLE . " (imagen_path,imagen_nombre,imagen_nombre_archivo) 
+            values(?,?,?)";
+        $stmt = $this->prepareStmt($non_query);
+        if (!$stmt->bind_param('sss', $path, $name, $nombreArchivo)) {
+            echo "addImagen - Bind Param failed: (" . $stmt->errno . ") " . $stmt->error;
+            return -1;
+        }
+        $name = $imagen->getNombre();
+        $nombreArchivo = $imagen->getNombreArchivo();
+        $path = $imagen->getPath();
+
+        if (!$stmt->execute()) {
+            echo "addImagen - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+            return -1;
+        }
+
         $stmt->close();
     }
 

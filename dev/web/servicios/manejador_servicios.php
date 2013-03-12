@@ -4,6 +4,7 @@
 @include_once ROOT_DIR . '/mocked/noticias.php';
 @include_once ROOT_DIR . '/datos/imagenes.php';
 @include_once ROOT_DIR . '/datos/noticias.php';
+@include_once ROOT_DIR . '/datos/reuniones.php';
 @include_once ROOT_DIR . '/mocked/UserServiceMocked.php';
 @include_once ROOT_DIR . '/datos/usuarios.php';
 
@@ -12,6 +13,7 @@ class ManejadorServicios {
     private $noticiasRepository;
     private $imagenesRepository;
     private $usuariosRepository;
+    private $reunionesRepository;
 
     public function __construct() {
         
@@ -22,8 +24,8 @@ class ManejadorServicios {
         $idImagen = $this->imagenesRepository->addImagenNoticia($imagen, $noticiaId);
         $imagen->setId($idImagen);
     }
-    
-    public function editarNoticia(Noticia $oNoticia){
+
+    public function editarNoticia(Noticia $oNoticia) {
         $this->noticiasRepository = new DataNoticias();
         $this->noticiasRepository->editarNoticia($oNoticia);
     }
@@ -68,13 +70,13 @@ class ManejadorServicios {
         $this->usuariosRepository = new DataUsuarios();
         return $this->usuariosRepository->cambioPassword($user, $newPassword);
     }
-    
-    public function editarImagen(Imagen $oImagen){
+
+    public function editarImagenNoticia(Imagen $oImagen) {
         $this->imagenesRepository = new DataImagenes();
-        $this->imagenesRepository->editarImagen($oImagen);
+        $this->imagenesRepository->editarImagenNoticia($oImagen);
     }
-    
-    public function getImagen($idImagen){
+
+    public function getImagen($idImagen) {
         $this->imagenesRepository = new DataImagenes();
         return $this->imagenesRepository->getImagen($idImagen);
     }
@@ -99,13 +101,79 @@ class ManejadorServicios {
             $oNoticia->setImagenes($vImagenes);
         }
     }
-    
-    public function getImagenesNoticia($noticiaId){
+
+    public function getImagenesNoticia($noticiaId) {
         $this->imagenesRepository = new DataImagenes();
         $vImagenes = $this->imagenesRepository->getImagenesNoticia($noticiaId);
         return $vImagenes;
     }
 
+    public function getReunionById($reunionId) {
+        $this->reunionesRepository = new DataReuniones();
+        $oReunion = $this->reunionesRepository->getReunionById($reunionId);
+        $this->asignaImagenesReunion($oReunion);
+        return $oReunion;
+    }
+
+    public function getReuniones($limit) {
+        $this->reunionesRepository = new DataReuniones();
+        $vReuniones = $this->reunionesRepository->getReuniones($limit);
+        $this->asignaImagenesReuniones($vReuniones);
+        return $vReuniones;
+    }
+
+    public function addReunion(Reunion $reunion) {
+        $this->reunionesRepository = new DataReuniones();
+        return $this->reunionesRepository->addReunion($reunion);
+    }
+    
+    public function editarReunion(Reunion $reunion) {
+        $this->reunionesRepository = new DataReuniones();
+        return $this->reunionesRepository->editarReunion($reunion);
+    }
+    
+    public function eliminarImagen(Imagen $imagen){
+        $imagen->setEliminada(1);
+        $this->imagenesRepository = new DataImagenes();
+        $this->imagenesRepository->editarImagen($imagen);
+    }
+    
+    public function getImagenesReunion($reunionId){
+        $this->imagenesRepository = new DataImagenes();
+        return $this->imagenesRepository->getImagenesReunion($reunionId);
+    }
+    public function addImagenReunion(Imagen $imagen,$reunionId){
+        $this->imagenesRepository = new DataImagenes();
+        return $this->imagenesRepository->addImagenReunion($imagen, $reunionId);
+    }
+    public function editarImagenReunion(Imagen $imagen){
+        $this->imagenesRepository = new DataImagenes();
+        return $this->imagenesRepository->editarImagenReunion($imagen);
+    }
+    
+    
+
+    private function asignaImagenesReunion($oReunion) {
+        if (!isset($oReunion)) {
+            return;
+        }
+        $this->imagenesRepository = new DataImagenes();
+        $vImagenes = $this->imagenesRepository->getImagenesReunion($oReunion->getId());
+        $oReunion->setImagenes($vImagenes);
+    }
+
+    private function asignaImagenesReuniones($vReuniones) {
+        if (!isset($vReuniones) || empty($vReuniones)) {
+            return;
+        }
+        $this->imagenesRepository = new DataImagenes();
+        $oReunion = new Reunion();
+        foreach ($vReuniones as $oReunion) {
+            $vImagenes = $this->imagenesRepository->getImagenesReunion($oReunion->getId());
+            $oReunion->setImagenes($vImagenes);
+        }
+    }
+    
 }
 
 ?>

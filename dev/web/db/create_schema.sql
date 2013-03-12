@@ -18,28 +18,36 @@ CREATE TABLE noticias(
     noticia_eliminada TINYINT(1) default 0
 )ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS imagenes_noticia;
+DROP TABLE IF EXISTS imagenes;
 
 /**
 * una noticia, puede tener muchas imagenes, una imagen pertenece a una noticia.
 */
-
-CREATE TABLE imagenes_noticia (
+CREATE TABLE imagenes (
     imagen_id integer unsigned not null primary key AUTO_INCREMENT,
     imagen_path varchar(200) not null,
     imagen_nombre varchar(200) not null,
-    imagen_noticia_id integer unsigned not null, #una imagen no puede no saber a que noticia pertenece
     imagen_eliminada TINYINT(1) default 0,
     imagen_fec_hora timestamp not null default current_timestamp,
-    imagen_nombre_archivo varchar(200) not null,
-    imagen_orden integer unsigned not null
+    imagen_nombre_archivo varchar(200) not null
+)ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS imagenes_noticia;
+
+CREATE TABLE imagenes_noticia (
+    imagen_id integer unsigned not null,
+    noticia_id integer unsigned not null, #una imagen no puede no saber a que noticia pertenece
+    imagen_orden integer unsigned not null,
+    primary key(imagen_id)#de esta forma una imagen tiene una noticia y una noticia muchas imagenes.
 )ENGINE=InnoDB;
 
 /**
 * foreign keys
 */
 
-ALTER TABLE imagenes_noticia ADD CONSTRAINT `FK_imagenes_noticia_id_1` FOREIGN KEY (`imagen_noticia_id`) REFERENCES `noticias` (`noticia_id`);
+ALTER TABLE imagenes_noticia ADD CONSTRAINT `FK_imagenes_noticia_id_1` FOREIGN KEY (`noticia_id`) REFERENCES `noticias` (`noticia_id`);
+ALTER TABLE imagenes_noticia ADD CONSTRAINT `FK_imagenes_noticia_id_2` FOREIGN KEY (`imagen_id`) REFERENCES `imagenes` (`imagen_id`);
+
 
 DROP TABLE IF EXISTS usuarios;
 
@@ -48,4 +56,36 @@ CREATE TABLE usuarios(
     usuario_pass varchar(32) not null
 )ENGINE=InnoDB;
 
+/* REUNIONES */
+DROP TABLE IF EXISTS reuniones;
 
+CREATE TABLE reuniones(
+    reunion_id integer unsigned not null primary key AUTO_INCREMENT,
+    reunion_fec_ini datetime not null,
+    reunion_fec_fin datetime not null,
+    reunion_titulo varchar(100) not null,
+    reunion_cuerpo text not null,
+    reunion_eliminada TINYINT(1) default 0
+)ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS imagenes_reunion;
+
+/**
+* una reunion, puede tener muchas imagenes, una imagen pertenece a una reunion.
+*/
+
+CREATE TABLE imagenes_reunion (
+    imagen_id integer unsigned not null,
+    reunion_id integer unsigned not null,
+    imagen_orden integer unsigned not null,
+    primary key (imagen_id)
+)ENGINE=InnoDB;
+
+/**
+* foreign keys
+*/
+
+ALTER TABLE imagenes_reunion ADD CONSTRAINT `FK_imagenes_reunion_id_1` FOREIGN KEY (`reunion_id`) REFERENCES `reuniones` (`reunion_id`);
+ALTER TABLE imagenes_reunion ADD CONSTRAINT `FK_imagenes_reunion_id_2` FOREIGN KEY (`imagen_id`) REFERENCES `imagenes` (`imagen_id`);
+
+/* FIN REUNIONES*/
