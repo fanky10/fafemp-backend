@@ -53,7 +53,7 @@
 
                 <li><a href="campus-virtual.html" title="Campus Virtual">Campus Virtual</a></li>
                 <li>|</li>
-                <li><a href="foro.html" title="Foros">Foro</a></li>
+                <li><a href="foro.html" title="Foros">Comisiones</a></li>
 
                 <li>|</li>
 
