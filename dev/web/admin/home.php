@@ -48,7 +48,7 @@ $oImagen = new Imagen();
         <?php
         include_once 'admin_header.php';
         include_once 'admin_menu.php';
-        $navigateTitle = "Noticias";
+        $navigateTitle = "Panel Administración";
         include_once 'admin_navigate.php';
         ?>
 

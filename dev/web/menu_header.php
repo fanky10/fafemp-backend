@@ -53,7 +53,14 @@
 
                 <li><a href="campus-virtual.html" title="Campus Virtual">Campus Virtual</a></li>
                 <li>|</li>
-                <li><a href="foro.html" title="Foros">Foro</a></li>
+                  <?php
+                if ($seccion == "comisiones") {
+                    echo '<li class="active">';
+                } else {
+                    echo "<li>";
+                };
+                ?>
+                <a href="comisiones.php" title="Comisiones">Comisiones</a></li>
 
                 <li>|</li>
 
