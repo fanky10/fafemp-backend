@@ -22,7 +22,7 @@
         $title = null;
         $link = "#";
         $img = "images/slider1.jpg";
-        echo '<a href="' . $link . '"><img src="' . $img . '" /><span class="slider-caption">' . $title . '</span></a>';
+        echo '<a href="' . $link . '"><img src="' . $img . '" /></a>';
     }
     foreach ($noticias as $oNoticia) {
 
