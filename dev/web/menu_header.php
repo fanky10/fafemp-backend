@@ -24,7 +24,14 @@
 
                 <li>|</li>
                 
-                <li><a href="autoridades.html" title="Autoridades">Autoridades</a></li>
+                <?php
+                if ($seccion == "autoridades") {
+                    echo '<li class="active">';
+                } else {
+                    echo "<li>";
+                };
+                ?>
+                <a href="autoridades.php" title="Autoridades">Autoridades</a></li>
 
                 <li>|</li>
 
