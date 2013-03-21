@@ -106,20 +106,19 @@
                 </div>
                 <div class="four columns">
                     <h3>Unidades académicas participantes</h3>
-                    <p class="text-justify"><b>Facultad de Medicina de la Universidad de Buenos Aires</b></p>
-                    <p class="text-justify"><b>Facultad de Ciencias Médicas de la Universidad Nacional del Centro de la Provincia de Buenos Aires</b></p>
-                    <p class="text-justify"><b>Facultad de Ciencias Médicas de la Universidad Nacional del Comahue</b></p>
-                    <p class="text-justify"><b>Facultad de Ciencias Médicas de la Universidad Nacional de Córdoba</b></p>
-                    <p class="text-justify"><b>Facultad de Medicina de la Universidad Nacional de Cuyo</b></p>
-                    <p class="text-justify"><b>Facultad de Medicina de la Universidad de Buenos Aires</b></p>
-                    <p class="text-justify"><b>Facultad de Ciencias Médicas de la Universidad Nacional de La Plata</b></p>
-                    <p class="text-justify"><b>Departamento Académico de Ciencias de la Salud y de la Educación de la Universidad Nacional de La Rioja</b></p>
-                    <p class="text-justify"><b>Facultad de Ciencias Médicas de la Universidad Nacional del Litoral</b></p>
-                    <p class="text-justify"><b>Facultad de Medicina de la Universidad Nacional del Nordeste</b></p>
-                    <p class="text-justify"><b>Facultad de Ciencias Médicas de la Universidad Nacional de Rosario</b></p>
-                    <p class="text-justify"><b>Departamento de Ciencias de la Salud de la Universidad Nacional del Sur</b></p>
-                    <p class="text-justify"><b>Facultad de Medicina de la Universidad Nacional de Tucumán </b></p>
-                    <p class="text-justify"><b>Departamento de Ciencias de la Salud de la Universidad Nacional de La Matanza</b></p>
+                    <p class="text-justify"><b><a href="http://www.fmed.uba.ar/">Facultad de Medicina de la Universidad de Buenos Aires</a></b></p>
+                    <p class="text-justify"><b><a href="http://www.salud.unicen.edu.ar/">Departamento de Ciencias Médicas de la Universidad Nacional del Centro de la Provincia de Buenos Aires</a></b></p>
+                    <p class="text-justify"><b><a href="http://uncoma.edu.ar">Facultad de Ciencias Médicas de la Universidad Nacional del Comahue</a></b></p>
+                    <p class="text-justify"><b><a href="http://www.fcm.unc.edu.ar/">Facultad de Ciencias Médicas de la Universidad Nacional de Córdoba</a></b></p>
+                    <p class="text-justify"><b><a href="http://www.fcm.uncu.edu.ar/joomla/">Facultad de Medicina de la Universidad Nacional de Cuyo</a></b>                    </p>
+                    <p class="text-justify"><b><a href="http://www.med.unlp.edu.ar/">Facultad de Ciencias Médicas de la Universidad Nacional de La Plata</a></b></p>
+                    <p class="text-justify"><b><a href="http://www.unlar.edu.ar/">Departamento Académico de Ciencias de la Salud y de la Educación de la Universidad Nacional de La Rioja</a></b></p>
+                    <p class="text-justify"><b><a href="http://www.fcm.unl.edu.ar/">Facultad de Ciencias Médicas de la Universidad Nacional del Litoral</a></b></p>
+                    <p class="text-justify"><b><a href="http://www.med.unne.edu.ar/">Facultad de Medicina de la Universidad Nacional del Nordeste</a></b></p>
+                    <p class="text-justify"><b><a href="http://www.fcm.unr.edu.ar/">Facultad de Ciencias Médicas de la Universidad Nacional de Rosario</a></b></p>
+                    <p class="text-justify"><b><a href="http://www.cienciasdelasalud.uns.edu.ar/">Departamento de Ciencias de la Salud de la Universidad Nacional del Sur</a></b></p>
+                    <p class="text-justify"><a href="http://www.fm.unt.edu.ar/"><b>Facultad de Medicina de la Universidad Nacional de Tucumán </b></a></p>
+                    <p class="text-justify"><b><a href="http://www.unlam.edu.ar/index.php?seccion=3&idArticulo=401">Departamento de Ciencias de la Salud de la Universidad Nacional de La Matanza</a></b></p>
                 </div>
 
             </div>
