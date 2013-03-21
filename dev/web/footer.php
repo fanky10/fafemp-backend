@@ -11,11 +11,11 @@
                         <h4>Contacto</h4>
                         <p class="last">
                             <img src="images/ico-phone.png" alt="Teléfono" /> Tel: (0341) -
-                            555555
+                            5571008
                         </p>
                         <p class="last">
                             <img src="images/ico-phone.png" alt="Teléfono" /> Fax: (0341) -
-                            555555
+                            5571008
                         </p>
                         <p>
                             <img src="images/ico-mail.png" alt="Mail" /> E-mail: <a
@@ -23,7 +23,7 @@
                         </p>
                         <p class="last">
                             <img src="images/ico-home.png" alt="Dirección" /> 
-                            <a href="https://maps.google.com.ar/maps/ms?msid=206810590642046489742.0004d26020155865bcfe4&msa=0&ll=-33.998027,-61.21582&spn=10.121215,20.214844&t=m&output=embed?iframe=true&width=100%&height=100%" rel="prettyPhoto[iframes]">Unidades académicas participantes</a>
+                            <a href="https://maps.google.com/maps/ms?msid=206810590642046489742.0004d771b22020fd69670&msa=0&ll=-32.546813,-58.754883&spn=20.530252,40.429687&t=m&output=embed?iframe=true&width=100%&height=100%" rel="prettyPhoto[iframes]">Unidades académicas participantes</a>
 
                         </p>
                     </div>

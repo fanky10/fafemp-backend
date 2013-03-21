@@ -9,10 +9,20 @@
     $oNoticia = new Noticia();
     $oImagen = new Imagen();
     if (!isset($noticias) || empty ($noticias)) {
-        $title = "Próximamente noticias...";
+        $title = "Salud Pública";
         $link = "#";
-        $img = "http://placehold.it/970x290/E9E9E9&text=Próximamente Noticias";
+        $img = "images/slider3.jpg";
         echo '<a href="' . $link . '"><img src="' . $img . '" /><span class="slider-caption">' . $title . '</span></a>';
+        
+        $title = "Exámen Unificado de Residencias y Posgrado";
+        $link = "#";
+        $img = "images/slider2.jpg";
+        echo '<a href="' . $link . '"><img src="' . $img . '" /><span class="slider-caption">' . $title . '</span></a>';
+        
+        $title = null;
+        $link = "#";
+        $img = "images/slider1.jpg";
+        echo '<a href="' . $link . '"><img src="' . $img . '" /></a>';
     }
     foreach ($noticias as $oNoticia) {
 
