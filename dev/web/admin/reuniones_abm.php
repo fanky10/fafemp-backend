@@ -19,6 +19,7 @@ if (!isset($action) || empty($action)) {
 }
 $controladorImagenes = new ControladorImagenesReunion(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
 $controladorReuniones = new ControladorReuniones($GLOBAL_SETTINGS["reuniones.datepicker.formatter"]);
+$manejador = new ManejadorServicios();
 
 if ($action == "add") {
     $oReunion = $controladorReuniones->agregarReunion();
@@ -44,6 +45,8 @@ if ($action == "add") {
     header($redirectLocation);
     return;
 }
+$oReunion = $manejador->getReunionById($reunionId);
+
 ?>
 
 <!DOCTYPE html>

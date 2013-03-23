@@ -18,9 +18,12 @@ if (!isset($action) || empty($action)) {
 }
 $controladorImagenes = new ControladorImagenesNoticia(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
 $controladorNoticias = new ControladorNoticias();
+$manejador = new ManejadorServicios();
+$noticiaId;
 if ($action == "add") {
     $oNoticia = $controladorNoticias->subirNoticia();
-    $controladorImagenes->setNoticiaId($oNoticia->getId());
+    $noticiaId = $oNoticia->getId();
+    $controladorImagenes->setNoticiaId($noticiaId);
     $oImagenes = $controladorImagenes->subeMultiplesImagenes();
     $oNoticia->setImagenes($oImagenes);
 } else if ($action == "edit") {
@@ -43,6 +46,8 @@ if ($action == "add") {
     header($redirectLocation);
     return;
 }
+//just to make sure everything works fine
+$oNoticia = $manejador->getNoticiaById($noticiaId);
 ?>
 <!DOCTYPE html>
 

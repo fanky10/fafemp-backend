@@ -63,6 +63,10 @@ class Utilidades {
     public static function breakeLines( $text){
         return preg_replace('#(\\\r|\\\n)#', '<br/>',preg_replace('#(\\\r\\\n)#', '<br/>',$text));
     }
+    
+    public static function removeBreakLines( $text){
+        return preg_replace('#(\\\r|\\\n)#', ' ',preg_replace('#(\\\r\\\n)#', ' ',$text));
+    }
 
     #Example: source from: http://snipplr.com/view/3644/
 //    get_date_spanish(time(), true, 'month'); # return Enero

@@ -98,7 +98,7 @@ $oImagen = new Imagen();
                             echo '<div class="four columns">';
                             $limiteCuerpo = $GLOBAL_SETTINGS['news.abm.body.limit'];
                             $shortenText = Utilidades::acortaTexto($oNoticia->getCuerpo(), $limiteCuerpo, ".");
-                            echo $shortenText;
+                            echo Utilidades::removeBreakLines($shortenText);
 
                             echo '</div>';
 

@@ -211,7 +211,7 @@ if ($isRedirect) {
                             <div class="twelve columns">
                                 <label for="descripcion">Cuerpo Noticia</label>
                                 <?php
-                                echo '<textarea rows="4" id="cuerpo" class="required" name="cuerpo">' . $oNoticia->getCuerpo() . '</textarea>';
+                                echo '<textarea rows="4" id="cuerpo" class="required" name="cuerpo">' .  str_replace('<br/>', "\n", Utilidades::breakeLines($oNoticia->getCuerpo())) . '</textarea>';
                                 ?>
 
                             </div>

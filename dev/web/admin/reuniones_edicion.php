@@ -249,7 +249,9 @@ if ($isRedirect) {
                         <div class="row">
                             <div class="twelve columns">
                                 <label for="descripcion">Cuerpo Reunion</label>
-                                <textarea rows="4" id="cuerpo" class="required" name="cuerpo"><?php echo $oReunion->getCuerpo() ?></textarea>
+                                <?php
+                                echo '<textarea rows="4" id="cuerpo" class="required" name="cuerpo">' .  str_replace('<br/>', "\n", Utilidades::breakeLines($oReunion->getCuerpo())) . '</textarea>';
+                                ?>
                             </div>
                             <div class="twelve columns">
                                 <label for="fecha_inicio">Fecha Inicio</label>
