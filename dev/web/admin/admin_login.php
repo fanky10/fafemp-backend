@@ -68,7 +68,7 @@
                                 <input id="user" class="required user" type="text" name="user">
                             </div>
                             <div class="four columns">
-                                <label for="password">Ingrese Pasword</label> 
+                                <label for="password">Ingrese Password</label> 
                                 <input id="pass" class="required pass" type="password" name="pass">
                             </div>
                             <div class="four columns">
