@@ -35,79 +35,44 @@
 
         <!-- End Header and Nav -->
         <?php
-        $seccion = "contacto";
+        $seccion = "comisiones";
         include_once 'menu_header.php';
         ?>
         <!-- First Band (Slider) -->
         <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
         <?php
-        $navigateTitle = "Contacto";
+        $navigateTitle = "Comisiones";
         include_once 'navigate.php';
         ?>
         <!-- Three-up Content Blocks -->
         <div class="content">
             <div class="row">
                 <!-- Contact Details -->
-                <div class="eight columns">
-                    <h3>Contacto</h3>
+                <div class="twelve columns">
+                    <h3>Foros de discusión internos</h3>
 
-                    <?php
-                        if(!isset($emailStatus)){
-                            echo '<p>Por favor pongase en contacto con nosotros por cualquier duda o comentario a través de nuestro formulario de Contacto.<br>A la brevedad nos estaremos comunicando con usted. Muchas gracias!.</p>';
-                        }else if($emailStatus=="success"){
-                            echo '
-                                <div class="alert-box success">
-                                    Su mensaje fue enviado Correctamente!. A la brevedad nos estaremos comunicando con usted!.
-                                    <p class="last">Muchas gracias!</p>
-                                    <a href="" class="close">&times;</a>
-                                </div>';
-                        }else if($emailStatus=="error"){
-                            echo '<div class="alert-box alert">
-                                    Su mensaje no fue enviado. Por favor vuelva a intentarlo.
-                                    <a href="" class="close">&times;</a>
-                                </div>';
-                        }
-                    ?>
-                    <form id="formInscripcion" class="validateform" method="post" action="send-mail.php">
-                        <h5>Formulario de Contacto</h5>
-                        <label for="nombre">Nombre y Apellido</label>
-                        <input type="text" class="twelve required" name="nombre" id="nombre" />
-                        <div class="row">
-                            <div class="six columns">
-                                <label for="telefono">Teléfono</label>
-                                <input type="text" id="telefono" class="required number" name="telefono" />
-                            </div>
-                            <div class="three columns">
-                                <label for="ciudad">Ciudad</label>
-                                <input type="text" id="ciudad" class="required" name="ciudad" />
-                            </div>
-                            <div class="three columns">
-                                <label for="zip">Zip</label>
-                                <input type="text" id="zip" class="required number" name="zip" />
-                            </div>
-                            <div class="twelve columns">
-                                <label for="email">Email</label>
-                                <input type="text" id="email" class="required email" name="email" />
-                            </div>
-                            <div class="twelve columns">
-                                <label for="mensaje">Mensaje</label>
-                                <textarea rows="4" id="mensaje" class="required" name="mensaje"></textarea>
-                                <button type="submit" class="radius button">Enviar</button>
-                                <input id="submitted" type="hidden" value="true" name="submitted">
-                            </div>
-                        </div>
-                    </form>
                 </div>
-                <!-- Sidebar -->
-                <div class="four columns">
-                    <h3>Google Maps</h3>    
-                    <!-- Clicking this placeholder fires the mapModal Reveal modal -->
-                    <p> <a href="https://maps.google.com/maps/ms?msid=206810590642046489742.0004d771b22020fd69670&msa=0&ll=-32.546813,-58.754883&spn=20.530252,40.429687&t=m&output=embed?iframe=true&width=100%&height=100%" rel="prettyPhoto[iframes]">
-                            <img src="images/mapa-argentina-fafemp.png" alt="Google Maps - Argentina" /> 
-                        </a>
-                    </p>
-                </div>  
-                <!-- End Sidebar -->
+                <div class="twelve columns">
+                    <a class="button radius" title="Ver más" href="#">Comisión de Decanos</a>
+                </div>
+                <div class="twelve columns">
+                    <br>
+                </div>
+                <div class="twelve columns">
+                    <a class="button radius" title="Ver más" href="#">Comisión de TICs</a>
+                </div>
+                <div class="twelve columns">
+                    <br>
+                </div>
+                <div class="twelve columns">
+                    <a class="button radius" title="Ver más" href="#">Comisión de PFO </a>
+                </div>
+                <div class="twelve columns">
+                    <br>
+                </div>
+                <div class="twelve columns">
+                    <a class="button radius" title="Ver más" href="#">Comisión de Acreditación</a>
+                </div>           
             </div>
         </div>
 
