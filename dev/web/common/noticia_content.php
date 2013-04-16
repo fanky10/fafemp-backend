@@ -59,7 +59,11 @@ include_once ROOT_DIR . '/util/utilidades.php';
             </section>
         </div>
         <div class="six columns">
-            <p class="text-justify"><?php echo Utilidades::breakeLines($oNoticia->getCuerpo()); ?></p>
+            <?php
+            $cuerpo = Utilidades::breakeLines($oNoticia->getCuerpo());
+            $cuerpo = Utilidades::convertLinkYouTube($cuerpo);
+            ?>
+            <p class="text-justify"><?php echo $cuerpo; ?></p>
         </div>
        	<div id="imgResponse" class="twelve columns" ></div>
 

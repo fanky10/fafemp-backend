@@ -19,22 +19,29 @@ class Utilidades {
      * @param type $char
      * @return type string, recorta el texto al ultimo char que se encuentre dentro de lo que uno busca
      */
+    public static function convertLinkYouTube($text) {
+        $Pos_Link_Youtube = stripos($text, "http://www.youtube.com/watch?v=");
+        $Enlace_Youtube = substr($text, $Pos_Link_Youtube + 31, 11);
+        $text = str_ireplace("http://www.youtube.com/watch?v=" . $Enlace_Youtube, '<iframe width="420" height="315" src="http://www.youtube.com/embed/' . $Enlace_Youtube . '" frameborder="0" allowfullscreen></iframe>', $text);
+        return $text;
+    }
+
     public static function acortaTexto($text, $limite, $char) {
-        if(strlen($text)<=$limite){
+        if (strlen($text) <= $limite) {
             return $text;
         }
         $pos = strripos($text, $char);
         if ($pos === false) {//did not find the $char
-            return substr($text, 0, $limite)." [...]";
+            return substr($text, 0, $limite) . " [...]";
         } else {//si lo encontramos, chequeamos que la posicion sea menor al limite
-            if($pos<$limite){//si lo encontramos todo ok! llegamos donde queriamos (:
-                return substr($text, 0, $pos+1) . " [...]";//incluimos el char.
-            }else{
+            if ($pos < $limite) {//si lo encontramos todo ok! llegamos donde queriamos (:
+                return substr($text, 0, $pos + 1) . " [...]"; //incluimos el char.
+            } else {
                 //seguimos buscando recursivamente con el string que tenemos recortado
-                return Utilidades::acortaTexto(substr($text, 0, $pos),$limite,$char);
+                return Utilidades::acortaTexto(substr($text, 0, $pos), $limite, $char);
             }
         }
-        return substr($text, 0, $limite) ." [...]";//se supone que nunca llegaria aqui (x
+        return substr($text, 0, $limite) . " [...]"; //se supone que nunca llegaria aqui (x
     }
 
     public static function formatero_numero($numero) {
@@ -59,13 +66,14 @@ class Utilidades {
         return preg_replace(
                         array("/\s+/", "/[^-\.\w]+/"), array("_", ""), trim($text));
     }
+
     //for text with 
-    public static function breakeLines( $text){
-        return preg_replace('#(\\\r|\\\n)#', '<br/>',preg_replace('#(\\\r\\\n)#', '<br/>',$text));
+    public static function breakeLines($text) {
+        return preg_replace('#(\\\r|\\\n)#', '<br/>', preg_replace('#(\\\r\\\n)#', '<br/>', $text));
     }
-    
-    public static function removeBreakLines( $text){
-        return preg_replace('#(\\\r|\\\n)#', ' ',preg_replace('#(\\\r\\\n)#', ' ',$text));
+
+    public static function removeBreakLines($text) {
+        return preg_replace('#(\\\r|\\\n)#', ' ', preg_replace('#(\\\r\\\n)#', ' ', $text));
     }
 
     #Example: source from: http://snipplr.com/view/3644/
@@ -74,6 +82,7 @@ class Utilidades {
 //    get_date_spanish(time(), true, 'Y'); # return 2011
 //    get_date_spanish(time());#return 06 de septiempre de 2011
     #Modified by Fanky10
+
     public static function get_date_spanish($time, $part = false, $formatDate = '') {
         #Declare n compatible arrays
         $month = array("", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiempre", "diciembre"); #n
