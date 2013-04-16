@@ -20,9 +20,10 @@ if (!isset($action) || empty($action)) {
 $controladorImagenes = new ControladorImagenesReunion(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
 $controladorReuniones = new ControladorReuniones($GLOBAL_SETTINGS["reuniones.datepicker.formatter"]);
 $manejador = new ManejadorServicios();
-
+$reunionId;
 if ($action == "add") {
     $oReunion = $controladorReuniones->agregarReunion();
+    $reunionId = $oReunion->getId();
     $controladorImagenes->setReunionId($oReunion->getId());
     $oImagenes = $controladorImagenes->subeMultiplesImagenes();
     $oReunion->setImagenes($oImagenes);
