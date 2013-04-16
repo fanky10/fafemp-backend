@@ -19,11 +19,11 @@ class Utilidades {
      * @param type $char
      * @return type string, recorta el texto al ultimo char que se encuentre dentro de lo que uno busca
      */
-    public static function convertLinkYouTube($text) {
-        $Pos_Link_Youtube = stripos($text, "http://www.youtube.com/watch?v=");
-        $Enlace_Youtube = substr($text, $Pos_Link_Youtube + 31, 11);
-        $text = str_ireplace("http://www.youtube.com/watch?v=" . $Enlace_Youtube, '<iframe width="420" height="315" src="http://www.youtube.com/embed/' . $Enlace_Youtube . '" frameborder="0" allowfullscreen></iframe>', $text);
-        return $text;
+    public static function convertLinkYouTube($texto) {
+        $Pos_Link_Youtube = stripos($texto, "http://www.youtube.com/watch?v=");
+        $Enlace_Youtube = substr($texto, $Pos_Link_Youtube + 31, 11);
+        $texto = str_ireplace("http://www.youtube.com/watch?v=" . $Enlace_Youtube, '<iframe width="420" height="315" src="http://www.youtube.com/embed/' . $Enlace_Youtube . '" frameborder="0" allowfullscreen></iframe>', $texto);
+        return $texto;
     }
 
     public static function acortaTexto($text, $limite, $char) {

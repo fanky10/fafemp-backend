@@ -60,8 +60,8 @@ include_once ROOT_DIR . '/util/utilidades.php';
         </div>
         <div class="six columns">
             <?php
-            $cuerpo = Utilidades::breakeLines($oNoticia->getCuerpo());
-            $cuerpo = Utilidades::convertLinkYouTube($cuerpo);
+            $cuerpoBreakeLines = Utilidades::breakeLines($oNoticia->getCuerpo());
+            $cuerpo = Utilidades::convertLinkYouTube($cuerpoBreakeLines);
             ?>
             <p class="text-justify"><?php echo $cuerpo; ?></p>
         </div>
