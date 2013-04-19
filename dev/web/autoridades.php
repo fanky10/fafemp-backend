@@ -60,7 +60,7 @@
                         <p>Prof. Dr. Alfredo Bussi</p>
                     </div>   
                 </div>  
-                
+
                 <div class="twelve columns">
                     <div class="two columns">
                         <p><b>Vice Presidente</b></p>
@@ -69,13 +69,136 @@
                         <p>Prof. Dr. Mateo Martinez</p>
                     </div>   
                 </div>
-                
+
                 <div class="twelve columns">
                     <div class="two columns">
                         <p><b>Secretario</b></p>
                     </div>   
                     <div class="ten columns">
                         <p>Prof. Dr. Álvaro Oliva</p>
+                    </div>   
+                </div>
+
+                <div class="twelve columns">
+                    <hr class="sin-margin-top">
+                </div>
+
+                <div class="twelve columns">
+                    <div class="five columns">
+                        <p><b>Facultad de Medicina. Universidad de Buenos Aires</b></p>
+                    </div>   
+                    <div class="seven columns">
+                        <p>Decano: Prof. Dr. Alfredo Bussi</p>
+                    </div>   
+                </div>
+
+                <div class="twelve columns">
+                    <div class="five columns">
+                        <p><b>Departamento de Ciencias Médicas. Universidad
+                                Nacional del Centro de la Provincia de Buenos Aires</b></p>
+                    </div>   
+                    <div class="seven columns">
+                        <p>Director: Dr. Héctor Trebucq</p>
+                    </div>   
+                </div>
+
+                <div class="twelve columns">
+                    <div class="five columns">
+                        <p><b>Facultad de Ciencias Médicas. Universidad Nacional del Comahue</b></p>
+                    </div>   
+                    <div class="seven columns">
+                        <p>Decano: Dr. Álvaro Oliva</p>
+                    </div>   
+                </div>
+
+                <div class="twelve columns">
+                    <div class="five columns">
+                        <p><b>Facultad de Ciencias Médicas . Universidad Nacional de Córdoba</b></p>
+                    </div>   
+                    <div class="seven columns">
+                        <p>Decano: Prof. Dr. Gustavo L. Irico</p>
+                    </div>   
+                </div>
+
+                <div class="twelve columns">
+                    <div class="five columns">
+                        <p><b>Facultad de Medicina. Universidad Nacional de Cuyo</b></p>
+                    </div>   
+                    <div class="seven columns">
+                        <p>Decano: Dr. Roberto Valles</p>
+                    </div>   
+                </div>
+
+                <div class="twelve columns">
+                    <div class="five columns">
+                        <p><b>Facultad de Ciencias Médicas. Universidad Nacional de la Plata</b></p>
+                    </div>   
+                    <div class="seven columns">
+                        <p>Decano: Prof. Dr. Jorge G. Martinez</p>
+                    </div>   
+                </div>
+
+                <div class="twelve columns">
+                    <div class="five columns">
+                        <p><b>Departamento Académico de Ciencias de la Salud y de la Educación.
+                                Universidad Nacional de la Rioja</b></p>
+                    </div>   
+                    <div class="seven columns">
+                        <p>Decano: Dr. Rubén Daniele</p>
+                    </div>   
+                </div>
+
+                <div class="twelve columns">
+                    <div class="five columns">
+                        <p><b>Facultad de Ciencias Médicas. Universidad Nacional del Litoral</b></p>
+                    </div>   
+                    <div class="seven columns">
+                        <p>Decano: Dr. Samuel Seiref</p>
+                    </div>   
+                </div>
+
+                <div class="twelve columns">
+                    <div class="five columns">
+                        <p><b>Facultad de Medicina. Universidad Nacional del Nordeste</b></p>
+                    </div>   
+                    <div class="seven columns">
+                        <p>Decano: Prof. Dr. Samuel Bluvstein</p>
+                    </div>   
+                </div>
+
+                <div class="twelve columns">
+                    <div class="five columns">
+                        <p><b>Facultad de Ciencias Médicas. Universidad Nacional de Rosario</b></p>
+                    </div>   
+                    <div class="seven columns">
+                        <p>Decano: Dr. Miguel A. Farroni</p>
+                    </div>   
+                </div>
+
+                <div class="twelve columns">
+                    <div class="five columns">
+                        <p><b>Departamento de Ciencias de la Salud. Universidad Nacional del Sur</b></p>
+                    </div>   
+                    <div class="seven columns">
+                        <p>Director Decano: Lic. Miguel H. Lliteras</p>
+                    </div>   
+                </div>
+
+                <div class="twelve columns">
+                    <div class="five columns">
+                        <p><b>Facultad de Medicina. Universidad Nacional de Tucumán</b></p>
+                    </div>   
+                    <div class="seven columns">
+                        <p>Decano: Prof. Dr. Mateo Martinez</p>
+                    </div>   
+                </div>
+
+                <div class="twelve columns">
+                    <div class="five columns">
+                        <p><b>Departamento de Ciencias de la Salud. Universidad Nacional de la Matanza</b></p>
+                    </div>   
+                    <div class="seven columns">
+                        <p>Decano: Dr. Mario Rovere</p>
                     </div>   
                 </div>
 

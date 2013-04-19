@@ -53,7 +53,7 @@
 
                 </div>
                 <div class="twelve columns">
-                    <a class="button radius" title="Ver más" href="#">Comisión de Decanos</a>
+                    <a class="button radius" title="Ver más" href="#">Foro de Decanos</a>
                 </div>
                 <div class="twelve columns">
                     <br>

@@ -53,7 +53,7 @@
                     echo "<li>";
                 };
                 ?>
-                <a href="reuniones.php" title="Reuniones">Reuniones</a></li>
+                <a href="reuniones.php" title="Agenda">Agenda</a></li>
 
 
                 <li>|</li>

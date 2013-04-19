@@ -150,7 +150,7 @@
         <!-- First Band (Slider) -->
         <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
         <?php
-        $navigateTitle = "Reuniones";
+        $navigateTitle = "Agenda";
         include_once 'navigate.php'
         ?>
         
