@@ -2,6 +2,26 @@
 require_once ('../initTesting.php');
 $width = $GLOBAL_SETTINGS['news.img.slider.width'];
 $height = $GLOBAL_SETTINGS['news.img.slider.height'];
+$output_filename = 'thumbnails/result.jpg';
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $jpeg_quality = 90;
+ 
+    $src = 'img/jp_landscape.jpg';
+    $img_r = imagecreatefromjpeg($src);
+    $dst_r = imagecreatetruecolor($width, $height);
+ 
+    imagecopyresampled($dst_r,$img_r,0,0,$_POST['x'],$_POST['y'],$width,$height,$_POST['w'],$_POST['h']);
+    imagejpeg($dst_r,time().'.jpg',$jpeg_quality);
+ 
+//    header('Content-type: image/jpeg');
+//    imagejpeg($dst_r,null,$jpeg_quality);
+    imagejpeg($dst_r, $output_filename, $jpeg_quality);
+    echo '<img id="result" src="'.$output_filename.'"/>';
+    exit;
+}
+
+
+
 ?>
 <html>
     <head>
@@ -16,11 +36,11 @@ $height = $GLOBAL_SETTINGS['news.img.slider.height'];
                 <script language="Javascript">
                     $(function() {
                         $('#target').Jcrop({
-                                setSelect:   [ 0, 0, 500, 200 ],
-                                minSize:[500,200],
-                                maxSize:[500,200],
+                                setSelect:   [ 0, 0, <?php echo $width.','.$height?> ],
+                                minSize:<?php echo '['.$width.','.$height.']'?>,
+                                maxSize:<?php echo '['.$width.','.$height.']'?>,
                                 onChange: showPreview,
-                                onSelect:    showPreview
+                                onSelect: showPreview
                                 
 
                         });
@@ -29,16 +49,37 @@ $height = $GLOBAL_SETTINGS['news.img.slider.height'];
                                 marginLeft: '-' + Math.round(coords.x) + 'px',
                                 marginTop: '-' + Math.round(coords.y) + 'px'
                             });
+                            updateCoords(coords);
                         }
+                        
+                        function updateCoords(c){
+                            $('#x').val(c.x);
+                            $('#y').val(c.y);
+                            $('#w').val(c.w);
+                            $('#h').val(c.h);
+                        };
                     });
 
                 </script>
-                <img id="target" src="http://1.bp.blogspot.com/_EDFqmuHfAF0/S8n4HgX3R9I/AAAAAAAAEYs/96LX6FPp0fo/s1600/Karina+Jelinek-109.jpg" >
+                <img id="target" src="img/jp_landscape.jpg" >
                 <br/>
-                <div style="width:500px;height:200px;overflow:hidden;margin-left:5px;border: .2em dotted #900;">
-                    <img id="preview" src="http://1.bp.blogspot.com/_EDFqmuHfAF0/S8n4HgX3R9I/AAAAAAAAEYs/96LX6FPp0fo/s1600/Karina+Jelinek-109.jpg"  >
-                </div>
-                    
+                <?php
+                echo '<div style="width:'.$width.'px;height:'.$height.'px;overflow:hidden;margin-left:5px;border: .2em dotted #900;">';
+                    echo'<img id="preview" src="img/jp_landscape.jpg"  >';
+                echo '</div>';
+                ?>
+                
+                
+                <!-- This is the form that our event handler fills -->
+                <form action="?" method="POST" onsubmit="return checkCoords();">
+                    <input type="hidden" id="x" name="x" />
+                    <input type="hidden" id="y" name="y" />
+                    <input type="hidden" id="w" name="w" />
+                    <input type="hidden" id="h" name="h" />
+                    <input type="hidden" id="tw" name="tw" />
+                    <input type="hidden" id="th" name="th" />
+                    Select a crop image size below then click: <input type="submit" value="Crop Image" />
+                </form>
                     
         </div>
         
