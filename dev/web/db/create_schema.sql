@@ -89,3 +89,51 @@ ALTER TABLE imagenes_reunion ADD CONSTRAINT `FK_imagenes_reunion_id_1` FOREIGN K
 ALTER TABLE imagenes_reunion ADD CONSTRAINT `FK_imagenes_reunion_id_2` FOREIGN KEY (`imagen_id`) REFERENCES `imagenes` (`imagen_id`);
 
 /* FIN REUNIONES*/
+
+
+/* DOCUMENTOS */
+
+CREATE TABLE `documentos` (
+  documento_id int(11) NOT NULL auto_increment,
+  nombre varchar(30) collate latin1_general_ci NOT NULL,
+  archivo longblob NOT NULL,
+  tipo varchar(20) collate latin1_general_ci NOT NULL,
+  doc_orden integer unsigned not null,
+  PRIMARY KEY  (`documento_id`)
+)ENGINE=InnoDB;
+
+/**
+* una reunion, puede tener muchos documentos, una documento puede pertenecer a cero o una reunion.
+*/
+CREATE TABLE documentos_reunion (
+    documento_id integer unsigned not null,
+    reunion_id integer unsigned not null,
+    doc_orden integer unsigned not null,
+    primary key (documento_id)
+)ENGINE=InnoDB;
+
+/**
+* foreign keys
+*/
+
+ALTER TABLE documentos_reunion ADD CONSTRAINT `FK_documentos_reunion_id_1` FOREIGN KEY (`reunion_id`) REFERENCES `reuniones` (`reunion_id`);
+ALTER TABLE documentos_reunion ADD CONSTRAINT `FK_documentos_reunion_id_2` FOREIGN KEY (`documento_id`) REFERENCES `documentos` (`documento_id`);
+
+/**
+* una noticia, puede tener muchos documentos, una documento puede pertenecer a cero o una noticia.
+*/
+CREATE TABLE documentos_noticia (
+    documento_id integer unsigned not null,
+    noticia_id integer unsigned not null,
+    doc_orden integer unsigned not null,
+    primary key (documento_id)
+)ENGINE=InnoDB;
+
+/**
+* foreign keys
+*/
+
+ALTER TABLE documentos_noticia ADD CONSTRAINT `FK_documentos_noticia_id_1` FOREIGN KEY (`noticia_id`) REFERENCES `noticias` (`noticia_id`);
+ALTER TABLE documentos_noticia ADD CONSTRAINT `FK_documentos_noticia_id_2` FOREIGN KEY (`documento_id`) REFERENCES `documentos` (`documento_id`);
+
+/* FIN DOCUMENTOS*/
