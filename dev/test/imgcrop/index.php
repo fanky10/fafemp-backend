@@ -20,8 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     exit;
 }
 
-
-
 ?>
 <html>
     <head>
@@ -35,20 +33,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <h1><b>Jcrop</b> Test DEMO</h1>
                 <script language="Javascript">
                     $(function() {
+                        var config = {
+                            sliderWidth:<?php echo $width;?>,
+                            sliderHeight:<?php echo $height;?>
+                        };
                         $('#target').Jcrop({
-                                setSelect:   [ 0, 0, <?php echo $width.','.$height?> ],
-                                minSize:<?php echo '['.$width.','.$height.']'?>,
-                                maxSize:<?php echo '['.$width.','.$height.']'?>,
+                                setSelect:   [ 0, 0, config.sliderWidth ,config.sliderHeight],
+                                aspectRatio: config.sliderWidth / config.sliderHeight,
+//                                minSize: [config.originalImageWidth ,config.originalImageHeight],
+//                                maxSize: [config.originalImageWidth ,config.originalImageHeight],
                                 onChange: showPreview,
                                 onSelect: showPreview
                                 
 
                         });
                         function showPreview(coords){
-                            $("#preview").css({
-                                marginLeft: '-' + Math.round(coords.x) + 'px',
-                                marginTop: '-' + Math.round(coords.y) + 'px'
-                            });
+                            console.log('values: sliderWidth: '+config.sliderWidth + ', config.sliderHeight: ' + config.sliderHeight );
+                            console.log('values: imageWidth: '+$('#target').width() + ', config.imageHeight: ' + $('#target').height() );
+                            var rx = config.sliderWidth / coords.w;
+                            var ry = config.sliderHeight / coords.h;
+                            console.log('values: ratioX: '+rx + ', ratioY: ' + ry );
+                            
+                            var cssValues = {
+                                width: Math.round(rx * $('#target').width()) + 'px',
+                                height: Math.round(ry *  $('#target').height()) + 'px',
+                                marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+                                marginTop: '-' + Math.round(ry * coords.y) + 'px'
+                            }
+                            console.log('values: ['+cssValues.width + ',' + cssValues.height +']');
+                            $("#preview").css(cssValues);
                             updateCoords(coords);
                         }
                         
