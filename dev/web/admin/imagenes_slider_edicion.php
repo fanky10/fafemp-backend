@@ -86,18 +86,23 @@ if ($isRedirect) {
                        
                     $("#imageSelect").change(function(e){
                         var imgSource = $(this).val();
+                        updateImgSrc(imgSource);
+                    });                    
+                    //init jcrop
+                    $('#target').Jcrop(jcropOptions,function(){
+                        jcropObject=this;
+                        var imgSource = $("#imageSelect").find(":selected").val();
+                        updateImgSrc(imgSource);
+                    });
+                    
+                    function updateImgSrc(imgSource){
+                        console.log("updating imgSource...");
                         $("#target").attr("src",imgSource);
                         $("#preview").attr("src",imgSource);
                         jcropObject.setImage(imgSource,function(){
                             this.setOptions(jcropOptions);
                         });
-                        
-                    });
-                    //init jcrop
-                    $('#target').Jcrop(jcropOptions,function(){
-                        jcropObject=this;
-                    });
-                    
+                    }
                     
                     function showPreview(coords){
                         var targetWidth = $('.jcrop-holder').width();
@@ -111,11 +116,8 @@ if ($isRedirect) {
                             marginLeft: '-' + Math.round(ratioX * coords.x) + 'px',
                             marginTop: '-' + Math.round(ratioY * coords.y) + 'px'
                         }
-                        console.log('ratio: x,y '+ratioX+','+ratioY);
-                        console.log('values: ['+cssValues.width + ',' + cssValues.height +']');
-                        console.log('margins:  '+cssValues.marginLeft+' x '+cssValues.marginTop);
-                        $("#preview").css(cssValues);
                         
+                        $("#preview").css(cssValues);
                         updateCoords(coords);
                     }
 
@@ -175,11 +177,13 @@ if ($isRedirect) {
                                 
                             </div>
                             <!-- imagen preview -->
+                            <div class="twelve columns">
                             <?php
                                 echo '<div style="width:'.$prevWidth.'px;height:'.$prevHeight.'px;overflow:hidden;border: .2em dotted #'.$prevWidth.';">';
                                     echo'<img id="preview" src="" style="max-width:none;" >';
                                 echo '</div>';
                             ?>
+                            </div>
 
                             
                             <div class="twelve columns">
