@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 <html>
     <head>
         <script src="js/jquery.min.js"></script>
-        <script src="js/jquery.Jcrop.min.js"></script>
+        <script src="js/jquery.Jcrop.js"></script>
         <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
     </head>
     <body>
@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <h1><b>Jcrop</b> Test DEMO</h1>
                 <script language="Javascript">
                     $(function() {
+                        var jcropObject ;
                         var config = {
                             sliderWidth:<?php echo $width;?>,
                             sliderHeight:<?php echo $height;?>
@@ -46,8 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 onSelect: showPreview
                                 
 
-                        });
+                        },function(){console.log("instanciating..?");jcropObject=this});
                         function showPreview(coords){
+                            console.log('jcropObject: '+jcropObject);
                             console.log('values: sliderWidth: '+config.sliderWidth + ', config.sliderHeight: ' + config.sliderHeight );
                             console.log('values: imageWidth: '+$('#target').width() + ', config.imageHeight: ' + $('#target').height() );
                             var rx = config.sliderWidth / coords.w;
