@@ -24,7 +24,7 @@ if ($isRedirect) {
     header('Location: ' . $redirect);
     return;
 } else {
-    $prevWidth = $GLOBAL_SETTINGS['news.img.slider.width'];
+    $prevWidth = 900;
     $prevHeight = $GLOBAL_SETTINGS['news.img.slider.height'];
 ?>
     <!DOCTYPE html>
@@ -89,7 +89,6 @@ if ($isRedirect) {
                         $("#target").attr("src",imgSource);
                         $("#preview").attr("src",imgSource);
                         jcropObject.setImage(imgSource,function(){
-                            console.log("jcrop.setImage callback");
                             this.setOptions(jcropOptions);
                         });
                         
@@ -101,22 +100,23 @@ if ($isRedirect) {
                     
                     
                     function showPreview(coords){
-                        var targetWidth = $('#target').width();
-                        var targetHeight = $('#target').height();
-                        if(targetHeight>0 && targetWidth>0){
-                            var rx = config.sliderWidth / coords.w;
-                            var ry = config.sliderHeight / coords.h;
-                            var cssValues = {
-                                width: Math.round(rx * targetWidth) + 'px',
-                                height: Math.round(ry *  targetHeight) + 'px',
-                                marginLeft: '-' + Math.round(rx * coords.x) + 'px',
-                                marginTop: '-' + Math.round(ry * coords.y) + 'px'
-                            }
-                            $("#preview").css(cssValues);
-                            updateCoords(coords);
-                        }else{
-                            
+                        var targetWidth = $('.jcrop-holder').width();
+                        var targetHeight = $('.jcrop-holder').height();
+                        var ratioX = config.sliderWidth / coords.w;
+                        var ratioY = config.sliderHeight / coords.h;
+                        
+                        var cssValues = {
+                            width: Math.round(ratioX * targetWidth) + 'px',
+                            height: Math.round(ratioY *  targetHeight) + 'px',
+                            marginLeft: '-' + Math.round(ratioX * coords.x) + 'px',
+                            marginTop: '-' + Math.round(ratioY * coords.y) + 'px'
                         }
+                        console.log('ratio: x,y '+ratioX+','+ratioY);
+                        console.log('values: ['+cssValues.width + ',' + cssValues.height +']');
+                        console.log('margins:  '+cssValues.marginLeft+' x '+cssValues.marginTop);
+                        $("#preview").css(cssValues);
+                        
+                        updateCoords(coords);
                     }
 
                     function updateCoords(c){
@@ -146,7 +146,6 @@ if ($isRedirect) {
             <!-- Three-up Content Blocks -->
             <div class="content">
                 <div class="row">
-                    <!-- Contact Details -->
                     <div class="nine columns">
                         <h3>Edicion Presentación</h3>
                         <p>Desde el siguiente formulario usted prodra editar la presentación de la noticia!</p>
@@ -170,18 +169,19 @@ if ($isRedirect) {
                                     ?>
                                 </select>
                             </div>
-                            
+                            <!-- imagen original -->
                             <div class="twelve columns">
                                 <img id="target" src="" >
                                 
                             </div>
-                            <div class="twelve columns">
-                                <?php
-                                echo '<div style="width:'.$prevWidth.'px;height:'.$prevHeight.'px;overflow:hidden;margin-left:5px;border: .2em dotted #900;">';
-                                    echo'<img id="preview" src=""  >';
+                            <!-- imagen preview -->
+                            <?php
+                                echo '<div style="width:'.$prevWidth.'px;height:'.$prevHeight.'px;overflow:hidden;border: .2em dotted #'.$prevWidth.';">';
+                                    echo'<img id="preview" src="" style="max-width:none;" >';
                                 echo '</div>';
-                                ?>
-                            </div>
+                            ?>
+
+                            
                             <div class="twelve columns">
                                 <!-- This is the form that our event handler fills -->
                                 <form action="?" method="POST" onsubmit="return checkCoords();">
@@ -220,9 +220,9 @@ if ($isRedirect) {
                     </div>
                 </div>
             </div>
-
     <?php include_once 'admin_footer.php'; ?>
 
         </body>
+        
     </html>
 <?php } ?>
