@@ -81,6 +81,7 @@ if ($isRedirect) {
                             setSelect: [ 0, 0, config.sliderWidth ,config.sliderHeight],
                             aspectRatio: config.sliderWidth / config.sliderHeight,
                             onChange: showPreview,
+                            boxWidth: config.sliderWidth,
                             onSelect: showPreview
                     }
                        
@@ -96,7 +97,6 @@ if ($isRedirect) {
                     });
                     
                     function updateImgSrc(imgSource){
-                        console.log("updating imgSource...");
                         $("#target").attr("src",imgSource);
                         $("#preview").attr("src",imgSource);
                         jcropObject.setImage(imgSource,function(){
@@ -105,14 +105,17 @@ if ($isRedirect) {
                     }
                     
                     function showPreview(coords){
-                        var targetWidth = $('.jcrop-holder').width();
-                        var targetHeight = $('.jcrop-holder').height();
+                        if(typeof jcropObject === 'undefined'){
+                            return ;
+                        };
                         var ratioX = config.sliderWidth / coords.w;
                         var ratioY = config.sliderHeight / coords.h;
+                        var newWidth = Math.round(ratioX * jcropObject.getBounds()[0]) + 'px';
+                        var newHeight = Math.round(ratioX * jcropObject.getBounds()[1]) + 'px';
                         
                         var cssValues = {
-                            width: Math.round(ratioX * targetWidth) + 'px',
-                            height: Math.round(ratioY *  targetHeight) + 'px',
+                            width: newWidth,
+                            height: newHeight,
                             marginLeft: '-' + Math.round(ratioX * coords.x) + 'px',
                             marginTop: '-' + Math.round(ratioY * coords.y) + 'px'
                         }
@@ -173,8 +176,9 @@ if ($isRedirect) {
                             </div>
                             <!-- imagen original -->
                             <div class="twelve columns">
-                                <img id="target" src="" >
-                                
+                                <?php
+                                echo'<img id="target" src="" style="width:'.$prevWidth.'px;" >';
+                                ?>
                             </div>
                             <!-- imagen preview -->
                             <div class="twelve columns">
