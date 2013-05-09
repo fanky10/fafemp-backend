@@ -7,10 +7,13 @@ include_once ROOT_DIR . '/entidades/noticia.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
 include_once ROOT_DIR . '/controladores/controlador_imagenes_slider.php';
 
-
 $prevWidth = $GLOBAL_SETTINGS['news.img.slider.width'];
 $prevHeight = $GLOBAL_SETTINGS['news.img.slider.height'];
-$idNoticia = null;
+$idNoticia = $_GET['idNoticia'];
+$redirect = ROOT_URL . '/admin/noticias.php';
+$isRedirect = true;
+$oNoticia = new Noticia();
+$oImagen = new Imagen();
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $controladorImagenes = new ControladorImagenesSlider(ROOT_DIR . "/", $GLOBAL_SETTINGS["news.slider.path"]);
     $idNoticia = $_POST['idNoticia'];
@@ -22,15 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $h = $_POST['h'];
     
     $controladorImagenes->saveSlider($idImagen, $idNoticia,$prevWidth,$prevHeight,$x,$y,$w,$h);
-    exit;
-}
-$redirect = ROOT_URL . '/admin/noticias.php';
-$idNoticia = $_GET['idNoticia'];
-$isRedirect = true;
-$oNoticia = new Noticia();
-$oImagen = new Imagen();
-// the id is valid
-if (isset($idNoticia) && !empty($idNoticia)) {
+    $isRedirect = true;
+}else if(isset($idNoticia) && !empty($idNoticia)) {
     $manejador = new ManejadorServicios();
     $oNoticia = $manejador->getNoticiaById($idNoticia);
     //id returns valid noticia object
@@ -38,10 +34,11 @@ if (isset($idNoticia) && !empty($idNoticia)) {
         $isRedirect = false; // I wont redirect unless noticia is a valid one
     }
 }
+
 if ($isRedirect) {
     header('Location: ' . $redirect);
-    return;
-} else {
+    exit;
+}
 ?>
     <!DOCTYPE html>
     <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
@@ -193,9 +190,7 @@ if ($isRedirect) {
                             </div>
                             <!-- imagen original -->
                             <div class="twelve columns">
-                                <?php
-                                echo'<img id="target" src="" style="width:'.$prevWidth.'px;" >';
-                                ?>
+                                <img id="target" src="" style="width:920px;" >
                             </div>
                             <!-- imagen preview -->
                             <div class="twelve columns">
@@ -244,4 +239,3 @@ if ($isRedirect) {
         </body>
         
     </html>
-<?php } ?>
