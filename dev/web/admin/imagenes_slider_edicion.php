@@ -5,7 +5,25 @@ include_once ROOT_DIR . '/util/utilidades.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/entidades/noticia.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
+include_once ROOT_DIR . '/controladores/controlador_imagenes_slider.php';
 
+
+$prevWidth = $GLOBAL_SETTINGS['news.img.slider.width'];
+$prevHeight = $GLOBAL_SETTINGS['news.img.slider.height'];
+$idNoticia = null;
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $controladorImagenes = new ControladorImagenesSlider(ROOT_DIR . "/", $GLOBAL_SETTINGS["news.slider.path"]);
+    $idNoticia = $_POST['idNoticia'];
+    $idImagen = $_POST['idImagen'];
+    
+    $x = $_POST['x'];
+    $y = $_POST['y'];
+    $w = $_POST['w'];
+    $h = $_POST['h'];
+    
+    $controladorImagenes->saveSlider($idImagen, $idNoticia,$prevWidth,$prevHeight,$x,$y,$w,$h);
+    exit;
+}
 $redirect = ROOT_URL . '/admin/noticias.php';
 $idNoticia = $_GET['idNoticia'];
 $isRedirect = true;
@@ -24,8 +42,6 @@ if ($isRedirect) {
     header('Location: ' . $redirect);
     return;
 } else {
-    $prevWidth = 900;
-    $prevHeight = $GLOBAL_SETTINGS['news.img.slider.height'];
 ?>
     <!DOCTYPE html>
     <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
@@ -86,19 +102,20 @@ if ($isRedirect) {
                     }
                        
                     $("#imageSelect").change(function(e){
-                        var imgSource = $(this).val();
-                        updateImgSrc(imgSource);
+                        updateImgSrc();
                     });                    
                     //init jcrop
                     $('#target').Jcrop(jcropOptions,function(){
                         jcropObject=this;
-                        var imgSource = $("#imageSelect").find(":selected").val();
-                        updateImgSrc(imgSource);
+                        updateImgSrc();
                     });
                     
-                    function updateImgSrc(imgSource){
+                    function updateImgSrc(){
+                        var imgSource = $("#imageSelect").find(":selected").val();
+                        var imgId = $("#imageSelect").find(":selected").attr("data-bind");
                         $("#target").attr("src",imgSource);
                         $("#preview").attr("src",imgSource);
+                        $('#idImagen').val(imgId);
                         jcropObject.setImage(imgSource,function(){
                             this.setOptions(jcropOptions);
                         });
@@ -128,7 +145,7 @@ if ($isRedirect) {
                         $('#x').val(c.x);
                         $('#y').val(c.y);
                         $('#w').val(c.w);
-                        $('#h').val(c.h);
+                        $('#h').val(c.h);                        
                     };
                     
                 });
@@ -167,7 +184,7 @@ if ($isRedirect) {
                                         if (isset($vImagenes) && !empty($vImagenes)) {
                                             foreach ($vImagenes as $oImagen) {
                                                 $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
-                                                echo '<option value="'.$imgSrc.'" data-bind="'.$imgSrc.'">'.$oImagen->getNombreArchivo().'</option>';
+                                                echo '<option value="'.$imgSrc.'" data-bind="'.$oImagen->getId().'">'.$oImagen->getNombreArchivo().'</option>';
                                             }
                                         } else {//no images
                                         }  
@@ -188,28 +205,22 @@ if ($isRedirect) {
                                 echo '</div>';
                             ?>
                             </div>
-
-                            
-                            <div class="twelve columns">
-                                <!-- This is the form that our event handler fills -->
-                                <form action="?" method="POST" onsubmit="return checkCoords();">
-                                    <input type="hidden" id="x" name="x" />
-                                    <input type="hidden" id="y" name="y" />
-                                    <input type="hidden" id="w" name="w" />
-                                    <input type="hidden" id="h" name="h" />
-                                    <input type="hidden" id="tw" name="tw" />
-                                    <input type="hidden" id="th" name="th" />
-                                    <input type="submit" value="Crop Image" />
-                                </form>
-                            </div>
-                             
-
                             
                             <div class="twelve columns">
                                 <div class="six columns">
                                     <div class="six columns">
-                                        <!--<button type="submit" name="submit" class="radius button">Guardar</button> </div> -->
-                                        <a href="#" data-reveal-id="myModal"><button class="radius button">Guardar</button></a> 
+                                        <!-- This is the form that our event handler fills -->
+                                        <form action="?" method="POST" onsubmit="return checkCoords();">
+                                            <input type="hidden" id="x" name="x" />
+                                            <input type="hidden" id="y" name="y" />
+                                            <input type="hidden" id="w" name="w" />
+                                            <input type="hidden" id="h" name="h" />
+                                            <input type="hidden" id="tw" name="tw" />
+                                            <input type="hidden" id="th" name="th" />
+                                            <input type="hidden" id="idImagen" name="idImagen" />
+                                            <input type="hidden" id="idNoticia" name="idNoticia" value="<?php echo $idNoticia?>" />
+                                            <input type="submit" class="radius button" value="Guardar" />
+                                        </form>
                                     </div>
                                     <div class="six columns">
                                         <a class="button radius" title="cancelar" href="noticias.php">Cancelar</a>
