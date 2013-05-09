@@ -181,7 +181,7 @@ class ManejadorServicios {
     }
 
     public function addImagen(Imagen $imagen) {
-        $this->imagenesRepository->addImagen($imagen);
+        return $this->imagenesRepository->addImagen($imagen);
     }
 
     public function setImgSliderNoticia($noticiaId, $imagenId) {
