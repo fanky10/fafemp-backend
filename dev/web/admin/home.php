@@ -4,11 +4,13 @@ include_once '../init.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/entidades/noticia.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
+include_once ROOT_DIR . '/entidades/documento.php';
 include_once ROOT_DIR . '/util/utilidades.php';
 $manejador = new ManejadorServicios();
 $noticias = $manejador->getNoticias($GLOBAL_SETTINGS['news.abm.limit']);
 $oNoticia = new Noticia();
 $oImagen = new Imagen();
+$oDocumento = new Documento();
 ?>
 
 <!DOCTYPE html>

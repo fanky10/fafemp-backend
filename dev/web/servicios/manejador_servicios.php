@@ -7,6 +7,8 @@
 @include_once ROOT_DIR . '/datos/reuniones.php';
 @include_once ROOT_DIR . '/mocked/UserServiceMocked.php';
 @include_once ROOT_DIR . '/datos/usuarios.php';
+@include_once ROOT_DIR . '/datos/documentos.php';
+
 
 class ManejadorServicios {
 
@@ -14,6 +16,8 @@ class ManejadorServicios {
     private $imagenesRepository;
     private $usuariosRepository;
     private $reunionesRepository;
+    private $documentosRepository;
+    
 
     public function __construct() {
         
@@ -24,6 +28,13 @@ class ManejadorServicios {
         $idImagen = $this->imagenesRepository->addImagenNoticia($imagen, $noticiaId);
         $imagen->setId($idImagen);
     }
+    
+     public function addDocumentoNoticia(Documento $documento, $noticiaId) {
+    	$this->documentosRepository = new DataDocumentos();
+    	$idDocumemto = $this->documentosRepository->addDocumentoNoticia($documento, $noticiaId);
+    	$documento->setId($idDocumemto);
+    }
+    
 
     public function editarNoticia(Noticia $oNoticia) {
         $this->noticiasRepository = new DataNoticias();
@@ -39,6 +50,7 @@ class ManejadorServicios {
         $this->noticiasRepository = new DataNoticias();
         $oNoticia = $this->noticiasRepository->getNoticiaById($id);
         $this->asignaImagenesNoticia($oNoticia);
+        $this->asignaDocumentosNoticia($oNoticia);
         return $oNoticia;
     }
 
@@ -46,6 +58,8 @@ class ManejadorServicios {
         $this->noticiasRepository = new DataNoticias();
         $vNoticias = $this->noticiasRepository->getNoticiasPaginadas($offset, $limit);
         $this->asignaImagenesNoticias($vNoticias);
+        $this->asignaDocumentosNoticias($vNoticias);
+        
         return $vNoticias;
     }
 
@@ -53,6 +67,8 @@ class ManejadorServicios {
         $this->noticiasRepository = new DataNoticias();
         $vNoticias = $this->noticiasRepository->getNoticias($limit);
         $this->asignaImagenesNoticias($vNoticias);
+        $this->asignaDocumentosNoticias($vNoticias);
+        
         return $vNoticias;
     }
 
@@ -75,12 +91,22 @@ class ManejadorServicios {
         $this->imagenesRepository = new DataImagenes();
         $this->imagenesRepository->editarImagenNoticia($oImagen);
     }
+    
+     public function editarDocumentoNoticia(Documento $oDocumento) {
+    	$this->documentosRepository = new DataDocumentos();
+    	$this->documentosRepository->editarDocumentoNoticia($oDocumento);
+    }
 
     public function getImagen($idImagen) {
         $this->imagenesRepository = new DataImagenes();
         return $this->imagenesRepository->getImagen($idImagen);
     }
-
+    
+    public function getDocumento($idDocumento) {
+        $this->documentosRepository = new DataDocumentos();
+        return $this->documentosRepository->getDocumento($idDocumento);
+    }
+    
     private function asignaImagenesNoticia($oNoticia) {
         if (!isset($oNoticia)) {
             return;
@@ -101,17 +127,45 @@ class ManejadorServicios {
             $oNoticia->setImagenes($vImagenes);
         }
     }
+    
+     private function asignaDocumentosNoticia($oNoticia) {
+    	if (!isset($oNoticia)) {
+            return;
+        }
+        $this->documentosRepository = new DataDocumentos();
+        $vDocumentos = $this->documentosRepository->getDocumentosNoticia($oNoticia->getId());
+        $oNoticia->setDocumentos($vDocumentos);
+    }
+    
+    private function asignaDocumentosNoticias($vNoticias) {
+    	if (!isset($vNoticias) || empty($vNoticias)) {
+    		return;
+    	}
+    	$this->documentosRepository = new DataDocumentos();
+    	$oNoticia = new Noticia();
+    	foreach ($vNoticias as $oNoticia) {
+    		$vDocumentos = $this->documentosRepository->getDocumentosNoticia($oNoticia->getId());
+    		$oNoticia->setDocumentos($vDocumentos);
+    	}
+    }
 
     public function getImagenesNoticia($noticiaId) {
         $this->imagenesRepository = new DataImagenes();
         $vImagenes = $this->imagenesRepository->getImagenesNoticia($noticiaId);
         return $vImagenes;
     }
+    
+    public function getDocumentosNoticia($noticiaId) {
+        $this->documentosRepository = new DataDocumentos();
+        $vDocmentos = $this->documentosRepository->getDocumentosNoticia($noticiaId);
+        return $vDocmentos;
+    }
 
     public function getReunionById($reunionId) {
         $this->reunionesRepository = new DataReuniones();
         $oReunion = $this->reunionesRepository->getReunionById($reunionId);
         $this->asignaImagenesReunion($oReunion);
+
         return $oReunion;
     }
 
@@ -119,6 +173,7 @@ class ManejadorServicios {
         $this->reunionesRepository = new DataReuniones();
         $vReuniones = $this->reunionesRepository->getReuniones($limit);
         $this->asignaImagenesReuniones($vReuniones);
+
         return $vReuniones;
     }
 
@@ -142,16 +197,16 @@ class ManejadorServicios {
         $this->imagenesRepository = new DataImagenes();
         return $this->imagenesRepository->getImagenesReunion($reunionId);
     }
+        
     public function addImagenReunion(Imagen $imagen,$reunionId){
         $this->imagenesRepository = new DataImagenes();
         return $this->imagenesRepository->addImagenReunion($imagen, $reunionId);
     }
+    
     public function editarImagenReunion(Imagen $imagen){
         $this->imagenesRepository = new DataImagenes();
         return $this->imagenesRepository->editarImagenReunion($imagen);
     }
-    
-    
 
     private function asignaImagenesReunion($oReunion) {
         if (!isset($oReunion)) {

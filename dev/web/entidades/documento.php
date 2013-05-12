@@ -1,13 +1,15 @@
 <?php
 
-class Imagen {
+class Documento {
 
     public static $TABLE = "documentos";
     public static $COLUMN_ID = "documento_id";
     private $id;
     private $nombre;
-    private $archivo;
-    private $tipo;
+    private $nombreArchivo;
+    private $path;
+    private $fechaHora;
+    private $eliminada;
     private $orden;
 
     public function setId($id) {
@@ -18,13 +20,20 @@ class Imagen {
         $this->nombre = $nombre;
     }
 
-    public function setArchivo($archivo) {
-        $this->archivo = $archivo;
+    public function setPath($path) {
+        $this->path = $path;
     }
 
-    
-    public function setTipo($tipo) {
-        $this->tipo = $tipo;
+    public function setFechaHora($fechaHora) {
+        $this->fechaHora = $fechaHora;
+    }
+
+    public function setEliminada($eliminada) {
+        $this->eliminada = $eliminada;
+    }
+
+    public function setNombreArchivo($nombreArchivo) {
+        $this->nombreArchivo = $nombreArchivo;
     }
     
     public function setOrden($orden) {
@@ -39,14 +48,21 @@ class Imagen {
         return $this->nombre;
     }
 
-    public function getTipo() {
-        return $this->tipo;
+    public function getPath() {
+        return $this->path;
     }
 
-	public function getTipo() {
-        return $this->tipo;
+    public function getFechaHora() {
+        return $this->fechaHora;
     }
-    
+
+    public function getEliminada() {
+        return $this->eliminada;
+    }
+
+    public function getNombreArchivo() {
+        return $this->nombreArchivo;
+    }
     public function getOrden() {
         return $this->orden;
     }

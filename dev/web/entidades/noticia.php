@@ -13,6 +13,7 @@ class Noticia {
     private $cuerpo;
     private $eliminada;
     private $imagenes;
+    private $documentos;
 
     public function setId($id) {
         $this->id = $id;
@@ -66,6 +67,21 @@ class Noticia {
     }
     public function getEliminada(){
         return $this->eliminada;
+    }
+    
+    public function getDocumentos() {
+    	return $this->documentos;
+    }
+    
+    public function setDocumentos($documentos) {
+    	$this->documentos = $documentos;
+    }
+    
+    public function getDocumento() {
+    	if (isset($this->documentos) && !empty($this->documentos)) {
+    		return $this->documentos[0];
+    	}
+    	return null;
     }
 }
 

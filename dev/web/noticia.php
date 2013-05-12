@@ -5,11 +5,13 @@ include_once ROOT_DIR . '/util/utilidades.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/entidades/noticia.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
+include_once ROOT_DIR . '/entidades/documento.php';
 
 $redirect = ROOT_URL . '/noticias.php';
 $idNoticia = $_GET['id'];
 $isRedirect = true;
 $oNoticia = new Noticia();
+
 //$oImagen = new Imagen();
 if (isset($idNoticia)) {
     $manejador = new ManejadorServicios();
@@ -18,6 +20,11 @@ if (isset($idNoticia)) {
     if (isset($vImagenes) && !empty($vImagenes)) {
         $oImagen = $vImagenes[0];
     }
+    $vDocumentos = $oNoticia->getDocumentos();
+    if (isset($vDocumentos) && !empty($vDocumentos)) {
+        $oDocumento = $vDocumentos[0];
+    }
+    
     if (!isset($oNoticia) || empty($oNoticia)) {
         $isRedirect = true;
     } else {

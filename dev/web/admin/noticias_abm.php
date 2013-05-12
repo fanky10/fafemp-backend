@@ -3,10 +3,12 @@ include 'admin_check.php';
 include_once '../init.php';
 include_once ROOT_DIR . '/entidades/noticia.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
+include_once ROOT_DIR . '/entidades/documento.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/util/utilidades.php';
 include_once ROOT_DIR . '/controladores/controlador_noticias.php';
 include_once ROOT_DIR . '/controladores/controlador_imagenes_noticia.php';
+include_once ROOT_DIR . '/controladores/controlador_documentos_noticia.php';
 
 $action = $_GET['action'];
 $redirectLocation = 'Location: noticias.php';
@@ -17,6 +19,7 @@ if (!isset($action) || empty($action)) {
     return;
 }
 $controladorImagenes = new ControladorImagenesNoticia(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
+$controladorDocumentos = new ControladorDocumentosNoticia(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
 $controladorNoticias = new ControladorNoticias();
 $manejador = new ManejadorServicios();
 $noticiaId;
@@ -25,6 +28,9 @@ if ($action == "add") {
     $noticiaId = $oNoticia->getId();
     $controladorImagenes->setNoticiaId($noticiaId);
     $oImagenes = $controladorImagenes->subeMultiplesImagenes();
+    $controladorDocumentos->setNoticiaId($noticiaId);
+    $oDocumentos = $controladorDocumentos->subeMultiplesDocumentos();
+    
     $oNoticia->setImagenes($oImagenes);
 } else if ($action == "edit") {
     $noticiaId = $_GET['id'];
@@ -34,6 +40,10 @@ if ($action == "add") {
         $controladorImagenes->setNoticiaId($noticiaId);
         $oImagenes = $controladorImagenes->subeMultiplesImagenes();
         $oNoticia->setImagenes($oImagenes);
+        
+        $controladorDocumentos->setNoticiaId($noticiaId);
+        $oDocumentos = $controladorDocumentos->subeMultiplesDocumentos();
+        $oNoticia->setDocumentos($oDocumentos);
     }
 } else if ($action == "del") {
     $noticiaId = $_GET['id'];
