@@ -88,6 +88,9 @@ class ManejadorServicios {
         $this->imagenesRepository = new DataImagenes();
         $vImagenes = $this->imagenesRepository->getImagenesNoticia($oNoticia->getId());
         $oNoticia->setImagenes($vImagenes);
+
+        $imagenSlider = $this->imagenesRepository->getImgSliderNoticia($oNoticia->getId());
+        $oNoticia->setImagenSlider($imagenSlider);
     }
 
     private function asignaImagenesNoticias($vNoticias) {
@@ -99,6 +102,9 @@ class ManejadorServicios {
         foreach ($vNoticias as $oNoticia) {
             $vImagenes = $this->imagenesRepository->getImagenesNoticia($oNoticia->getId());
             $oNoticia->setImagenes($vImagenes);
+
+            $imagenSlider = $this->imagenesRepository->getImgSliderNoticia($oNoticia->getId());
+            $oNoticia->setImagenSlider($imagenSlider);
         }
     }
 
@@ -126,32 +132,32 @@ class ManejadorServicios {
         $this->reunionesRepository = new DataReuniones();
         return $this->reunionesRepository->addReunion($reunion);
     }
-    
+
     public function editarReunion(Reunion $reunion) {
         $this->reunionesRepository = new DataReuniones();
         return $this->reunionesRepository->editarReunion($reunion);
     }
-    
-    public function eliminarImagen(Imagen $imagen){
+
+    public function eliminarImagen(Imagen $imagen) {
         $imagen->setEliminada(1);
         $this->imagenesRepository = new DataImagenes();
         $this->imagenesRepository->editarImagen($imagen);
     }
-    
-    public function getImagenesReunion($reunionId){
+
+    public function getImagenesReunion($reunionId) {
         $this->imagenesRepository = new DataImagenes();
         return $this->imagenesRepository->getImagenesReunion($reunionId);
     }
-    public function addImagenReunion(Imagen $imagen,$reunionId){
+
+    public function addImagenReunion(Imagen $imagen, $reunionId) {
         $this->imagenesRepository = new DataImagenes();
         return $this->imagenesRepository->addImagenReunion($imagen, $reunionId);
     }
-    public function editarImagenReunion(Imagen $imagen){
+
+    public function editarImagenReunion(Imagen $imagen) {
         $this->imagenesRepository = new DataImagenes();
         return $this->imagenesRepository->editarImagenReunion($imagen);
     }
-    
-    
 
     private function asignaImagenesReunion($oReunion) {
         if (!isset($oReunion)) {
@@ -173,7 +179,15 @@ class ManejadorServicios {
             $oReunion->setImagenes($vImagenes);
         }
     }
-    
+
+    public function addImagen(Imagen $imagen) {
+        return $this->imagenesRepository->addImagen($imagen);
+    }
+
+    public function setImgSliderNoticia($noticiaId, $imagenId) {
+        $this->imagenesRepository->setImgSliderNoticia($noticiaId, $imagenId);
+    }
+
 }
 
 ?>

@@ -65,6 +65,24 @@ class ImagenesTest extends DatabaseIsolatedTestCase {
         $editedImagen = $this->imagenesRepository->getImagen($idImagen);
         $this->assertTrue(isset($editedImagen) && $this->isEquals($imagen, $editedImagen));
     }
+    
+    function testGetImgSliderNoticia() {
+        $idNoticia = $this->agregaNoticia();
+        $this->agregaImgSliderNoticia($idNoticia);
+        $imagen = $this->imagenesRepository->getImgSliderNoticia($idNoticia);
+        $this->assertTrue(isset($imagen));
+    }
+    
+    private function agregaImgSliderNoticia($idNoticia){
+        $imagen = new Imagen();
+        $imagen->setNombre("pepe.png");
+        $imagen->setNombreArchivo("pepe.png");
+        $imagen->setPath("/pepe/");
+        $imagen->setOrden(1);
+
+        $imagenId = $this->imagenesRepository->addImagen($imagen);
+        $this->imagenesRepository->setImgSliderNoticia($idNoticia, $imagenId);
+    }
 
     private function agregaImagenNoticia($idNoticia) {
         $imagen = new Imagen();
