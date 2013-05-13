@@ -87,7 +87,7 @@ if ($isRedirect) {
                 $(document).ready(function () {
                     var jcropObject;
                     var config = {
-                            sliderWidth:<?php echo $prevWidth;?>,
+                            sliderWidth:$("#contenido").width(),
                             sliderHeight:<?php echo $prevHeight;?>
                         };
                     var jcropOptions = {
@@ -97,6 +97,7 @@ if ($isRedirect) {
                             boxWidth: config.sliderWidth,
                             onSelect: showPreview
                     }
+                    $("#preview").css({width:config.sliderWidth});
                        
                     $("#imageSelect").change(function(e){
                         updateImgSrc();
@@ -164,8 +165,8 @@ if ($isRedirect) {
 
             <!-- Three-up Content Blocks -->
             <div class="content">
-                <div class="row">
-                    <div class="nine columns">
+                <div  class="row">
+                    <div id="contenido" class="twelve columns">
                         <h3>Edicion Presentación</h3>
                         <p>Desde el siguiente formulario usted prodra editar la presentación de la noticia!</p>
 
@@ -190,12 +191,12 @@ if ($isRedirect) {
                             </div>
                             <!-- imagen original -->
                             <div class="twelve columns">
-                                <img id="target" src="" style="width:920px;" >
+                                <img id="target" src="" >
                             </div>
                             <!-- imagen preview -->
                             <div class="twelve columns">
                             <?php
-                                echo '<div style="width:'.$prevWidth.'px;height:'.$prevHeight.'px;overflow:hidden;border: .2em dotted #'.$prevWidth.';">';
+                                echo '<div style="height:'.$prevHeight.'px;overflow:hidden;border: .2em dotted #'.$prevWidth.';">';
                                     echo'<img id="preview" src="" style="max-width:none;" >';
                                 echo '</div>';
                             ?>
