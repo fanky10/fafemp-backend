@@ -22,10 +22,9 @@ if (isset($idNoticia) && !empty($idNoticia)) {
         if (isset($vImagenes) && !empty($vImagenes)) {
             $oImagen = $vImagenes[0];
         }
-        
         $vDocumentos = $oNoticia->getDocumentos();
         if (isset($vDocumentos) && !empty($vDocumentos)) {
-        	$oDocumento = $vDocumentos[0];
+            $oDocumento = $vDocumentos[0];
         }
         
         $isRedirect = false; // I wont redirect unless noticia is a valid one

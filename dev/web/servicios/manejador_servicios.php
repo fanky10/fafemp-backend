@@ -165,6 +165,7 @@ class ManejadorServicios {
         $this->reunionesRepository = new DataReuniones();
         $oReunion = $this->reunionesRepository->getReunionById($reunionId);
         $this->asignaImagenesReunion($oReunion);
+        $this->asignaDocumentosReunion($oReunion);
 
         return $oReunion;
     }
@@ -173,6 +174,7 @@ class ManejadorServicios {
         $this->reunionesRepository = new DataReuniones();
         $vReuniones = $this->reunionesRepository->getReuniones($limit);
         $this->asignaImagenesReuniones($vReuniones);
+        $this->asignaDocumentosReuniones($vReuniones);
 
         return $vReuniones;
     }
@@ -193,9 +195,20 @@ class ManejadorServicios {
         $this->imagenesRepository->editarImagen($imagen);
     }
     
+    public function eliminarDocumento(Documento $documento){
+        $documento->setEliminada(1);
+        $this->documentosRepository = new DataDocumentos();
+        $this->documentosRepository->editarDocumento($documento);
+    }
+    
     public function getImagenesReunion($reunionId){
         $this->imagenesRepository = new DataImagenes();
         return $this->imagenesRepository->getImagenesReunion($reunionId);
+    }
+    
+    public function getDocumentosReunion($reunionId){
+        $this->documentosRepository = new DataDocumentos();
+        return $this->documentosRepository->getDocumentosReunion($reunionId);
     }
         
     public function addImagenReunion(Imagen $imagen,$reunionId){
@@ -203,9 +216,19 @@ class ManejadorServicios {
         return $this->imagenesRepository->addImagenReunion($imagen, $reunionId);
     }
     
+    public function addDocumentoReunion(Documento $documento,$reunionId){
+        $this->documentosRepository = new DataDocumentos();
+        return $this->documentosRepository->addDocumentoReunion($documento, $reunionId);
+    }
+    
     public function editarImagenReunion(Imagen $imagen){
         $this->imagenesRepository = new DataImagenes();
         return $this->imagenesRepository->editarImagenReunion($imagen);
+    }
+    
+    public function editarDocumentoReunion(Documento $documento){
+        $this->documentosRepository = new DataDocumentos();
+        return $this->documentosRepository->editarDocumentoReunion($documento);
     }
 
     private function asignaImagenesReunion($oReunion) {
@@ -215,6 +238,15 @@ class ManejadorServicios {
         $this->imagenesRepository = new DataImagenes();
         $vImagenes = $this->imagenesRepository->getImagenesReunion($oReunion->getId());
         $oReunion->setImagenes($vImagenes);
+    }
+    
+    private function asignaDocumentosReunion($oReunion) {
+        if (!isset($oReunion)) {
+            return;
+        }
+        $this->documentosRepository = new DataDocumentos();
+        $vDocumentos = $this->documentosRepository->getDocumentosReunion($oReunion->getId());
+        $oReunion->setDocumentos($vDocumentos);
     }
 
     private function asignaImagenesReuniones($vReuniones) {
@@ -226,6 +258,18 @@ class ManejadorServicios {
         foreach ($vReuniones as $oReunion) {
             $vImagenes = $this->imagenesRepository->getImagenesReunion($oReunion->getId());
             $oReunion->setImagenes($vImagenes);
+        }
+    }
+    
+    private function asignaDocumentosReuniones($vReuniones) {
+        if (!isset($vReuniones) || empty($vReuniones)) {
+            return;
+        }
+        $this->documentosRepository = new DataDocumentos();
+        $oReunion = new Reunion();
+        foreach ($vReuniones as $oReunion) {
+            $vDocumentos = $this->documentosRepository->getDocumentosReunion($oReunion->getId());
+            $oReunion->setDocumentos($vDocumentos);
         }
     }
     
