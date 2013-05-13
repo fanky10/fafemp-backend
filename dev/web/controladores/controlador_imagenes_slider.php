@@ -24,8 +24,8 @@ class ControladorImagenesSlider extends ControladorImagenes {
             try{
             //la imagen original que estamos por resizear
             $src = $this->dirBase . $this->oImagen->getPath() . "/" . $this->oImagen->getNombreArchivo();
-            $formattedDate = strftime('%d%m%Y'); //Dia-Mes-Anio todo en nros.
-            $nombreArchivo = Utilidades::safeText($formattedDate . '-' . $this->oImagen->getNombre());
+            $ext = pathinfo($this->oImagen->getNombreArchivo(), PATHINFO_EXTENSION);
+            $nombreArchivo = Utilidades::safeText($idNoticia . '-Slider.' . $ext);
             $outputFilename = $this->dirBase . $this->imgPath . "/" . $nombreArchivo;
             $img_r = imagecreatefromjpeg($src);
             $dst_r = imagecreatetruecolor($width, $height);
