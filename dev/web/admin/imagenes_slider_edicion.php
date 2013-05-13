@@ -181,8 +181,12 @@ if ($isRedirect) {
                                         $vImagenes = $oNoticia->getImagenes();
                                         if (isset($vImagenes) && !empty($vImagenes)) {
                                             foreach ($vImagenes as $oImagen) {
-                                                $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
-                                                echo '<option value="'.$imgSrc.'" data-bind="'.$oImagen->getId().'">'.$oImagen->getNombreArchivo().'</option>';
+                                                $fileTypes = "/^\.(jpg|jpeg){1}$/i";
+                                                $ext = ".".pathinfo($oImagen->getNombreArchivo(), PATHINFO_EXTENSION);
+                                                if(preg_match($fileTypes,$ext)){
+                                                    $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
+                                                    echo '<option value="'.$imgSrc.'" data-bind="'.$oImagen->getId().'">'.$oImagen->getNombreArchivo().'</option>';
+                                                }
                                             }
                                         } else {//no images
                                         }  

@@ -31,9 +31,7 @@ class ControladorImagenesSlider extends ControladorImagenes {
             $dst_r = imagecreatetruecolor($width, $height);
 
             imagecopyresampled($dst_r, $img_r, 0, 0, $xPosition, $yPosition, $width, $height, $wValue, $hValue);
-            //why two times?
-//            imagejpeg($dst_r, time() . '.jpg', $jpeg_quality);
-
+            
             imagejpeg($dst_r, $outputFilename, $jpeg_quality);
 
             //if everyhing went as expected:
