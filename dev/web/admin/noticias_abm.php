@@ -30,7 +30,7 @@ if ($action == "add") {
     $noticiaId = $_GET['id'];
     if (isset($noticiaId) && !empty($noticiaId)) {
         $oNoticia = $controladorNoticias->editarNoticia($noticiaId);
-        
+
         $controladorImagenes->setNoticiaId($noticiaId);
         $oImagenes = $controladorImagenes->subeMultiplesImagenes();
         $oNoticia->setImagenes($oImagenes);
@@ -121,28 +121,47 @@ $oNoticia = $manejador->getNoticiaById($noticiaId);
         $navigateTitle = "Noticia - Previsualización";
         include_once 'admin_navigate.php';
         ?>
-        
+
         <?php
         include_once '../common/noticia_content.php';
         ?>
 
         <div class="content">
-	        <div class="row">
-	            <div class="three columns" ></div>
-	            <div class="three columns">
-	                <?php
-	                $linkEdicion = "noticias_edicion.php?id=" . $oNoticia->getId();
-	                echo '<a href="' . $linkEdicion . '"> <button class="radius button">Volver a editar</button> </a>';
-	                echo '</div>';
-	                ?>
-				<div class="three columns">
-	            	<a class="radius button" href="noticias.php">Volver a Noticias</a>
-				</div>
-	            <div class="three columns" ></div>
-	
-			</div>
-		</div>
-        
+            <div class="row">
+                <?php if ($action == "edit") { ?>
+                    <div class="three columns" ></div>
+                    <div class="three columns">
+                        <?php
+                        $linkEdicion = "noticias_edicion.php?id=" . $oNoticia->getId();
+                        echo '<a href="' . $linkEdicion . '"> <button class="radius button">Volver a editar</button> </a>';
+                        ?>
+                    </div>
+                    <div class="three columns">
+                        <a class="radius button" href="noticias.php">Volver a Noticias</a>
+                    </div>
+                    <div class="three columns" ></div>
+                <?php } elseif ($action == "add") { ?>
+                    <div class="one columns" ></div>
+                    <div class="three columns">
+                        <?php
+                        $linkPresentacion = "imagenes_slider_edicion.php?idNoticia=" . $oNoticia->getId();
+                        echo '<a href="' . $linkPresentacion . '"> <button class="radius button">Crear presentación</button> </a>';
+                        ?>
+                    </div>
+                    <div class="three columns">
+                        <?php
+                        $linkEdicion = "noticias_edicion.php?id=" . $oNoticia->getId();
+                        echo '<a href="' . $linkEdicion . '"> <button class="radius button">Volver a editar</button> </a>';
+                        ?>
+                    </div>
+                    <div class="three columns">
+                        <a class="radius button" href="noticias.php">Volver a Noticias</a>
+                    </div>
+                    <div class="one columns" ></div>
+                <?php } ?>
+            </div>
+        </div>
+
         <?php
         include_once 'admin_footer.php';
         ?>
