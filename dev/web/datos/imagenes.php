@@ -36,9 +36,8 @@ class DataImagenes extends Data implements ImagenesRepository {
     }
 
     public function addImagenNoticia(Imagen $imagen, $noticiaId) {
-        $this->addImagen($imagen);
         //conseguimos el idImagen generado
-        $imagenId = $this->getUltimoID(Imagen::$TABLE, Imagen::$COLUMN_ID);
+        $imagenId = $this->addImagen($imagen);
 
         $non_query = "insert into " . ImagenNoticia::$TABLE . " (imagen_id,noticia_id,imagen_orden) 
             values(?,?,?)";
@@ -137,9 +136,9 @@ class DataImagenes extends Data implements ImagenesRepository {
     }
 
     public function addImagenReunion(Imagen $imagen, $reunionId) {
-        $this->addImagen($imagen);
+        
         //conseguimos el idImagen generado
-        $imagenId = $this->getUltimoID(Imagen::$TABLE, Imagen::$COLUMN_ID);
+        $imagenId = $this->addImagen($imagen);
 
         $non_query = "insert into " . ImagenReunion::$TABLE . " (imagen_id,reunion_id,imagen_orden) 
             values(?,?,?)";
@@ -200,7 +199,7 @@ class DataImagenes extends Data implements ImagenesRepository {
         $stmt->close();
     }
     
-    private function addImagen(Imagen $imagen){
+    public function addImagen(Imagen $imagen){
         $non_query = "insert into " . Imagen::$TABLE . " (imagen_path,imagen_nombre,imagen_nombre_archivo) 
             values(?,?,?)";
         $stmt = $this->prepareStmt($non_query);
@@ -216,7 +215,45 @@ class DataImagenes extends Data implements ImagenesRepository {
             echo "addImagen - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
             return -1;
         }
+        
+        //conseguimos el idImagen generado
+        $imagenId = $this->getUltimoID(Imagen::$TABLE, Imagen::$COLUMN_ID);
+        return $imagenId;
+    }
 
+    public function getImgSliderNoticia($noticiaId) {
+        $query = "select i.imagen_id,i.imagen_path,i.imagen_nombre,i.imagen_fec_hora,i.imagen_eliminada,i.imagen_nombre_archivo, 0 as imagen_orden FROM " . Imagen::$TABLE . " as i" .
+                " INNER JOIN " . Noticia::$TABLE . " as n ON n.noticia_slider_imagen_id=i.imagen_id" .
+                " WHERE n.noticia_id= ? and i.imagen_eliminada=0";
+        $stmt = $this->prepareStmt($query);
+
+        $stmt->bind_param('i', $noticiaId);
+
+        if (!$stmt->execute()) {
+            echo "getImgSliderNoticia - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            return $this->createImageObject($row);
+        }
+        return null;
+    }
+
+    public function deleteImgSliderNoticia($noticiaId) {
+        $this->setImgSliderNoticia($noticiaId, null);
+    }
+
+    public function setImgSliderNoticia($noticiaId, $imagenId) {
+        $non_query = "update " . Noticia::$TABLE . " set noticia_slider_imagen_id=? where noticia_id=?";
+        $stmt = $this->prepareStmt($non_query);
+        $stmt->bind_param('ii', $imagenId, $noticiaId);
+
+        if (!$stmt->execute()) {
+            echo "setImgSliderNoticia - Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        /* close statement and connection */
         $stmt->close();
     }
 

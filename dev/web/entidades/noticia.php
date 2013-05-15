@@ -13,6 +13,7 @@ class Noticia {
     private $cuerpo;
     private $eliminada;
     private $imagenes;
+    private $imagenSlider;
 
     public function setId($id) {
         $this->id = $id;
@@ -29,9 +30,9 @@ class Noticia {
     public function setCuerpo($cuerpo) {
         $this->cuerpo = $cuerpo;
     }
-    
-    public function setEliminada($eliminada){
-        $this->eliminada=$eliminada;
+
+    public function setEliminada($eliminada) {
+        $this->eliminada = $eliminada;
     }
 
     public function setImagenes($imagenes) {
@@ -64,9 +65,19 @@ class Noticia {
         }
         return null;
     }
-    public function getEliminada(){
+
+    public function getEliminada() {
         return $this->eliminada;
     }
+
+    public function getImagenSlider() {
+        return $this->imagenSlider;
+    }
+
+    public function setImagenSlider($imagenSlider) {
+        $this->imagenSlider = $imagenSlider;
+    }
+
 }
 
 ?>

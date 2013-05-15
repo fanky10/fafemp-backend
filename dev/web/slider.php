@@ -38,9 +38,15 @@
 
         $title = $oNoticia->getTitulo();
         $oImagen = $oNoticia->getImagen();
-        $link = ROOT_URL . "/noticia.php?id=" . $oNoticia->getId();
-        $img = "http://placehold.it/970x290/E9E9E9&text=" . $title;
-        echo '<a href="' . $link . '"><img src="' . $img . '" /><span class="slider-caption">Ver más</span></a>';
+        $link = ROOT_URL ."/noticia.php?id=".$oNoticia->getId();
+        $img = "http://placehold.it/970x290/E9E9E9&text=".$title;
+        $captionMsg = 'Ver más';
+        $oImgSlider = $oNoticia->getImagenSlider();
+        if(isset($oImgSlider)){
+            $img = ROOT_URL . "/" . $oImgSlider->getPath() . "/" . $oImgSlider->getNombreArchivo();
+            $captionMsg = $title;
+        }
+        echo '<a href="' . $link . '"><img src="' . $img . '" /><span class="slider-caption">'.$captionMsg.'</span></a>';
     }
     ?>
 </div>        
