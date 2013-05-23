@@ -5,7 +5,7 @@ include_once ROOT_DIR . '/entidades/documento.php';
 
 interface DocumentosRepository{
     public function getDocumento($id);
-    public function getDocumentos();
+    
     public function editarDocumento(Documento $documento);
     
     public function editarDocumentoNoticia(Documento $documento);
@@ -15,5 +15,7 @@ interface DocumentosRepository{
     public function getDocumentosReunion($reunionId);
     public function addDocumentoReunion(Documento $documento,$reunionId);
     public function editarDocumentoReunion(Documento $documento);
+    
+    public function getDocumentos($limit);
 }
 ?>

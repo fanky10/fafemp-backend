@@ -64,12 +64,16 @@ $oDocumento = new Documento();
                     <div class="row">
                         <div class="twelve columns">
                             <div class="twelve columns">
-                                <div class="six columns">
+                                <div class="four columns">
                                     <a class="button radius" title="Noticias" href="noticias.php">Noticias</a>
-                                    <div class="six columns">
-                                        <a class="button radius" title="Reuniones" href="reuniones.php">Reuniones</a>
-                                    </div>
                                 </div>
+                                <div class="four columns">
+                                    <a class="button radius" title="Reuniones" href="reuniones.php">Reuniones</a>
+                                </div>
+                                <div class="four columns">
+                                    <a class="button radius" title="Documentos" href="documentos.php">Documentos</a>
+                                </div>
+                                
                             </div>
                         </div>
 

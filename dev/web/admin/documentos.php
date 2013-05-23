@@ -2,14 +2,10 @@
 include 'admin_check.php';
 include_once '../init.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
-include_once ROOT_DIR . '/entidades/noticia.php';
-include_once ROOT_DIR . '/entidades/imagen.php';
 include_once ROOT_DIR . '/util/utilidades.php';
 include_once ROOT_DIR . '/entidades/documento.php';
 $manejador = new ManejadorServicios();
-$reuniones = $manejador->getReuniones($GLOBAL_SETTINGS['news.abm.limit']);
-$oReunion = new Reunion();
-$oImagen = new Imagen();
+$documentos = $manejador->getDocumentos($GLOBAL_SETTINGS['news.abm.limit']);
 $oDocumento = new Documento();
 ?>
 
@@ -50,7 +46,7 @@ $oDocumento = new Documento();
         <?php
         include_once 'admin_header.php';
         include_once 'admin_menu.php';
-        $navigateTitle = "Reuniones";
+        $navigateTitle = "Documentos";
         include_once 'admin_navigate.php';
         ?>
 
@@ -58,60 +54,37 @@ $oDocumento = new Documento();
             <div class="row">
                 <div class="twelve columns">
                     <?php
-                    if (isset($reuniones) && !empty($reuniones)) {//hay reuniones    
+                    if (isset($documentos) && !empty($documentos)) {//hay reuniones    
                         ?>
-                        <h3>Listado de Reuniones</h3>
-                        <p>Desde la siguiente lista de noticias podras editar y eliminar reuniones ya cargadas.</p>
+                        <h3>Listado de Documentos</h3>
+                        <p>Desde la siguiente lista de documentos podras descargar y eliminar documentos ya cargados.</p>
 
                         <div class="row">
-                            <div class="two columns">
-                                <h5>Fecha</h5>
-                            </div>
-                            <div class="two columns">
-                                <h5>Titulo</h5>
+                            <div class="six columns">
+                                <h5>Nombre</h5>
                             </div>
                             <div class="four columns">
-                                <h5>Descripcion</h5>
+                                <h5>Link para descarga</h5>
                             </div>
                             <div class="two columns">
-                            </div>
-                            <div class="two columns">
+                                <h5>Link para eliminar documento</h5>
                             </div>
                         </div>
                         <?php
-                        foreach ($reuniones as $oReunion) {
+                        foreach ($documentos as $oDocumento) {
                             echo '<div class="row">';
-                            echo '<div class="two columns">';
-                            $timestamp = time();
-                            $reunionFecHr = $oReunion->getFechaInicio();
-                            if (isset($reunionFecHr)) {
-                                $timestamp = strtotime($reunionFecHr);
-                            }
-                            //handle strftime
-                            $formattedDate = strftime($GLOBAL_SETTINGS['news.date.formatter'], $timestamp);
-                            echo $formattedDate;
+                            echo '<div class="six columns">';
+                            echo $oDocumento->getNombreArchivo();
                             echo '</div>';
-
-
-                            echo '<div class="two columns">';
-                            echo $oReunion->getTitulo();
-
-                            echo '</div>';
-                            echo '<div class="four columns">';
-                            $limiteCuerpo = $GLOBAL_SETTINGS['news.abm.body.limit'];
-                            $shortenText = Utilidades::acortaTexto($oReunion->getCuerpo(), $limiteCuerpo, ".");
-                            echo Utilidades::removeBreakLines($shortenText);
-
-                            echo '</div>';
-
-                            echo '<div class = "two columns" align = "center">';
-                            $linkEdicion = "reuniones_edicion.php?id=" . $oReunion->getId();
-                            echo '<a href="' . $linkEdicion . '"><img src="../images/soft-scraps-edit-icon.png" alt="Editar" /></a>';
+                           
+                            echo '<div class = "four columns" align = "center">';
+                            $linkDownload = $oDocumento->getPath();
+                            echo '<a href="' . $linkDownload . '"><img src="../images/soft-scraps-edit-icon.png" alt="Editar" /></a>';
                             echo '</div>';
 
                             echo '<div class="two columns" align="center">';
-                            $linkEliminar = "reuniones_abm.php?action=del&id=" . $oReunion->getId();
-                            echo '<a href="#" onclick="popUpConfirm(\'' . $linkEliminar . '\',\'Seguro desea eliminar la reunion?\')"><img src="../images/soft-scraps-delete-icon.png" alt="Eliminar" /></a>';
+                            $linkEliminar = "documentos_abm.php?action=del&id=" . $oDocumento->getId();
+                            echo '<a href="#" onclick="popUpConfirm(\'' . $linkEliminar . '\',\'Seguro desea eliminar el documento?\')"><img src="../images/soft-scraps-delete-icon.png" alt="Eliminar" /></a>';
                             echo '</div>';
 
                             echo '<div class="twelve columns"> <br/> </div>';
@@ -119,9 +92,9 @@ $oDocumento = new Documento();
                             echo '</div>';
                         }
                     } else {//no hay noticias
-                        echo "<h3>No se han encontrado reuniones</h3>";
+                        echo "<h3>No se han encontrado documentos</h3>";
                     }
-                    echo '<a class="button radius" title="Ver más" href="reuniones_carga.php">Agregar Reunion</a>';
+                    echo '<a class="button radius" title="Ver más" href="documento_carga.php">Agregar Documento</a>';
                     ?>
                 </div>
             </div>

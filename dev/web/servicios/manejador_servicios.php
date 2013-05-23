@@ -273,6 +273,12 @@ class ManejadorServicios {
         }
     }
     
+    public function getDocumentos($limit) {
+        $this->documentosRepository = new DataDocumentos();
+        $vDocumentos = $this->documentosRepository->getDocumentos($limit);
+        return $vDocumentos;
+    }
+    
 }
 
 ?>

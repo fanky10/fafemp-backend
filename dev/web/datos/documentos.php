@@ -14,10 +14,6 @@ class DataDocumentos extends Data implements DocumentosRepository {
         parent::__construct();
     }
 
-    public function getDocumentos() {
-        return array();
-    }
-
     public function getDocumento($idDocumento) {
         $query = "select documento_id,documento_path,documento_nombre,documento_fec_hora,documento_eliminada,documento_nombre_archivo, 1 as documento_orden FROM " . Documento::$TABLE .
                 " WHERE documento_id= ? ";
@@ -244,6 +240,51 @@ class DataDocumentos extends Data implements DocumentosRepository {
             $doc_idx++;
         }
         return $vDocumentos;
+    }
+
+    
+    public function getDocumentos($limit) {
+        $query = "select d.documento_id,d.documento_nombre,d.documento_path,d.documento_nombre_archivo,d.documento_eliminada,d.documento_fec_hora
+            from documentos d WHERE d.documento_eliminada=0
+            ORDER BY d.documento_fec_hora desc limit ?";
+        $stmt = $this->prepareStmt($query);
+
+        $stmt->bind_param('i', $limit);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $documento_idx = 0;
+        $vDocs = array();
+        while ($row = $result->fetch_assoc()) {
+
+            $oDocumento = $this->generaDocumento($row);
+
+            $vDocs[$documento_idx] = $oDocumento;
+            $documento_idx = $documento_idx + 1;
+        }
+        $stmt->close();
+        return $vDocs;
+    }
+    
+     private function generaDocumento($row) {
+        $id = $row['documento_id'];
+        $nombre = $row['documento_nombre'];
+        $path = $row['documento_path'];
+        $eliminada = $row['documento_eliminada'];
+        $nombreArchivo = $row['documento_nombre_archivo'];
+        $fechaHora = $row['documento_fec_hora'];
+
+        
+        $oDocumento = new Documento();
+        $oDocumento->setId($id);
+        $oDocumento->setNombre($nombre);
+        $oDocumento->setPath($path);
+        $oDocumento->setNombreArchivo($nombreArchivo);
+        $oDocumento->setEliminada($eliminada);
+        $oDocumento->setFechaHora($fechaHora);
+        return $oDocumento;
     }
 
 }
