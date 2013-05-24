@@ -48,7 +48,7 @@
                     <h3>Carga Documentos</h3>
                     <p>Desde el siguiente selector usted prodrá ingresar nuevos
                         documentos, que quedarán visibles desde el sitio público!.</p>
-                    <form id="formNoticia"action="noticias_abm.php?action=add" method="POST"
+                    <form id="formDocumento"action="documentos_abm.php?action=add" method="POST"
                           enctype="multipart/form-data">
                         <h5>Documentos:</h5>
                         <div class="row">

@@ -94,7 +94,7 @@ $oDocumento = new Documento();
                     } else {//no hay noticias
                         echo "<h3>No se han encontrado documentos</h3>";
                     }
-                    echo '<a class="button radius" title="Ver más" href="documento_carga.php">Agregar Documento</a>';
+                    echo '<a class="button radius" title="Ver más" href="documentos_carga.php">Agregar Documento</a>';
                     ?>
                 </div>
             </div>
