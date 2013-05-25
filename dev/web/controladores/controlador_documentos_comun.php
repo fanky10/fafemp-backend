@@ -19,6 +19,7 @@ class ControladorDocumentosComun extends ControladorDocumentos {
         $oDocumento->setNombreArchivo($safe_filename);
         $oDocumento->setPath($this->docPath);
         $oDocumento->setOrden($orden);
+        $this->manejador->addDocumento($oDocumento);
         return $oDocumento;
     }
 

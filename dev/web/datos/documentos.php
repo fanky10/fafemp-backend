@@ -154,7 +154,7 @@ class DataDocumentos extends Data implements DocumentosRepository {
         $stmt->close();
     }
     
-    private function addDocumento(Documento $documento){
+    public function addDocumento(Documento $documento){
         $non_query = "insert into " . Documento::$TABLE . " (documento_path,documento_nombre,documento_nombre_archivo) 
             values(?,?,?)";
         $stmt = $this->prepareStmt($non_query);
