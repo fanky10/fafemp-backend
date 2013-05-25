@@ -221,6 +221,11 @@ class ManejadorServicios {
         return $this->documentosRepository->addDocumentoReunion($documento, $reunionId);
     }
     
+     public function addDocumento(Documento $documento){
+        $this->documentosRepository = new DataDocumentos();
+        return $this->documentosRepository->addDocumento($documento);
+    }
+    
     public function editarImagenReunion(Imagen $imagen){
         $this->imagenesRepository = new DataImagenes();
         return $this->imagenesRepository->editarImagenReunion($imagen);
