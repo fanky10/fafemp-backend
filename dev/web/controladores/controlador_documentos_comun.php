@@ -7,9 +7,10 @@ include_once ROOT_DIR . '/util/utilidades.php';
 include_once 'controlador_documentos.php';
 
 class ControladorDocumentosComun extends ControladorDocumentos {
-
-    public function __construct($dirBase, $docPath) {
+    private $limit;
+    public function __construct($dirBase, $docPath,$limit) {
         parent::__construct($dirBase, $docPath);
+        $this->limit = $limit;
     }
 
 
@@ -24,6 +25,7 @@ class ControladorDocumentosComun extends ControladorDocumentos {
     }
 
     protected function getDocumentosGuardados() {
+        $this->manejador->getDocumentos($this->limit);
         
     }
 

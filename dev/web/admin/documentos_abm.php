@@ -14,7 +14,7 @@ if (!isset($action) || empty($action)) {
     header($redirectLocation);
     exit;
 }
-$controladorDocumentos = new ControladorDocumentosComun(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.doc.path"] . "/", $GLOBAL_SETTINGS["news.doc.path"]);
+$controladorDocumentos = new ControladorDocumentosComun(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.doc.path"] . "/", $GLOBAL_SETTINGS["news.doc.path"],$GLOBAL_SETTINGS["news.doc.limit"]);
 $manejador = new ManejadorServicios();
 
 $documentoId;
@@ -26,7 +26,7 @@ if ($action == "add") {
     if (isset($documentoId) && !empty($documentoId)) {
         $controladorDocumentos->deleteDocumento($documentoId);
         header($redirectLocation);
-        return;
+        exit;
     }
 } else {
     header($redirectLocation);
