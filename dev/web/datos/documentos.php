@@ -221,7 +221,7 @@ class DataDocumentos extends Data implements DocumentosRepository {
     public function getDocumentosReunion($reunionId) {
         $query = "select i.documento_id,i.documento_path,i.documento_nombre,i.documento_fec_hora,i.documento_eliminada,i.documento_nombre_archivo,ii.documento_orden FROM " . Documento::$TABLE . " as i" .
                 " INNER JOIN " . DocumentoReunion::$TABLE . " as ii ON ii.documento_id=i.documento_id" .
-                " WHERE ii.documento_id= ? and i.documento_eliminada=0" .
+                " WHERE ii.reunion_id= ? and i.documento_eliminada=0" .
                 " ORDER BY documento_orden";
         $stmt = $this->prepareStmt($query);
 
