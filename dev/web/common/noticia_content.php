@@ -65,39 +65,40 @@ include_once ROOT_DIR . '/util/utilidades.php';
             ?>
             <p class="text-justify"><?php echo $cuerpo; ?></p>
         </div>
-       	
+
         <div class="one columns" ></div>
         <div id="imgResponse" class="nine columns" >
-            <h4 class="destacado">Lista de documentos:</h4>
-            <ul style="list-style-type:none;">
-                <?php
-                $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
-                $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
-                $vDocumentos = $oNoticia->getDocumentos();
-                if (isset($vDocumentos) && !empty($vDocumentos)) {
-                    foreach ($vDocumentos as $oDocumento) {
-                        if (isset($oDocumento)) {
-                            $doc = ROOT_URL . "/" . $oDocumento->getPath() . "/" . $oDocumento->getNombreArchivo();
-                            $nombreDoc = $oDocumento->getNombreArchivo();
-                            echo "<li>";
-                            echo "<p>";
-                            echo '<a href="' .  $doc . '"><img src="images/soft-scraps-download-icon.png" style="Position:Absolute;  right:50%;" />'.$nombreDoc .  '"</a>';
-                            
-                            //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
-                            echo "</p>";
-                            echo "</li>";
-                            
-                        }
+
+            <?php
+            $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
+            $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
+            $vDocumentos = $oNoticia->getDocumentos();
+            if (isset($vDocumentos) && !empty($vDocumentos)) {
+                echo "<h4 class=\"destacado\">Lista de documentos:</h4>";
+                echo "<ul style=\"list-style-type:none;\">";
+                foreach ($vDocumentos as $oDocumento) {
+                    if (isset($oDocumento)) {
+                        $doc = ROOT_URL . "/" . $oDocumento->getPath() . "/" . $oDocumento->getNombreArchivo();
+                        $nombreDoc = $oDocumento->getNombreArchivo();
+                        echo "<li>";
+                        echo "<p>";
+                        echo '<a href="' . $doc . '"><img src="images/soft-scraps-download-icon.png" style="Position:Absolute;  right:50%;" />' . $nombreDoc . '"</a>';
+
+                        //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
+                        echo "</p>";
+                        echo "</li>";
                     }
-                } else {//no images
-                    $doc = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
-                    echo "<li>";
-                    echo '<img src="' . $doc . '">'.$nombreDoc .  '"</>';
-                    //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
-                    echo "</li>";
                 }
-                ?>
-            </ul>
+                echo "</ul>";
+            } else {//no images
+                //$doc = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
+                //echo "<li>";
+                //echo '<img src="' . $doc . '">' . $nombreDoc . '"</>';
+                //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
+                //echo "</li>";
+            }
+            ?>
+
         </div>
         <div class="two columns" ></div>
     </div>
