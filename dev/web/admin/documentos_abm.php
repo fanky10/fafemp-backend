@@ -12,9 +12,9 @@ $redirectLocation = 'Location: documentos.php';
 if (!isset($action) || empty($action)) {
     //I dont know what to do!
     header($redirectLocation);
-    return;
+    exit;
 }
-$controladorDocumentos = new ControladorDocumentosComun(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.img.path"] . "/", $GLOBAL_SETTINGS["news.img.path"]);
+$controladorDocumentos = new ControladorDocumentosComun(ROOT_DIR . "/" . $GLOBAL_SETTINGS["news.doc.path"] . "/", $GLOBAL_SETTINGS["news.doc.path"]);
 $manejador = new ManejadorServicios();
 
 $documentoId;
@@ -30,7 +30,7 @@ if ($action == "add") {
     }
 } else {
     header($redirectLocation);
-    return;
+    exit;
 }
 //just to make sure everything works fine
 //$oDocumento = $manejador->getDocumentoById($documentoId);
