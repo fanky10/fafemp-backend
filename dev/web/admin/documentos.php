@@ -76,9 +76,9 @@ $oDocumento = new Documento();
                             echo '<div class="six columns">';
                             echo $oDocumento->getNombreArchivo();
                             echo '</div>';
-                           
+
                             echo '<div class = "four columns" align = "center">';
-                            $linkDownload = $oDocumento->getPath();
+                            $linkDownload = ROOT_URL . "/" . $oDocumento->getPath() . "/" . $oDocumento->getNombreArchivo();
                             echo '<a href="' . $linkDownload . '"><img src="../images/soft-scraps-download-icon.png" alt="Editar" /></a>';
                             echo '</div>';
 
@@ -88,7 +88,7 @@ $oDocumento = new Documento();
                             echo '</div>';
 
                             echo '<div class="twelve columns"> <br/> </div>';
-                            
+
                             echo '</div>';
                         }
                     } else {//no hay noticias
