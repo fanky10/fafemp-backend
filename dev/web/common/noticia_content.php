@@ -82,7 +82,7 @@ include_once ROOT_DIR . '/util/utilidades.php';
                         $nombreDoc = $oDocumento->getNombreArchivo();
                         echo "<li>";
                         echo "<p>";
-                        echo '<a href="' . $doc . '"><img src="images/soft-scraps-download-icon.png" style="Position:Absolute;  right:50%;" />' . $nombreDoc . '"</a>';
+                        echo '<a href="' . $doc . '"><img src="images/soft-scraps-download-icon.png" style="Position:Absolute;  right:50%;" />' . $nombreDoc . '</a>';
 
                         //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
                         echo "</p>";
