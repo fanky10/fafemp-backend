@@ -79,7 +79,7 @@ $oDocumento = new Documento();
                            
                             echo '<div class = "four columns" align = "center">';
                             $linkDownload = $oDocumento->getPath();
-                            echo '<a href="' . $linkDownload . '"><img src="../images/soft-scraps-edit-icon.png" alt="Editar" /></a>';
+                            echo '<a href="' . $linkDownload . '"><img src="../images/soft-scraps-download-icon.png" alt="Editar" /></a>';
                             echo '</div>';
 
                             echo '<div class="two columns" align="center">';
