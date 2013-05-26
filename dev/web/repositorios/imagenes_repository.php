@@ -4,6 +4,7 @@ include_once '../init.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
 
 interface ImagenesRepository{
+    public function addImagen(Imagen $imagen);
     public function getImagen($id);
     public function getImagenes();
     public function editarImagen(Imagen $imagen);
@@ -15,5 +16,9 @@ interface ImagenesRepository{
     public function getImagenesReunion($reunionId);
     public function addImagenReunion(Imagen $imagen,$reunionId);
     public function editarImagenReunion(Imagen $imagen);
+    
+    public function getImgSliderNoticia($noticiaId);
+    public function setImgSliderNoticia($noticiaId, $imagenId);
+    public function deleteImgSliderNoticia($noticiaId);
 }
 ?>

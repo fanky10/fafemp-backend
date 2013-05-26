@@ -114,6 +114,9 @@ class ManejadorServicios {
         $this->imagenesRepository = new DataImagenes();
         $vImagenes = $this->imagenesRepository->getImagenesNoticia($oNoticia->getId());
         $oNoticia->setImagenes($vImagenes);
+
+        $imagenSlider = $this->imagenesRepository->getImgSliderNoticia($oNoticia->getId());
+        $oNoticia->setImagenSlider($imagenSlider);
     }
 
     private function asignaImagenesNoticias($vNoticias) {
@@ -125,6 +128,9 @@ class ManejadorServicios {
         foreach ($vNoticias as $oNoticia) {
             $vImagenes = $this->imagenesRepository->getImagenesNoticia($oNoticia->getId());
             $oNoticia->setImagenes($vImagenes);
+
+            $imagenSlider = $this->imagenesRepository->getImgSliderNoticia($oNoticia->getId());
+            $oNoticia->setImagenSlider($imagenSlider);
         }
     }
     
@@ -284,6 +290,13 @@ class ManejadorServicios {
         return $vDocumentos;
     }
     
+    public function addImagen(Imagen $imagen) {
+        return $this->imagenesRepository->addImagen($imagen);
+    }
+
+    public function setImgSliderNoticia($noticiaId, $imagenId) {
+        $this->imagenesRepository->setImgSliderNoticia($noticiaId, $imagenId);
+    }
 }
 
 ?>

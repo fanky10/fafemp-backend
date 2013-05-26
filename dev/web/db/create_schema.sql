@@ -15,7 +15,8 @@ CREATE TABLE noticias(
     noticia_fec_hora timestamp not null,
     noticia_titulo varchar(100) not null,
     noticia_cuerpo text not null,
-    noticia_eliminada TINYINT(1) default 0
+    noticia_eliminada TINYINT(1) default 0,
+    noticia_slider_imagen_id integer unsigned not null
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS imagenes;
@@ -44,7 +45,7 @@ CREATE TABLE imagenes_noticia (
 /**
 * foreign keys
 */
-
+ALTER TABLE noticias ADD CONSTRAINT `FK_noticia_id_1` FOREIGN KEY (`noticia_slider_imagen_id`) REFERENCES `imagenes` (`imagen_id`);
 ALTER TABLE imagenes_noticia ADD CONSTRAINT `FK_imagenes_noticia_id_1` FOREIGN KEY (`noticia_id`) REFERENCES `noticias` (`noticia_id`);
 ALTER TABLE imagenes_noticia ADD CONSTRAINT `FK_imagenes_noticia_id_2` FOREIGN KEY (`imagen_id`) REFERENCES `imagenes` (`imagen_id`);
 

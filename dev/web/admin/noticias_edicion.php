@@ -32,6 +32,7 @@ if (isset($idNoticia) && !empty($idNoticia)) {
 }
 if ($isRedirect) {
     header('Location: ' . $redirect);
+    return;
 } else {
     ?>
     <!DOCTYPE html>
@@ -304,6 +305,17 @@ if ($isRedirect) {
                                     echo '<a class="secondary button" data-reveal-id="confirmImageChanges" title="editarDocumentos" href="#">Mover ó eliminar Documentos</a>';
                                 } else {
                                     echo '<a class="secondary button disabled" title="editarDocumentos" href="#">Mover ó eliminar documentos</a>';
+                                }
+                                ?>
+
+                            </div>
+                            <div class="twelve columns">
+                                <?php
+                                $vImagenes = $oNoticia->getImagenes();
+                                if (isset($vImagenes) && !empty($vImagenes)) {
+                                    echo '<a class="secondary button" title="editar slider" href="imagenes_slider_edicion.php?idNoticia='.$oNoticia->getId().'">Editar presentación</a>';
+                                } else {
+                                    echo '<a class="secondary button disabled" title="editar slider" href="#">Editar presentación</a>';
                                 }
                                 ?>
 
