@@ -111,7 +111,10 @@ if ($action == "add") {
                 <div class="row">
                     <div class="twelve columns" ></div>
                     <div class="twelve columns" >
+                        <h3>Carga Documentos</h3>
+                        <p>
                         El documento fue cargado correctacmente.
+                        </p>
                     </div>
                     <div class="twelve columns" ></div>
                     <div class="three columns" ></div>
