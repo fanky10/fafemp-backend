@@ -286,6 +286,40 @@ class DataDocumentos extends Data implements DocumentosRepository {
         $oDocumento->setFechaHora($fechaHora);
         return $oDocumento;
     }
+    
+     public function getDocumentosPaginados($offset, $limit) {
+        $query = "SELECT SQL_CALC_FOUND_ROWS d.documento_id,d.documento_nombre,d.documento_path,d.documento_nombre_archivo,d.documento_eliminada,d.documento_fec_hora
+            from documentos d WHERE d.documento_eliminada=0
+            ORDER BY d.documento_fec_hora desc limit  ?,?";
+        $stmt = $this->prepareStmt($query);
+
+        $stmt->bind_param("ii",$offset, $limit);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $documento_idx = 0;
+        $vDocs = array();
+        while ($row = $result->fetch_assoc()) {
+            $oDocumento = $this->generaDocumento($row);
+
+            $vDocs[$documento_idx] = $oDocumento;
+            $documento_idx = $documento_idx + 1;
+        }
+        $stmt->close();
+        return $vDocs;
+    }
+    
+    public function getCantidadDocumentos() {
+        $query = "select count(*) as cantidad from " . Documento::$TABLE. " where documento_eliminada=0";
+        $result = $this->mysqli->query($query);
+        if (!$result) {
+            throw new Exception("Database Error [{$this->mysqli->errno}] {$this->mysqli->error}");
+        }
+        $row = $result->fetch_assoc();
+        return $row['cantidad'];
+    }
 
 }
 
