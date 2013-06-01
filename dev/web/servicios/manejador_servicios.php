@@ -290,6 +290,17 @@ class ManejadorServicios {
         return $vDocumentos;
     }
     
+    public function getDocumentosPaginados($offset, $limit) {
+        $this->documentosRepository = new DataDocumentos();
+        $vDocumentos = $this->documentosRepository->getDocumentosPaginados($offset, $limit);
+        return $vDocumentos;
+    }
+    
+    public function getCantidadDocumentos() {
+        $this->documentosRepository = new DataDocumentos();
+        return $this->documentosRepository->getCantidadDocumentos();
+    }
+    
     public function addImagen(Imagen $imagen) {
         return $this->imagenesRepository->addImagen($imagen);
     }

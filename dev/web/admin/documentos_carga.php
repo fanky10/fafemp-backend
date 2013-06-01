@@ -65,7 +65,7 @@
                                     <div class="six columns">
                                         <button type="submit" name="submit" class="radius button">Guardar</button> </div>
                                     <div class="six columns">
-                                        <a class="button radius" title="cancelar" href="noticias.php">Cancelar</a>
+                                        <a class="button radius" title="cancelar" href="documentos.php">Cancelar</a>
                                     </div>
                                 </div>
                             </div>

@@ -34,18 +34,18 @@
         <?php include_once 'header.php'; ?>
 
         <!-- End Header and Nav -->
-        <?php $seccion = "noticias";
+        <?php $seccion = "documentos";
         include_once 'menu_header.php'; ?>
         <!-- First Band (Slider) -->
         <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
         <?php
-        $navigateTitle = "Noticias";
+        $navigateTitle = "Documentos";
         include_once 'navigate.php'
         ?>
         <!-- Three-up Content Blocks -->
         <div class="content">
 
-            <?php include_once 'noticias_list.php'; ?>
+            <?php include_once 'documentos_list.php'; ?>
 
         </div>
 

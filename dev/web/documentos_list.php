@@ -1,8 +1,8 @@
 <?php
 include_once 'init.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
-include_once ROOT_DIR . '/entidades/noticia.php';
-include_once ROOT_DIR . '/entidades/imagen.php';
+include_once ROOT_DIR . '/entidades/documento.php';
+
 // pagina pedida
 $pag = 1;
 if (isset($_GET["pag"])) {
@@ -12,12 +12,11 @@ $limit = $GLOBAL_SETTINGS['news.per.page'];
 $offset = ($pag - 1) * $limit; //donde empieza a mostrar
 $paginacionLimit = $GLOBAL_SETTINGS['news.page.limit'];
 $manejador = new ManejadorServicios();
-$vNoticias = $manejador->getNoticiasPaginadas($offset, $limit);
-$totalNoticias = $manejador->getCantidadNoticias();
-$imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
-$imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
+$vDocumentos = $manejador->getDocumentosPaginados($offset, $limit);
+$totalDocumentos = $manejador->getCantidadDocumentos();
+
 $limiteCuerpo = $GLOBAL_SETTINGS['news.body.limit'];
-if (!isset($vNoticias) || empty($vNoticias)) {
+if (!isset($vDocumentos) || empty($vDocumentos)) {
     ?>
     <div class="content">
         <div class="row">
@@ -26,7 +25,7 @@ if (!isset($vNoticias) || empty($vNoticias)) {
 
             </div>
             <div class="twelve columns">
-                <h3>Proximamente noticias...</h3>
+                <h3>Proximamente documentos...</h3>
             </div>
 
         </div>
@@ -35,42 +34,37 @@ if (!isset($vNoticias) || empty($vNoticias)) {
     <?php
 } else {
 
-    $oNoticia = new Noticia();
-    $oImagen = new Imagen();
-
-    $noticiasCount = count($vNoticias);
+    $oDocumento = new Documento();
+    
+    $documentosCount = count($vDocumentos);
     //creamos un arreglo multidimensional (x
     // cada row tiene la cant de elementos corresp.
     $tableData[] = array();
     $row = array();
     $itemCount = 0;
     $rowCount = 0;
-    foreach ($vNoticias as $oNoticia) {
-        $vImagenes = $oNoticia->getImagenes();
-        $imgSrc = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
-        $link = ROOT_URL . "/noticia.php?id=" . $oNoticia->getId();
-        if (isset($vImagenes) && !empty($vImagenes)) {
-            $oImagen = $vImagenes[0];
-            $idImg = $oImagen->getId();
-            if (isset($oImagen) && isset($idImg)) {
-                $imgSrc = ROOT_URL . "/" . $oImagen->getPath() . "/" . $oImagen->getNombreArchivo();
-            }
+    
+ echo '<div class="content">';
+    echo '<div class="row">';
+        echo '<div class="twelve columns">';
+        echo '<div class="twelve columns"> <br/> </div>';
+        foreach ($vDocumentos as $oDocumento) {
+            echo '<div class="twelve columns"> <br/> </div>';
+            echo '<div class="eight columns">';
+            echo $oDocumento->getNombreArchivo();
+            echo '</div>';
+
+            echo '<div class = "four columns" align = "center">';
+            $linkDownload = ROOT_URL . "/" . $oDocumento->getPath() . "/" . $oDocumento->getNombreArchivo();
+            echo '<a href="' . $linkDownload . '"><img src="'.ROOT_URL . '/images/soft-scraps-download-icon.png" alt="Editar" /></a>';
+            echo '</div>';
+
+            echo '<div class="twelve columns"> <br/> </div>';
         }
-        $shortenText = Utilidades::acortaTexto($oNoticia->getCuerpo(), $limiteCuerpo, ".");
-        $shortenText = Utilidades::breakeLines($shortenText);
-        echo '<div class="row">';
-        echo '<div class="twelve columns"><h3>' . $oNoticia->getTitulo() . '</div>';
-        echo '<div class="four columns">';
-        echo '<a href="' . $link . '"><img src="' . $imgSrc . '" witdh="' . $imgWidth . '" height="' . $imgHeight . '"></a>';
         echo '</div>';
-        echo '<div class="eight columns">';
-        echo '<p>';
-        echo $shortenText;
-        echo '</p>';
-        echo '<a class="button radius" title="Ver más" href="' . $link . '">Más detalles</a>';
-        echo '</div>';
-        echo '</div>';
-    }
+    echo '</div">';
+echo '</div">';
+    
 }
 //TODO: paginacion??
 // a piece of code!
@@ -82,12 +76,12 @@ if (!isset($vNoticias) || empty($vNoticias)) {
     <hr/>
     <div class="twelve columns">
         <?php
-        if($totalNoticias==0){
+        if($totalDocumentos==0){
             return ;
         }
         //cual es la pagina de inicio, si estamos mas alla del limite, mostrar la anterior
         $paginaInicio = ($pag > $paginacionLimit ? $pag - 1 : 1); //
-        $pagFin = ceil($totalNoticias / $limit); //saco el total de las paginas
+        $pagFin = ceil($totalDocumentos / $limit); //saco el total de las paginas
         //el numero de paginas a mostrar = configuradas
         $totalPag = $paginacionLimit;
         if ($pag > $paginacionLimit) {//excepto que ya la hayamos pasado
