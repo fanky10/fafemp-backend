@@ -200,7 +200,7 @@ if ($isRedirect) {
                             <!-- imagen preview -->
                             <div class="twelve columns">
                             <?php
-                                echo '<div style="height:'.$prevHeight.'px;overflow:hidden;border: .2em dotted #'.$prevWidth.';">';
+                                echo '<div style="height:'.$prevHeight.'px;overflow:hidden;border: 2px solid rgba(93,123,147,1)">';
                                     echo'<img id="preview" src="" style="max-width:none;" >';
                                 echo '</div>';
                             ?>

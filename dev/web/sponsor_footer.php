@@ -13,7 +13,7 @@
             <div class="table">
                 <ul id="sponsors"> 
                     <li><a class="panAmerican" href="http://www.paho.org/"></a></li> 
-                    <li><a class="cvsp" href="http://www.campusvirtualsp.org/" ></a></li>
+                    <li><a class="cvsp" href="http://www.campusvirtualsp.org/"></a></li> 
                     <!--<li><a class="oea" href="http://www.oas.org/es/"></a></li> -->
                     <!--<li><a class="redTelesalud" href="#"></a></li> -->
                 </ul>

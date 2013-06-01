@@ -171,7 +171,7 @@ $oNoticia = $manejador->getNoticiaById($noticiaId);
                 <?php } ?>
             </div>
         </div>
-
+        
         <?php
         include_once 'admin_footer.php';
         ?>
