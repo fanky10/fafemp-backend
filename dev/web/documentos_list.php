@@ -8,9 +8,9 @@ $pag = 1;
 if (isset($_GET["pag"])) {
     $pag = (int) $_GET["pag"];
 }
-$limit = $GLOBAL_SETTINGS['news.per.page'];
+$limit = $GLOBAL_SETTINGS['news.doc.per.page'];
 $offset = ($pag - 1) * $limit; //donde empieza a mostrar
-$paginacionLimit = $GLOBAL_SETTINGS['news.page.limit'];
+$paginacionLimit = $GLOBAL_SETTINGS['news.doc.limit'];
 $manejador = new ManejadorServicios();
 $vDocumentos = $manejador->getDocumentosPaginados($offset, $limit);
 $totalDocumentos = $manejador->getCantidadDocumentos();
