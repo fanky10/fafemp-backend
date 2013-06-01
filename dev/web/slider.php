@@ -17,6 +17,11 @@
     $link = "#";
     $img = "images/slider2.jpg";
     echo '<a href="' . $link . '"><img src="' . $img . '" /><span class="slider-caption">' . $title . '</span></a>';
+    
+    $title = "Reuniones Plenarias del Foro";
+    $link = "#";
+    $img = "images/slider5.jpg";
+    echo '<a href="' . $link . '"><img src="' . $img . '" /><span class="slider-caption">' . $title . '</span></a>';
 
     $title = null;
     $link = "#";
