@@ -277,6 +277,9 @@ ul#sponsors li {
 #sponsors li a.redTelesaludWhite{
     background-position: -1827px 0;
 }
+#sponsors li a.cvsp{
+    background-position: -2088px 0;
+}
 
 #sponsors li a.ministerioEducacion:hover {
     background-position: -522px -86px;
@@ -301,6 +304,9 @@ ul#sponsors li {
 }
 #sponsors li a.redTelesaludWhite:hover {
     background-position: -1827px -86px;
+}
+#sponsors li a.cvsp:hover {
+    background-position: -2088px -86px;
 }
 
 
