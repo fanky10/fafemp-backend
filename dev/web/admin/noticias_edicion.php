@@ -298,6 +298,7 @@ if ($isRedirect) {
                             <div class="twelve columns">
                                 <br><br>
                             </div>
+                            <!-- no se pueden eliminar desde aca, sino desde el panel gral. REDO
                             <div class="twelve columns">
                                 <?php
                                 $vDocumentos = $oNoticia->getDocumentos();
@@ -309,6 +310,7 @@ if ($isRedirect) {
                                 ?>
 
                             </div>
+                            -->
                             <div class="twelve columns">
                                 <?php
                                 $vImagenes = $oNoticia->getImagenes();
