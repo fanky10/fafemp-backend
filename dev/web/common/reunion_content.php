@@ -65,8 +65,7 @@ include_once ROOT_DIR . '/util/utilidades.php';
             ?>
             <p class="text-justify"><?php echo $cuerpo; ?></p>
         </div>
-       	<div id="imgResponse" class="twelve columns" ></div>
-
+       	
         <div class="one columns" ></div>
         <div id="imgResponse" class="nine columns" >
                 <?php
@@ -82,21 +81,14 @@ include_once ROOT_DIR . '/util/utilidades.php';
                             $nombreDoc = $oDocumento->getNombreArchivo();
                             echo "<li>";
                             echo "<p>";
-                            echo '<a href="' .  $doc . '"><img src="images/soft-scraps-download-icon.png" style="Position:Absolute;  right:50%;" />'.$nombreDoc .  '</a>';
+                            echo '<a href="' . $doc . '"><img src="'.ROOT_URL.'/images/soft-scraps-download-icon.png" style="Position:Absolute;  right:50%;" />' . $nombreDoc . '</a>';
                             
-                            //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
                             echo "</p>";
                             echo "</li>";
                         }
                     }
                 echo "</ul>";
-                } else {//no images
-                    //$doc = "http://placehold.it/" . $imgWidth . "x" . $imgHeight . "/E9E9E9&text=Sin imagen";
-                    //echo "<li>";
-                    //echo '<img src="' . $doc . '">'.$nombreDoc .  '"</>';
-                    //echo '<a href="' . $img . '" rel="prettyPhoto[images]"><img src="' . $img . '" /></a>';
-                    //echo "</li>";
-                }
+                } 
                 ?>
         </div>
         <div class="two columns" ></div>
