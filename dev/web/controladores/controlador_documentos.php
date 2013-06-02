@@ -95,7 +95,6 @@ abstract class ControladorDocumentos {
     public function deleteDocumento($documentoId) {
         $oDocumento = $this->manejador->getDocumento($documentoId);
         $this->manejador->eliminarDocumento($oDocumento);
-        $this->sendJSONResponseMessage("OK", "");
     }
 
     public function getDocumentosJSON() {
