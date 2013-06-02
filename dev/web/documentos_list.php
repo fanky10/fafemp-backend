@@ -44,26 +44,24 @@ if (!isset($vDocumentos) || empty($vDocumentos)) {
     $itemCount = 0;
     $rowCount = 0;
     
- echo '<div class="content">';
     echo '<div class="row">';
         echo '<div class="twelve columns">';
-        echo '<div class="twelve columns"> <br/> </div>';
-        foreach ($vDocumentos as $oDocumento) {
             echo '<div class="twelve columns"> <br/> </div>';
-            echo '<div class="eight columns">';
-            echo $oDocumento->getNombreArchivo();
-            echo '</div>';
+            foreach ($vDocumentos as $oDocumento) {
+                echo '<div class="twelve columns"> <br/> </div>';
+                echo '<div class="eight columns">';
+                echo $oDocumento->getNombreArchivo();
+                echo '</div>';
 
-            echo '<div class = "four columns" align = "center">';
-            $linkDownload = ROOT_URL . "/" . $oDocumento->getPath() . "/" . $oDocumento->getNombreArchivo();
-            echo '<a href="' . $linkDownload . '"><img src="'.ROOT_URL . '/images/soft-scraps-download-icon.png" alt="Editar" /></a>';
-            echo '</div>';
+                echo '<div class = "four columns" align = "center">';
+                    $linkDownload = ROOT_URL . "/" . $oDocumento->getPath() . "/" . $oDocumento->getNombreArchivo();
+                    echo '<a href="' . $linkDownload . '"><img src="'.ROOT_URL . '/images/soft-scraps-download-icon.png" alt="Editar" /></a>';
+                echo '</div>';
 
-            echo '<div class="twelve columns"> <br/> </div>';
-        }
+                echo '<div class="twelve columns"> <br/> </div>';
+            }
         echo '</div>';
-    echo '</div">';
-echo '</div">';
+    echo '</div>';
     
 }
 //TODO: paginacion??
