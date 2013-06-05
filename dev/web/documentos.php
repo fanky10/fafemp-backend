@@ -35,7 +35,8 @@
 
         <!-- End Header and Nav -->
         <?php $seccion = "documentos";
-        include_once 'menu_header.php'; ?>
+        include_once 'menu_header.php';
+        ?>
         <!-- First Band (Slider) -->
         <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
         <?php
@@ -44,13 +45,21 @@
         ?>
         <!-- Three-up Content Blocks -->
         <div class="content">
-
-            <?php include_once 'documentos_list.php'; ?>
-
+            <div class="row">
+                <div class="twelve columns">
+                <div class="nine columns">
+                    <h5>Nombre del documento</h5>
+                </div>
+                <div class="three columns">
+                    <h5>Link para descarga</h5>
+                </div>
+            </div>
+<?php include_once 'documentos_list.php'; ?>
+            </div>
         </div>
 
         <!-- Footer -->
-        <?php include_once 'footer.php'; ?> 
+<?php include_once 'footer.php'; ?> 
 
         <!-- Included JS Files (Compressed) -->
         <script src="javascripts/jquery.js"></script>

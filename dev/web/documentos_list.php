@@ -48,13 +48,14 @@ if (!isset($vDocumentos) || empty($vDocumentos)) {
         echo '<div class="twelve columns">';
             echo '<div class="twelve columns"> <br/> </div>';
             foreach ($vDocumentos as $oDocumento) {
+                $linkDownload = ROOT_URL . "/" . $oDocumento->getPath() . "/" . $oDocumento->getNombreArchivo();
                 echo '<div class="twelve columns"> <br/> </div>';
                 echo '<div class="eight columns">';
-                echo $oDocumento->getNombreArchivo();
+                echo '<a href="' . $linkDownload . '">' . $oDocumento->getNombreArchivo() . '</a>';
                 echo '</div>';
 
                 echo '<div class = "four columns" align = "center">';
-                    $linkDownload = ROOT_URL . "/" . $oDocumento->getPath() . "/" . $oDocumento->getNombreArchivo();
+                   
                     echo '<a href="' . $linkDownload . '"><img src="'.ROOT_URL . '/images/soft-scraps-download-icon.png" alt="Editar" /></a>';
                 echo '</div>';
 
