@@ -7,7 +7,7 @@ include_once ROOT_DIR . '/entidades/imagen.php';
 include_once ROOT_DIR . '/util/utilidades.php';
 include_once ROOT_DIR . '/entidades/documento.php';
 $manejador = new ManejadorServicios();
-$reuniones = $manejador->getReuniones($GLOBAL_SETTINGS['news.abm.limit']);
+$reuniones = $manejador->getReuniones($GLOBAL_SETTINGS['reuniones.limit']);
 $oReunion = new Reunion();
 $oImagen = new Imagen();
 $oDocumento = new Documento();
