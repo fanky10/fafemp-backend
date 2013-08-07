@@ -70,6 +70,17 @@
                 <a href="comisiones.php" title="Comisiones">Comisiones</a></li>
 
                 <li>|</li>
+                
+                <?php
+                if ($seccion == "documentos") {
+                    echo '<li class="active">';
+                } else {
+                    echo "<li>";
+                };
+                ?>
+                <a href="documentos.php" title="Documentos">Documentos</a></li>
+
+                <li>|</li>
 
                 <?php
                 if ($seccion == "contacto") {

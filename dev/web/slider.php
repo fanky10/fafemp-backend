@@ -8,7 +8,6 @@
     $noticias = $manejador->getNoticias($GLOBAL_SETTINGS['slider.size']);
     $oNoticia = new Noticia();
     $oImagen = new Imagen();
-    //if (!isset($noticias) || empty ($noticias)) {
     $title = "Salud Pública";
     $link = "#";
     $img = "images/slider3.jpg";
@@ -18,7 +17,7 @@
     $link = "#";
     $img = "images/slider2.jpg";
     echo '<a href="' . $link . '"><img src="' . $img . '" /><span class="slider-caption">' . $title . '</span></a>';
-
+    
     $title = "Reuniones Plenarias del Foro";
     $link = "#";
     $img = "images/slider5.jpg";
@@ -33,7 +32,6 @@
     $link = "#";
     $img = "images/slider4.jpg";
     echo '<a href="' . $link . '"><img src="' . $img . '" /><span class="slider-caption">' . $title . '</span></a>';
-    //}
     foreach ($noticias as $oNoticia) {
 
         $title = $oNoticia->getTitulo();

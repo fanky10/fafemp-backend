@@ -161,6 +161,13 @@
                                 <label for="imagen">Selecciona Imagen</label> 
                                 <input type="file" class="twelve" name="fileImage[]" id="file" multiple="true"/>
                             </div>
+                             <div class="twelve columns">
+                                <br/>
+                            </div>
+                            <div class="twelve columns">
+                                <label for="imagen">Selecciona Documentos</label> 
+                                <input type="file" class="twelve" name="fileDoc[]" id="file" multiple="true"/>
+                            </div>
                             <div class="twelve columns">
                                 <br/>
                             </div>

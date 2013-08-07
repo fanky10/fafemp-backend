@@ -66,6 +66,13 @@
                                 <br/>
                             </div>
                             <div class="twelve columns">
+                                <label for="imagen">Selecciona Documentos</label> 
+                                <input type="file" class="twelve" name="fileDoc[]" id="file" multiple="true"/>
+                            </div>
+                            <div class="twelve columns">
+                                <br/>
+                            </div>
+                            <div class="twelve columns">
                                 <div class="six columns">
                                     <div class="six columns">
                                         <button type="submit" name="submit" class="radius button">Guardar</button> </div>

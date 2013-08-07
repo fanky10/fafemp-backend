@@ -5,10 +5,12 @@ include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/entidades/noticia.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
 include_once ROOT_DIR . '/util/utilidades.php';
+include_once ROOT_DIR . '/entidades/documento.php';
 $manejador = new ManejadorServicios();
 $reuniones = $manejador->getReuniones($GLOBAL_SETTINGS['news.abm.limit']);
 $oReunion = new Reunion();
 $oImagen = new Imagen();
+$oDocumento = new Documento();
 ?>
 
 <!DOCTYPE html>

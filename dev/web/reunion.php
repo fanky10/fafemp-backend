@@ -2,13 +2,14 @@
 include_once 'init.php';
 include_once ROOT_DIR . '/util/utilidades.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
-include_once ROOT_DIR . '/entidades/noticia.php';
+include_once ROOT_DIR . '/entidades/reunion.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
+include_once ROOT_DIR . '/entidades/documento.php';
 
 $redirect = ROOT_URL . '/reuniones.php';
 $idReunion = $_GET['id'];
 $isRedirect = true;
-$oNoticia = new Noticia();
+$oReunion = new Reunion();
 //$oImagen = new Imagen();
 if (isset($idReunion)) {
     $manejador = new ManejadorServicios();
@@ -16,6 +17,10 @@ if (isset($idReunion)) {
     $vImagenes = $oReunion->getImagenes();
     if (isset($vImagenes) && !empty($vImagenes)) {
         $oImagen = $vImagenes[0];
+    }
+    $vDocumentos = $oReunion->getDocumentos();
+    if (isset($vDocumentos) && !empty($vDocumentos)) {
+        $oDocumento = $vDocumentos[0];
     }
     if (!isset($oReunion) || empty($oReunion)) {
         $isRedirect = true;

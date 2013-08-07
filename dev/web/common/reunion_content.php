@@ -65,8 +65,32 @@ include_once ROOT_DIR . '/util/utilidades.php';
             ?>
             <p class="text-justify"><?php echo $cuerpo; ?></p>
         </div>
-       	<div id="imgResponse" class="twelve columns" ></div>
-
-        <div class="three columns" ></div>
+       	
+        <div class="one columns" ></div>
+        <div id="imgResponse" class="nine columns" >
+                <?php
+                $imgWidth = $GLOBAL_SETTINGS['news.img.preview.width'];
+                $imgHeight = $GLOBAL_SETTINGS['news.img.preview.height'];
+                $vDocumentos = $oReunion->getDocumentos();
+                if (isset($vDocumentos) && !empty($vDocumentos)) {
+                echo "<h4 class=\"destacado\">Lista de documentos:</h4>";
+                echo "<ul style=\"list-style-type:none;\">";
+                    foreach ($vDocumentos as $oDocumento) {
+                        if (isset($oDocumento)) {
+                            $doc = ROOT_URL . "/" . $oDocumento->getPath() . "/" . $oDocumento->getNombreArchivo();
+                            $nombreDoc = $oDocumento->getNombreArchivo();
+                            echo "<li>";
+                            echo "<p>";
+                            echo '<a href="' . $doc . '"><img src="'.ROOT_URL.'/images/soft-scraps-download-icon.png" style="Position:Absolute;  right:50%;" />' . $nombreDoc . '</a>';
+                            
+                            echo "</p>";
+                            echo "</li>";
+                        }
+                    }
+                echo "</ul>";
+                } 
+                ?>
+        </div>
+        <div class="two columns" ></div>
     </div>
 </div>

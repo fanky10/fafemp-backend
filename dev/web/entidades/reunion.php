@@ -13,6 +13,7 @@ class Reunion {
     private $cuerpo;
     private $imagenes;
     private $eliminada;
+    private $documentos;
     
     public function getId() {
         return $this->id;
@@ -75,9 +76,22 @@ class Reunion {
     public function setEliminada($eliminada) {
         $this->eliminada = $eliminada;
     }
-
-
     
+    public function getDocumentos() {
+    	return $this->documentos;
+    }
+    
+    public function setDocumentos($documentos) {
+    	$this->documentos = $documentos;
+    }
+    
+    public function getDocumento() {
+    	if (isset($this->documentos) && !empty($this->documentos)) {
+    		return $this->documentos[0];
+    	}
+    	return null;
+    }
+
 }
 
 ?>

@@ -283,6 +283,13 @@ if ($isRedirect) {
                                 <br><br>
                             </div>
                             <div class="twelve columns">
+                                <label for="imagen">Agregar Documentos</label> 
+                                <input type="file" class="twelve" name="fileDoc[]" id="file" multiple="true"/>
+                            </div>
+                            <div class="twelve columns">
+                                <br><br>
+                            </div>
+                            <div class="twelve columns">
                                 <div class="six columns">
                                     <div class="six columns">
                                         <a href="#" data-reveal-id="myModal"><button class="radius button">Guardar</button></a> 

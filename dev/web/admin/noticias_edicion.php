@@ -5,6 +5,7 @@ include_once ROOT_DIR . '/util/utilidades.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/entidades/noticia.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
+include_once ROOT_DIR . '/entidades/documento.php';
 
 $redirect = ROOT_URL . '/admin/noticias.php';
 $idNoticia = $_GET['id'];
@@ -21,6 +22,11 @@ if (isset($idNoticia) && !empty($idNoticia)) {
         if (isset($vImagenes) && !empty($vImagenes)) {
             $oImagen = $vImagenes[0];
         }
+        $vDocumentos = $oNoticia->getDocumentos();
+        if (isset($vDocumentos) && !empty($vDocumentos)) {
+            $oDocumento = $vDocumentos[0];
+        }
+        
         $isRedirect = false; // I wont redirect unless noticia is a valid one
     }
 }
@@ -144,6 +150,32 @@ if ($isRedirect) {
                         }
                     });
                     $( "#imgSortable" ).disableSelection();
+
+                    $( "#docSortable" ).sortable({
+                        update: function(event, ui) {
+                            var result = [];//new Array();
+                            $("#docSortable li").each(function(idx, item){
+                                var id = $(item).attr('documentoId');
+                                var oRow = createObject(id,idx);
+                                result.push(oRow);
+                                                                                                                        
+                            });
+                            //once we have the result let's show it!!
+                            var jsonResult = JSON.stringify(result);
+                            //once we know it works let's send it!!
+                            $.post(
+                            "documentos_noticia_abm.php?action=updateOrder&idNoticia=<?php echo $oNoticia->getId(); ?>",
+                            {imgJSON: jsonResult},
+                            function(response){
+                                                                                                    
+                                if(response.status=='ERROR'){
+                                    $("#docResponse").html('<div class="alert-box alert">'+response.mensaje+'.<a href="" class="close">&times;</a></div>');
+                                }
+                            });
+                                                                                                                    
+                        }
+                    });
+                    $( "#docSortable" ).disableSelection();
                 });
             </script>
             <!-- script para delete+updatear el set de las imagenes -->
@@ -160,6 +192,27 @@ if ($isRedirect) {
                         if(response.status=='OK'){
                             //IF ok then 
                             $("#liImg"+imageId).fadeOut("slow", function() { 
+                                $(this).remove(); 
+                            });
+                        }
+                    });
+                                                                                                        
+                }            
+            </script>
+            <!-- script para delete+updatear el set de los documentos -->
+            <script>
+                                                                        
+                function deleteDocumento(documentoId,noticiaId) {
+                                                                                                        
+                    $.getJSON('documentos_noticia_abm.php',
+                    {
+                        action:"del",
+                        id_noticia:noticiaId,
+                        id_documento:documentoId
+                    }, function(response){
+                        if(response.status=='OK'){
+                            //IF ok then 
+                            $("#liImg"+documentoId).fadeOut("slow", function() { 
                                 $(this).remove(); 
                             });
                         }
@@ -235,6 +288,29 @@ if ($isRedirect) {
                                 ?>
 
                             </div>
+                             <div class="twelve columns">
+                                <br><br>
+                            </div>
+                            <div class="twelve columns">
+                                <label for="imagen">Agregar Documentos</label> 
+                                <input type="file" class="twelve" name="fileDoc[]" id="file" multiple="true"/>
+                            </div>
+                            <div class="twelve columns">
+                                <br><br>
+                            </div>
+                            <!-- no se pueden eliminar desde aca, sino desde el panel gral. REDO
+                            <div class="twelve columns">
+                                <?php
+                                $vDocumentos = $oNoticia->getDocumentos();
+                                if (isset($vDocumentos) && !empty($vDocumentos)) {
+                                    echo '<a class="secondary button" data-reveal-id="confirmImageChanges" title="editarDocumentos" href="#">Mover ó eliminar Documentos</a>';
+                                } else {
+                                    echo '<a class="secondary button disabled" title="editarDocumentos" href="#">Mover ó eliminar documentos</a>';
+                                }
+                                ?>
+
+                            </div>
+                            -->
                             <div class="twelve columns">
                                 <?php
                                 $vImagenes = $oNoticia->getImagenes();

@@ -4,11 +4,13 @@ include_once '../init.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/entidades/noticia.php';
 include_once ROOT_DIR . '/entidades/imagen.php';
+include_once ROOT_DIR . '/entidades/documento.php';
 include_once ROOT_DIR . '/util/utilidades.php';
 $manejador = new ManejadorServicios();
 $noticias = $manejador->getNoticias($GLOBAL_SETTINGS['news.abm.limit']);
 $oNoticia = new Noticia();
 $oImagen = new Imagen();
+$oDocumento = new Documento();
 ?>
 
 <!DOCTYPE html>
@@ -62,12 +64,16 @@ $oImagen = new Imagen();
                     <div class="row">
                         <div class="twelve columns">
                             <div class="twelve columns">
-                                <div class="six columns">
+                                <div class="four columns">
                                     <a class="button radius" title="Noticias" href="noticias.php">Noticias</a>
-                                    <div class="six columns">
-                                        <a class="button radius" title="Reuniones" href="reuniones.php">Reuniones</a>
-                                    </div>
                                 </div>
+                                <div class="four columns">
+                                    <a class="button radius" title="Reuniones" href="reuniones.php">Reuniones</a>
+                                </div>
+                                <div class="four columns">
+                                    <a class="button radius" title="Documentos" href="documentos.php">Documentos</a>
+                                </div>
+                                
                             </div>
                         </div>
 

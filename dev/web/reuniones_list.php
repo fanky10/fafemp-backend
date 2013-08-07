@@ -2,7 +2,7 @@
 include_once 'init.php';
 include_once ROOT_DIR . '/servicios/manejador_servicios.php';
 include_once ROOT_DIR . '/entidades/reunion.php';
-$jsonReunion = new JSONReunion($GLOBAL_SETTINGS['news.abm.limit']);
+$jsonReunion = new JSONReunion($GLOBAL_SETTINGS['reuniones.limit']);
 $jsonReunion->getJSONCalendarReuniones();
 
 class JSONReunion{
@@ -17,7 +17,6 @@ class JSONReunion{
         header("Content-type: application/json");
         $responseMsg = new StdClass;
         $responseMsg->status = "OK";
-        $responseMsg->mensaje = "Re daaa";
         $responseMsg->content = $this->getReuniones();
         echo json_encode($responseMsg);
     }

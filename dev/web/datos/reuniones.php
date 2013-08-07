@@ -59,10 +59,12 @@ class DataReuniones extends Data implements ReunionesRepository {
         $query = "select r.reunion_id,r.reunion_titulo,r.reunion_cuerpo,r.reunion_fec_ini,r.reunion_fec_fin,r.reunion_eliminada
             FROM reuniones r 
             WHERE r.reunion_eliminada=0
-            ORDER BY r.reunion_fec_ini LIMIT ?";
+            ORDER BY r.reunion_fec_ini" . ($limit > 0 ? " LIMIT ?" : "");
 
         $stmt = $this->prepareStmt($query);
-        $stmt->bind_param('i', $limit);
+        if ($limit > 0) {
+            $stmt->bind_param('i', $limit);
+        }
         $stmt->execute();
         $result = $stmt->get_result();
 
