@@ -62,6 +62,7 @@ include_once ROOT_DIR . '/util/utilidades.php';
             <?php
             $cuerpoBreakeLines = Utilidades::breakeLines($oNoticia->getCuerpo());
             $cuerpo = Utilidades::convertLinkYouTube($cuerpoBreakeLines);
+            $cuerpo = str_replace('\"', '"', $cuerpo);
             ?>
             <p class="text-justify"><?php echo $cuerpo; ?></p>
         </div>

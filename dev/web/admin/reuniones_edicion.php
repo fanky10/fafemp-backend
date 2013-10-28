@@ -89,28 +89,28 @@ if ($isRedirect) {
                         }
                     });
                     $.validator.addMethod(
-                        "validDateFormat",
-                        function(value, element) {
-                            return value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
-                        },
-                        "Por favor ingrese la fecha en formato dd/mm/yyyy."
-                    );
+                    "validDateFormat",
+                    function(value, element) {
+                        return value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
+                    },
+                    "Por favor ingrese la fecha en formato dd/mm/yyyy."
+                );
                     $.validator.addMethod(
-                        "validMinDate",
-                        function(value, element) {
-                            var fechaInicio = parseDate($("#datepickerInicio").val());
-                            var fechaFin = parseDate(value);
+                    "validMinDate",
+                    function(value, element) {
+                        var fechaInicio = parseDate($("#datepickerInicio").val());
+                        var fechaFin = parseDate(value);
 
-                            return fechaInicio<=fechaFin;
-                        },
-                        "Por favor ingrese una fecha de fin mayor a la de inicio."
-                    );
+                        return fechaInicio<=fechaFin;
+                    },
+                    "Por favor ingrese una fecha de fin mayor a la de inicio."
+                );
                 });
                 // parse a date in dd/mm/yyyy
                 function parseDate(input) {
-                  var parts = input.match(/(\d+)/g);
-                  // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-                  return new Date(parts[2], parts[1]-1, parts[0]); // months are 0-based
+                    var parts = input.match(/(\d+)/g);
+                    // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+                    return new Date(parts[2], parts[1]-1, parts[0]); // months are 0-based
                 }
             </script>
             <script type="text/javascript">
@@ -155,16 +155,16 @@ if ($isRedirect) {
             <!-- script para enviar un json del orden de las imagenes -->
             <script type="text/javascript">
                 $(document).ready(function() {
-                                                                                                                        
+                                                                                                                                
                     function createObject(id, position) {
-                                                                                                                            
+                                                                                                                                    
                         return {
                             "imagen.id": id,
                             "imagen.orden": position
                         }
-                                                                                                                            
+                                                                                                                                    
                     }
-                                                                                                                        
+                                                                                                                                
                     $( "#imgSortable" ).sortable({
                         update: function(event, ui) {
                             var result = [];//new Array();
@@ -172,7 +172,7 @@ if ($isRedirect) {
                                 var id = $(item).attr('imageId');
                                 var oRow = createObject(id,idx);
                                 result.push(oRow);
-                                                                                                                                    
+                                                                                                                                            
                             });
                             //once we have the result let's show it!!
                             var jsonResult = JSON.stringify(result);
@@ -181,12 +181,12 @@ if ($isRedirect) {
                             "imagenes_reunion_abm.php?action=updateOrder&id_reunion=<?php echo $oReunion->getId(); ?>",
                             {imgJSON: jsonResult},
                             function(response){
-                                                                                                                
+                                                                                                                        
                                 if(response.status=='ERROR'){
                                     $("#imgResponse").html('<div class="alert-box alert">'+response.mensaje+'.<a href="" class="close">&times;</a></div>');
                                 }
                             });
-                                                                                                                                
+                                                                                                                                        
                         }
                     });
                     $( "#imgSortable" ).disableSelection();
@@ -194,9 +194,9 @@ if ($isRedirect) {
             </script>
             <!-- script para delete+updatear el set de las imagenes -->
             <script>
-                                                                                    
+                                                                                            
                 function deleteImage(imageId) {
-                                                                                                                    
+                                                                                                                            
                     $.getJSON('imagenes_reunion_abm.php',
                     {
                         action:"del",
@@ -209,15 +209,15 @@ if ($isRedirect) {
                             });
                         }
                     });
-                                                                                                                    
+                                                                                                                            
                 }            
             </script>
             <script>
-                                                                                    
+                                                                                            
                 function submitForm() {
-                                                                                                                    
+                                                                                                                            
                     $("#formReunion").submit();
-                                                                                                                    
+                                                                                                                            
                 }            
             </script>
         </head>
@@ -250,7 +250,9 @@ if ($isRedirect) {
                             <div class="twelve columns">
                                 <label for="descripcion">Cuerpo Reunion</label>
                                 <?php
-                                echo '<textarea rows="4" id="cuerpo" class="required" name="cuerpo">' .  str_replace('<br/>', "\n", Utilidades::breakeLines($oReunion->getCuerpo())) . '</textarea>';
+                                $cuerpo = str_replace('<br/>', "\n", Utilidades::breakeLines($oReunion->getCuerpo()));
+                                $cuerpo = str_replace('\"', '"', $cuerpo);
+                                echo '<textarea rows="4" id="cuerpo" class="required" name="cuerpo">' . $cuerpo . '</textarea>';
                                 ?>
                             </div>
                             <div class="twelve columns">
